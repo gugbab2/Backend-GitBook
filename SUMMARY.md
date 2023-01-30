@@ -3,4 +3,4 @@
 ## GitBook
 
 * [1. HTTP 기초](README.md)
-  * [1.1 HTTP 이해](gitbook/readme/1.1-http.md)
+  * [1.1 HTTP 이해](gitbook/github/README.md)
