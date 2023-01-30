@@ -1,2 +1,6 @@
-# Backend-GitBook
-매일마다 학습한 내용을 기록합니다.
+---
+description: 매일매일을 기록합니다.
+---
+
+# Git Book 시작
+
