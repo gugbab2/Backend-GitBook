@@ -1,5 +1,5 @@
 ---
-description: HTTP Client 관련한 지식이 공부해보자
+description: HTTP Client 관련한 지식을 공부해보자
 ---
 
 # HTTP Client
@@ -67,8 +67,7 @@ description: HTTP Client 관련한 지식이 공부해보자
 
 ## Java InputStream과 OutputStream 를 사용한 Socket Client 예제
 
-```java
-// 1. connect
+<pre class="language-java"><code class="lang-java">// 1. connect
 Socket socket = new Socket("example.com", 80);
 
 String message = "GET / HTTP/1.1\n" +
@@ -79,8 +78,8 @@ OutputStream outputStream = socket.getOutputStream();
 outputStream.write(message.getBytes());*/
 
 // 2. write
-OutputStream outputStream = socket.getOutputStream();
-Writer writer = new OutputStreamWriter(outputStream);
+<strong>OutputStream outputStream = socket.getOutputStream();
+</strong>Writer writer = new OutputStreamWriter(outputStream);
 
 writer.write(message);
 writer.flush();
@@ -104,7 +103,7 @@ String text = charBuffer.toString();
 
 // 4. close
 socket.close();
-```
+</code></pre>
 
 ## &#x20;Java try-with-resources
 
