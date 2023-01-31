@@ -1,14 +1,57 @@
+---
+description: HTTP 이해
+---
+
 # 1.1 HTTP 이해
 
-* HTTP(Hypertext Transfer Protocol)
-* HTTP와 HTTPS의 차이(TLS)
-* 클라이언트-서버 모델
-* stateless와 stateful
-* HTTP Cookie와 HTTP Session
-* HTTP 메시지 구조
-  * HTTP 요청(Reuqest)와 응답(Response)
-    * multipart/form-data
-  * HTTP 요청 메서드(HTTP request methods)
-    * 멱등성
-  * HTTP 응답 상태 코드(HTTP response status code)
-    * 리다이렉션
+## HTTP(Hypertext Transfer Protocol)
+
+* WEB 상에서 발생하는 통신을 위한 가장  기본적인 프로토콜(규칙,  규약)
+* 클라이언트-서버 프로토콜이기도 하다
+* HTTP 는 OSI(Open Systems Interconnection) 7계층에서 마지막 7계층에 해당되는 프로토콜로  웹개발자의 입장에서는 2, 3, 4, 7 계층 정보를 이해하고 넘어가자
+  * 2계층(데이터 링크 계층) \
+    \- MAC Address 라는 물리 주소(유일)를 가지게 되고, 2계층부터 주소체계를 가지게 된다.
+  * 3계층(네트워크 계층) \
+    \- IP 라는 논리 주소(유일하지  않음)를 가지게 되고, 이는 네트워크 관리자에 의해 관리된다.
+  * 4계층(전송  계층) \
+    \-  Port 를 가지게 되고, 각 IP 내부 특정 프로세스를 식별한다.\
+    \-  TCP, UDP 프로토콜을 사용하며, TCP 연결지향(올바른패킷관리) 프로토콜이다.
+  * 7계층\
+    \- 1\~4계층까지는 운영체제 와 같이 사람이 아닌 곳에서 할당하고 관리하지만, \
+    \- 7계층은 사람이 직접 개발하고 관리  해야한다.
+
+## HTTP와 HTTPS의 차이(TLS)
+
+* 위에서 말했듯이, HTTP 는 웹표준 프로토콜이고, HTTPS 는 중간에 TLS(SSL) 를 함께 사용하는 보안이 강화된 프로토콜이다.
+* 이를 통해서 웹 상에서, 통신 내부 정보가 평문으로 노출되지 않는다.\
+  (와이어샤크와  같은 패킷분석툴을 통해서  패킷정보를 확인 할 수 있다)![](../../.gitbook/assets/image.png)
+
+## 클라이언트-서버 모델
+
+* HTTP 요청 대상을 리소스/서비스 라고 부르며 URL( URI) 을 통해서 요청을 보낸다.
+* 클라이언트 -> 요청
+* 서버 -> (처리, Optional) -> 응답
+
+## stateless와 stateful
+
+* HTTP 는 각각의 요청이 독립적인 Stateless Protocol 이다.&#x20;
+* 때문에, 클라이언트는 항상 자신이 누구인지 서버에 요청을 보낼 때마다 알려주어야 한다.
+
+## HTTP Cookie와 HTTP Session
+
+* Cookie
+  * 위와 같이 Stateless 상황에서 자신을 서버에 알리기 위한 정보를 쿠키에 담아서 서버에 전달한다.
+  * 요청과 응답을 통해서 계속적으로 쿠키를 주고받게 된다.
+* Session
+  * 쿠키는 브라우저 개발자 도구 등 쉽게 변조가 가능하여 보안이 취약하다는 단점을 가지고 있다.
+  * 이에 대한 해결책으로 나온 세션은, 데이터는 서버에서 관리하고 이를 사용할 수 있는 Key 값을 쿠키에 담아 요청과 응답을 통해 쿠키를 주고받는다.
+  * 보통 Key 값으로는 예측할 수 없는 UUID 등을 많이 사용한다.
+
+## HTTP 메시지 구조
+
+* ### HTTP 요청(Reuqest)와 응답(Response)
+  * #### multipart/form-data
+* ### HTTP 요청 메서드(HTTP request methods)
+  * #### 멱등성
+* ### HTTP 응답 상태 코드(HTTP response status code)
+  * #### 리다이렉션
