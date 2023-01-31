@@ -1,8 +1,8 @@
 ---
-description: HTTP 이해
+description: HTTP 개요, HTTP 메시지
 ---
 
-# 1.1 HTTP 이해
+# HTTP 이해
 
 ## HTTP(Hypertext Transfer Protocol)
 
@@ -49,9 +49,39 @@ description: HTTP 이해
 
 ## HTTP 메시지 구조
 
-* ### HTTP 요청(Reuqest)와 응답(Response)
+* ### HTTP 요청(Reuqest)와 응답(Response
+  * #### 요청과 응답의 구조
+    * Start line\
+      \- 실행되어야 할 요청 OR 요청  수행에 대한 결과 값
+    * HTTP headers\
+      \- 요청과 응답에 대한 설명 \
+      \- Body 에 대한 설명
+    * empty line
+    * Body\
+      \- 크기를 알기가 어렵다. 때문에 헤더 값 중 하나인 Content-Length 를 확인해야 한다.\
+      \- 꼭 사람이 읽을 수 있는 텍스트일 필요는 없다. 바이너리 형태도 가능하다.\
+      \- 하나가 아니라 여럿일 수 있다. 파일 업로드를 위한 multipart/form-data 가 대표적이다.
   * #### multipart/form-data
+    * html \<form> 을 통해 데이터를 서버로 전송할 때 설정하지 않을  시 default 로 Content-Type: application/x-www-form-urlencoded 와 같은 Content-Type 을 사용하고, 전송되는 각각의  데이터들은 HTTP Body 에 '**&**' 로 구분 지어 전송되게 된다. \
+      (문자열과 숫자의 조합일 때는 상관없다)
+    * 하지만, 파일을 서버로 전송할 때는 바이너리 데이터를 전송해야 하고 수 많은 문자의 조합이 사용되어 '**&**' 로 구분하지 못한다.
+    * 이때, multipart/form-data 를 사용하게 되면 임의로 생성되는 바운더리를 통해서 구분되며 임의의 바운더리는 UUID 로 매번 임의로 생성된다.
 * ### HTTP 요청 메서드(HTTP request methods)
-  * #### 멱등성
+  * #### 멱등성 : 매번 같은 요청을 보내도 같은 결과를 나타내는 것을 뜻함
+  * GET → Read
+  * HEAD → GET without body
+  * POST → Submit (멱등성X) \
+    \- GET 은 URL 을 통해서 요청을 보내 데이터(개인정보)를 평문으로 노출시킬 수도 있지만,\
+    \- POST 는 HTTP Body 를 통해서 데이터를 보내기 때문에 한번 감추어준다.(완벽한 건X)
+  * PUT → Update (+Create) ⇒ Overwrite!
+  * PATCH → Update (멱등성X) => Particial!
+  * DELETE → Delete
+  * OPTIONS → 리소스와의 통신 옵션을 확인하기 위해 사용
 * ### HTTP 응답 상태 코드(HTTP response status code)
-  * #### 리다이렉션
+  * 1xx → 정보 ⇒ 우리가 직접 쓰는 일은 드믐.
+  * 2xx → 성공 ⇒ 200 OK, 201 Created, 204 No Content
+  * 3xx → 리다이렉션 \
+    \- 304 : 요청된 리소스를 재전송할 필요가 없음을 나타낸다. 캐시된 자원으로의 암묵적인 리디렉션이다.\
+    \- 304 Not Modified가 특수한 형태로 자주 보임.
+  * 4xx → 클라이언트 쪽 문제 ⇒ 404 Not Found
+  * 5xx → 서버 쪽 문제 ⇒ 500 Internal Server Error
