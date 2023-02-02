@@ -6,8 +6,12 @@ description: HTTP Server 관한 내용을 공부해보자
 
 ## Java ServerSocket
 
-```java
-// 1. Listen
+* ServerSocket listener = new ServerSocket(8080, 0); 과 같은 코드를 Blocking 이라 한다.
+* 제어권을 호출한 곳에 넘겨준 상태이고 파일 읽기, 쓰기 등도 모두 Blocking 동작으로 볼 수 있다.
+* TCP 통신에서는 네트워크 상태 같은 요인에 의해 크게 지연될 수 있고, 만약 요청이 없다면 무작정 기다려야만 한다;;
+* 멀티스레드, 비동기, 이벤트 기반 처리가 필요한 이유다.
+
+<pre class="language-java"><code class="lang-java">// 1. Listen
 // 해당 지역에서 클라이언트의 요청을 기다리고 있다.
 // I/O 에서 기다리는 것을 Blocking 이라고 한다.
 ServerSocket listener = new ServerSocket(8080, 0);
@@ -17,8 +21,8 @@ while (true) {
 
     // 2. Accept
     Socket socket = listener.accept();
-    System.out.println("Accept!");
-
+    System.o<a data-footnote-ref href="#user-content-fn-1">u</a>t.println("Accept!");
+    
     // 3. Request -> 처리 -> Response
     Reader reader = new InputStreamReader(socket.getInputStream());
 
@@ -46,7 +50,7 @@ while (true) {
 
     // 5. Close
     socket.close();
-```
+</code></pre>
 
 ## Sync vs Async
 
@@ -67,3 +71,5 @@ while (true) {
   * A 함수가 B 함수를 호출하면, 제어권을 A 가 호출한 B 함수에 넘겨준다.
 * Non-Blocking&#x20;
   * A 함수가 B 함수를 호출해도 제어권은 그대로 자신이 가지고 있는다.
+
+[^1]: 

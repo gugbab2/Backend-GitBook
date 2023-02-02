@@ -21,7 +21,7 @@ description: HTTP Client 관련한 지식을 공부해보자
 
 ## Socket&#x20;
 
-* Socket 은 기본적으로 파일과 유사하게 다룰 수 있다.
+* Socket 은 기본적으로 파일과 유사하게 다룰 수 있다. (Java.io)
 * 자바에서는 소켓을 키보드 입력, 화면 출력, 파일 입출력 등을 Stream 으로 다룰 수 있다 \
   (자바 8에서 도입된 Stream API 아님! 주의,,)
 
@@ -46,7 +46,7 @@ description: HTTP Client 관련한 지식을 공부해보자
 
 *   ### IP 주소
 
-    \- 클라이언트가 실제적으로 통신해야하는 논리적 주소를 의미한다.
+    \- 클라이언트가 실제적으로 통신해야 하는 논리적 주소를 의미한다.
 *   ### Domain name
 
     \- www.naver.com 와 같이 우리가 쉽게 생각하는 웹사이트 주소를 의미하며 내부적으로는 IP 를 가리킨다.
@@ -82,7 +82,7 @@ outputStream.write(message.getBytes());*/
 </strong>Writer writer = new OutputStreamWriter(outputStream);
 
 writer.write(message);
-writer.flush();
+<a data-footnote-ref href="#user-content-fn-1">writer</a>.flush();
 
 // 3. read
 InputStream inputStream = socket.getInputStream();
@@ -153,3 +153,5 @@ try(Socket socket = new Socket("example.com", 80)){
 }
 
 ```
+
+[^1]: 
