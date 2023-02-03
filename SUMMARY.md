@@ -7,5 +7,4 @@
   * [HTTP Client](gitbook/readme/http-client.md)
   * [HTTP Server](gitbook/readme/http-server.md)
   * [Java HTTP Server](gitbook/readme/java-http-server.md)
-  * [Java HTTP Server](gitbook/readme/java-http-server-1.md)
   * [Spring Web MVC](gitbook/readme/spring-web-mvc.md)
