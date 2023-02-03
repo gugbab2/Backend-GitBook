@@ -6,7 +6,7 @@ description: HTTP Server 관한 내용을 공부해보자
 
 ## Java ServerSocket
 
-* ServerSocket listener = new ServerSocket(8080, 0); 과 같은 코드를 Blocking 이라 한다.
+* ServerSocket listener = new ServerSocket(8080, 0); 과 같은 코드를 Blocking 상태라고 한다.
 * 제어권을 호출한 곳에 넘겨준 상태이고 파일 읽기, 쓰기 등도 모두 Blocking 동작으로 볼 수 있다.
 * TCP 통신에서는 네트워크 상태 같은 요인에 의해 크게 지연될 수 있고, 만약 요청이 없다면 무작정 기다려야만 한다;;
 * 멀티스레드, 비동기, 이벤트 기반 처리가 필요한 이유다.
@@ -23,22 +23,27 @@ while (true) {
     Socket socket = listener.accept();
     System.o<a data-footnote-ref href="#user-content-fn-1">u</a>t.println("Accept!");
     
-    // 3. Request -> 처리 -> Response
-    Reader reader = new InputStreamReader(socket.getInputStream());
+    // 3. Request
+    InputStream inputStream = socket.getInputStream();
+    Reader reader = new InputStreamReader(inputStream);
 
     CharBuffer charBuffer = CharBuffer.allocate(1_000_000);
+    
     reader.read(charBuffer);
-
     charBuffer.flip();
+    
     System.out.println(charBuffer.toString());
-
+    
+    // Request 값 처리..
+    
     // 4. Response
     String body = "Hello, world!";
     byte[] bytes = body.getBytes();
     String message = "" +
             "HTTP/1.1 200 OK\n" +
             "Content-Type: text/html; charset=UTF-8\n" +
-            "Content-Length: " + bytes.length + "\n" +
+            //Content-Length 는 byte 값으로 변경처리해야 한다.
+            "Content-Length: " + bytes.length + "\n" +    
             "\n" +
             body;
 
@@ -47,9 +52,10 @@ while (true) {
 
     writer.write(message);
     writer.flush();
+}
 
-    // 5. Close
-    socket.close();
+<strong>// 5. Close
+</strong>socket.close();
 </code></pre>
 
 ## Sync vs Async
