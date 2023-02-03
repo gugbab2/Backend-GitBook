@@ -73,11 +73,13 @@ Socket socket = new Socket("example.com", 80);
 String message = "GET / HTTP/1.1\n" +
                 "Host: example.com\n" +
                 "\n";
-/*
-OutputStream outputStream = socket.getOutputStream();
-outputStream.write(message.getBytes());*/
 
 // 2. write
+/*
+OutputStream outputStream = socket.getOutputStream();
+outputStream.write(message.getBytes());
+*/
+
 <strong>OutputStream outputStream = socket.getOutputStream();
 </strong>Writer writer = new OutputStreamWriter(outputStream);
 
@@ -85,6 +87,15 @@ writer.write(message);
 <a data-footnote-ref href="#user-content-fn-1">writer</a>.flush();
 
 // 3. read
+/*
+InputStream inputStream = socket.getInputStream();
+byte[] bytes = new byte[1_000_000];
+
+int read_size = inputStream.read(bytes);
+
+byte[] data = Arrays.copyOf(bytes, read_size);
+*/
+
 InputStream inputStream = socket.getInputStream();
 Reader reader = new InputStreamReader(inputStream);
 
@@ -94,11 +105,7 @@ reader.read(charBuffer);
 
 charBuffer.flip();
 
-/*byte[] bytes = new byte[1_000_000];
-int read_size = inputStream.read(bytes);
-
-byte[] data = Arrays.copyOf(bytes, read_size);
-String text = new String(reader.toString());*/
+//String text = new String(reader.toString());
 String text = charBuffer.toString();
 
 // 4. close
