@@ -49,16 +49,45 @@
 
 ## Model-View-Controller(MVC) 아키텍처 패턴
 
+* Model, View, Controller 의 약자로 하나의 애플리케이션을 각각의 관심사에 따라서 분리하여 로직을 짜는 것을 의미한다.
+*   View → 표현(웹페이지)
+
+    Controller → 입력(URL 요청 처리)
+
+    Model → 그 외의 모든 것 (사실상 도메인 모델)
+
 ## 관심사의 분리(Seperation of Concern)
+
+* MVC 패턴이 추구하는 것으로 UI 와 비지니스 로직을 분리했다.
 
 ## Spring MVC
 
+Spring Web MVC는 Map과 유사한 Model 인터페이스를 제공.
+
+1. [https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/ui/package-summary.html](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/ui/package-summary.html)
+2. 애플리케이션 전체가 아니라, 웹과 관련된 부분(UI Layer) 에서만 MVC 개념을 활용할 수 있도록 도움. 관심사의 분리를 더 심화할 기회 제공.
+
 ## Java Annotation
+
+* 주석처럼 프로그래밍 언어에 영향을 미치지 않으며 유용한 정보를 제공(설정 정보)..\
+  \-> Annotation 이전에 설정들은 대부분 .xml 형태로 했다.
+* @Test, @Override, @FunctionalInterface, @Deprecated, @SuppressWarnings 등등..
+* 아래와 같이 인터페이스를 만들 수 있다!
+
+```java
+// 예시
+@Test
+public void method(){
+    ...
+}
+```
 
 ## Spring Annotation
 
 * ### @RestController
-  * #### @Controller
-  * #### @ResponseBody
+  * #### @Controller : 컨트롤러의 역할을 수행한다 .
+  *   #### @ResponseBody : 해당 어노테이션을 붙여주지 않는다면 스프링 프로젝트 내 뷰 템플릿과 매핑이된다.
+
+      하지만 해다 어노테이션은 말 그대로 ResponseBody 에 값을 넣어 응답을 해준다.
 * ### @GetMapping
-  * #### @RequestMapping
+  * #### @RequestMapping : 요청과 매핑이 되도록 연결해준다.
