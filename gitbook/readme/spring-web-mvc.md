@@ -74,14 +74,6 @@ Spring Web MVC는 Map과 유사한 Model 인터페이스를 제공.
 * @Test, @Override, @FunctionalInterface, @Deprecated, @SuppressWarnings 등등..
 * 아래와 같이 인터페이스를 만들 수 있다!
 
-```java
-// 예시
-@Test
-public void method(){
-    ...
-}
-```
-
 ## Spring Annotation
 
 * ### @RestController
