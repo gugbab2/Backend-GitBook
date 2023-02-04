@@ -24,9 +24,7 @@ public interface HttpHandler {
 ```
 
 ```java
-private 
-
-void run() throws IOException {
+public void run() throws IOException {
     InetSocketAddress address = new InetSocketAddress(8080);
     HttpServer httpServer = HttpServer.create(address, 0);
 
