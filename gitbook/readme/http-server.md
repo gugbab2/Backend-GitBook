@@ -4,6 +4,24 @@ description: HTTP Server 관한 내용을 공부해보자
 
 # HTTP Server
 
+## Stateful, Stateless
+
+* ### stateful
+* ### stateless(무상태 프로토콜)
+  * HTTP 프로토콜은 상태를 유지하지 않는 stateless 프로토콜이다!
+  * **때문에, 쿠키/세션/토큰이 필요하다.**
+  * 무상태 프로토콜을 통해서 **무한한 서버 증설**이 가능하다.\
+    \-> **마지막에 모든 응답에 필요한 모든 정보를 넘겨주기 때문에, 마지막 요청만으로도 정상적으로 처리가 된다.**
+
+## 비연결성
+
+* 서버가 모든 클라이언트와 연결되어 있다면, 연결을 위한 자원을 지속적으로 소모해야 한다.
+* 때문에, **HTTP 는 한번의 통신 후 연결을 끊는다.**\
+  \-> 서버의 자원을 효율적으로 사용할 수 있다.
+* 하지만, **요청할 때마다 3 way handshake 시간이 추가된다.**\
+  \-> Persistent Connections(지속 연결성)\
+  \-> HTTP 2.0, 3.0 에서 최적화해 문제를 해결해나가고 있다.
+
 ## Java ServerSocket
 
 * ServerSocket listener = new ServerSocket(8080, 0); 과 같은 코드를 Blocking 상태라고 한다.
