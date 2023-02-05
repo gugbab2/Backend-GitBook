@@ -38,8 +38,21 @@ description: HTTP 개요, HTTP 메시지
 
 ## stateless와 stateful
 
-* HTTP 는 각각의 요청이 독립적인 Stateless Protocol 이다.&#x20;
-* 때문에, 클라이언트는 항상 자신이 누구인지 서버에 요청을 보낼 때마다 알려주어야 한다.
+* ### stateful
+* ### stateless(무상태 프로토콜)
+  * HTTP 프로토콜은 상태를 유지하지 않는 stateless 프로토콜이다!
+  * **때문에, 쿠키/세션/토큰이 필요하다.**
+  * 무상태 프로토콜을 통해서 **무한한 서버 증설**이 가능하다.\
+    \-> **마지막에 모든 응답에 필요한 모든 정보를 넘겨주기 때문에, 마지막 요청만으로도 정상적으로 처리가 된다.**
+
+## 비연결성
+
+* 서버가 모든 클라이언트와 연결되어 있다면, 연결을 위한 자원을 지속적으로 소모해야 한다.
+* 때문에, **HTTP 는 한번의 통신 후 연결을 끊는다.**\
+  \-> 서버의 자원을 효율적으로 사용할 수 있다.
+* 하지만, **요청할 때마다 3 way handshake 시간이 추가된다.**\
+  \-> Persistent Connections(지속 연결성)\
+  \-> HTTP 2.0, 3.0 에서 최적화해 문제를 해결해나가고 있다.
 
 ## HTTP Cookie와 HTTP Session
 
@@ -71,17 +84,28 @@ description: HTTP 개요, HTTP 메시지
     * html \<form> 을 통해 데이터를 서버로 전송할 때 설정하지 않을  시 default 로 Content-Type: application/x-www-form-urlencoded 와 같은 Content-Type 을 사용하고, 전송되는 각각의  데이터들은 HTTP Body 에 '**&**' 로 구분 지어 전송되게 된다. \
       (문자열과 숫자의 조합일 때는 상관없다)
     * 하지만, 파일을 서버로 전송할 때는 바이너리 데이터를 전송해야 하고 수 많은 문자의 조합이 사용되어 '**&**' 로 구분하지 못한다.
-    * 이때, multipart/form-data 를 사용하게 되면 임의로 생성되는 바운더리를 통해서 구분되며 임의의 바운더리는 UUID 로 매번 임의로 생성된다.
+    * 이때, multipart/form-data 를 사용하게 되면 임의로 생성되는 바운더리( ex)---xxx )를 통해서 구분되며 임의의 바운더리는 UUID 로 매번 임의로 생성된다.
 * ### HTTP 요청 메서드(HTTP request methods)
-  * #### 멱등성 : 매번 같은 요청을 보내도 같은 결과를 나타내는 것을 뜻함
-  * GET → Read
+  *   #### 멱등성 : 매번 같은 요청을 보내도 같은 결과를 나타내는 것을 뜻함
+
+      **-> 멱등해야지만 자동복구 매커니즘에 사용할 수 있다!**\
+      ex) DELETE 가 확인되지 않아서, 다시 DELETE 한다.
+  * #### GET → 조회
+    * 서버의 전달하고 싶은 데이터를 쿼리 파라미터를 통해서 전달
+    * 최근 버전에서는 바디를 통해서 데이터를 전달 할 수 있지만, 지원하지 않는 버전이 많기에 권장하지 않는다.
   * HEAD → GET without body
-  * POST → Submit (멱등성X) \
-    \- GET 은 URL 을 통해서 요청을 보내 데이터(개인정보)를 평문으로 노출시킬 수도 있지만,\
-    \- POST 는 HTTP Body 를 통해서 데이터를 보내기 때문에 한번 감추어준다.(완벽한 건X)
-  * PUT → Update (+Create) ⇒ Overwrite!
-  * PATCH → Update (멱등성X) => Particial!
-  * DELETE → Delete
+  * #### POST → **요청 데이터 처리, 주로 등록에 사용** (멱등성X)&#x20;
+    * GET 은 URL 을 통해서 요청을 보내 데이터(개인정보)를 쿼리 파라미터로 평문 노출시킬 수도 있지만,
+    * **POST 는 메시지 바디를 통해서 데이터를 보내기 때문에 한번 감추어준다. (완벽한 건 X)**
+    * **주로 등록에 사용하지만,  변경하는 것을 넘어선 프로세스를 처리해야 하는 경우에도 사용하기 때문에, 수많은 용도로 사용한다.(컨트롤 URL, 결과로 새로운 리소스가 생겨나지 않을 수도 있다!)**
+    * **애매하면 POST 사용해라.**
+  * #### PUT → Update (+Create) ⇒ Overwrite!(리소스를 완전하게 대체한다)
+    * **POST 와 달리 클라이언트가 리소스를 식별한다!!**\
+      ex) PUT /members/**100** HTTP/1.1
+  * #### PATCH → Update (멱등성X) => Particial!(리소스를 부분적으로 대체한다)
+    * 만약 서버에서 PATCH 가 지원되지 않는다면 POST 를 사용해라.\
+      \-> **POST 는 무적이다..**
+  * #### DELETE → Delete
   * OPTIONS → 리소스와의 통신 옵션을 확인하기 위해 사용
 * ### HTTP 응답 상태 코드(HTTP response status code)
   * 1xx → 정보 ⇒ 우리가 직접 쓰는 일은 드믐.
@@ -91,3 +115,21 @@ description: HTTP 개요, HTTP 메시지
     \- 304 Not Modified가 특수한 형태로 자주 보임.
   * 4xx → 클라이언트 쪽 문제 ⇒ 404 Not Found
   * 5xx → 서버 쪽 문제 ⇒ 500 Internal Server Error
+* ### POST/PUT 을 사용한 신규 자원 등록시 차이점
+  * #### POST (주문 관리 시스템)
+    * 클라이언트는 등록될 리소스의 URI 를 모른다.
+    * 서버가 새로 등록된 리소스 URI 를 생성해서 전달해준다.\
+      ex) HTTP/1.1 201 Created\
+      &#x20;     Location: **/members/100**
+    * 컬렉션(Collection)
+      * 서버가 관리하는 리소스 디렉토리
+      * 서버가 리소스의 URI 를 생성하고 관리한다.
+      * 위에서 컬렉션은 /members
+  * **PUT (파일 관리 시스템)**
+    * 클라이언트가 리소스의 URI 를 알고 있어야 한다.\
+      ex) PUT /files/star.jpg
+    * 클라이언트가 직접 리소스의 URI 를 지정한다.
+    * 스토어(Store)
+      * 클라이언트가 관리하는 리소스 저장소
+      * 클라이언트가 리소스의 URI 를 알고 관리
+      * 위에서 스토어는 /files
