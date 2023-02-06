@@ -131,15 +131,15 @@ description: HTTP 개요, HTTP 메시지
       * 때문에, POST 주문후에 주문 결과 화면을 GET 메서드로 리다이렉트
       * 새로고침을 해도 GET 메서드(결과 화면)이기 때문에, 중복 주문을 예방 한다.
   * 4xx → 클라이언트 쪽 문제&#x20;
-    * 400 : Bad Request -> 클라이언트가 잘못된 요청
-    * 401 : Unauthorized -> 클라이언트가 해당 리소스에 대한 인증이 필요함**(인증)**
+    * **400 : Bad Request** -> 클라이언트가 잘못된 요청
+    * **401 : Unauthorized** -> 클라이언트가 해당 리소스에 대한 인증이 필요함**(인증)**
       * Authentication : 인증 -> 본인이 누구인가(로그인)
       * Authorization : 인가 -> 리소스에 대한 인증(권한부여)
-    * 403 : Forbidden -> 서버가 요청을 이해했지만, 승인을 거부함**(인가)**
-    * 404 : Not Found -> 요청에 대한 리소스를 찾을 수 없음
+    * **403 : Forbidden** -> 서버가 요청을 이해했지만, 승인을 거부함**(인가)**
+    * **404 : Not Found** -> 요청에 대한 리소스를 찾을 수 없음
   * 5xx → 서버 쪽 문제&#x20;
-    * 500 : Internal Server Error -> 애매하면 500 오류
-    * 503 : Service Unavailable -> 서비스 이용 불가
+    * **500 : Internal Server Error** -> 애매하면 500 오류
+    * **503 : Service Unavailable** -> 서비스 이용 불가
 * ### POST/PUT 을 사용한 신규 자원 등록시 차이점
   *   #### POST (주문 관리 시스템)
 
