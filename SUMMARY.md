@@ -9,3 +9,6 @@
   * [HTTP Server](gitbook/readme/http-server.md)
   * [Java HTTP Server](gitbook/readme/java-http-server.md)
   * [Spring Web MVC](gitbook/readme/spring-web-mvc.md)
+* [REST API](gitbook/rest-api/README.md)
+  * [REST API](gitbook/rest-api/rest-api.md)
+  * [Page 1](gitbook/rest-api/page-1.md)
