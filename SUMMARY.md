@@ -11,3 +11,5 @@
   * [Spring Web MVC](gitbook/readme/spring-web-mvc.md)
 * [REST API](gitbook/rest-api/README.md)
   * [REST API](gitbook/rest-api/rest-api.md)
+  * [URI & MIME type](gitbook/rest-api/uri-and-mime-type.md)
+  * [Collection Pattern](gitbook/rest-api/collection-pattern.md)
