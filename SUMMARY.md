@@ -13,3 +13,8 @@
   * [REST API](gitbook/rest-api/rest-api.md)
   * [URI & MIME type](gitbook/rest-api/uri-and-mime-type.md)
   * [Collection Pattern](gitbook/rest-api/collection-pattern.md)
+  * [Collection Pattern 적용](gitbook/rest-api/collection-pattern-1.md)
+
+***
+
+* [Spring Web MVC 구현](spring-web-mvc.md)
