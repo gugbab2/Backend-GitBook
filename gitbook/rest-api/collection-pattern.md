@@ -37,7 +37,7 @@ Collection Pattern을 쓰는 경우:
 * `[/posts/{post_id}][/comments/{id}]` ⇒ Element. 여기서 {id}는 {comment\_id}를 의미함.
   * `[/comments/{id}]` 형태로 간단히 구성해도 된다. 이렇게 할 경우, URI만 봐서는 어떤 게시물에 대한 댓글인지 알 수 없다. => 댓글 삭제 등 간단한 작업 요청 상황이라면 오히려 좋을 수도 있다.
 
-특정 게시물을 고치는 페이지를 표현하고 싶다면, 마찬가로 구성할 수 있다.
+특정 게시물을 고치는 페이지를 표현하고 싶다면, 마찬가지로 구성할 수 있다.
 
 * `[/posts/{id}][/edit]` ⇒ “Edit Page”라는 리소스.
   * 마찬가지로 `/edit?post_id={post_id}` 형태로 써줄 수도 있다. 다만, `/comments/{id}/edit` 같은 게 도입될 경우 `/edit?comment_id={comment_id}` 같이 구분해서 처리하는 것이 더 복잡할 수 있다.
