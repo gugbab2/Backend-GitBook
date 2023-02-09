@@ -49,11 +49,11 @@
            1. **URI 등으로 리소스를 식별할 수 있다.** -> 리소스 : 자원(명사)
            2. **표현으로 리소스를 조작한다** -> 표현 : 행위(동사)
            3. **메시지(표현)는 자기 서술적이기 때문에, 여러 레이어에서 처리/변환 가능하다...??**\
-              \-> 즉, API 정보(문서) 가 REST API 응답 본문에 존재해야 한다는 것이다!\
+              \-> REST API 기준에서는, API 정보(문서) 가 REST API 응답 본문에 존재해야 한다는 것이다!\
               \-> 물론 불가능하다.. 하지만 적어도 API 문서가 어디 있는지는 알려주어야 한다.\
               \-> 서버가 변해서 Response Data 가 변경되어도, 클라이언트는 해당 API 문서를 통해 어떤 부분이 수정되었는지 확인이 가능하다!
            4. **HATEOAS(Hypermedia as the Engine of Application State)**\
-              \-> Hypermedia Link 를 통해 API 호출 후 다음 행동 할 수 있는 것들을 응답 본문에 넣어주어야 한다.\
+              \->   REST API 기준에서는, Hypermedia Link 를 통해 API 호출 후 다음 행동 할 수 있는 것들을 응답 본문에 넣어주어야 한다.\
               \-> 표현에 선택 가능한 상태 전환이 포함돼야 한다. => 이게 바로 하이퍼미디어 링크\
               \-> 대부분은 효율 문제로 표현에 링크를 넣지 않고, 클라이언트 개발자가 API 문서를 활용해 처리한다. 표현에서 상태 전환을 선택하는 게 아니라, API 문서를 참조해서 상태 전환을 강제하는 것.\
               \-> [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html)\<RESTful Web API>의 공저자인 레오나르드 리처드슨은 Hypermedia Control(대표적인 게 바로 링크)을 강조.\
