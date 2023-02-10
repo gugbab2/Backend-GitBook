@@ -2,7 +2,7 @@
 
 ## GitBook
 
-* [1주차 - HTTP 기초](README.md)
+* [HTTP 기초](README.md)
   * [HTTP 이해](gitbook/readme/http.md)
   * [HTTP Header](gitbook/readme/http-header.md)
   * [HTTP Client](gitbook/readme/http-client.md)
@@ -14,7 +14,4 @@
   * [URI & MIME type](gitbook/rest-api/uri-and-mime-type.md)
   * [Collection Pattern](gitbook/rest-api/collection-pattern.md)
   * [Collection Pattern 적용](gitbook/rest-api/collection-pattern-1.md)
-
-***
-
-* [Spring Web MVC 구현](spring-web-mvc.md)
+  * [Spring Web MVC 구현](gitbook/rest-api/spring-web-mvc.md)
