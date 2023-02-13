@@ -15,3 +15,6 @@
   * [Collection Pattern](gitbook/rest-api/collection-pattern.md)
   * [Collection Pattern 적용](gitbook/rest-api/collection-pattern-1.md)
   * [Spring Web MVC 구현](gitbook/rest-api/spring-web-mvc.md)
+* [DTO & JSON & CROS](gitbook/dto-and-json-and-cros/README.md)
+  * [DTO](gitbook/dto-and-json-and-cros/dto.md)
+  * [직렬화(Serialization)](gitbook/dto-and-json-and-cros/serialization.md)
