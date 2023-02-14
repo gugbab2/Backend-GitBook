@@ -14,8 +14,8 @@
 
 **직렬화**와 **마샬링**은 거의 같지만, Java에선 마샬링을 특수하게 다룸.
 
-* 직렬화(Serialization): 역직렬화(Deserialization)를 통해 객체 또는 데이터(DTO)의 복사본을 만들 수 있음.
-* 마샬링(Marshalling): 직렬화와 같거나, 원격 객체(본래 객체를 컨트롤 할 수 있는 리모콘 객체)로 복원할 수 있음.&#x20;
+* 직렬화(Serialization) : 역직렬화(Deserialization)를 통해 객체 또는 데이터(DTO)의 복사본을 만들 수 있음.
+* 마샬링(Marshalling) : 직렬화와 같거나, 원격 객체(본래 객체를 컨트롤 할 수 있는 리모콘 객체)로 복원할 수 있음.&#x20;
 
 ### JSON (JavaScript Object Notation)
 
@@ -40,7 +40,39 @@ Java는 Map이 이와 유사하지만, 스키마(메타데이터의  집합) 관
 Java에선 [Jackson](https://github.com/FasterXML/jackson)이란 도구가 유명하고, Spring Boot에서 Web 의존성을 추가하면 바로 사용할 수 있다.\
 (즉, 우리는 딱히 아무 것도 안 해도 된다)
 
-변환할 때 getter 사용. @JsonProperty로 속성 이름(key) 지정 가능. 다른 객체(DTO)를 포함하고 있어도 됨.
+변환할 때 getter 사용. @JsonProperty로 속성 이름(key) 지정 가능. 다른 객체(DTO)를 포함하고 있어도 됨.\
+\-> 특별한 경우가 아니라면, getter 이름을 변경해 사용하도록 하자.
+
+```java
+public class PostDTO {
+    private String id;
+    private String title;
+    private String content;
+
+    public PostDTO(String id) {
+    }
+
+    public PostDTO(String id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
+    @JsonProperty("ID")
+    public String getId() {
+        return id;
+    }
+    @JsonProperty("TITLE")
+    public String getTitle() {
+        return title;
+    }
+    @JsonProperty("CONTENT")
+    public String getContent() {
+        return content;
+    }
+}
+
+```
 
 ### JSON 스키마로서의 DTO (class)
 

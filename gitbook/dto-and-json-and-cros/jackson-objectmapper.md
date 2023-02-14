@@ -49,7 +49,7 @@ public class PostDto {
 }
 ```
 
-Spring DI를 통해 컨트롤러에서 Jackson ObjectMapper를 얻는다. 스프링이 등록된 객체(Bean)를 관리하고 있고, 생성자에 명시하면 받아서 사용할 수 있다. 사용=의존성/의존관계를 주입 받는다(Dependency Injection).
+Spring DI를 통해 컨트롤러에서 Jackson ObjectMapper를 얻는다. 스프링이 등록된 객체(Bean == ObjectMapper)를 관리하고 있고, 생성자에 명시하면 받아서 사용할 수 있다. 사용=의존성/의존관계를 주입 받는다(Dependency Injection).
 
 ```java
 public class PostController {
@@ -72,6 +72,13 @@ Jackson ObjectMapper를 써서 DTO를 JSON 포맷의 String으로 변환한다. 
 ```
 
 우리가 Jackson을 바로 쓸 수 있는 건 Spring Boot가 Jackson을 지원하기 때문. 변환 또한 Spring Boot가 알아서 해주기 때문에 실제로는 아주 쉽고 자연스럽게 쓸 수 있다.
+
+<pre class="language-gradle"><code class="lang-gradle">dependencies {
+<strong>    //Jackson 이 내장되어 있다.
+</strong>    implementation 'org.springframework.boot:spring-boot-starter-web'    
+   
+}
+</code></pre>
 
 ```java
 	@GetMapping("/{id}")
@@ -104,7 +111,8 @@ Jackson ObjectMapper를 써서 DTO를 JSON 포맷의 String으로 변환한다. 
 	}
 ```
 
-CRUD 모두 이런 식으로 DTO를 활용할 수 있다. 이때 적절한 요청 또는 응답을 처리하도록 DTO를 세분화해도 좋다. 예를 들어, Create(POST)에선 id를 직접 넘겨주지 않는다는 걸 명확히 드러낼 수도 있다.
+CRUD 모두 이런 식으로 DTO를 활용할 수 있다. 이때 적절한 요청 또는 응답을 처리하도록 DTO를 세분화해도 좋다. 예를 들어, Create(POST)에선 id를 직접 넘겨주지 않는다는 걸 명확히 드러낼 수도 있다.\
+\-> 세분화 하여 DTO 를 사용한다는 것은 관리 포인트가 많아진다는 것을 의미한다. 신중하자..
 
 `**PostController` 전체 코드\*\*
 

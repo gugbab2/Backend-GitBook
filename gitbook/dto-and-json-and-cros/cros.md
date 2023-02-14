@@ -1,5 +1,8 @@
 # CROS
 
+F/E 애플리케이션에서 B/E REST API를 사용하는 \
+(실제) 상황 사용자가 접근하는 URL: [http://localhost:3000/](http://localhost:3000/) (바뀔 예정)
+
 ### Same-Origin Policy
 
 > [CORS](https://github.com/ahastudio/til/blob/main/http/20201205-cors.md)
@@ -8,7 +11,7 @@
 
 웹 브라우저가 처리하는 보안 정책(서버에서는 이미 처리 끝내고 결과를 준 상태).
 
-Back-end, 즉 얻으려는 리소스의 출처(호스트)가 Front-end, 즉 현재 페이지(B/E 입장에서는 요청하는 쪽)와 다르면 접근할 수 없게 하는 보안 정책. 출처에는 포트까지 포함된다는 점에 주의.
+Back-end, 즉 얻으려는 리소스의 출처(호스트)가 Front-end, 즉 현재 페이지(B/E 입장에서는 요청하는 쪽)와 다르면 접근할 수 없게 하는 보안 정책. **출처에는 포트까지 포함된다는 점에 주의**.
 
 **요청 메시지**
 
