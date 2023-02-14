@@ -18,8 +18,5 @@
 * [DTO & JSON & CROS](gitbook/dto-and-json-and-cros/README.md)
   * [DTO](gitbook/dto-and-json-and-cros/dto.md)
   * [직렬화(Serialization)](gitbook/dto-and-json-and-cros/serialization.md)
-
-***
-
-* [Jackson ObjectMapper](jackson-objectmapper.md)
-* [CROS](cros.md)
+  * [Jackson ObjectMapper](gitbook/dto-and-json-and-cros/jackson-objectmapper.md)
+  * [CROS](gitbook/dto-and-json-and-cros/cros.md)
