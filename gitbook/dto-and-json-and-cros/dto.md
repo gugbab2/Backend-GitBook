@@ -4,12 +4,12 @@
 
 > [DTO](https://martinfowler.com/eaaCatalog/dataTransferObject.html)
 
-> ~~~~[~~Remote Facade~~](https://martinfowler.com/eaaCatalog/remoteFacade.html)~~~~
+> [Remote Facade](https://martinfowler.com/eaaCatalog/remoteFacade.html)
 
 #### **제약 조건**
 
 * “between processes”
-* ~~“working with a remote interface, such as Remote Facade”~~
+* “working with a remote interface, such as Remote Facade”
 * 다른 프로세스와 통신, 그것도 원격(네트워크를 통해)으로!\
   \-> 아래 나오는 IPC 라고 부른다
 
@@ -24,7 +24,7 @@
     * REST를 활용하면 리소스에 대한 CRUD로 정리해야 함.\
       \-> 리소스를 표현을 기준으로 API 를 명확하게 정의함.&#x20;
 
-REST 에선 표현(HTTP 메서드)을 다뤄야 하고, 이를 위해 사실상 데이터를 담는 것 외엔 아무 것도 하지 않아서 제대로 된 객체라고 볼 수 없는 특별한 객체를 사용하게 된다.(객체 지향에서 지양해야만 하는 데이터 덩어리 객체..)\
+REST 에선 표현(메서드)을 다뤄야 하고, 이를 위해 사실상 데이터를 담는 것 외엔 아무 것도 하지 않아서 제대로 된 객체라고 볼 수 없는 특별한 객체를 사용하게 된다.(객체 지향에서 지양해야만 하는 데이터 덩어리 객체..)\
 \->  객체지향 프로그래밍에서는 캡슐화를 통해서 데이터를 외부에 공개해서는 안된다!
 
 * [“무기력한 도메인 모델” 안티패턴](https://martinfowler.com/bliki/AnemicDomainModel.html)
