@@ -3,6 +3,7 @@
 ## Language
 
 * [Java](README.md)
+  * [CLI 환경에서 .class 파일 실행](language/java/cli-.class.md)
 
 ## Server
 
@@ -24,7 +25,3 @@
   * [직렬화(Serialization)](server/dto-and-json-and-cros/serialization.md)
   * [Jackson ObjectMapper](server/dto-and-json-and-cros/jackson-objectmapper.md)
   * [CROS](server/dto-and-json-and-cros/cros.md)
-
-***
-
-* [CLI 환경에서 .class 파일 실행](cli-.class.md)

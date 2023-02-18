@@ -22,7 +22,7 @@ Main.java 파일을 컴파일 하기 위해서 javac Main.java 명령어를 사�
 해당 클래스 파일을 실행하기 위해서 java Main 명령어를 실행하게 되면 다음의 에러 메시지를 띄우면 정상적으로 실행되지 않는 것을 볼 수 있다.\
 "Error : Could not find or load main class Main"
 
-![](<.gitbook/assets/Screen Shot 2023-02-18 at 14.12.52.png>)
+![](<../../.gitbook/assets/Screen Shot 2023-02-18 at 14.12.52.png>)
 
 Main.java 파일을 들여다 보면 패키지가 org.example 로 설정된 것을 볼 수 있다.\
 자바 명령어를 실행할 때는 FQCN 로 실행시켜야 정상 작동한다.\
@@ -34,7 +34,7 @@ Main.java 파일을 들여다 보면 패키지가 org.example 로 설정된 것�
 현재 우리는 org.example 디렉토리 안에 들어와 있는 상태로, 해당 클래스 파일을 찾을 수 없다.\
 만약 java 디렉토리에서 java org.example.Main 으로 실행시킨다면 아래와 같이 정상적으로 작동하는 것을 볼 수 있다.
 
-![](<.gitbook/assets/Screen Shot 2023-02-18 at 14.28.11.png>)
+![](<../../.gitbook/assets/Screen Shot 2023-02-18 at 14.28.11.png>)
 
 만약 다른 디렉토리에서 해당 클래스파일을 실행시키고 싶다면, 환경변수를 설정해주거나, -cp -classpath 옵션을 추가해보는 것을 생각할 수있다.
 
@@ -44,4 +44,4 @@ Main.java 파일을 들여다 보면 패키지가 org.example 로 설정된 것�
 
 별다른 고민 없이 컴파일 한 디렉토리에서 클래스파일을 실행시켜도 아래와 같이 정상적으로 작동하는 것을 볼 수 있다.&#x20;
 
-![](<.gitbook/assets/Screen Shot 2023-02-18 at 14.30.45.png>)
+![](<../../.gitbook/assets/Screen Shot 2023-02-18 at 14.30.45.png>)
