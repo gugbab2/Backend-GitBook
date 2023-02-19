@@ -4,7 +4,6 @@
 
 * [Java](README.md)
   * [CLI 환경에서 .class 파일 실행](language/java/cli-.class.md)
-  * [Page 1](language/java/page-1.md)
 
 ## Server
 

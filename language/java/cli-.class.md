@@ -29,7 +29,8 @@ Main.java 파일을 들여다 보면 패키지가 org.example 로 설정된 것�
 (FQCN(Full Qualify Class Name) → FULL 패키지 이름 + 클래스 이름)
 
 하지만 FQCN 형식인 java org.example.Main 으로 실행시켜도 동일한 오류가 발생할 것이다.. \
-왜냐하면, CLASSPATH 환경 변수가 없기 때문에 -classpath 또는 -cp 옵션을 사용하여 경로를 제안 하지 않으므로 _기본적으로 Java는 현재 디렉토리에서만 검색합니다_ .&#x20;
+왜냐하면, CLASSPATH 환경 변수가 없기 때문에 -classpath 또는 -cp 옵션을 사용하여 경로를 제안 하지 않으므로 기본적으로 Java는 현재 디렉토리에서만 검색합니다 . \
+\-> **기본적으로 자바는 해당 패키지의 가장 상위 패키지(root) 에서 실행을 해야만 한다는 약속이 있다.(그냥 약속이다!)**
 
 현재 우리는 org.example 디렉토리 안에 들어와 있는 상태로, 해당 클래스 파일을 찾을 수 없다.\
 만약 java 디렉토리에서 java org.example.Main 으로 실행시킨다면 아래와 같이 정상적으로 작동하는 것을 볼 수 있다.
