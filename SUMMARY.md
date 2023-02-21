@@ -25,3 +25,7 @@
   * [직렬화(Serialization)](server/dto-and-json-and-cros/serialization.md)
   * [Jackson ObjectMapper](server/dto-and-json-and-cros/jackson-objectmapper.md)
   * [CROS](server/dto-and-json-and-cros/cros.md)
+* [Layered Architecture](server/layered-architecture/README.md)
+  * [Layered Architecture](server/layered-architecture/layered-architecture.md)
+  * [Data Access](server/layered-architecture/data-access.md)
+  * [Domain Model](server/layered-architecture/domain-model.md)
