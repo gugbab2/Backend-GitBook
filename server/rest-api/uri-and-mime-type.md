@@ -7,7 +7,7 @@
 
 * ### URI 를 나누는 방법
   * URN : 리소스의 유니크한 이름, 사실상 안쓰임
-  * URI : 리소스의 위치(유니크), 위치 변경에 취약하다;;
+  * URL : 리소스의 위치(유니크), 위치 변경에 취약하다;;
 
 ## [MIME Type](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics\_of\_HTTP/MIME\_types)(Content Type, Media Type)
 
