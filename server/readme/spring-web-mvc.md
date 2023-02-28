@@ -47,7 +47,7 @@
       \-> 스프링부트를 실행했을 때, 내부적으로 임베디드 톰캣이 실행되는 것을 볼 수 있다.
     * 아직도 많은 JSP를 사용하는 웹 프로그래머들은 아파치 + 톰캣을 병행해서 사용. 그 이유는 정적 데이터를 처리할 때 아파치의 성능이 더 좋음.
 
-    <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 ## Model-View-Controller(MVC) 아키텍처 패턴
 

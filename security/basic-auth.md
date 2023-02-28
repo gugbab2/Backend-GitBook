@@ -10,7 +10,7 @@
 
 \-> 아래와 같이 인가를 위한 가장 기본적인본프로세스를 기본 엑세스 인증(Basic Access Authentication) 이라고 부르며 다음과 같은 프로세스를 진행하게 된다.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>인증 인가 프로세스</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>인증 인가 프로세스</p></figcaption></figure>
 
 1. 클라이언트 입장에서 아무런  정보 없이(ID/PW) 없는 서버에 접근할 경우 서버에서는 401( Unauthorized) 라는 응답 코드를 전달해주게 되며, 해당 접근을 서버 입장에서 엑세스 할 수 없음을 나타낸다.
 2. 클라이언트는 사용자 이름과 암호를 Authorization 헤더 값으로 포함해 전달하게 된다.\
