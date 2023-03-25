@@ -17,7 +17,13 @@
     * [Object.equals() && .hashCode()](language/java/object-class/object.equals-and-and-.hashcode.md)
   * [추상클래스, 인터페이스, Enum](language/java/enum.md)
   * [예외처리](language/java/undefined-3.md)
-  * [String](language/java/string.md)
+  * [String](language/java/string/README.md)
+    * [String 구조](language/java/string/string.md)
+    * [String 문자열을 byte 로 변환하기](language/java/string/string-byte.md)
+    * [String 클래스에서 자주 사용되는 메서드](language/java/string/string-1.md)
+    * [immutable 한 String 의 단점을 보완한 클래스 StringBuilder, StringBuffer](language/java/string/immutable-string-stringbuilder-stringbuffer.md)
+  * [Annotation](language/java/annotation/README.md)
+    * [Untitled](language/java/annotation/untitled.md)
 
 ## Server
 
