@@ -1,6 +1,6 @@
 # JVM, JRE, JDK
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. JVM(Java Virtual Machine)
 
