@@ -1,42 +1,52 @@
-# 참조자료형의 형변환
+# 상속 Basic
 
-### 참조자료형의 형변환
+### 상속의 목적
 
-* 참조 자료형은 자식 클래스의 타입을 부모 클래스의 타입으로 형 변환하면, 부모클래스에서 호출할 수 있는 메소드들은 자식 클래스에서도 호출할 수 있으므로 전혀 문제가 되지 않는다. (상속관계이기 때문에!)\
-  \-> 따라서 형 변환을 명시적으로 해줄 필요가 없다.
-* 아래코드와 같이 부모객체를 자식객체에서 사용하려는 경우 런타임 에러가 생긴다.\
-  \-> 자식객체에서 사용하려는 객체가 실제로 부모객체인 경우 사용할 수 가 없다.(ClassCastException)
+* 코드 재사용을 줄이는 것이 가장 큰 목적이다.
+  * 맥북에는 여러 모델이 있는데, 모델마다 같은 기능을 반복적으로 개발한다는 것은 상당히 비효율적...
+  * 때문에, 맥북의 표준 기능을 만들어두고, 모델마다 특별한 기능을 표준에 추가하는 것이 합리적!
+
+### 기본적인 상속 정리
+
+* 부모 클래스에서는 기본 생성자는 만들어 놓는 것 이외에는 상속을 위해서 아무런 작업을 할 필요가 없다.\
+  \-> 자식 생성자와 매개변수가 매핑되는 부모 생성자가 존재해야 한다. \
+  \-> 만약 자식 생성자와 매핑되는 부모생성자가 없다면 오류발생!\
+  \-> 아래와 같이 super() 예약어를 통해서 원하는 부모 생성자 호출 가능.
 
 ```java
-public class InheritanceCasting {
-    public void objectCast(){
-        ParentCasting parentCasting = new ParentCasting();
-        ChildCasting childCasting = new ChildCasting();
+public class Main extends Parent{
 
-        ParentCasting parentCasting1 = childCasting;
-        ChildCasting childCasting1 = (ChildCasting)parentCasting;
+    Main(){
+        super("args1");
+    }
+}
+
+class Parent{
+//    Parent(){
+//        System.out.println("no argument Parent class");
+//    }
+
+    Parent(String arg1){
+        System.out.println("one argument Parent class");
     }
 }
 ```
 
-* 하지만 아래 코드와 같이 자식객체에서 사용하려는 객체의 실제 모습이 자식객체라면 문제없이 사용할 수 있다.
+* 추가적으로 참조자료형을 매개변수로 하는 생성자를 부모 클래스에 만들 수 있지만, super(null) 의 형태로 호출하게 되면, 어떤 생성자를 찾아야 할지 모호 하기에 오류가 발생한다.&#x20;
+* **자식 클래스의 생성자가 호출되면, 자동으로 부모 클래스의 매개 변수 없는 생성자가 실행된다.**
+* 자식 클래스에서는 부모 클래스에 있는 public, protected 로 선언된 모든 인스턴스 및 클래스 변수와 메서드를 사용할 수 있다.&#x20;
+* 자식 클래스에서 부모클래스의 메서드를 오버라이딩 할 때, 접근 제어자가 확대 되는 것은 문제가 없지만, 축소되는 것은 문제가 될 수 있다.&#x20;
 
-```java
-public class InheritanceCasting2 {
-    public void objectCast(){
-        ChildCasting childCasting = new ChildCasting();
-        ParentCasting parentCasting = childCasting;
-        ChildCasting childCasting1 = (ChildCasting) parentCasting;
-    }
-}
-```
+### 자식클래스에서 할 수 있는 일
 
-### 참조자료형의 형변환 정리
-
-* 참조자료형도 형 변환이 가능하다.
-* 자식 타입의 객체를 부모 타입으로 형 변환 하는 것은 자동으로 된다.
-* 부모 타입의 객체를 자식 타입으로 형 변환을 할 때는 명시적으로 타입을 지정해주어야 한다.\
-  \-> **이때 부모 타입의 실제 객체는 자식 타입이어야만 한다.**
-* instanceof 예약어를 사용하면 객체의 타입을 확인할 수 있다.
-* instanceof 로 타입 확인할 때 부모 타입도 true 라는 결과를 제공한다.\
-  \-> **때문에 타입을 확인할 때는 가장 하위에 있는 자식 타입부터 확인을 해야 제대로 타입 점검이 가능하다.**
+* **생성자**
+  * 자식 클래스의 생성자가 호출되면 자동으로 부모 클래스의 기본 생성자를 호출하게 되고, 명시적으로 super() 라고 지정할 수 있다.
+  * 부모 클래스의 생성자를 명시적으로 호출하기 위해서 super 예약어를 사용할 수 있다.
+* **변수**
+  * 부모 클래스에 private 로 선언된 변수를 제외한 모든 변수가 자신의 클래스에 선언된 것처럼 사용할 수 있다.
+  * 부모 클래스에 선언된 변수와 동일한 이름을 가진 변수를 선언할 수 도 있다. 하지만 권장 x
+  * 부모 클래스에 선언되어 있지 않은 이름의 변수를 선언할 수 있다.
+* **메소드**
+  * 변수처럼 부모 클래스에 선언된 메서드들이 자신의 클래스에 선언된 것처럼 사용할 수 있다.
+  * 부모 클래스에 선언된 메소드와  동일한 시그니처를 사용함으로써 메소드를 overriding 할 수 있다.
+  * 부모 클래스에 선언되어 있지 않은 이름의 새로운 메소드를 선언할 수 있다.

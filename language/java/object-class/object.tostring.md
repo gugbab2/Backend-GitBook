@@ -3,8 +3,8 @@
 ### Object.toString() 이 자동적으로 호출되는 경우
 
 * CASE
-  * System.out.println() 메소드에 매개 변수로 들어가는 경우
-  * 객체에 대하여 더하기 연산을 하는 경우
+  * **System.out.println() 메소드에 매개 변수로 들어가는 경우**
+  * **객체에 대하여 더하기 연산을 하는 경우**
 * default toString 형식
   * getClass().getName() + '@' + Integer.toHexString(hashCode())\
     \-> Full Package + '@' + 객체의 해시코드 값
