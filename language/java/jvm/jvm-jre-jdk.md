@@ -1,13 +1,15 @@
 # JVM, JRE, JDK
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. JVM(Java Virtual Machine)
 
 * 단독으로 배포되지 않는다.
 * 자바 파일을 컴파일 해서 생긴 클래스파일(바이트코드)을 운영체제에 종속적인 코드로 변환하여 실행한다.\
   \-> 특정 운영체제에 _**종속적**_이라고 볼 수 있다..
-* JVM 벤터 : 오라클, 아마존, Azul...(다양하다..)
+* JVM 벤더 : 오라클, 아마존, Azul...(다양하다..)
+* JVM 은 자바 프로그램이 실행되는 프로세스를 의미한다.\
+  \-> java 명령어를 통해서 애플리케이션이 수행되면, JVM 위에서 애플리케이션이 동작한다.
 * 클래스를 읽어들이고, 메모리에 올리는 등 다양한 역할을 한다.
 
 ## 2. JRE(Java Runtime Enviroment)
@@ -19,7 +21,7 @@
 
 ## 3. JDK(Java Development Kit)
 
-* 자바 개발 도구
+* 자바 개발 도구(자바 컴파일러도 포함되어 있다)
 * 자바를 실행하기 위한 환경(JRE) 을 제공하고, 추가적으로 자바를 개발하기 위한 도구 또한 제공하는 것을 JDK 라고 부른다.
 * 자바 11 부터는 JDK만 제공한다.(해당 버전부터 JDK 가 최소 배포단위이다)\
   \-> JRE 와 JDK 버전이 맞지 않으면 돌아가지 않는 이슈는 자바 11부터는 존재하지 않는다.
