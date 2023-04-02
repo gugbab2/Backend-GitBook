@@ -33,6 +33,10 @@
   * [java.lang](language/java/java.lang/README.md)
     * [숫자를 처리하는 클래스](language/java/java.lang/undefined.md)
     * [각종 정보를 확인하는 System 클래스](language/java/java.lang/system.md)
+  * [제네릭](language/java/undefined-5/README.md)
+    * [제네릭 기본](language/java/undefined-5/undefined.md)
+    * [제네릭에 ?(와일드 카드)](language/java/undefined-5/undefined-1.md)
+    * [Page 1](language/java/undefined-5/page-1.md)
 
 ## Server
 
