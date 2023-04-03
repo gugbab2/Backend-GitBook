@@ -23,7 +23,7 @@ Authorization: AWS AWSAccessKeyId:Signature
 
 ## HMAC 동작 원리
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption><p>HMAC 동작 원리</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>HMAC 동작 원리</p></figcaption></figure>
 
 1. 해시 생성 : 클라이언트는 key + message 를 HMAC 알고리즘으로 처리해 해시 값을 만들어낸다.
 2. 요청 보내기 : 생성된 해시와 message 를 HTTP 요청으로 REST API 서버에 보냅니다.\

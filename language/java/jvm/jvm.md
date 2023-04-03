@@ -1,6 +1,6 @@
 # JVM 구조 이해하기
 
-<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 * 자바의 코드가 운영체제에서 실행되기 위해서는 아래의 과정을 거친다.
 * 자바 소스코드 -> 자바 컴파일러 -> 바이트코드 -> **JVM** -> 기계어 -> 하드웨어 및 OS&#x20;
@@ -40,4 +40,4 @@
 * JNL(Java Native Library) : 네이티브 메서드를 사용할 수 있는 실제 객체(라이브러리)\
   \-> native 키워드를 사용한다.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
