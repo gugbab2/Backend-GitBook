@@ -1,6 +1,10 @@
 # Collection 기본
 
+<figure><img src="../../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
 ## Collection 클래스
+
+\-> **Collection 을 상속하는 객체들은 for(String temp : list1) 형식의 for 문을 사용 가능하다.**
 
 ```java
 public interface Collection<E> extends Iterable<E>
