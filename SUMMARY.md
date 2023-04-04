@@ -37,9 +37,9 @@
     * [제네릭 기본](language/java/undefined-5/undefined.md)
     * [제네릭에 ?(와일드 카드)](language/java/undefined-5/undefined-1.md)
     * [메소드를 제네릭하기 선언하기](language/java/undefined-5/undefined-2.md)
-  * [제네릭](language/java/undefined-6.md)
   * [Collection](language/java/collection/README.md)
     * [Collection 기본](language/java/collection/collection.md)
+    * [List & ArrayList](language/java/collection/list-and-arraylist.md)
 
 ## Server
 
