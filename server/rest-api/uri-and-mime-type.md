@@ -23,4 +23,3 @@
 7. `application/json` ⇒ 범용. 자기서술적이기 굉장히 어렵다.
 8. `application/dns+json`
 
-``

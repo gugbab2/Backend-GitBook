@@ -4,7 +4,7 @@
 
 > [DTO](https://martinfowler.com/eaaCatalog/dataTransferObject.html)
 
-> ~~~~[~~Remote Facade~~](https://martinfowler.com/eaaCatalog/remoteFacade.html)~~~~
+> [~~Remote Facade~~](https://martinfowler.com/eaaCatalog/remoteFacade.html)
 
 #### **제약 조건**
 

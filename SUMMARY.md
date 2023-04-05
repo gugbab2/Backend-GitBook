@@ -39,7 +39,8 @@
     * [메소드를 제네릭하기 선언하기](language/java/undefined-5/undefined-2.md)
   * [Collection](language/java/collection/README.md)
     * [Collection 기본](language/java/collection/collection.md)
-    * [List & ArrayList](language/java/collection/list-and-arraylist.md)
+    * [List & ArrayList & Stack](language/java/collection/list-and-arraylist-and-stack.md)
+    * [Set & Queue](language/java/collection/set-and-queue.md)
 
 ## Server
 
