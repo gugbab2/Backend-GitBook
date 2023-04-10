@@ -41,6 +41,9 @@
     * [Collection 기본](language/java/collection/collection.md)
     * [List & ArrayList & Stack](language/java/collection/list-and-arraylist-and-stack.md)
     * [Set & Queue](language/java/collection/set-and-queue.md)
+    * [LinkedList](language/java/collection/linkedlist.md)
+    * [Map](language/java/collection/map.md)
+  * [Thread](language/java/thread.md)
 
 ## Server
 

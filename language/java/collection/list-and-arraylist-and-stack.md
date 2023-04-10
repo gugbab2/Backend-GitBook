@@ -32,11 +32,11 @@ java.lang.Object
 >
 > Iterable\<E> : foreach 문장 사용 가능
 >
-> Collection\<E>
+> Collection\<E> : 여러개의 데이터를 한 객체에 담아 처리할 메소드 지정
 >
-> List\<E>&#x20;
+> List\<E> : 목록형 데이터를 처리하는 것과 관련된 메소드 지정
 >
-> RandomAccess : 목록형 데이터보다 빠르게 접근할 수 있도록 임의로(random) 접근하는 알고리즘이 적용된다는 것을 지정
+> RandomAccess : 목록형 데이터를 보다 빠르게 접근할 수 있도록 임의로(random) 접근하는 알고리즘이 적용된다는 것을 지정
 
 ## ArrayList 생성자
 
@@ -149,5 +149,5 @@ public void checkArrayList6(){
 * boolean empty() : 객체가 비어있는지를 확인한다.
 * E peek() : 객체의 가장 위에 있는 데이터를 리턴.
 * E pop() : 객체의 가장 위에 있는 데이터를 지우고, 리턴
-* E push(E item ) : 매개변수로 넘어온 데이터를 가장 위에 저장
+* E push(E item) : 매개변수로 넘어온 데이터를 가장 위에 저장
 * int search(Object o) : 매개변수로 넘어온 데이터 위치를 리턴
