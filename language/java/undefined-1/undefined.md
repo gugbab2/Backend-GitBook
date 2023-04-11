@@ -14,7 +14,7 @@ private : 해당 클래스 내에서 접근 가능.&#x20;
 
 public 으로 선언된 클래스가 소스 내에 있다면, 그 소스 파일의 이름은 public 인 클래스 이름과 동일해야 한다.
 
-```
+```java
 // 한 클래스 파일 내에 두개의 public class 는 존재할 수 없다.
 package c.javapackage;
 public class PublicClass{
