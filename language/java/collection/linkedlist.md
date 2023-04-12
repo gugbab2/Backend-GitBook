@@ -18,7 +18,7 @@ java.lang.Object
 >
 > Cloneable : Object 클래스의 _**clone() 메서드가 제대로 수행될 수 있음을 지정**_, 복제가 가능한 객체
 >
-> Iterable\<E> : foreach 문장 사용 가능
+> Iterable\<E> : Iterable 인터페이스 사용을 통해서 데이터를 순차적으로 가져올 수 있다.&#x20;
 >
 > Collection\<E> : 여러개의 데이터를 한 데이터에 담아 처리할 메서드를 지정
 >
@@ -93,5 +93,6 @@ java.lang.Object
 ## LinkedList 데이터를 하나씩 검색하자
 
 * ListIterator listIterator(int i) : 매개변수에 지정된 위치부터의 데이터를 검색하기 위한 ListIterator 객체를 리턴한다. \
-  \-> ListIterator 는 Iterator 객체가 다음 데이터만 검색할 수 있다는 단점을 보완하여, 이전 데이터도 검색할 수 있는 이터레이터다. (next(), previous())
+  \-> **ListIterator 는 Iterator 객체가 다음 데이터만 검색할 수 있다는 단점을 보완하여, 이전 데이터도 검색할 수 있는 이터레이터다. (next(), previous())**
 * Iterator descendingIterator() : LinkedList 의 데이터를 끝에서부터 검색하기 위한 Iterator 객체를 리턴한다.&#x20;
+
