@@ -43,8 +43,9 @@
     * [Set & Queue](language/java/collection/set-and-queue.md)
     * [LinkedList](language/java/collection/linkedlist.md)
     * [Map](language/java/collection/map.md)
-  * [Thread](language/java/thread/README.md)
+  * [Thread](language/java/thread.md)
     * [Thread 기본](language/java/thread/thread.md)
+    * [Thread 와 관련이 많은, Synchronized](language/java/thread/thread-synchronized.md)
 
 ## Server
 
