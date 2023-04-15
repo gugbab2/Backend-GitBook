@@ -23,7 +23,7 @@ java.lang.Object
             java.util.ArrayList<E>
 ```
 
-* Object -> Collection -> ArrayList 순으로 확장한 것을 확인할 수 있다.&#x20;
+* Object -> Collection -> List -> ArrayList 순으로 확장한 것을 확인할 수 있다.&#x20;
 * ArrayList 는 아래 인터페이스를 구현한다.&#x20;
 
 > **Serializable, Cloneable, Iterable\<E>, Collection\<E>, List\<E>, RandomAccess**
@@ -39,7 +39,7 @@ java.lang.Object
 >
 > List\<E> : 목록형 데이터를 처리하는 것과 관련된 메소드 지정
 >
-> RandomAccess : 목록형 데이터를 보다 빠르게 접근할 수 있도록 임의로(random) 접근하는 알고리즘이 적용된다는 것을 지정
+> **RandomAccess : 목록형 데이터를 보다 빠르게 접근할 수 있도록 임의로(random) 접근하는 알고리즘이 적용된다는 것을 지정**
 
 ## ArrayList 생성자
 
