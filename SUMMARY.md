@@ -46,6 +46,7 @@
   * [Thread](language/java/thread.md)
     * [Thread 기본](language/java/thread/thread.md)
     * [Thread 와 관련이 많은, Synchronized](language/java/thread/thread-synchronized.md)
+    * [Thread 를 통제하는 메서드](language/java/thread/thread-1.md)
 
 ## Server
 
