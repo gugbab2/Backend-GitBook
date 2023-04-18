@@ -29,7 +29,7 @@
 ```java
 public class StateThread extends Thread{
     private Object monitor;
-    public StateThread(){
+    public StateThread(Object monitor){
         this.monitor = monitor;
     }
     
