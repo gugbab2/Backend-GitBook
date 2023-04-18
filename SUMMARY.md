@@ -53,6 +53,10 @@
     * [Reader, Writer](language/java/i-o/reader-writer.md)
   * [Serializable, NIO](language/java/serializable-nio/README.md)
     * [Serializable](language/java/serializable-nio/serializable.md)
+    * [NIO](language/java/serializable-nio/nio.md)
+  * [네트워크 프로그래밍](language/java/undefined-6/README.md)
+    * [네트워크 기본 & TCP 통신](language/java/undefined-6/and-tcp.md)
+    * [UDP 통신](language/java/undefined-6/udp.md)
 
 ## Server
 

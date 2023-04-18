@@ -160,3 +160,21 @@ public class SerialDTO implement Serializable{
 * **다음과 같이, serialVersionUID 를 명시적으로 선언한 것 같이, 다른 객체로 인식하게 된다.**
 * **만약 데이터가 변경되면 다음과 같이 serialVersionUID를 명시적으로 선언하는 것이 권장된다.**\
   **-> 운영상황에서, serializable 한 객체의 내용이 바뀌었는데 오류가 발생하지 않는다면 데이터가 꼬일 수 있기 때문이다.**&#x20;
+
+## transient 라는 예약어는 Serializable 과 뗄 수 없는 관계다
+
+```java
+import java.io.Serializable;
+
+public class SerialDTO implements Serializable {
+    private String bookName;
+    private int bookOrder;
+    transient private boolean bestSeller;
+    private long soldPerDay;
+
+    ...
+}
+
+```
+
+* transient 예약어를 사용하게 되면, Serializable 대상에 제외가 된다!(꼭 기억하자!)
