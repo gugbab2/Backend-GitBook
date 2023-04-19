@@ -23,7 +23,7 @@ static final long serialVersionUID = 1L;
 ## 객체를 저장하자&#x20;
 
 * 다음과 같이 DTO 객체를 만들고\
-  **-> Serializable 인터페이스를 구현하지 않았다면 정상적으로 실행되지 않는다..**\
+  **-> Serializable 인터페이스를 구현하지 않았다면 I/O & 네트워크 통신 시 정상적으로 실행되지 않는다..**\
   **-> I/O & 네트워크 통신 시에는 Serializable 인터페이스 구현이 필수적이다.**&#x20;
 
 ```java
