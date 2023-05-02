@@ -66,9 +66,6 @@
   * [HTTP Client](server/readme/http-client.md)
   * [HTTP Server](server/readme/http-server.md)
   * [Java HTTP Server](server/readme/java-http-server.md)
-  * [WAS(Servlet, JSP, Tomcat)](server/readme/was-servlet-jsp-tomcat/README.md)
-    * [JSP](server/readme/was-servlet-jsp-tomcat/jsp.md)
-    * [쿠키 / 세션](server/readme/was-servlet-jsp-tomcat/undefined.md)
 * [REST API](server/rest-api/README.md)
   * [REST API](server/rest-api/rest-api.md)
   * [URI & MIME type](server/rest-api/uri-and-mime-type.md)
@@ -80,6 +77,9 @@
   * [직렬화(Serialization)](server/dto-and-json-and-cros/serialization.md)
   * [Jackson ObjectMapper](server/dto-and-json-and-cros/jackson-objectmapper.md)
   * [CROS](server/dto-and-json-and-cros/cros.md)
+* [JSP 2.3 웹 프로그래밍](server/jsp-2.3/README.md)
+  * [JSP](server/jsp-2.3/jsp.md)
+  * [쿠키 / 세션](server/jsp-2.3/undefined.md)
 
 ## Security
 
