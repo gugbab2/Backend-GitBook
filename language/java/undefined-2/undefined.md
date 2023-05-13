@@ -19,7 +19,7 @@ public class InheritanceCasting {
 }
 ```
 
-* 하지만 아래 코드와 같이 자식객체에서 사용하려는 객체의 실제 모습이 자식객체라면 문제없이 사용할 수 있다.
+* 하지만 아래 코드와 같이 **자식객체에서 사용하려는 객체의 실제 모습이 자식객체라면 문제없이 사용할 수 있다.**
 
 ```java
 public class InheritanceCasting2 {
@@ -40,3 +40,4 @@ public class InheritanceCasting2 {
 * instanceof 예약어를 사용하면 객체의 타입을 확인할 수 있다.
 * instanceof 로 타입 확인할 때 부모 타입도 true 라는 결과를 제공한다.\
   \-> **때문에 타입을 확인할 때는 가장 하위에 있는 자식 타입부터 확인을 해야 제대로 타입 점검이 가능하다.**
+
