@@ -57,6 +57,7 @@
   * [네트워크 프로그래밍](language/java/undefined-6/README.md)
     * [네트워크 기본 & TCP 통신](language/java/undefined-6/and-tcp.md)
     * [UDP 통신](language/java/undefined-6/udp.md)
+  * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
 
 ## Server
 
@@ -91,3 +92,7 @@
 
 * [Basic Auth](security/basic-auth.md)
 * [HMAC 기반 인증](security/hmac.md)
+
+## DB
+
+* [실무에서 외래키를 사용하지 않는 이유](db/undefined.md)
