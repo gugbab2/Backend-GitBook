@@ -67,7 +67,7 @@ java.lang.Object
     **-> 따라서, get() 메서드가 호출되면, hashCode() 결과를 확인하고, equals() 메서드를 통해 버켓에 들어간 데이터를 가져온다.**\
 
 
-    <figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## TreeMap&#x20;
 

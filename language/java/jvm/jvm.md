@@ -41,4 +41,4 @@
 * JNL(Java Native Library) : 네이티브 메서드를 사용할 수 있는 실제 객체(라이브러리)\
   \-> native 키워드를 사용한다.
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
