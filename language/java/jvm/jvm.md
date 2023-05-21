@@ -1,6 +1,6 @@
 # JVM 구조 이해하기
 
-<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 자바의 코드가 운영체제에서 실행되기 위해서는 아래의 과정을 거친다.
 * 자바 소스코드 -> 자바 컴파일러 -> 바이트코드 -> **JVM** -> 기계어 -> 하드웨어 및 OS&#x20;

@@ -89,6 +89,7 @@
   * [객체지향 설계의 5원칙](server/undefined/5.md)
   * [스프링이 사랑한 디자인 패턴](server/undefined/undefined.md)
   * [IoC / DI](server/undefined/ioc-di.md)
+  * [AOP](server/undefined/aop.md)
 
 ## Security
 
