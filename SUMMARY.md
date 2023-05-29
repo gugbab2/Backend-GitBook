@@ -94,6 +94,7 @@
   * [스프링 컨테이너와 스프링 빈](server/undefined-1/undefined.md)
   * [싱글톤 컨테이너](server/undefined-1/undefined-1.md)
   * [컴포넌트 스캔과 의존관계 자동 주입하기](server/undefined-1/undefined-2.md)
+  * [의존관계 자동 주입](server/undefined-1/undefined-3.md)
 
 ## Security
 
