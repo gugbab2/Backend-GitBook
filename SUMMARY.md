@@ -95,6 +95,8 @@
   * [싱글톤 컨테이너](server/undefined-1/undefined-1.md)
   * [컴포넌트 스캔과 의존관계 자동 주입하기](server/undefined-1/undefined-2.md)
   * [의존관계 자동 주입](server/undefined-1/undefined-3.md)
+  * [빈 생명주기 콜백](server/undefined-1/undefined-4.md)
+  * [빈 스코프](server/undefined-1/undefined-5.md)
 
 ## Security
 
