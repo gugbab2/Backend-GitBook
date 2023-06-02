@@ -64,3 +64,98 @@ public int logic() {
 
 * 매번 사용할 때 마다 의존관계 주입이 완료된 새로운 객체가 필요하면 사용하면 된다!
 * 그런데 실무에서는 싱글톤 빈으로 대부분의 문제를 해결할 수 있기에 프로토타입 빈을 사용하는 경우는 드물다..
+
+## 3. 웹 스코프
+
+* 웹 스코프는 웹 환경에서만 동작하고,&#x20;
+* 프로토타입 스코프와는 다르게 스프링이 해당 스코프의 종료시점까지 관리한다. \
+  \-> 따라서 종료 메서드가 호출된다.
+
+### 3-1. 웹 스코프 종류
+
+* request : HTTP 요청 하나가 들어오고 나갈 때까지 유지되는 스코프, 각각의 HTTP 요청마다 별도의 빈 인스턴스가 생성되고, 관리된다.
+* session : HTTP Session 과 동일한 생명주기를 갖는 스코프
+* application : 서블릿 컨텍스트(ServletContext)와 동일한 생명주기를 가지는 스코프&#x20;
+* websocket : 웹 소켓과 동일한 생명주기를 갖는 스코프
+
+### 3-2. request 스코프&#x20;
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+> 스프링 부트는 웹 라이브러리가 없으면 우리가 지금까지 학습한 `AnnotationConfigApplicationContext`을 기반으로 애플리케이션을 구동한다. 웹 라이브러리가 추가되면 웹과 관련된 추가 설정과 환경들이 필요하므로 `AnnotationConfigServletWebServerApplicationContext` 를 기반으로 애플리케이션을 구동한다.
+
+```java
+@Component
+@Scope(value = "request")
+public class MyLogger {
+
+  private String uuid;
+  private String requestURL;
+  
+  public void setRequestURL(String requestURL) {
+   this.requestURL = requestURL;
+  }
+  public void log(String message) {
+   System.out.println("[" + uuid + "]" + "[" + requestURL + "] " + message);
+  }
+ 
+  @PostConstruct
+  public void init() {
+   uuid = UUID.randomUUID().toString();
+   System.out.println("[" + uuid + "] request scope bean create:" + this);
+  }
+  @PreDestroy
+  public void close() {
+   System.out.println("[" + uuid + "] request scope bean close:" + this);
+  }
+}
+```
+
+```java
+@Controller
+@RequiredArgsConstructor
+public class LogDemoController {
+  private final LogDemoService logDemoService;
+  private final MyLogger myLogger;
+ 
+  @RequestMapping("log-demo")
+  @ResponseBody
+  public String logDemo(HttpServletRequest request) {
+   String requestURL = request.getRequestURL().toString();
+   myLogger.setRequestURL(requestURL);
+   myLogger.log("controller test");
+   logDemoService.logic("testId");
+   return "OK";
+  }
+}
+```
+
+```java
+@Service
+@RequiredArgsConstructor
+public class LogDemoService {
+  private final ObjectProvider<MyLogger> myLoggerProvider;
+  public void logic(String id) {
+    MyLogger myLogger = myLoggerProvider.getObject();
+    myLogger.log("service id = " + id);
+  }
+}
+
+```
+
+* **위의 코드를 실행했을 때, 다음과 같이 우리가 기대했던 값이 나오지 않는 것을 확인할 수 있다...**\
+  **-> 그 이유는 스프링 애플리케이션을 실행하는 시점에 싱글톤 빈은 생성해서 주입이 가능하지만,  request 스코프 빈은 아직 생성되지 않았기 때문이다..(이 빈은 실제 고객의 요청이 와야 생성할 수 있다)**
+
+<pre><code><strong>Error creating bean with name 'myLogger': Scope 'request' is not active for the 
+</strong>current thread; consider defining a scoped proxy for this bean if you intend to 
+refer to it from a singleton;
+</code></pre>
+
+* **때문에, ObjectProvider 를 사용했을 때! 우리가 원하는 아래의 결과를 얻을 수 있다.**
+
+```
+[d06b992f...] request scope bean create
+[d06b992f...][http://localhost:8080/log-demo] controller test
+[d06b992f...][http://localhost:8080/log-demo] service id = testId
+[d06b992f...] request scope bean close
+```
