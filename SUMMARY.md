@@ -78,6 +78,8 @@
   * [직렬화(Serialization)](server/dto-and-json-and-cros/serialization.md)
   * [Jackson ObjectMapper](server/dto-and-json-and-cros/jackson-objectmapper.md)
   * [CROS](server/dto-and-json-and-cros/cros.md)
+* [Race Condition](server/race-condition/README.md)
+  * [멀티 프로세스 vs 멀티 스레드](server/race-condition/vs.md)
 
 ## Spring
 
@@ -98,6 +100,7 @@
   * [1. 오브젝트와 의존관계](spring/3.1/1./README.md)
     * [1.4 제어의 역전(IoC)](spring/3.1/1./1.4-ioc.md)
     * [1.5 스프링의 IoC](spring/3.1/1./1.5-ioc.md)
+    * [1.6 싱글톤 레지스트리와 오브젝트 스코프](spring/3.1/1./1.6.md)
 * [김영한 스프링 기초](server/undefined-1/README.md)
   * [스프링 컨테이너와 스프링 빈](server/undefined-1/undefined.md)
   * [싱글톤 컨테이너](server/undefined-1/undefined-1.md)
