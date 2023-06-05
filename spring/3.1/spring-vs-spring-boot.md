@@ -88,9 +88,19 @@ public class MyController {
 
 ### 3-1. 번거로운 설정 : 의존성 자동설정(AutoConfiguration)
 
-* 스프링 부트에서는 AutoConfiguration(자동 구성)이라는 기능을 제공합니다. 이를 통해 과거 수많은 빈설정, 의존성주입 등의 문제를 해결할 수 있다.&#x20;
-* 예를 들어, 스프링 부트에서는 데이터베이스 연결 설정을 자동으로 처리할 수 있습니다. 개발자는 데이터베이스 드라이버를 추가한 후, 데이터베이스 URL, 사용자 이름, 암호 등을 구성 파일(application.properties 또는 application.yml)에 작성하면 됩니다. 스프링 부트는 이 정보를 기반으로 데이터베이스 연결을 자동으로 설정합니다.
-* AutoConfiguration은 `@EnableAutoConfiguration` 애너테이션을 통해 활성화됩니다. 이 애너테이션은 주로 메인 애플리케이션 클래스에 추가됩니다. 스프링 부트는 자동 구성 클래스들을 스캔하고, 필요한 빈들을 자동으로 구성하여 애플리케이션에 추가합니다.
+* 스프링부트의 AutoConfiguration 은 Starter 의 의존성의 문제가 해결된 라이브러리를 기반으로 애플리케이션 구성을 자동으로 설정한다. \
+  \-> 스프링 부트가 애플리케이션 classpath 를 검사하여 starter에 포함된 라이브러리와 설정 파일을 찾고, 이를 사용하여 필요한 bean 들을 자동으로 생성하고 구성하는 것을 말한다.&#x20;
+* 스프링부트의 최상단에는 @SpringBootApplication 이라는 어노테이션이 있다. 해당 어노테이션은 다음의 어노테이션을 합쳐놓은 것이다.
+  * @SpringbootConfiguration
+  * @ComponentScan \
+    \-> 자신을 root 로 하위 패키지들을 싹 훑어서 @Component 라는 어노테이션을 붙인 클래스들을 찾아서 Bean 으로 등록한다.
+  * @EnableAutoConfiguration \
+    \-> 해당 에너테이션을 통해서 AutoConfiguration 이 활성화된다.&#x20;
+* 예를 들어 spring-boot-starter-web 을 사용하는 경우 스프링 부트 자동 구성은 다음의 설정을 자동으로 처리한다.
+  1. Tomcat 또는 Undertow와 같은 내장 서버의 설정: 스프링 부트는 "spring-boot-starter-web" Starter의 의존성을 기반으로 내장 서버(Tomcat 또는 Undertow)를 자동으로 구성합니다. 따라서 개발자는 별도의 서버 설정이나 배포 파일을 작성할 필요 없이 내장 서버를 사용할 수 있습니다.
+  2. DispatcherServlet의 등록: 웹 애플리케이션을 위해 스프링 MVC를 사용하는 경우, "spring-boot-starter-web" Starter는 DispatcherServlet을 자동으로 등록합니다. 이를 통해 HTTP 요청을 처리하는 컨트롤러와 뷰를 매핑할 수 있습니다.
+  3. WebMvcConfigurer의 설정: "spring-boot-starter-web" Starter는 WebMvcConfigurer를 구현한 Bean들을 검색하여 자동으로 설정합니다. 이를 통해 개발자는 추가적인 설정 없이도 웹 애플리케이션의 인터셉터, 리소스 핸들러, 포매터 등을 등록할 수 있습니다.
+  4. Spring Boot의 기본 설정: 스프링 부트의 자동 구성은 기본적으로 여러 가지 기능과 설정들을 제공합니다. 예를 들어, 자동으로 설정되는 로깅 설정, 자동으로 설정되는 스프링 시큐리티 설정 등이 있습니다.
 
 ### 3-2. 의존성 관리의 어려움 : Starter
 
@@ -98,6 +108,10 @@ public class MyController {
   \-> 이는 의존성 충돌이나 버전 관리의 어려움을 초래할 수 있다..
 * 스프링부트는 Starter 라는 개념을 도입해서 필요한 의존성을 한번에 가져오고 버전 관리를 자동화한다. \
   \-> 이는 개발자에게 의존성 관리에 대한 부담을 지우고 빠르게 개발에 집중할 수 있다.&#x20;
+* 예를 들어 spring-boot-starter-jpa 를 의존성 추가했을 때 아래의 일을 해준다.
+  * spring-app, spring-jdbc 등의 의존성을 걸어준다.
+  * classpath 를 뒤져서 어떤 Database 를 사용하는지 파악하고, 자동으로 entityManager 를 구성해준다.
+  * 해당 모듈들 설정에 필요한 properties 설정을 제공한다.
 
 ### 3-3. 내장 서버의 부재
 
