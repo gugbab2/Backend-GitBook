@@ -8,7 +8,7 @@
 * 횡단(부가적인) 관심사 : 다수의 모듈(입금, 출금, 이체) 에서 **공통적으로 나타나는 부분(로깅, 보안, 트랜잭션)을** 의미한다.&#x20;
 * 핵심 관심사 : 로직에서 횡단 관심사를 제외한 부분으로, 모듈마다 다르다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. OOP / AOP
 
