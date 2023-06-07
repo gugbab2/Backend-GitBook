@@ -18,7 +18,7 @@
 
 ## 3. AOP 주요 개념&#x20;
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt="" width="375"><figcaption></figcaption></figure>
 
 ### 3-1. 핵심 관심사 영역&#x20;
 

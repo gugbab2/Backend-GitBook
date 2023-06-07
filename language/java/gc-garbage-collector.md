@@ -28,16 +28,18 @@
   * Old 영역 : Young 영역에서 살아남은(객체를 계속 사용하는 상태) 객체가 복사되는 공간이다. 대부분 Young 영역보다 크게 할당하고, 크기가 큰 만큼 Young 영역보다 GC 는 적게 발생한다. \
     \-> 해당 영역에서 일어나는 GC 를 Major GC(혹은 Full GC) 가 일어난다 말한다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 위 그림의 Permanent Generation(자바8 부터 metaspace 라고  부른다) 영역은 Method Area(클래스 수준의 정보를 저장하는 영역) 이라고 한다.
-* Old 영역은 살아남은 객체가 영원히 남아있는 곳은 아니다. 이 영역에서도 GC 가 발생할 수 있는데, 여기서 GC 가 발생해도 Major GC 횟수에 포함된다.&#x20;
-* "Old 영역에 있는 객체가 Young 영역의 객체를 참조하는 경우가 있을 때 어떻게 처리가 될까?" 라는 상황을 처리하기 위해서 Old 영역에는 512 바이트에 덩어리(chunk) 로 되어 있는 카드 테이블(card table) 이 존재한다.&#x20;
+* Permanent Generation 영역은 Old 영역에서살아남은 객체가 영원히 남아있는 곳은 아니다. \
+  이 영역에서도 GC 가 발생할 수 있는데, 여기서 GC 가 발생해도 Major GC 횟수에 포함된다.&#x20;
+* "Old 영역에 있는 객체가 Young 영역의 객체를 참조하는 경우가 있을 때 어떻게 처리가 될까?" 라는 \
+  상황을 처리하기 위해서 Old 영역에는 512 바이트에 덩어리(chunk) 로 되어 있는 카드 테이블(card table) 이 존재한다.&#x20;
 * 카드 테이블에는 Old 영역에 있는 객체가 Young 영역의 객체를 참조할 때마다 Young 영역 객체에 해당하는 카드테이블이 체크된다. Young 영역의 GC 를 실행할 때는 Old 영역에 있는 모든 객체의 참조를 확인하지 않고 이 카드 테이블만 뒤져서 체크 되어있을 경우, GC 대상에서 제외한다.&#x20;
 
 <figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
-## Young 영역
+## Young 영역에 대한 GC
 
 ### Young 영역의 구분
 
@@ -53,6 +55,50 @@
   * Eden 영역에서 GC 가 발생하면 이미 살아남은 객체가 존재하는 Survivor 영역에 객체가 계속해서 쌓인다.&#x20;
   * 하나의 Survivor 영역이 가득 차게 되면 그 중에서 살아남은 객체를 다른 Survivor 영역으로 이동한다. 그리고 가득 찬 Survivor 영역은 아무 데이터도 없는 상태로 된다.&#x20;
   * 이 과정을 반복하다가 계속해서 살아남아 있는 객체는 Old 영역으로 이동하게 된다.
-*
+* Young 영역의 동작에서 하나의 Survivor 영역은 반드시 비워져 있어야 한다. \
+  \-> 만약 비워져 있지 않는다면, 비정상적인 상황으로 인지하면 된다.&#x20;
 
-## Old 영역
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+* HotSpot VM(가장 많이 사용되어지는 JVM 구현체) 에는 보다 빠른 메모리 할당을 위해서 두가지 기술을 사용한다.
+  * bump-the-pointer
+    * bump-the-pointer 는 Eden 영역에 할당된 마지막 객체를 추적한다. \
+      (마지막 객체는 Eden 영역 맨 위에 있다)
+    * 그 다음 생성되는 객체가 있다면, 해당 객체가 Eden 영역에 넣기 적당한지 체크하고, 적당하다면 맨 위에 위치시킨다.&#x20;
+    * 새로운 객체가 생성될 때마다 마지막에 추가된 객체의 위치를 점검하면 된다.\
+      \-> 이 과정으로 통해서 마지막 객체의 위치만 확인하기 때문에, 매우 빠르게 메모리 할당이 이루어진다.&#x20;
+  * TALBs(Thread-Local Allocation Buffers)
+    * 멀티스레드 환경을 생각한다면 bump-the-pointer 방식도 Thread-Safe 하기 위해서 Eden 영역에 Lock 이 발생할 수 밖에 없고, Lock-Contention 으로 인한 성능이 매우 떨어질 것이다.&#x20;
+    * 이를 해결하기 위해서, 각각의 스레드가 각각의 목에 해당하는 Eden 영역의 작은 덩어리를 가질 수 있도록 하는 것이다. \
+      \-> 각 스레드에는 자기가 갖고 있는 TLAB 에만 접근할 수 있기 때문에, bump-the-pointer 방식을 사용하더라도 아무런 Lock 없이 사용이 가능하다.&#x20;
+
+## Old 영역에 대한 GC
+
+* Old 영역은 기본적으로 데이터가 가득 차면 GC 를 실행한다. GC 방식에 따라서 처리 절차가 달라지므로 방식을 알아두는 것이 좋다.&#x20;
+* JDK7 기준으로 5가지 방식이 있다.&#x20;
+  * Serial GC
+  * Parallel GC
+  * Parallel Old GC(Parallel Compacting GC)
+  * CMS GC(Concurrent Mark & Sweep GC)
+  * G1GC(Garbage First GC)&#x20;
+
+### Serial GC
+
+* Old 영역의 GC 는 mark-sweep-compact 알고리즘을 사용한다.
+* 이 알고리즘의 첫 단계는 Old 영역에 살아있는 객체(Mark)를 식별하고,
+* 힙(Heap) 영역의 앞 부분부터 확인하여 살아있는 것(Sweep)만 남긴다.
+* 마지막 단계에서는 각 객체들이 연속되게 쌓이도록 힙의 가장 앞 부분부터 채워서 객체가 존재하는 부분과 객체가 없는 부분으로 나눈다(Compaction).
+* Serial GC 는 적은 메모리와 CPU 코어 개수가 적을 때 적합한 방식이다.
+
+### Paralled GC
+
+* Serial GC 와 기본적인 알고리즘은 같지만, Serial GC 는 GC 스레드가 하나인 것에 비해서, \
+  Paralled GC 는 GC 를 처리하는 스레드가 여러개이다.
+* 때문에, Serial GC 보다 빠르게 객체를 처리할 수 있고, Parallel GC 메모리가 충분하고 CPU 코어 개수가 충분할 때 적합한 방식이다.
+
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+
+### Parallel Old GC
+
+* Parallel GC 와 비교해서 Old 영역의 GC 알고리즘만 다르다.&#x20;
+* 이 방식은

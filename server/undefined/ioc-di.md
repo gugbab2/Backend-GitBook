@@ -37,7 +37,7 @@
   \-> 스프링 컨테이너가 관리하는 이러한 오브젝트를 빈이라고 한다.&#x20;
 * 스프링 컨테이너는 자바코드(생성자, 수정자...), XML, Groovy 등 다양한 설정 정보를 받아들일 수 있도록 유연하게 설계되어 있다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-4. 스프링 빈 설정 메타 정보(BeanDefinition)
 
