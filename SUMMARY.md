@@ -57,7 +57,9 @@
   * [네트워크 프로그래밍](language/java/undefined-6/README.md)
     * [네트워크 기본 & TCP 통신](language/java/undefined-6/and-tcp.md)
     * [UDP 통신](language/java/undefined-6/udp.md)
-  * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
+  * [GC(Garbage Collector)](language/java/gc-garbage-collector/README.md)
+    * [GC Part.1](language/java/gc-garbage-collector/gc-part.1.md)
+    * [GC Part.2](language/java/gc-garbage-collector/gc-part.2.md)
 
 ## Server
 
