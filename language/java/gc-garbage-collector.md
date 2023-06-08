@@ -25,11 +25,11 @@
   Paralled GC 는 GC 를 처리하는 스레드가 여러개이다.
 * **때문에, Serial GC 보다 빠르게 객체를 처리할 수 있고, Parallel GC 메모리가 충분하고 CPU 코어 개수가 충분할 때 적합한 방식이다.**
 
-<figure><img src="../../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ### CMS GC
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-07 21.44.34.png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/스크린샷 2023-06-07 21.44.34.png" alt="" width="375"><figcaption></figcaption></figure>
 
 * CMS GC 는 다음의 과정을 거친다.&#x20;
   * **초기 Initial Mark 단계에서 클래스 로더에서 가장 가까운 객체 중 살아있는 객체만 찾는 것(Mark)으로 끝낸다.** \
@@ -51,7 +51,7 @@
 
 ## G1GC
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-07 22.05.51.png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/스크린샷 2023-06-07 22.05.51.png" alt="" width="375"><figcaption></figcaption></figure>
 
 * G1GC 는 기존의 Young / Old 영역에 대한 개념이 필요없다.&#x20;
 * G1GC 는 다음과 같은 특징을 가지고 있다.&#x20;
