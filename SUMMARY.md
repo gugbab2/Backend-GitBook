@@ -60,6 +60,7 @@
   * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
     * [GC Part.1](language/java/gc-garbage-collector/gc-part.1.md)
     * [GC Part.2](language/java/gc-garbage-collector/gc-part.2.md)
+    * [GC Part.3](language/java/gc-garbage-collector/gc-part.3.md)
 
 ## Server
 

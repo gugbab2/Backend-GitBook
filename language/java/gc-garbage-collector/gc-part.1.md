@@ -27,7 +27,7 @@
   * **Young 영역** : 새롭게 생성한 객체 대부분이 위치하는 공간으로 대부분의 객체가 금방 사용하지 않는 상태가 되기 때문에, 매우 많은 객체가 Young 영역에 생성되었다가 사라진다. \
     \-> 해당 영역에서 일어나는 GC 를 Minor GC 가 발생한다고 말한다.&#x20;
   * **Old 영역** : Young 영역에서 살아남은(객체를 계속 사용하는 상태) 객체가 복사되는 공간이다. 대부분 Young 영역보다 크게 할당하고, 크기가 큰 만큼 Young 영역보다 GC 는 적게 발생한다. \
-    \-> 해당 영역에서 일어나는 GC 를 Major GC(혹은 Full GC) 가 일어난다 말한다.&#x20;
+    \-> 해당 영역에서 일어나는 GC 를 Major GC가 일어난다 말한다.&#x20;
 
 <figure><img src="../../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
