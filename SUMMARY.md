@@ -30,6 +30,9 @@
     * [JVM 구조 이해하기](language/java/jvm/jvm.md)
     * [클래스 로더](language/java/jvm/undefined.md)
     * [JIT(Just-In-Time) 컴파일러](language/java/jvm/jit-just-in-time.md)
+  * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
+    * [GC Part.1](language/java/gc-garbage-collector/gc-part.1.md)
+    * [GC Part.2](language/java/gc-garbage-collector/gc-part.2.md)
   * [java.lang](language/java/java.lang/README.md)
     * [숫자를 처리하는 클래스](language/java/java.lang/undefined.md)
     * [각종 정보를 확인하는 System 클래스](language/java/java.lang/system.md)
@@ -57,10 +60,9 @@
   * [네트워크 프로그래밍](language/java/undefined-6/README.md)
     * [네트워크 기본 & TCP 통신](language/java/undefined-6/and-tcp.md)
     * [UDP 통신](language/java/undefined-6/udp.md)
-  * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
-    * [GC Part.1](language/java/gc-garbage-collector/gc-part.1.md)
-    * [GC Part.2](language/java/gc-garbage-collector/gc-part.2.md)
-    * [GC Part.3](language/java/gc-garbage-collector/gc-part.3.md)
+  * [람다](language/java/undefined-7/README.md)
+    * [함수형 인터페이스](language/java/undefined-7/undefined.md)
+    * [람다란?](language/java/undefined-7/undefined-1.md)
 
 ## Server
 
