@@ -17,7 +17,9 @@ Authorization: AWS AWSAccessKeyId:Signature
 
 ## HMAC 개념
 
-* HMAC 이란 REST API 요청을 받았을 때, 이 요청을 신뢰할 수 있는 호출인지 확인하는 방법 중 하나로,
+* HMAC 은 암호화 해시 함수(MD5, SHA1, SHA256)를 사용하여,  클라이언트가 보낸 메시지를 인증하는 방식으로 가볍고 구현이 용이하며, 속도가 빨라 다양하게 활용되고 있다. \
+  \-> 특히 REST API 필수 구성 요소로 자리 잡고있다. \
+  \-> 해시 함수 : 입력에 대해서 유일한 출력을 내는 함수
 * **클라이언트**는사용자의 ID 와 같은 민감 정보를 직접 받을 필요가 없이, 사전에 공유한 secret key 와 전송할 message 를 입력 받아서 Hash 기반 MAC 을 생성해서 전송하며&#x20;
 * **서버**는 secret key 와 message 를 기반으로 MAC 를 검증해서, secret key 를 소유한 클라이언트가 보낸 메시지가 맞는지 인증할 수 있다.
 
