@@ -40,7 +40,7 @@
 
 ### 6-1. G1GC 란?
 
-* Heap 영역을 Region 으로 잘게 나누어서 각 영역을 Young/Old 영역으로 구분한다.&#x20;
+* Heap 영역을 Region 으로 잘게 나누었다.&#x20;
 * 빠른 처리 속도를 지원하면서 stop-the-world 최소화하며, Application 의 스레드와 GC 스레드가 동시에 실행된다.
 * 메모리 Compaction 작업까지 지원한다.&#x20;
 * 자바 9 버전부터 기본 GC 방식으로 채택되었다.&#x20;
