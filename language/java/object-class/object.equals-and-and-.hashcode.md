@@ -11,6 +11,13 @@
   \-> 따라서, 같은 hashCode() 메소드 결과를 갖도록 하기 위해서 오버라이딩 해서 사용해야 한다.\
   \-> equals() 메서드를 통해서 인스턴스 변수의 값이 같은지 판단할 수 있지만, hash 를 사용하는 HashSet, HashMap 등의 클래스에서는 같은 값이라고 판단하지 않기에, 항상 오버라이딩해서 사용해야 한다.&#x20;
 
+### equals() && hashCode() 오버라이딩 시 주의 점
+
+* equals() 메서드의 대칭성 : A.equals(B) 가 true 라면, B.equals(A) 도 true 이어야 한다.&#x20;
+* null 비교 허용 : equals() 메서드에서는 null 과의 비교를 허용해야 하며 null 과 비교시 항상 false 를 반환해야 한다. \
+  \-> NullPointException 을 방지하고, null 과 비교시 언제나 false 를 반환하기 떄문에, 일관성을 유지할 수 있다.&#x20;
+* hashCode() 일치 : equals() 메서드를 통해서 두 객체가 같다고 판단되면 두 객체의 hashCode() 는 언제나 동일해야 한다.&#x20;
+
 ### 인텔리제이에서 기본적으로 생성해주는 equals(), hashCode() 형식.
 
 * equals() : 객체의 각각의 인스턴스 변수를 비교해주는 메서드
