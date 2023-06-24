@@ -126,6 +126,9 @@
 ## DB
 
 * [실무에서 외래키를 사용하지 않는 이유](db/undefined.md)
+* [JPA](db/jpa/README.md)
+  * [EntityManager 와 영속성 컨텍스트](db/jpa/entitymanager.md)
+* [ORM vs SQL Mapper](db/orm-vs-sql-mapper.md)
 
 ## Data Structure
 
