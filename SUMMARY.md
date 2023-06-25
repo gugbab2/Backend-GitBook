@@ -128,8 +128,10 @@
 
 * [실무에서 외래키를 사용하지 않는 이유](db/undefined.md)
 * [JPA](db/jpa/README.md)
+  * [SQL 중심적인 개발의 문제점](db/jpa/sql.md)
+  * [JPA 란?](db/jpa/jpa.md)
   * [EntityManager 와 영속성 컨텍스트](db/jpa/entitymanager.md)
-  * [JPA 연관 관계 매핑](db/jpa/jpa.md)
+  * [JPA 연관 관계 매핑](db/jpa/jpa-1.md)
 * [ORM vs SQL Mapper](db/orm-vs-sql-mapper.md)
 
 ## Data Structure
