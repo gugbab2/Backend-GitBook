@@ -30,88 +30,28 @@
 * 사실상 Java 7 Update 4 버전부터는 Paralled GC 를 설정해도, Paralled Old GC 가 동작한다. \
   \-> 엄밀히 말하면 Java 8 의 디폴트 버전은 Paralled Old GC 인 셈이다.&#x20;
 
-### 5-4. CMS GC
-
-* Application 의 스레드와 GC 스레드가 동시에 실행되어서 stop-the-world 를 최소화하는 GC 이다.\
-  \-> 때문에, 메모리와 CPU 를 많이 사용한다.&#x20;
-* 하지만, Compaction 기능을 제공하지 않아 장기적 운영적인 측면에서 단점이 많아 Deprecated.
-
 ## 6. G1GC
 
 ### 6-1. G1GC 란?
 
-* Heap 영역을 Region 으로 잘게 나누었다.&#x20;
-* 빠른 처리 속도를 지원하면서 stop-the-world 최소화하며, Application 의 스레드와 GC 스레드가 동시에 실행된다.
-* 메모리 Compaction 작업까지 지원한다.&#x20;
-* 자바 9 버전부터 기본 GC 방식으로 채택되었다.&#x20;
+* 대규모 힙 영역을 효율적으로 관리하기 위해서 설계되었다.&#x20;
+* 힙을 영역으로 구분했다.
+  * 전체 힙을 논리적인 작은 크기의 영역으로 분할한다.&#x20;
+  * 각 영역은 young, old, Humongous(큰 객체나, 배열을 관리하는 영역) 영역으로 구분된다.&#x20;
+* **영역 기반 수집**
+  * &#x20;G1GC는 전체 힙을 작은 영역으로 분할합니다. 이렇게 분할된 영역들 중에서 **가장 가비지가 많은 영역부터 수집을 진행합니다.**&#x20;
+  * **이 방식을 통해서 힙 전체에 일어나는 GC 를 분산시켜 stop the world 를 최소화했다.**&#x20;
+* **병렬 처리**
+  * &#x20;G1GC는 다중 스레드를 사용하여 가비지 컬렉션 작업을 병렬로 처리합니다. 이를 통해 가비지 컬렉션 작업을 빠르게 수행하고 일시 중지 시간을 최소화합니다.
+* **Mixed GC**
+  * &#x20;G1GC에서는 Mixed GC라고 불리는 통합된 가비지 컬렉션을 수행합니다. Mixed GC는 Young 영역과 Old 영역을 동시에 수집하는 방식으로, 전체 힙을 한 번에 처리하므로 일시 중지 시간을 최소화할 수 있습니다.
+* **일시 중지 시간 조절**
+  * &#x20;G1GC는 일시 중지 시간을 조절하기 위해 목표 일시 중지 시간을 설정할 수 있습니다. G1GC는 설정된 목표 일시 중지 시간을 지키면서 가비지 컬렉션을 수행하며, 일시 중지 시간이 넘어가지 않도록 작업을 조절합니다.
+* **자바 9 버전부터 기본 GC 방식으로 채택되었다.**&#x20;
 
-### 6-2. G1GC 장단점
-
-* 장점&#x20;
-  * 별도의 stop-the-world 없이도 Compaction 기능을 제공한다.&#x20;
-  * Old/Young 영역을 나눠서 Compaction 할 필요가 없고, 해당 Generation 의 일부분에 대해서만 Compaction 을 진행한다.&#x20;
-  * Heap 크기가 클수록 잘 동작한다.
-  * CMS 이 비해서 개선된 알고리즘을 사용하고, 처리속도가 빠르다.&#x20;
-  * Garbage 로 가득찬 영역을 빠르게 회수하여 빈 공간을 확보하므로 GC 빈도가 줄어든다.
-* 단점
-  * 공간이 부족한 상태를 조심해야 한다. \
-    \-> 이 때 Full GC 가 발생하는데, 이 GC 는 Single Thread 로 동작한다.\
-    \-> Full GC 는 Heap 전반적으로 GC 가 발생하는 것을 뜻한다.&#x20;
-  * 작은 Heap 공간을 가지는 Application 에서는 제 성능을 발휘하지 못하고 Full GC 가 발생한다.&#x20;
-
-### 6-3. G1GC Heap 구조
+### 6-2. G1GC Heap 구조
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.41.26.png" alt="" width="286"><figcaption></figcaption></figure>
 
 * G1GC 는 기존 힙 구조와 다르게, Young/Old 영역을 명확하게 구분하지 않는다.
 * G1GC 는 개념적으로 그들이 존재하나, 일정 크기의 논리적 단위인 region 으로 구분한다.&#x20;
-
-### 6-4. G1GC 동작과정
-
-#### 6-4-1. Minor GC
-
-* Minor GC 기존 GC 와 원리가 비슷하나, 멀티 스레드에서 병렬로 동작한다.&#x20;
-* 연속되지 않은 공간에, Young 영역이 Region 단위로 메모리에 할당되어 있다.&#x20;
-
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.44.56.png" alt="" width="375"><figcaption></figcaption></figure>
-
-* Eden 영역이 다 차게되면 GC 가 발생하고, Young 영역에 있는 유효객체를 Survivor 영역이나, Old 영역으로 이동한다.&#x20;
-* Minor GC 를 모두 마친 후 모습이다.&#x20;
-
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.46.03.png" alt="" width="375"><figcaption></figcaption></figure>
-
-#### 6-4-2. Major GC
-
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.52.45.png" alt="" width="375"><figcaption></figcaption></figure>
-
-* Initial Mark
-  * Initial Mark 단계는 Old Region 에 존재하는 객체들이 참조하는 Survivor Region 이 있는지 파악해서 Suvivor Region 에 마킹하는 단계이다.
-  * Survivor Region 에 의존적인 상태이고 때문에, Minor GC 가 전부 끝난 상태여야 한다. \
-    \-> 따라서 Initial Mark 는 Minor GC 에 의존적이며, stop-the-world 를 발생시킨다.
-*   &#x20;Root Region Scan
-
-    * Initial Mark 단계에서 마킹된 Survivor Region 에서 Old Region 에 대해 참조하고 있는 객체를 마킹한다.&#x20;
-    * 멀티 스레드로 동작하며, 다음 Minor GC 가 발생하기 전에 동작을 완료한다.
-
-    <figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.59.19.png" alt="" width="375"><figcaption></figcaption></figure>
-* Concurrent Marking&#x20;
-  * Old 영역 내 생존해 있는 모든 객체를 마킹한다.&#x20;
-  * stop-the-wolrd 가 발생하지 않으므로, Application 스레드와 동시에 동작하고,
-  * Minor GC 와 같이 진행되므로 종종 Minor GC 에 의해서 stop-the-world 가 발생될 수 있다.&#x20;
-
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-09 00.05.35.png" alt="" width="375"><figcaption></figcaption></figure>
-
-* Remark&#x20;
-  * Concurrent Marking 에서 X 표시한 영역을 회수하며 stop-the-world 가 발생한다.&#x20;
-
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-09 00.06.57.png" alt="" width="375"><figcaption></figcaption></figure>
-
-*   Copying/Cleanup&#x20;
-
-    * Copying/Cleanup 단계에서 Live Object 비율이 낮은 영역 순으로 순차적으로 GC 가 수행되며, \
-      stop-the-world 가 발생한다.
-    * GC 수행 시 해당 영역의 Live Object 를 다른 영역으로 이동 후 Garbage 를 수집한다. &#x20;
-
-    <figure><img src="../../../.gitbook/assets/스크린샷 2023-06-09 00.16.30.png" alt="" width="375"><figcaption></figcaption></figure>
-* Compaction&#x20;
-  * Major GC 가 끝난 후  Live Object 가 새로운 Region 으로 이동하고 메모리 Compaction 이 일어난다.&#x20;

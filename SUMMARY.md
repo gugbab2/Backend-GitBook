@@ -9,6 +9,7 @@
   * [패키지](language/java/undefined-1/README.md)
     * [CLI 환경에서 .java 파일 컴파일 && 실행](language/java/undefined-1/cli-.java-and-and.md)
     * [접근제어자](language/java/undefined-1/undefined.md)
+  * [static 키워드](language/java/static.md)
   * [상속](language/java/undefined-2/README.md)
     * [상속 기본](language/java/undefined-2/basic.md)
     * [참조자료형의 형변환](language/java/undefined-2/undefined.md)
@@ -17,7 +18,8 @@
     * [Object.toString()](language/java/object-class/object.tostring.md)
     * [Object.equals() && .hashCode()](language/java/object-class/object.equals-and-and-.hashcode.md)
   * [추상클래스, 인터페이스, Enum](language/java/enum.md)
-  * [예외처리](language/java/undefined-3.md)
+  * [예외처리](language/java/undefined-3/README.md)
+    * [Exception vs RuntimeException](language/java/undefined-3/exception-vs-runtimeexception.md)
   * [String](language/java/string/README.md)
     * [String 구조](language/java/string/string.md)
     * [String 문자열을 byte 로 변환하기](language/java/string/string-byte.md)
@@ -31,7 +33,6 @@
     * [JVM 구조 이해하기](language/java/jvm/jvm.md)
     * [클래스 로더](language/java/jvm/undefined.md)
     * [JIT(Just-In-Time) 컴파일러](language/java/jvm/jit-just-in-time.md)
-    * [static 키워드](language/java/jvm/static.md)
   * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
     * [GC Part.1](language/java/gc-garbage-collector/gc-part.1.md)
     * [GC Part.2](language/java/gc-garbage-collector/gc-part.2.md)
@@ -128,6 +129,7 @@
 * [실무에서 외래키를 사용하지 않는 이유](db/undefined.md)
 * [JPA](db/jpa/README.md)
   * [EntityManager 와 영속성 컨텍스트](db/jpa/entitymanager.md)
+  * [JPA 연관 관계 매핑](db/jpa/jpa.md)
 * [ORM vs SQL Mapper](db/orm-vs-sql-mapper.md)
 
 ## Data Structure
