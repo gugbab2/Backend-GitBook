@@ -133,6 +133,7 @@
   * [영속성 컨텍스트](db/jpa/undefined.md)
   * [엔티티 매핑](db/jpa/undefined-1.md)
   * [연관 관계 매핑 part.1](db/jpa/part.1.md)
+  * [연관 관계 매핑 part.2](db/jpa/part.2.md)
 * [ORM vs SQL Mapper](db/orm-vs-sql-mapper.md)
 
 ## Data Structure
