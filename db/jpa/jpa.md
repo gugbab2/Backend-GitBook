@@ -1,6 +1,6 @@
 # JPA 란?
 
-## ORM 이란?
+## 1. ORM 이란?
 
 * 객체 관계 매핑(Object relational mapping)
 * 객체는 객체대로 설계
@@ -10,7 +10,7 @@
 
     <figure><img src="../../.gitbook/assets/스크린샷 2023-06-25 19.31.33.png" alt="" width="375"><figcaption></figcaption></figure>
 
-## JPA 소개&#x20;
+## 2. JPA 소개&#x20;
 
 * EJB-엔티티빈(자바 표준)   =>   하이버네이트(오픈소스)   =>   JPA(자바표준)
 
