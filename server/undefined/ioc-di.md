@@ -16,7 +16,7 @@
 
 ### 1-2. 빈 팩토리와 애플리케이션 컨텍스트의 관계
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 * 빈 팩토리
   * 스프링 컨테이너의 최상위 인터페이스

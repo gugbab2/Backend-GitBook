@@ -55,8 +55,7 @@
   * IDENTITY : 데이터베이스에 위임, MYSQL
   * SEQUENCE : 데이터베이스 시퀀스 오브젝트 사용
   * TABLE : 키 생성용 테이블 사용, 모든 DB 사용
-  * AUTO : 방언에 따라서 자동 기정, default 값
-  *
+  * AUTO : 디비 방언에 따라서 자동 지정, default 값
 
 ### IDENTITY 전략&#x20;
 

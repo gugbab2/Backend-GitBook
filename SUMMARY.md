@@ -132,7 +132,7 @@
   * [JPA 란?](db/jpa/jpa.md)
   * [영속성 컨텍스트](db/jpa/undefined.md)
   * [엔티티 매핑](db/jpa/undefined-1.md)
-  * [JPA 연관 관계 매핑](db/jpa/jpa-1.md)
+  * [연관 관계 매핑 part.1](db/jpa/part.1.md)
 * [ORM vs SQL Mapper](db/orm-vs-sql-mapper.md)
 
 ## Data Structure
