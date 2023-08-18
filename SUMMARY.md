@@ -4,8 +4,10 @@
 
 * [Java](README.md)
   * [변수](language/java/undefined/README.md)
-    * [Pass By Value, Pass By Reference](language/java/undefined/pass-by-value-pass-by-reference.md)
-    * [Primitive Type VS Reference Type](language/java/undefined/primitive-type-vs-reference-type.md)
+    * [클래스 변수 / 인스턴스 변수 / 지역 변수](language/java/undefined/undefined.md)
+    * [Pass by Value && Pass By Reference](language/java/undefined/pass-by-value-and-and-pass-by-reference/README.md)
+      * [Pass By Value, Pass By Reference](language/java/undefined/pass-by-value-and-and-pass-by-reference/pass-by-value-pass-by-reference.md)
+      * [Primitive Type VS Reference Type](language/java/undefined/pass-by-value-and-and-pass-by-reference/primitive-type-vs-reference-type.md)
   * [패키지](language/java/undefined-1/README.md)
     * [CLI 환경에서 .java 파일 컴파일 && 실행](language/java/undefined-1/cli-.java-and-and.md)
     * [접근제어자](language/java/undefined-1/undefined.md)
@@ -139,3 +141,10 @@
 ## Data Structure
 
 * [Map / HashTable](data-structure/map-hashtable.md)
+
+## WORK ISSUE
+
+* [엑셀 다운로드 시 Out of Memory](work-issue/out-of-memory/README.md)
+  * [Java Out of Memory](work-issue/out-of-memory/java-out-of-memory.md)
+  * [Apache POI-XSSF/SXSSF](work-issue/out-of-memory/apache-poi-xssf-sxssf.md)
+  * [문제 상황 및 해결 방안](work-issue/out-of-memory/undefined.md)
