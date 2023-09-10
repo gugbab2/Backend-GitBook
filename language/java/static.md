@@ -1,7 +1,3 @@
----
-description: 드
----
-
 # static 키워드
 
 ## static 키워드 개념
