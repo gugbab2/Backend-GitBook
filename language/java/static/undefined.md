@@ -23,6 +23,16 @@
 6. 메서드가 실행이 종료됨에 따라, StackFrame 은 Stack 영역에서 사라진다.&#x20;
 7. Heap 영역의 할당된 자원도 자동적으로 반환된다.(GC)
 
+> **\[스택프레임 ( Stack Frame)]**
+>
+> 하나의 메서드에 필요한 메모리 덩어리를 묶어서 스택 프레임(Stack Frame) 이라고 한다. \
+> 하나의 메서드당 하나의 스택 프레임이 필요하며, 메서드 호출하기 직전 스택프레임을 자바 Stack 에 생성한 후 메서드를 호출하게 된다.&#x20;
+>
+> 스택 프레임이 쌓이는 데이터는 메서드 매개변수, 지역변수, 리턴값 등이 있다. \
+> 만약 메서드 호출 범위가 종료되면 스택에서 제거된다.&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (15).png" alt=""><figcaption><p>스택프레</p></figcaption></figure>
+
 ## 자바의 메모리
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-09-11 19.07.26.png" alt=""><figcaption></figcaption></figure>
