@@ -71,7 +71,7 @@
 
 ### 4.1 Reference Counting(자바에서 사용되지 않는다...)
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (4).png" alt="" width="375"><figcaption></figcaption></figure>
 
 * **Root Space** 는 Heap 영역 참조를 가리키고 있는 공간이다.\
   **-> Stack 의 로컬변수** \

@@ -8,7 +8,7 @@
 * 횡단(부가적인) 관심사 : 다수의 모듈(입금, 출금, 이체) 에서 **공통적으로 나타나는 부분(로깅, 보안, 트랜잭션)을** 의미한다.&#x20;
 * 핵심 관심사 : 로직에서 횡단 관심사를 제외한 부분으로, 모듈마다 다르다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. OOP / AOP
 
@@ -22,7 +22,7 @@
 
 ### 3-1. 핵심 관심사 영역&#x20;
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3).png" alt="" width="375"><figcaption></figcaption></figure>
 
 * Target Object&#x20;
   * **횡단 기능이 적용될 객체로**, 핵심 기능을 가지고 있다.&#x20;
@@ -67,7 +67,7 @@
 
 ### 5-1. AOP 동작 원리
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 * AOP 는 프록시 패턴을 사용한다.&#x20;
 * 프록시는 타겟을 감싸서 타겟의 요청을 대신 받아주는 Wrapping 오브젝트이다.&#x20;

@@ -30,7 +30,7 @@
     * [String 클래스에서 자주 사용되는 메서드](language/java/string/string-1.md)
     * [immutable 한 String 의 단점을 보완한 클래스 StringBuilder, StringBuffer](language/java/string/immutable-string-stringbuilder-stringbuffer.md)
     * [String 클래스로 살펴보는 불변객체](language/java/string/string-2.md)
-  * [추상클래스, 인터페이스, Enum](language/java/enum/README.md)
+  * [추상클래스, 인터페이스, Enum](language/java/enum.md)
     * [템플릿 메서드 패턴(Template Method Pattern) 으로 배우는 추상 클래스](language/java/enum/template-method-pattern.md)
     * [팩토리 메서드 패턴과 Java Reflection](language/java/enum/java-reflection.md)
   * [예외처리](language/java/undefined-3/README.md)
@@ -43,6 +43,7 @@
     * [JVM 구조 이해하기](language/java/jvm/jvm.md)
     * [클래스 로더](language/java/jvm/undefined.md)
     * [JIT(Just-In-Time) 컴파일러](language/java/jvm/jit-just-in-time.md)
+    * [Java Reflection](language/java/jvm/java-reflection.md)
   * [GC(Garbage Collector)](language/java/gc-garbage-collector.md)
     * [GC Part.1](language/java/gc-garbage-collector/gc-part.1.md)
     * [GC Part.2](language/java/gc-garbage-collector/gc-part.2.md)
@@ -97,6 +98,9 @@
   * [멀티 프로세스 vs 멀티 스레드](server/race-condition/vs.md)
 * [Connection Timeout / Read Timeout](server/connection-timeout-read-timeout.md)
 * [SSL 인증 동작](server/ssl.md)
+* [웹 서버(Web Server) 보안](server/web-server/README.md)
+  * [네트워크 구성](server/web-server/undefined.md)
+  * [SOP vs CORS](server/web-server/sop-vs-cors.md)
 
 ## Spring
 
