@@ -2,15 +2,21 @@
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-06-25 13.46.38.png" alt="" width="563"><figcaption></figcaption></figure>
 
-## Exception(Checked Exception)
+## 1. Error
 
+* 수습할 수 없는 심각한 오류
+
+## 2. Exception(Checked Exception)
+
+* 예외처리를 통해 수습할 수 있다. \
+  \-> 메모리 부족, StackOverflow 가 발생하는 것은 개발자가 제어할 수 없다.
 * Exception 클래스는 모든 예외 클래스의 최상위 클래스이며, 예외가 발생할 수 있는 모든 상황을 다룬다.&#x20;
 * Exception 클래스는 다양한 하위 클래스를 가지며, 각 하위 클래스는 특정한 유형의 예외를 나타낸다.&#x20;
 * Exception 의 예
   * IOException, ClassNotFoundException, SQLException ...
 * **외부 리소스나, 네트워크를 사용하는 상황에서 컴파일러의 도움을 받아 적절한 예외를 처리할 수 있도록 도와준다.**&#x20;
 
-## RuntimeException(Unchecked Exception)
+## 3. RuntimeException(Unchecked Exception)
 
 * RuntimeException 은 Exception 클래스의 하위 클래스 중 하나이다. \
   \-> RumtimeException 과 그 하위 클래스들은 'unchecked' 예외로 분류된다.&#x20;

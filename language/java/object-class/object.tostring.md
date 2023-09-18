@@ -1,6 +1,12 @@
 # Object.toString()
 
-### Object.toString() 이 자동적으로 호출되는 경우
+### 1. 오버라이딩 하지 않은, toString() 은 주소값일까?
+
+* Java 는 주소라는 개념을 가지고 있지 않다!
+* **참조라는 개념만을 가지고 있다!**\
+  **-> 오버라이딩 하지 않은 toString() 에서 나오는 값은 참조값이라고 보는 시점이 더 맞다**
+
+## 2. Object.toString() 이 자동적으로 호출되는 경우
 
 * CASE
   * _**System.out.println() 메소드에 매개 변수로 들어가는 경우**_
@@ -21,7 +27,7 @@ public class ToString {
 }
 ```
 
-### Object.toString() 는 대부분 Overriding 해서 사용해야 한다.
+## 3. Object.toString() 는 대부분 Overriding 해서 사용해야 한다.
 
 * 사용할 때?
   * DTO(Data Transfore Object) 를 사용할 때는 기본적으로 toString() 메서드를 오버라이딩 해야 내용 확인이 쉽다
