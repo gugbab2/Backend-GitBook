@@ -32,7 +32,7 @@ java.lang.Object
 
 * Set 클래스에는 equals(), hashCode(), removeAll() 메서드만 구현되어 있다.&#x20;
 * Set 을 확장한 클래스이며, **무엇보다 중복을 허용하지 않기 때문에, 데이터가 같은지를 확인하는 것이 핵심이다.**\
-  \-> equals() 메서드와 hashCode() 메서드는 값의 중복을 확인하는데, 매우 중요한 역할을 한다.&#x20;
+  \-> **equals() 메서드와 hashCode() 메서드는 값의 중복을 확인하는데, 매우 중요한 역할을 한다.**&#x20;
 
 > **Serializable, Cloneable, Iterable\<E>, Collection\<E>, Set\<E>**
 >
