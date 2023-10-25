@@ -6,6 +6,7 @@
   * [출력(Output)](language/c++/output.md)
   * [입력(Input)](language/c++/input.md)
   * [초기 C++ 새로운 기능(bool 타입, Reference)](language/c++/c++-bool-reference.md)
+  * [문자열(string)](language/c++/string.md)
 * [Java](<README (1).md>)
   * [변수](language/java/undefined/README.md)
     * [클래스 변수 / 인스턴스 변수 / 지역 변수](language/java/undefined/undefined.md)
