@@ -56,6 +56,21 @@ if(fs.is_open())
 }
 ```
 
+#### 다른 스트림에서도 사용되는 get(), getline(), >> 추상화!&#x20;
+
+```cpp
+fin.get(character);
+
+fin.getline(firstName, 20);     // 파일에서 문자 20개를 읽음
+
+string line;
+getline(fin, line);             // 파일에서 한 줄을 읽음    
+
+fin >> word;                    // 파일에서 한 단어를 읽음
+```
+
+## 2. 파일에서 읽기
+
 #### 파일에서 문자 하나씩 읽기&#x20;
 
 ```cpp
@@ -75,21 +90,6 @@ while(true)
 
 fin.close();
 ```
-
-#### 다른 스트림에서도 사용되는 get(), getline(), >> 추상화!&#x20;
-
-```cpp
-fin.get(character);
-
-fin.getline(firstName, 20);     // 파일에서 문자 20개를 읽음
-
-string line;
-getline(fin, line);             // 파일에서 한 줄을 읽음    
-
-fin >> word;                    // 파일에서 한 단어를 읽음
-```
-
-## 2. 파일에서 읽기
 
 #### 파일에서 한줄씩 읽기 코드
 
@@ -298,5 +298,81 @@ while(!fin.eof())
 fin.close();
 ```
 
+#### 바이너리 파일을 읽어보자&#x20;
+
+```cpp
+ifstream fin("helloWorld.dat", 
+    ios_base::in | ios_base::binary);
+
+if(fin.is_open())
+{
+    Record record;
+    fin.read((char*)&record,    // 파일로부터 Record 의 사이즈만큼 읽어서 record 에 저장
+        sizeof(Record));
+}
+
+fin.close();
+```
+
 ## 3. 파일에서 쓰기
 
+#### 파일에서 문자 쓰기
+
+```cpp
+ofstream fout;
+fout.open("helloWorld.txt");
+
+string line;
+getline(cin, line);
+while(!cin.fail())
+{
+    fout << line << endl;
+}
+
+fout.close();
+```
+
+#### 바이너리 파일에 쓰기&#x20;
+
+```cpp
+ofstream fout("helloWorld.dat",
+    ios_base::out | ios_base::binary);
+
+if(fout.is_open())
+{
+    char buffer[20] = "Pope Kim";
+    fout.write(buffer, 20);
+}
+
+fout.close();
+```
+
+## 4. 파일 안에서의 탐색
+
+#### seekp, seekg 의 차이&#x20;
+
+* seekp : 쓰기 포인터를 변경하는 함수
+* seekg : 읽기 포인터를 변경하는 함수
+* 그 외 기능은 동일하다.
+
+#### 탐색하는 코드를 살펴보자 &#x20;
+
+```cpp
+fstream fs("helloWorld.dat", ios_base::in |
+    ios_base::out | ios_base::binary)
+    
+if(fs.is_open())
+{
+    // ios_base::beg
+    // ios_base::cur
+    // ios_base::end
+    // fs.seekp(0);     처음 위치로 이동
+    fs.seekp(20, ios_base::beg);    // 시작부터 20바이트 뒤
+    if(!fs.fail())
+    {
+        // 21번째 위치부터 덮어쓰기
+    }    
+}
+
+fs.close();
+```
