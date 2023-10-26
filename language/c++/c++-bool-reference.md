@@ -1,6 +1,6 @@
 # 초기 C++ 새로운 기능(bool 타입, Reference)
 
-#### C 에서 없던 bool 데이터 형이 생겨났다.&#x20;
+## 1. C 에서 없던 bool 데이터 형이 생겨났다.&#x20;
 
 ```cpp
 if(IsStudent() == false)
@@ -14,7 +14,7 @@ if(IsStudent() == false)
 }
 ```
 
-### 참조(Reference) 는 매우 중요한 개념이다!
+## 2. 참조(Reference) 는 매우 중요한 개념이다!
 
 #### 참조&#x20;
 
@@ -46,7 +46,7 @@ if(IsStudent() == false)
 
           <figure><img src="../../.gitbook/assets/스크린샷 2023-10-24 22.34.33.png" alt="" width="375"><figcaption></figcaption></figure>
 
-### C++ 의 참조(reference)는 위와 같이 복잡한 방법에 대한 해결책이다. &#x20;
+## 3. C++ 의 참조(reference)는 위와 같이 복잡한 방법에 대한 해결책이다. &#x20;
 
 #### 참조는 별칭이다!&#x20;
 
@@ -94,7 +94,7 @@ void swap(int& number1, int& number2)
 }
 ```
 
-### 컴퓨터는 참조가 뭔지 알까?
+## 4. 컴퓨터는 참조가 뭔지 알까?
 
 * 모른다..
 * 포인터와 참조는 같은 어셈블리 명령어를 생성한다.
