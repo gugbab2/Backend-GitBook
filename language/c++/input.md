@@ -1,5 +1,7 @@
 # 입력(Input)
 
+## 1. 입력의 기본
+
 #### c++ 은 다음과 같은 형식으로 입력을 받게 된다.&#x20;
 
 ```cpp
@@ -27,6 +29,7 @@ cin >> setw(4) >> firstName;
 * 다음 코드를 보자.
 
 ```cpp
+string line;
 cin >> line;
 if(!cin.eof())    // eof : end of file(eof 를 만나면 더이상 읽을 것이 없기에 포기한다)
 {
@@ -60,7 +63,7 @@ cin >> number;
 // failbit : unset
 
 // 입력값 : 456        -> 콘솔상에서 입력을 받는다면 마지막에 \n 가 있기 때문에, eof 가 unset 이지만, 
-// eofbit : (un)set  -> 텍스트 파일을 통해서 입력을 받는다면, \n 가 없기 때문에, eof 가 set 이다.
+// eofbit : (un)set   -> 텍스트 파일을 통해서 입력을 받는다면, \n 가 없기 때문에, eof 가 set 이다.
 // failbit : unset
 
 // 입력값 : abc

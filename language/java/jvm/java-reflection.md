@@ -20,7 +20,7 @@
 >
 > 만약 .class 파일을 찾지 못하면 ClassNotFoundException 예외를 띄우게 된다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 3. Class 클래스 객체 얻는 3가지 방법
 
