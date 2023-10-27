@@ -158,7 +158,7 @@
 
 ## Data Structure
 
-* [Map / HashTable](data-structure/map-hashtable.md)
+* [정렬(선택정렬 / 버블정렬 / 삽입정렬)](data-structure/undefined.md)
 
 ## WORK ISSUE
 
