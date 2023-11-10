@@ -20,7 +20,7 @@ cin >> firstName;
 
 ```cpp
 char firstName[4];
-cin >> setw(4) >> firstName;
+cin >> setw(3) >> firstName;
 ```
 
 #### 입력스트림에서 무엇인가를 읽어왔는데, 성공/실패의 상태를 어떻게 알 수 있을까?
