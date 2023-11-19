@@ -13,11 +13,10 @@ cin.getline(line, 256);
 
 #### C++ 의 std::string 클래스&#x20;
 
-* 기존의 문자열을 읽는 방식과 다르게, **string 자료형은 크기가 변하기 때문에 입력 받는 크기의 제한이 없다.**&#x20;
+* 기존의 문자열을 읽는 방식과 다르게, **string 자료형은 크기가 변하기 때문에 입력 받는 크기의 제한이 없다.**
 
-```cpp
-#include <string>
-std::string firstName;
+<pre class="language-cpp"><code class="lang-cpp"><strong>#include &#x3C;string>
+</strong>std::string firstName;
 std::cin >> firstName;
 
 string firstName = "POPE";
@@ -39,8 +38,8 @@ if(firstName1 > firstName2)
 }
 
 // 문자열의 길이를 반환
-cout << firstName.size() << endl;
-cout << fitstName.length() << endl;
+cout &#x3C;&#x3C; firstName.size() &#x3C;&#x3C; endl;
+cout &#x3C;&#x3C; fitstName.length() &#x3C;&#x3C; endl;
 
 // const char* : 해당 문자열을 변경할 수 없다. 
 // .c_str() : 해당 string 이 가지고 있는 문자 배열의 시작 주소를 가리키는 포인를 반환
@@ -65,7 +64,7 @@ fistName.at(2) = 'P';
 string mailHeader;
 getline(cin, mailHeader);
 getline(cin, mailHeader, '@');
-```
+</code></pre>
 
 #### 그래서 왜 string 이 더 낫다는 거죠?
 
@@ -101,6 +100,6 @@ getline(cin, mailHeader, '@');
 ```cpp
 string line = "POPE";
 const char* cLine = line.c_str();    // 포인터는 변경이 가능하지만, 해당 string 값은 변경이 불가하다.
-// char* const          : 포인터가 변경이 불가하다.                  
-// const char* const    : 포인터와 string 값 모두 변경 불가하다. 
+// char* cLine const          : 포인터가 변경이 불가하다.                  
+// const char* cLine const    : 포인터와 string 값 모두 변경 불가하다. 
 ```

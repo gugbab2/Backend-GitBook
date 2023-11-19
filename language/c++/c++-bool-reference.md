@@ -53,8 +53,8 @@ if(IsStudent() == false)
 \-> `int& reference = number`\
 `int* pointer = &number` 는 완전 다른 의미이기 때문에, 주의하자!
 
-<pre class="language-cpp"><code class="lang-cpp">int number = 100;
-int&#x26; reference = number;
+<pre class="language-cpp"><code class="lang-cpp"><strong>int number = 100;
+</strong>int&#x26; reference = number;
 
 // NULL 이 될 수 없다!
 int&#x26; reference = NULL;    // error
