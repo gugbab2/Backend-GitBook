@@ -1,6 +1,6 @@
 # 클래스 로더
 
-<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 클래스 로더는 로딩 -> 링크 -> 초기화 순으로 진행된다.
 

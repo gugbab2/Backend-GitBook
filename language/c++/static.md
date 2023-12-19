@@ -47,7 +47,7 @@ int main()
 
 * 함수 안에 정적 변수를 선언 할 경우, 해당 정적 변수는 함수 안에 범위를 제한하게 된다.\
   \-> 메모리는  반납되지 않고 계속 사용된다.\
-  \-> Java 의 정적변수와는 다르다.
+  \-> Java 에는 함수 속 정적 변수가 없다. (오직 정적 멤버 변수만 있다)
 
 <figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 

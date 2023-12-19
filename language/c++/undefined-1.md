@@ -20,7 +20,7 @@ description: 수
   * CPU 캐시에 최적이 아닐 수도 있다!\
     \-> 최근에 읽은 메모리들은 캐시 메모리에 저장되어 있다.\
     \-> A, B 함수의 위치가 멀어질 시, 코드를 실행시킬 때 캐시에 읽어와서 다시 실행을 해야하기 때문에, 이 과정이 반복될 시 성능이 느려질 수 있다.
-  * 때문에, 모든것을 함수로 만들라는 것은 잘못된 조언이다...\
+  * 때문에, 모든 것을 함수로 만들라는 것은 잘못된 조언이다...\
     \-> 하지만, 아직도 이런 조언을 하는 경우가 많다.\
     \-> 재활용성이 있거나, 너무 긴 코드의 가독성이 필요할 때만 함수로 만들라는 조언이 적합하다.
 * 하지만 너무 간단한 연산에 함수를 만드는 것은, 함수호출에 필요한 오버헤드를 떠맡기에는 좀 부담이 된다. \
@@ -42,14 +42,14 @@ description: 수
 </strong><strong>
 </strong><strong>// 클래스 멤버함수의 경우
 </strong><strong>// Animal.h
+</strong><strong>// .h 파일 안에 inline 함수의 구현체가 있어야만 한다.
 </strong>class Animal
 {
 public:
     Animal(int age);
     inline int GetAge() const;
-}
+};
 
-// Animal.cpp
 int Animal::GetAge() const
 {
     return mAge;

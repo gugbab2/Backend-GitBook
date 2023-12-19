@@ -11,7 +11,7 @@
 * 때문에,  웹 서비스 포트(80, 443) 를 제외하고는 웹 서버의 모든 포트를 막도록 Inbound 방화벽 규칙을 설정한다.
 * 또, 웹 서버는 내부망에 연결이 가능한 서버이므로, 웹 서버에서 내부망으로 연결하는 방화벽 규칙은 WAS 서비스 포트만 연결 가능하도록 하는 것이 좋다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. Reverse Proxy
 
