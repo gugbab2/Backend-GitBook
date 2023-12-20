@@ -93,6 +93,11 @@
 
 ***
 
+* [OS](os/README.md)
+  * [컴퓨터는 3층집이다.](os/3-..md)
+  * [컴퓨터의 구조와 성능향상](os/undefined/README.md)
+    * [인터럽트에서 DirectX 까지](os/undefined/directx.md)
+    * [DMA 와 고성능 소켓](os/undefined/dma.md)
 * [NETWORK](network/README.md)
   * [Internet 기반 네트워크 입문](network/internet.md)
   * [L2 수준에서 외울 것들](network/l2.md)
