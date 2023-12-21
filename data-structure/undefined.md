@@ -73,7 +73,7 @@
 1. 배열의 앞쪽부터 다음 인덱스와 비교해 더 큰 숫자를 뒤로 보내준다.&#x20;
 2.  위 방법을 정렬이 완료될 때까지 반복한다.&#x20;
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 버블정렬 코드
 
