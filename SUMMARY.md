@@ -99,11 +99,18 @@
     * [인터럽트에서 DirectX 까지](os/undefined/directx.md)
     * [DMA 와 고성능 소켓](os/undefined/dma.md)
 * [NETWORK](network/README.md)
-  * [Internet 기반 네트워크 입문](network/internet.md)
-  * [L2 수준에서 외울 것들](network/l2.md)
-  * [L3 수준에서 외울 것들](network/l3.md)
-  * [L4 수준 대표주자 TCP 와 UDP](network/l4-tcp-udp.md)
-  * [웹을 이루는 핵심기술](network/undefined.md)
+  * [네트워크 입문](network/undefined/README.md)
+    * [Internet 기반 네트워크 입문](network/undefined/internet/README.md)
+      * [Host 는 이렇게 외우자](network/undefined/internet/host.md)
+      * [스위치가 하는 일과 비용](network/undefined/internet/undefined.md)
+    * [L2 수준에서 외울 것들](network/undefined/l2/README.md)
+      * [NIC, L2 Frame, LAN 카드 그리고 MAC 주소](network/undefined/l2/nic-l2-frame-lan-mac.md)
+      * [L2 스위치에 대해서](network/undefined/l2/l2.md)
+      * [LAN 과 WAN 의 경계 그리고 Broadcast](network/undefined/l2/lan-wan-broadcast.md)
+    * [L3 수준에서 외울 것들](network/undefined/l3.md)
+    * [L4 수준 대표주자 TCP 와 UDP](network/undefined/l4-tcp-udp.md)
+    * [웹을 이루는 핵심기술](network/undefined/undefined.md)
+  * [네트워크 심화](network/undefined-1.md)
 
 ## Server
 
