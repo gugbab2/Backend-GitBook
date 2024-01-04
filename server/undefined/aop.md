@@ -67,7 +67,7 @@
 
 ### 5-1. AOP 동작 원리
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * AOP 는 프록시 패턴을 사용한다.&#x20;
 * 프록시는 타겟을 감싸서 타겟의 요청을 대신 받아주는 Wrapping 오브젝트이다.&#x20;

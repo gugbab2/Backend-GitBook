@@ -16,7 +16,7 @@
 
 ### 1-2. 빈 팩토리와 애플리케이션 컨텍스트의 관계
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 빈 팩토리
   * 스프링 컨테이너의 최상위 인터페이스
@@ -41,7 +41,7 @@
 
 ### 1-4. 스프링 빈 설정 메타 정보(BeanDefinition)
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 스프링이 이러한 다양한 설정을 제공하는데 있어 그 중심에는 BeanDefinition 이라는 추상화가 있다.&#x20;
 * 쉽게 말하면, 설정정보(XML, 자바코드, 어노테이션) 를 읽어서 BeanDefinition 을 만든다. \
@@ -61,7 +61,7 @@
   **-> 이를 통해 가독성 또한 높아진다.**&#x20;
 * 스프링에서는 외부의 대상이 IoC 컨테이너가 되어, 빈을 알아서 주입해 준다.
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-3. 의존관게 주입의 방법
 

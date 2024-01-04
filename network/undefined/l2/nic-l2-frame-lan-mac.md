@@ -1,6 +1,6 @@
 # NIC, L2 Frame, LAN 카드 그리고 MAC 주소
 
-<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## NIC
 

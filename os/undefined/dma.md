@@ -1,6 +1,6 @@
 # DMA 와 고성능 소켓
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## CPU 가 장치에 데이터를 보내는 과정을 생각해보자
 

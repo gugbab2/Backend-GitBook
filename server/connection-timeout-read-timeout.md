@@ -9,7 +9,7 @@
     \-> 이 시간을 넘기게 되면 연결할 수 없는 것으로 생각하고 에러가 발생 \
 
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Timeout 설정을 위한 기준 생각하기
 
