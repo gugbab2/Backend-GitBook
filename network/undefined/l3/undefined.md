@@ -7,7 +7,7 @@
 1. 프로세스에서 데이터를 인터페이스(File)에 Write 해준다.\
    \-> TCP/IP 프로토콜에서는 인터페이스가 Socket 이다. \
    \-> TCP/IP 프로토콜에서는 Write 가  Send 이다.\
-   \-> 여기서 인터페이스는 Kernel mode 프로토콜을 User mode 프로세스에서 접근할 수 있는 추상화한 인터페이스이다.&#x20;
+   \-> 여기서 인터페이스(File : Socket)는 Kernel mode 프로토콜을 User mode 프로세스에서 접근할 수 있는 추상화한 인터페이스이다.&#x20;
 2. TCP 로 전달되게 되면, Segment 형태(TCP Header + Data) 화 한다.&#x20;
 3. 아래 계층으로 가면 갈 수록 앞에 Header 를 붙이는 형태로 가공이 되고, 결국 적으로 L2 Frame 의 형태로 가공이 된다.&#x20;
 4. 결국, L2 Frame 의 형태로 이더넷을 타고 L2 Access Switch -> Router -> Internet 으로 통신되는 구조이다.&#x20;
