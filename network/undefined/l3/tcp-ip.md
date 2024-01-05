@@ -60,5 +60,5 @@
   * Out of order : Segment 의 순서가 맞지 않을 때\
     \-> 일정 수준을 운영체제 TCP 수준에서 보완을 해준다.&#x20;
 * 프로세스 수준의 장애
-  * Zero Window : **Socket 의 Buffer(Window Size) 가 Zero 가 될 때**\
+  * Zero Window : **Socket 의 Buffer(Window Size) 의 남은 공간이 Zero 가 될 때**\
     **->  **_**네트워크와 프로세스의 속도차이 때문에 발생**_
