@@ -22,7 +22,7 @@
 2. 프로세스의 Buffer 에서 Socket 의 Buffer 로 Copy 한다. \
    \-> 단위 : Stream&#x20;
 3. Socket 의 Buffer 를 분해해서 L4(TCP) 계층으로 전송한다. \
-   \-> 단위 : Segment\
+   \-> 단위 : Segment(TCP 기준, UDP 의 경우는 Datagram 이라고 표현한다)\
    \-> Segment 는 각각의 순서를 가지고 있다. (TCP : 연결지향인 이유)\
    **-> 순차적으로 Segment 를 송신한다.** \
    **-> 몇개의 Segment 를 보낸 뒤 ACK 를 기다리기 위해서 Wait 한다.**
