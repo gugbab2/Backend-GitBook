@@ -1,11 +1,11 @@
 # URI & MIME type
 
-## [URI](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics\_of\_HTTP/Identifying\_resources\_on\_the\_Web)(Uniform Resource Identifier)&#x20;
+## [URI](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics\_of\_HTTP/Identifying\_resources\_on\_the\_Web)(Uniform Resource Identifier)
 
 \-> 리소스를 식별하는 방법(식별자의 역할)\
 \-> URI 는 대부분 URL 을 의미한다.(동의어에 가깝다)
 
-* ### URI 를 나누는 방법
+* #### URI 를 나누는 방법
   * URN : 리소스의 유니크한 이름, 사실상 안쓰임
   * URL : 리소스의 위치(유니크), 위치 변경에 취약하다;;
 
@@ -22,4 +22,3 @@
 6. `application/atom+xml`
 7. `application/json` ⇒ 범용. 자기서술적이기 굉장히 어렵다.
 8. `application/dns+json`
-

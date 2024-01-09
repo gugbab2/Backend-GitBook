@@ -8,12 +8,12 @@
 
 #### 선택정렬 순서
 
-1. 주어진 배열 중에 최소값을 찾는다.&#x20;
-2. 그 값을 맨 앞에 위치한 값과 교체한다.&#x20;
-3. 맨 처음 위치를 뺀 나머지 배열에서 같은 방법으로 교체한다.&#x20;
-4. 하나의 원소만 남을 때까지 위 과정을 반복한다.&#x20;
+1. 주어진 배열 중에 최소값을 찾는다.
+2. 그 값을 맨 앞에 위치한 값과 교체한다.
+3. 맨 처음 위치를 뺀 나머지 배열에서 같은 방법으로 교체한다.
+4. 하나의 원소만 남을 때까지 위 과정을 반복한다.
 
-<figure><img src="../.gitbook/assets/image (7) (1).png" alt="" width="391"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (24).png" alt="" width="391"><figcaption></figcaption></figure>
 
 #### 선택정렬 코드
 
@@ -52,13 +52,13 @@
 }
 </code></pre>
 
-#### 선택정렬 장점&#x20;
+#### 선택정렬 장점
 
-* 정렬은 위한 비교 횟수는 많지만, 버블정렬에 비해서 비교적 교환하는 횟수가 적기 때문에, 버블정렬과 비교해 효율적이다.&#x20;
+* 정렬은 위한 비교 횟수는 많지만, 버블정렬에 비해서 비교적 교환하는 횟수가 적기 때문에, 버블정렬과 비교해 효율적이다.
 
 #### 선택정렬 단점
 
-* 시간 복잡도가 O(n^2) 으로 비효율적이다.&#x20;
+* 시간 복잡도가 O(n^2) 으로 비효율적이다.
 * 불안정 정렬(Unstable Sort)이다.
 
 ## 2. 버블정렬
@@ -68,16 +68,14 @@
 * 버블정렬은 배열내의 두개의 인접한 index 를 비교하여 더 큰 숫자를 뒤로 보내 차곡차곡 쌓아 정렬하는 알고리즘.
 * 배열의 뒤쪽부터 정렬하는 방법.
 
-#### 버블정렬 순서&#x20;
+#### 버블정렬 순서
 
-1. 배열의 앞쪽부터 다음 인덱스와 비교해 더 큰 숫자를 뒤로 보내준다.&#x20;
-2.  위 방법을 정렬이 완료될 때까지 반복한다.&#x20;
+1. 배열의 앞쪽부터 다음 인덱스와 비교해 더 큰 숫자를 뒤로 보내준다.
+2.  위 방법을 정렬이 완료될 때까지 반복한다.
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (25).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 버블정렬 코드
-
-
 
 <pre class="language-cpp"><code class="lang-cpp"><strong>int main() 
 </strong>{ 
@@ -118,14 +116,14 @@
 
 #### 삽입정렬이란?
 
-* 기준이 되는 숫자와 그 앞에있는 숫자를 비교하여 조건에 맞게 정렬하는 방법이다.&#x20;
-* 0번째 인덱스는 앞쪽에 있는 숫자가 없기 때문에, 정렬의 시작은 1번째 인덱스로 시작한다.&#x20;
+* 기준이 되는 숫자와 그 앞에있는 숫자를 비교하여 조건에 맞게 정렬하는 방법이다.
+* 0번째 인덱스는 앞쪽에 있는 숫자가 없기 때문에, 정렬의 시작은 1번째 인덱스로 시작한다.
 
 #### 삽입정렬 순서
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (26).png" alt="" width="563"><figcaption></figcaption></figure>
 
-#### 삽입정렬 코드&#x20;
+#### 삽입정렬 코드
 
 <pre class="language-cpp"><code class="lang-cpp"><strong>int main() 
 </strong>{ 
@@ -168,4 +166,4 @@
 
 * 평균과 최악의 시간복잡도가 O(n^2)으로 비효율적입니다.
 
-<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
