@@ -118,7 +118,6 @@
       * [TTL 과 단편화](network/undefined/l3/ttl.md)
       * [인터넷 설정 자동화를 위한 DHCP](network/undefined/l3/dhcp.md)
       * [ARP 과 Ping(PTT)](network/undefined/l3/arp-ping-ptt.md)
-      * [Ping 과 RTT](network/undefined/l3/ping-rtt.md)
     * [L4 수준 대표주자 TCP 와 UDP](network/undefined/l4-tcp-udp/README.md)
       * [TCP 와 UDP 개요](network/undefined/l4-tcp-udp/tcp-udp.md)
       * [TCP 연결 및 상태 변화](network/undefined/l4-tcp-udp/tcp.md)
@@ -129,7 +128,13 @@
     * [웹을 이루는 핵심기술](network/undefined/undefined/README.md)
       * [DNS](network/undefined/undefined/dns.md)
       * [URL, URI](network/undefined/undefined/url-uri.md)
-  * [네트워크 심화](network/undefined-1.md)
+  * [네트워크 심화](network/undefined-1/README.md)
+    * [네트워크 장치의 구조](network/undefined-1/undefined/README.md)
+      * [Inline 구조](network/undefined-1/undefined/inline.md)
+      * [Out of path 구조와 DPI 그리고 망중립](network/undefined-1/undefined/out-of-path-dpi.md)
+      * [Proxy - 우회](network/undefined-1/undefined/proxy.md)
+    * [부하분산 시스템 작동 원리](network/undefined-1/undefined-1.md)
+    * [VPN과 네트워크 보안 솔루션](network/undefined-1/vpn.md)
 
 ## Server
 

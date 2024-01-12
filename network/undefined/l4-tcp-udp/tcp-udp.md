@@ -2,11 +2,11 @@
 
 ## TCP(Segment)&#x20;
 
-* 연결(Connection, Session)지향..!\
+* 연결(Connection, Session)지향..! \
   \-> 연결은 매우 '논리적(Virtual)' 이다.
 * 연결은 결과적으로 순서번호(L4, Segment)로 구현되며, '상태(전이)' 개념을 동반한다.\
   \-> 전화를 거는 상황을 생각해보면, 전화를 받는 쪽에서 전화를 받으면 상태(전화 전, 전화 후)가 전이된다.
-* TCP 에서 Zero Window 와 같이 Application 단에서 에러가 발생한다면, Packet 을 보내지 않는다.
+* TCP 에서 Zero Window 와 같이 **Application 단에서 에러가 발생한다면, Packet 을 보내지 않는다.**
 
 #### TCP 의 과정
 
