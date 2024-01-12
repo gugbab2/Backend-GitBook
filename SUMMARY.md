@@ -130,6 +130,7 @@
       * [URL, URI](network/undefined/undefined/url-uri.md)
   * [네트워크 심화](network/undefined-1/README.md)
     * [네트워크 장치의 구조](network/undefined-1/undefined/README.md)
+      * [세 가지 네트워크 장치 구조](network/undefined-1/undefined/undefined.md)
       * [Inline 구조](network/undefined-1/undefined/inline.md)
       * [Out of path 구조와 DPI 그리고 망중립](network/undefined-1/undefined/out-of-path-dpi.md)
       * [Proxy - 우회](network/undefined-1/undefined/proxy.md)
