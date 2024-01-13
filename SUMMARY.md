@@ -133,8 +133,14 @@
       * [세 가지 네트워크 장치 구조](network/undefined-1/undefined/undefined.md)
       * [Inline 구조](network/undefined-1/undefined/inline.md)
       * [Out of path 구조와 DPI 그리고 망중립](network/undefined-1/undefined/out-of-path-dpi.md)
-      * [Proxy - 우회](network/undefined-1/undefined/proxy.md)
-    * [부하분산 시스템 작동 원리](network/undefined-1/undefined-1.md)
+      * [Proxy(클라이언트 입장) - 우회](network/undefined-1/undefined/proxy.md)
+      * [Proxy(클라이언트 입장) - 보호와 감시](network/undefined-1/undefined/proxy-1.md)
+      * [Reverse Proxy(서버 입장)](network/undefined-1/undefined/reverse-proxy.md)
+    * [인터넷 공유기의 작동 원리](network/undefined-1/undefined-1/README.md)
+      * [공유기 개요](network/undefined-1/undefined-1/undefined.md)
+      * [Symmetric NAT](network/undefined-1/undefined-1/symmetric-nat.md)
+      * [Full Cone 방식과 내부 네트워크 접속 문제](network/undefined-1/undefined-1/full-cone.md)
+    * [부하분산 시스템 작동 원리](network/undefined-1/undefined-2.md)
     * [VPN과 네트워크 보안 솔루션](network/undefined-1/vpn.md)
 
 ## Server
