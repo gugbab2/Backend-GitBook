@@ -139,9 +139,16 @@
     * [인터넷 공유기의 작동 원리](network/undefined-1/undefined-1/README.md)
       * [공유기 개요](network/undefined-1/undefined-1/undefined.md)
       * [Symmetric NAT](network/undefined-1/undefined-1/symmetric-nat.md)
-      * [Full Cone 방식과 내부 네트워크 접속 문제](network/undefined-1/undefined-1/full-cone.md)
-    * [부하분산 시스템 작동 원리](network/undefined-1/undefined-2.md)
-    * [VPN과 네트워크 보안 솔루션](network/undefined-1/vpn.md)
+      * [Full Cone 방식](network/undefined-1/undefined-1/full-cone.md)
+      * [Restricted Cone, Port Restricted Cone](network/undefined-1/undefined-1/restricted-cone-port-restricted-cone.md)
+      * [포트 포워딩](network/undefined-1/undefined-1/undefined-1.md)
+      * [UPnP 와 NAT](network/undefined-1/undefined-1/upnp-nat.md)
+    * [부하분산 시스템 작동 원리](network/undefined-1/undefined-2/README.md)
+      * [L4 부하분산 무정지 시스템](network/undefined-1/undefined-2/l4.md)
+      * [대규모 부하분산을 위한 GSLB](network/undefined-1/undefined-2/gslb.md)
+    * [VPN과 네트워크 보안 솔루션](network/undefined-1/vpn/README.md)
+      * [PN 과 VPN](network/undefined-1/vpn/pn-vpn.md)
+      * [IPSec VPN 과 터널링 개념](network/undefined-1/vpn/ipsec-vpn.md)
 
 ## Server
 
