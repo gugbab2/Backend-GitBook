@@ -149,6 +149,7 @@
     * [VPN과 네트워크 보안 솔루션](network/undefined-1/vpn/README.md)
       * [PN 과 VPN](network/undefined-1/vpn/pn-vpn.md)
       * [IPSec VPN 과 터널링 개념](network/undefined-1/vpn/ipsec-vpn.md)
+      * [VPN 과 재택근무](network/undefined-1/vpn/vpn.md)
 
 ## Server
 
