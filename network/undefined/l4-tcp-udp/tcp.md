@@ -8,7 +8,8 @@
 
 * 3-way handshaking 에서 통신 단위는 Segment 인데, 일반적인 Segment 가 아닌 IP, TCP 헤더만(Payload 가 없다) 담겨있는 관리 목적의 Segment 이다.
 * 3-way handshaking 에는 시간차가 존재하는데, 클라이언트가 ACK 를 받은 시점과, 서버가 ACK 를 받은 시점이 다르다는 것이다.\
-  \-> Established 시점이 다르다.
+  \-> Established 시점이 다르다.\
+  **-> 회사 전문통신을 생각해볼 때 netstat 명령어로 서버와 클라이언트 네트워크 상태를 살펴볼 때, 서버와 클라이언트 모두 Established 상태여야만 한다.**&#x20;
 
 #### 연결 과정을 살펴보자.
 

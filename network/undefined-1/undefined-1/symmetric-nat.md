@@ -22,7 +22,7 @@
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-01-13 16.41.26.png" alt=""><figcaption></figcaption></figure>
 
-* Serch 된 정보를 기준으로 호스트에게 응답이 전해지게 된다.&#x20;
+* Search 된 정보를 기준으로 호스트에게 응답이 전해지게 된다.&#x20;
 
 ## Symmetric NAT 특징
 

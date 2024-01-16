@@ -117,7 +117,7 @@
       * [Broadcast IP 주소와 Localhost](network/undefined/l3/broadcast-ip-localhost.md)
       * [TTL 과 단편화](network/undefined/l3/ttl.md)
       * [인터넷 설정 자동화를 위한 DHCP](network/undefined/l3/dhcp.md)
-      * [ARP 과 Ping(PTT)](network/undefined/l3/arp-ping-ptt.md)
+      * [ARP 과 Ping(RTT : Round Trip Time)](network/undefined/l3/arp-ping-ptt.md)
     * [L4 수준 대표주자 TCP 와 UDP](network/undefined/l4-tcp-udp/README.md)
       * [TCP 와 UDP 개요](network/undefined/l4-tcp-udp/tcp-udp.md)
       * [TCP 연결 및 상태 변화](network/undefined/l4-tcp-udp/tcp.md)
