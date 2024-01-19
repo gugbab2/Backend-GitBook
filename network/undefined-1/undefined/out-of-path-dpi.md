@@ -1,6 +1,6 @@
 # Out of path 구조와 DPI 그리고 망중립
 
-## Out of path 구조(Sencor)
+## Out of path 구조(Sensor)
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-01-12 16.23.28.png" alt=""><figcaption></figcaption></figure>
 
@@ -23,9 +23,9 @@
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-01-12 16.43.07.png" alt=""><figcaption></figcaption></figure>
 
 * **우리나라에서는 유해사이트를 국가 차원에서 막고 있는데, 어떻게 막는 것일까?**
-  * **유해사이트에 접근하려하면, ISP 단 Sensor 에서 응답을 유해사이트보다 먼저 응답을 주게된다.** \
+  * **유해사이트에 접근하려하면, ISP(Internet Service Provider) 단 Sensor 에서 응답을 유해사이트보다 먼저 응답을 주게된다.** \
     **-> Sensor 는 Only Read 만 가능하기에, 응답을 빨리 주는 방법밖에 없다.**&#x20;
-  * **국가가 지정하는 유해사이트(포르노, 마약 ..)를 제외하고는 접근 제한을 해서는 안된다.(망중립의 원칙)**
+  * **국가가 지정하는 유해사이트(포르노, 마약 ..)를 제외하고는 접근 제한을 해서는 안된다. (망중립의 원칙)**
 * 유해사이트에 대한 응답으로 주고 있는 것들은 HTTP 이다. 이것을 한번 더 생각해보면 L7 HTTP 통신이 이루어지고 있다는 말이 된다.
 * HTTP 통신 단위의 흐름을 보면 다음과 같다.\
   \-> Socket Stream > Segment > Packet&#x20;

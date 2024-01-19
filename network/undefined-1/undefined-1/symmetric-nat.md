@@ -18,7 +18,7 @@
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-01-13 16.34.18.png" alt=""><figcaption></figcaption></figure>
 
 * **서버는 공유기를 목적지로 SYN + ACK 를 보내게 되는데,**&#x20;
-* **이 때, NAT-Table 의 정보(호스트 포트, 목적지 IP, 목적지 포트) 를 기준으로 Serch 해 사설 IP 정보를 얻어낸다.**&#x20;
+* **이 때, NAT-Table 의 정보(공유기 포트, 목적지 IP, 목적지 포트) 를 기준으로 Serch 해 사설 IP 정보를 얻어낸다.**&#x20;
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-01-13 16.41.26.png" alt=""><figcaption></figcaption></figure>
 

@@ -1,6 +1,6 @@
 # 대규모 부하분산을 위한 GSLB
 
-## GSLB
+## GSLB(Global Service Load Balancing)
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-01-14 09.50.02.png" alt=""><figcaption></figcaption></figure>
 

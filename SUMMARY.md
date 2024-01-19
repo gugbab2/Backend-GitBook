@@ -156,7 +156,7 @@
       * [Hash](network/ssl/undefined/hash.md)
     * [암호기술에 대한 이해](network/ssl/undefined-1/README.md)
       * [대칭키](network/ssl/undefined-1/undefined.md)
-      * [비대칭키와](network/ssl/undefined-1/undefined-1.md)
+      * [비대칭키](network/ssl/undefined-1/undefined-1.md)
     * [PKI 시스템과 인터넷](network/ssl/pki/README.md)
       * [인터넷을 위한 비대칭키 체계](network/ssl/pki/undefined.md)
       * [공개키 신뢰를 위한 검증체계](network/ssl/pki/undefined-1.md)
