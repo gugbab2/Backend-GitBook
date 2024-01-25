@@ -148,6 +148,12 @@
       * [PN 과 VPN](network/undefined-1/vpn/pn-vpn.md)
       * [IPSec VPN 과 터널링 개념](network/undefined-1/vpn/ipsec-vpn.md)
       * [VPN 과 재택근무](network/undefined-1/vpn/vpn.md)
+  * [HTTP 기초](network/readme/README.md)
+    * [HTTP 이해](network/readme/http.md)
+    * [HTTP Header](network/readme/http-header.md)
+    * [HTTP Client](network/readme/http-client.md)
+    * [HTTP Server](network/readme/http-server.md)
+    * [Java HTTP Server](network/readme/java-http-server.md)
   * [SSL 과 암호기술](network/ssl/README.md)
     * [기초이론](network/ssl/undefined/README.md)
       * [Checksum (검사합)](network/ssl/undefined/checksum.md)
@@ -162,12 +168,6 @@
 
 ## Server
 
-* [HTTP 기초](server/readme/README.md)
-  * [HTTP 이해](server/readme/http.md)
-  * [HTTP Header](server/readme/http-header.md)
-  * [HTTP Client](server/readme/http-client.md)
-  * [HTTP Server](server/readme/http-server.md)
-  * [Java HTTP Server](server/readme/java-http-server.md)
 * [REST API](server/rest-api/README.md)
   * [REST API](server/rest-api/rest-api.md)
   * [URI & MIME type](server/rest-api/uri-and-mime-type.md)
