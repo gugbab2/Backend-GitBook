@@ -88,6 +88,9 @@
   * [람다](language/readme-1/undefined-6/README.md)
     * [함수형 인터페이스](language/readme-1/undefined-6/undefined.md)
     * [람다란?](language/readme-1/undefined-6/undefined-1.md)
+  * [절차 지향 vs 객체 지향](language/readme-1/vs/README.md)
+    * [절차 지향 프로그래밍](language/readme-1/vs/undefined.md)
+    * [객체 지향 프로그래밍](language/readme-1/vs/undefined-1.md)
 
 ***
 
