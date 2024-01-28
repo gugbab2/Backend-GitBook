@@ -21,7 +21,7 @@
     * [클래스 변수 / 인스턴스 변수, 멤버 변수 / 지역 변수](language/readme-1/undefined/undefined.md)
     * [기본형 vs 참조형](language/readme-1/undefined/vs.md)
   * [패키지](language/readme-1/undefined-1/README.md)
-    * [접근제어자](language/readme-1/undefined-1/undefined.md)
+    * [패키지](language/readme-1/undefined-1/undefined.md)
     * [CLI 환경에서 .java 파일 컴파일 && 실행](language/readme-1/undefined-1/cli-.java-and-and.md)
   * [static](language/readme-1/static/README.md)
     * [static 기본](language/readme-1/static/static.md)
@@ -91,6 +91,9 @@
   * [절차 지향 vs 객체 지향](language/readme-1/vs/README.md)
     * [절차 지향 프로그래밍](language/readme-1/vs/undefined.md)
     * [객체 지향 프로그래밍](language/readme-1/vs/undefined-1.md)
+  * [접근 제어자](language/readme-1/undefined-4/README.md)
+    * [접근 제어자 - 기본](language/readme-1/undefined-4/undefined.md)
+    * [캡슐화](language/readme-1/undefined-4/undefined-1.md)
 
 ***
 
