@@ -34,7 +34,7 @@
 
 #### **모든 객체를 설계할 때에는, 인터페이스를 먼저 설계해야만 한다!**
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-02-03 10.15.44.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-02-03 10.15.44.png" alt=""><figcaption></figcaption></figure>
 
 ### 객체의 협력이라는 관계부터 생각&#x20;
 
@@ -59,4 +59,4 @@
   * Closed for modification : 기존의 코드는 수정되지 않아야 한다.\
     \-> _**클라이언트의 코드가 바뀌지 않는다는 것이다.**_
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-02-03 10.38.35.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-02-03 10.38.35.png" alt=""><figcaption></figcaption></figure>

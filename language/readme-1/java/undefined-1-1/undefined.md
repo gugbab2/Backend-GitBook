@@ -36,4 +36,4 @@
 * com.helloshop 이라는 도메인을 가진 간단한 주문 서비스에서는 다음과 같이 패키지를 분리하여 관리한다.&#x20;
 * 패키지를 구성할 때 서로 관련된 클래스는 하나의 패키지에 모으고, 관련이 적은 클래스는 다른 패키지로 분리하는 것이 좋다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2024-01-28 09.23.21.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-01-28 09.23.21.png" alt=""><figcaption></figcaption></figure>

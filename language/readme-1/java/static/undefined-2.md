@@ -31,11 +31,11 @@
 > 스택 프레임이 쌓이는 데이터는 메서드 매개변수, 지역변수, 리턴값 등이 있다.\
 > 만약 메서드 호출 범위가 종료되면 스택에서 제거된다.
 
-<figure><img src="../../../.gitbook/assets/image (67).png" alt=""><figcaption><p>스택프레</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (67).png" alt=""><figcaption><p>스택프레</p></figcaption></figure>
 
 ## 자바의 메모리
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-09-11 19.07.26.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/스크린샷 2023-09-11 19.07.26.png" alt=""><figcaption></figcaption></figure>
 
 * 위에서 클래스 수준의 정보가 저장되는 메모리 영역을 method 영역이라 불렀는데, 버전에 따라 저장되는 영역이 달라졌다.
   * **자바 7 : PermGen(Java Heap)**

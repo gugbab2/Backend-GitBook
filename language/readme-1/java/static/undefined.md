@@ -2,9 +2,9 @@
 
 ## 자바 메모리 구조
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2024-01-29 20.38.08.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-01-29 20.38.08.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2024-01-29 20.42.31.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-01-29 20.42.31.png" alt=""><figcaption></figcaption></figure>
 
 ### 메서드 영역&#x20;
 
