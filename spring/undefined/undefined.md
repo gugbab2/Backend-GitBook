@@ -2,6 +2,39 @@
 
 ## 1. 어댑터 패턴(Adapter Pattern)
 
+```java
+public interface Target {
+    void doSomething();
+}
+
+public class Adaptee {
+    public void performAction(){
+        System.out.println("Action Performed");
+    }
+}
+
+public class Adapter extends Target {
+    private final adaptee;
+    
+    public Adapter(Adaptee adaptee){
+        this.Adaptee = adaptee;
+    }
+    
+    @Override 
+    public void doSomething(){
+        adaptee.performAction();
+    }
+}
+
+public class Client() {
+    public static void main(String[] args){
+        Adaptee adaptee = new Adaptee();
+        Targer adapter = new Adapter(adaptee);
+        adapter.doSomething();
+    }
+}
+```
+
 * 어댑터는 변환기로 서로 다른 두 인터페이스 사이에 통신이 가능하도록 하는 것이다.\
   \-> 다른 클래스에서 비슷한 기능을 하는 메서드를 어댑터를 통해서 동일한 메시지를 통해 호출 하는 방법\
   \-> DB 의 JDBC / 플랫폼 별 JRE
@@ -13,7 +46,7 @@
 
 ```java
 public interface IService{
-    public abstract String runSomething();
+    String runSomething();
 }
 
 public class Service implement IService{
@@ -28,7 +61,7 @@ public class Proxy implement IService{
     public String runSomething(){
         System.out.println("호출에 대한 흐름 제어가 주목적, 반환 결과를 그대로 전달.");
         
-        Service1 = new Service();
+        service = new Service();
         return service1.runSimething();
     }
 }
@@ -69,7 +102,7 @@ public class Decoreator implement IService{
     public String runSomething(){
         System.out.println("호출에 대한 흐름 제어가 주목적, 반환 결과에 장식을 더하여 전달.");
         
-        Service1 = new Service();
+        service = new Service();
         return "장식" + service1.runSimething();
     }
 }
@@ -185,10 +218,10 @@ public class Driver{
 }    
 ```
 
-* **상위 클래스에 공통 로직을 수행하는 템플릿 메서드와 하위 클래스에 오버라이딩을 강제하는 추상 메서드 또는 선택적으로 오버라이딩 할 수 있는, 훅 메서드를 두는 패턴을 템플릿 메서드 패턴이라고 한다.**\
+* **상위 클래스에 공통 로직을 수행하는 템플릿 메서드와 하위 클래스에 오버라이딩을 강제하는 추상 메서드, 또는 선택적으로 오버라이딩 할 수 있는 훅 메서드를 두는 패턴을 템플릿 메서드 패턴이라고 한다.**\
   **-> 추상클래스, 인터페이스를 통해서 구현**
 * **"상위 클래스의 템플릿 메서드에서 하위 클래스가 오버라이딩한 메서드를 호출하는 패턴"**
-* **템플 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
+* **템플릿 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
 
 ## 6. 팩터리 메서드 패턴(Factory Method Pattern)
 
@@ -216,7 +249,7 @@ public class DogToy extends AnimalToy{
 
 public class Cat extends Animal(){
     @Override
-    AnimalToy getCat(){
+    AnimalToy getToy(){
         return new CatToy();
     }
 }
@@ -242,7 +275,7 @@ public class Driver{
 ```
 
 * 객체 지향에서 팩터리는 객체를 생성한다.\
-  \-> 결국 팩터리 메서드는 객체를 생성 반환하는 메서드를 말한다.
+  \-> **결국 팩터리 메서드는 **_**객체를 생성 반환하는 메서드**_**를 말한다.**
 * **"오버라이드 된 메서드가 객체를 반환하는 패턴이다.** "
 * **펙터리 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
 
