@@ -25,7 +25,7 @@ const int * const ptr3 = &val3;    // 포인터 ptr3 가 상수화 되었으며,
 int GetX() const;         //  이 함수 내에서 멤버변수에 저장된 값을 변경하지 않겠다.
 ```
 
-## 3. const 사용의 꿀팁
+## 3. const 사용의 TIP
 
 ### 3-1. 참조자를 이용한 Call-by-reference 단점을 해결한 const 참조자
 

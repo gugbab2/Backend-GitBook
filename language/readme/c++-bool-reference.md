@@ -3,7 +3,7 @@
 ## 1. C 에서 없던 bool 데이터 형이 생겨났다.
 
 ```cpp
-if(IsStudent() == false)
+if(IsStudent() == true)
 {
 
 }
@@ -74,7 +74,7 @@ int&#x26; reference;           // error
 
 #### 함수 매개변수로서의 참조
 
-* **number1, number2 변수는 NULL 이 될 수 없다. (안전한 코드!)]**
+* **number1, number2 변수는 NULL 이 될 수 없다. (안전한 코드!)**
 
 ```cpp
 // 포인터

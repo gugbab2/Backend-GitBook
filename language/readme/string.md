@@ -104,3 +104,152 @@ const char* cLine = line.c_str();    // 포인터는 변경이 가능하지만, 
 // char* const cLine          : 포인터가 변경이 불가하다.                  
 // const char* const cLine    : 포인터와 string 값 모두 변경 불가하다. 
 ```
+
+#### String 클래스를 직접 구현해보자
+
+```cpp
+#include "MyString.hpp"
+
+using namespace std;
+
+MyString::MyString()
+{
+    str_ = nullptr;
+    size_ = 0;
+}
+
+MyString::MyString(const char* init)
+{
+    // 크기(size_) 결정
+    while(init[size_] != '\0')
+        size_++;
+
+    // 메모리 할당
+    str_ = new char[size_];
+    
+    // 데이터 복사
+    memcpy(str_, init, size_);
+}
+
+MyString::MyString(const MyString& str)
+{
+    size_ = str.size_;
+    str_ = new char[size_];
+    memcpy(str_, str.str_, size_);
+}
+
+MyString::~MyString()
+{
+    // 메모리 해제
+    if(str_ != nullptr)
+    {
+        delete[] str_;
+        str_ = nullptr;
+        size_ = 0;
+    }
+}
+
+bool MyString::IsEmpty()
+{
+    return Length() == 0;
+}
+
+bool MyString::IsEqual(const MyString& str)
+{
+    for(int i=0; i<str.size_; i++)
+    {
+        if(str_[i] != str.str_[i])
+            return false;
+    }
+
+    return true;
+}
+
+int MyString::Length()
+{
+    return size_;
+}
+
+void MyString::Resize(int new_size)
+{
+    char* new_str = new char[new_size];
+    
+    for(int i=0; i<(size_ > new_size ? new_size:size_); i++)
+        new_str[i] = str_[i];
+    
+    delete str_;
+    str_ = new_str;
+    size_ = new_size;
+}
+
+MyString MyString::Substr(int start, int num)
+{
+    MyString temp;
+    temp.size_ = num;
+    temp.str_ = new char[temp.size_];
+    
+    for(int i=start; i<start + num; i++)
+    {
+        temp.str_[i-start] = str_[i];
+    }
+
+    return temp;
+}
+
+MyString MyString::Concat(MyString app_str)
+{
+    MyString temp;
+
+    temp.size_ = size_ + app_str.size_;
+    temp.str_ = new char[temp.size_];
+    
+    memcpy(temp.str_, str_, size_);
+    memcpy(temp.str_ + size_, app_str.str_, app_str.size_);
+
+    return temp;
+}
+
+MyString MyString::Insert(MyString t, int start)
+{
+    assert(start >= 0);
+    assert(start <= this->size_);
+
+    MyString temp;
+
+    temp.size_ = size_ + t.size_;
+    temp.str_ = new char[temp.Length()];
+
+    memcpy(temp.str_, str_, start);
+    memcpy(temp.str_ + start, t.str_, t.size_);
+    memcpy(temp.str_ + start + t.size_, str_ + start, size_ - start);
+
+    return temp;
+}
+
+int MyString::Find(MyString pat)
+{
+    //TODO:
+    for(int i=0; i<Length() - pat.Length(); i++)
+    {
+        for(int j=0; j<pat.Length(); j++)
+        {
+            if(str_[i+j] != pat.str_[j])
+                break;
+            
+            if(j == pat.Length()-1)
+                return i;
+        }
+    }
+
+    return -1;
+}
+
+void MyString::Print()
+{
+    for (int i = 0; i < size_; i++)
+        cout << str_[i];
+    cout << endl;
+}
+
+
+```
