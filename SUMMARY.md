@@ -104,10 +104,10 @@
 ## CS
 
 * [OS](cs/os/README.md)
-  * [컴퓨터는 3층집이다.](cs/os/3-..md)
-  * [컴퓨터의 구조와 성능향상](cs/os/undefined/README.md)
-    * [인터럽트에서 DirectX 까지](cs/os/undefined/directx.md)
-    * [DMA 와 고성능 소켓](cs/os/undefined/dma.md)
+  * [혼자 공부하는 컴퓨터구조 + 운영체제](cs/os/+/README.md)
+    * [1. 컴퓨터 구조 시작하기](cs/os/+/1..md)
+    * [2. 데이터](cs/os/+/2..md)
+    * [3. 명령어](cs/os/+/3..md)
 * [NETWORK](cs/network/README.md)
   * [네트워크 입문](cs/network/undefined/README.md)
     * [Internet 기반 네트워크 입문](cs/network/undefined/internet/README.md)
