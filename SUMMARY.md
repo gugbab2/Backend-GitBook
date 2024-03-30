@@ -110,6 +110,7 @@
     * [3. 명령어](cs/os/+/3..md)
     * [4. CPU 의 작동원리](cs/os/+/4.-cpu.md)
     * [5. CPU 성능 향상 기법](cs/os/+/5.-cpu.md)
+    * [6. 메모리와 캐시메모리](cs/os/+/6..md)
 * [NETWORK](cs/network/README.md)
   * [네트워크 입문](cs/network/undefined/README.md)
     * [Internet 기반 네트워크 입문](cs/network/undefined/internet/README.md)
