@@ -1,6 +1,6 @@
 # 캐스팅(형변환, casting)
 
-#### 암시적 캐스팅&#x20;
+#### 암시적 캐스팅
 
 * 컴파일러가 형을 변환해준다.
 * 형 변환이 허용될 때만 해준다.
@@ -19,7 +19,7 @@ long number2 = number1;
   * dynamic\_cast
   * reinterpret\_cast
 
-#### C 스타일 캐스팅&#x20;
+#### C 스타일 캐스팅
 
 * 아래 코드는 무엇을 할까? (자바에서도 다음과 같은 캐스팅 방법을 사용한다)
 * 다음의 캐스팅 방법은 무슨 문제를 가지고 있을까?
@@ -32,10 +32,12 @@ long number2 = number1;
 int score = (int)someVariable;
 ```
 
-#### 정적캐스팅(static\_cast)
+## 정적캐스팅(static\_cast)
 
-* CASE.1 두 숫자형 값을 변환&#x20;
-  * 값을 유지(반올림의 오차는 제외)
+#### 1. 값
+
+* 두 숫자형 값을 변환
+  * 값을 유지하려고 노력 (올림의 오차는 제외)
   * **이진수 표기는 달라질 수 있다.**\
     \-> float 를 int 로 변환했을 때, 소수점 아래는 버려지기 때문에, 이진수 표현이 다를 수 있다.
 
@@ -55,10 +57,11 @@ int number2 = static_cast<int>(number1);
 // number2 -> 0000 0000 0000 0011
 ```
 
-* CASE.2 개체 포인터
-  * 컴파일 시 상속관계 확인 후 자식 클래스로 변환
-  * 실행 도중 여전히 크래시가 날 수 있다. \
-    \-> 컴파일 타임에는 상속관계만을 확인하는 것이기 때문에, 함수를 호출 가능한 것인지까지는 확인하지 않는다.&#x20;
+#### 2. 개체 포인터
+
+* **컴파일 시** 상속 관계 확인 후 자식 클래스로 변환
+* **런타임 시** 실제 크래시가 날 수 있다.\
+  \-> 컴파일 타임에는 상속 관계 만을 확인하는 것이기 때문에, 함수를 호출 가능한 것인지 까지는 확인하지 않는다.
 
 <pre class="language-cpp"><code class="lang-cpp">Animal* myPet = new Cat(2, "COCO");
 
@@ -74,7 +77,7 @@ House* myHouse = static_cast&#x3C;House*>(myPet);    // C 스타일의 캐스팅
 <strong>myHouse->GetAddress();                          // C++ 캐스팅은 컴파일러가 상속관계를 파악하기에 컴파일 에러가 난다.
 </strong></code></pre>
 
-#### 재해석 캐스팅(reinterpret\_cast)
+## 재해석 캐스팅(reinterpret\_cast)
 
 \-> 상당히 위험한 캐스팅이다!
 
@@ -100,9 +103,9 @@ unsigned int* unsignedNumber1 = static_cast<unsugned int*>(signedNumber);
 unsigned int* unsignedNumber2 = reinterpret_cast<unsugned int*>(signedNumber);
 ```
 
-#### const\_cast
+## const\_cast
 
-* const\_cast 로는 형을 바꾸는 것이 아닌, const 를 제거할 때 사용한다.&#x20;
+* _**const\_cast 로는 형을 바꾸는 것이 아닌, const 를 제거할 때 사용한다.**_
 
 <pre class="language-cpp"><code class="lang-cpp">Animal* myPet = new Cat(2, "COCO");
 const Animal* petptr = myPet;
@@ -130,10 +133,10 @@ void Foo(const char* name)
 }
 ```
 
-#### 동적캐스팅(dynamic\_cast)
+## 동적캐스팅(dynamic\_cast)
 
 * 런타임에 캐스팅이 가능한지 판단을 하고 캐스팅이 가능할 때는 캐스팅, 아니라면 null 을 반환한다.\
-  \-> 때문에, **dynamic\_cast 가 static\_cast 가 더 안전하다.**&#x20;
+  \-> 때문에, **dynamic\_cast 가 static\_cast 가 더 안전하다.**
 
 ```cpp
 // static_cast
@@ -161,7 +164,7 @@ if(myDog != null)
 
 * **하지만, dynamic\_cast 를 사용하기 위해서는 컴파일 중에 RTTI(실시간 타입정보, Real Time Type Infomation) 을 켜야한다!**\
   **-> 이 기능을 키지 않는다면 static\_cast 와 동일하게 작동한다.**
-* 대부분의 프로젝트에서는 RTTI 가 꺼져있다. \
+* 대부분의 프로젝트에서는 RTTI 가 꺼져있다.\
   \-> 왜? C++ 을 쓰는 업계는 성능이 중요하다고 했는데, RTTI 를 버틸수 있을 만큼의 성능을 가지고 있지 않는다.\
   \-> 정말 좋은 개념이지만 실제적으로 거의 쓰이지 않는다..
 
