@@ -113,6 +113,8 @@
     * [6. 메모리와 캐시메모리](cs/os/+/6..md)
     * [7. 보조기억장치](cs/os/+/7..md)
     * [8. 입출력장치](cs/os/+/8..md)
+    * [9. 운영체제 시작하기](cs/os/+/9..md)
+    * [10. 프로세스와 스레드](cs/os/+/10..md)
 * [NETWORK](cs/network/README.md)
   * [네트워크 입문](cs/network/undefined/README.md)
     * [Internet 기반 네트워크 입문](cs/network/undefined/internet/README.md)
