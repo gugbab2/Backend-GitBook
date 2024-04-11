@@ -12,7 +12,7 @@
 
 #### 전역변수(extern 키워드)
 
-* extern 키워드는다른 파일의 전역변수에 접근을 가능하게 해준다.
+* extern 키워드는 다른 파일의 전역변수에 접근을 가능하게 해준다.
 * 아래 예제를 살펴보자
   * 선행처리기에 의해 # include ExternTest.h 가 선언 된 파일에 ExternTest.h 의 내용을 그대로 복붙한다.&#x20;
   * 컴파일러에 의해 ExternTest.c / Main.c 파일 각각 obj 파일을 만들게 된다.\
