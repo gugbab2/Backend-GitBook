@@ -20,7 +20,7 @@
 
 ## 네트워크의 규모( LAN 과 WAN 의 경계)
 
-<figure><img src="../../../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 네트워크 규모를 이해하는 요령(정답은 아니다, 요령이다!)
 

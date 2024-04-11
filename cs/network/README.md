@@ -2,7 +2,7 @@
 
 ## 네트워크와 네트워킹 그리고 개념
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 네트워크
 
@@ -25,7 +25,7 @@
 
 ## User mode 와 Kernel mode
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### H/W
 

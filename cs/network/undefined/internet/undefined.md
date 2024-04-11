@@ -1,6 +1,6 @@
 # 스위치가 하는 일과 비용
 
-<figure><img src="../../../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 일반적으로 우리가 길을 찾아가는 과정을 생각해보자
   * 길을 가다보면 교차로를 만나게 된다.

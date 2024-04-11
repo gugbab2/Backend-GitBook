@@ -8,7 +8,7 @@
 * 스트림은 **실제 입력이나 출력이 표현된 추상화 된 흐름을 의미**한다.
 * 즉 스트림은 운영체제에 의해 생성되는 가상의 연결 고리를 의미하고, 중간 매개자 역할을 한다.
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt="" width="290"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1).png" alt="" width="290"><figcaption></figcaption></figure>
 
 #### 버퍼(buffer)
 

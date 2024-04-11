@@ -15,7 +15,7 @@
 3. 맨 처음 위치를 뺀 나머지 배열에서 같은 방법으로 교체한다.
 4. 하나의 원소만 남을 때까지 위 과정을 반복한다.
 
-<figure><img src="../.gitbook/assets/image (24).png" alt="" width="391"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (24) (1).png" alt="" width="391"><figcaption></figcaption></figure>
 
 #### 선택정렬 코드
 
@@ -76,7 +76,7 @@
 1. 배열의 앞쪽부터 다음 인덱스와 비교해 더 큰 숫자를 뒤로 보내준다.
 2.  위 방법을 정렬이 완료될 때까지 반복한다.
 
-    <figure><img src="../.gitbook/assets/image (25).png" alt="" width="563"><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (25) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 버블정렬 코드
 
@@ -124,7 +124,7 @@
 
 #### 삽입정렬 순서
 
-<figure><img src="../.gitbook/assets/image (26).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (26) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 삽입정렬 코드
 
