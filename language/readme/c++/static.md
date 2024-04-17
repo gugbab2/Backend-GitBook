@@ -83,7 +83,7 @@ int main()
   \-> 메모리는 반납 되지 않고 계속 사용된다.\
   \-> Java 에는 함수 속 정적 변수가 없다. (오직 정적 멤버 변수만 있다)
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
 
 ## C++ 스타일 static&#x20;
 
@@ -96,7 +96,7 @@ int main()
   \-> 개체마다 생겨나는 메모리가 아닌 클래스 하나에 있는 메모리이기 때문에, 한번 메모리를 할당하면 이후에 할당할 일이 없다.\
   \-> ONLY ONE!
 
-<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
 
 #### 정적 멤버 변수 BEST PRACTICE
 
@@ -119,4 +119,4 @@ int main()
 * 다음 예제는 컴파일 에러가 난다!\
   **-> 정적 멤버 함수에서는 정적 멤버 변수 또는 정적 전역 변수만 사용 가능하다.**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>

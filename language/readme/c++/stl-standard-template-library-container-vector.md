@@ -52,12 +52,12 @@ ages.push_back(100);
   **-> 해당 과정을 컴파일러가 최적화해준다.** \
   **(vector 생성 후 바로 500byte 를 할당한다면 처음부터 500byte 를 할당해준다)**
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 12.13.40.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 12.13.40.png" alt=""><figcaption></figcaption></figure>
 
 * 동일한 크기과 데이터를 같는 vector 를 생성할 수 있다. \
   \-> 복사 생성자와 동작하는 방식이 비슷하다.&#x20;
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 12.15.16.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 12.15.16.png" alt=""><figcaption></figcaption></figure>
 
 ### Vector 요소에 접근하기
 
@@ -119,7 +119,7 @@ int main()
 
 * begin(), end() 가 아닌 rbegin(), rend() 를 사용하면 된다.
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 13.08.18.png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 13.08.18.png" alt="" width="563"><figcaption></figcaption></figure>
 
 ```cpp
 #include <iostream>
@@ -191,7 +191,7 @@ int main()
 * **메모리 복사 : 삽입되는 인덱스 뒤에 데이터는 모두 복사 되어야 한다.**&#x20;
 *   **메모리 재할당 : 할당된 메모리보다 데이터를 더 집어넣을 때 메모리를 재할당 받고 기존 데이터를 옮긴다.**&#x20;
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 13.17.26.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 13.17.26.png" alt=""><figcaption></figcaption></figure>
 
 ### Vector 요소 교환하기
 
@@ -220,7 +220,7 @@ int main()
 * **이전에 c++ 은 개체 배열 생성 시 각 요소 마다 주소값이 아닌 개체 멤버변수를 저장한다고 했다.**&#x20;
 * **백터 또한 내부적으로는 배열로 구현되어 있기 때문에, 요소마다 주소값이 아닌 멤버변수를 저장한다.**&#x20;
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 13.37.17.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 13.37.17.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -233,9 +233,9 @@ int main()
   * 백터의 사본을 만들 때 기존에 데이터를 모두 복사해야 한다. \
     (개체의 일반적으로 사이즈는 크다..)
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 13.48.37.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 13.48.37.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 13.52.03.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 13.52.03.png" alt=""><figcaption></figcaption></figure>
 
 #### 때문에, 개체의 크기가 크다면 포인터를 저장해야 한다. (Java 의 방식!)
 

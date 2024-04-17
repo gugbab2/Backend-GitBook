@@ -32,45 +32,45 @@
 * **하지만 예외처리 한 코드에 대한 어셈블리어를 보게 되면, 그렇지 않은 어셈블리어에 비해서 코드량이 많다.** \
   **-> 예외처리는 공짜가 아니다.. 비용이 든다.**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (75).png" alt=""><figcaption><p>범위 이탈</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (75).png" alt=""><figcaption><p>범위 이탈</p></figcaption></figure>
 
 * 또한 다음의 경우에서 볼 수 있듯이, 예측이 가능한 부분이라면, 예외처리를 하지 않고 분기문으로 처리가 가능하다. \
   \-> 엄격하게 말할 때, **예외는 프로그래머가 예측할 수 없어야 한다.** \
   **(해당 사례는 충분히 예측이 가능하기에 예외라고 부르기에 애매하다;;)**
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
 
 ### 0으로 나누기&#x20;
 
 * 정수를 0으로 나누었을 때 예외가 발생하는데, 이 예외는 c++ 의 예외가 아닌 **OS 단의 예외**이다. \
   **-> OS 단의 예외는 어플리케이션 단에서 발생하는 것이 아닌, OS 단에서 발생하는 것이기 때문에, 속도가 느릴 수 밖에 없다.**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
 
 * 다음과 같이 예측이 가능한 부분이라면, 예외처리를 하지 않고 분기문으로 처리가 가능하다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
 
 ### NULL 개체 사용
 
 * null 개체를 사용할 때 발생하는 오류도 c++ 의 오류가 아닌, OS 단의 예외이다. \
   \-> 없는 메모리를 참조한다고 하니 OS 에서 예외를 발생시킨다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
 
 * 다음과 같이 예측이 가능한 부분이라면, 예외처리를 하지 않고 분기문으로 처리가 가능하다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (85).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (85).png" alt=""><figcaption></figcaption></figure>
 
 ### 생성자
 
-<figure><img src="../../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
 
 ## OS 예외 vs C++ 예외
 
-<figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
 ## 에러 코드에 대한 오해를 풀어보자!
 
@@ -79,10 +79,10 @@
 *   함수를 잘 만들어 에러 코드를 반환 한다면 오히려 예외 처리의 코드량이 더 많다.. \
     \-> 잘 만들어진 에러 코드를 반환하는 메서드는 예외 처리와 가독성의 차이는 없다..
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.09.35.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.09.35.png" alt=""><figcaption></figcaption></figure>
 *   에러 코드의 가독성이 떨어진다면, 그 코드를 가독성이 좋게 만들면 될 일이지 에러코드 자체의 문제는 아니다!
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.12.44.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.12.44.png" alt=""><figcaption></figcaption></figure>
 
 ### 예외처리를 하는 프로그램이 유지보수성이 높다?
 
@@ -91,7 +91,7 @@
 *   뒷받침할 증거나 데이터가 없고, 실제로 잘 만들어진 운영체제 프로그램은 에러 코드를 사용하고 있다. (C사용)\
     \-> 웹도 에러코드 기반으로 돌아가고 있다. (**http status code**)
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.18.55.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.18.55.png" alt=""><figcaption></figcaption></figure>
 * **대부분의 프로그래머는 예외를 제대로 처리하지 못함..** \
   **-> 100% 예외 안정성을 가지는 프로그램을 만드는 일은 정말로 쉬운일이 아니다;;** \
   _**-> 상식적으로 사람은 사고방식이 선형적인데 메서드 내에서 10개의 예외가 발생한다고 파악할 수 있을까?**_\
@@ -101,7 +101,7 @@
 *   **최근 Java 에서는 exception 별로 처리하는 것도 아닌, 최상위 Exception 으로 잡아서 처리한다.** \
     \-> 어디서 어떤 exception 이 발생하는지 파악하는 것은 상당히 어렵다 ;;&#x20;
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.31.16.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.31.16.png" alt=""><figcaption></figcaption></figure>
 
 ## 적절한 예외처리
 
@@ -112,19 +112,19 @@
     **-> 반대로 내부에서 우리가 관여하는 코드는 예측이 가능하기에 에러 코드로 처리가 가능하다.**&#x20;
   *   ex, 외부에서 들어오는 웹 요청, 파일 읽기/쓰기, 외부 라이브러리&#x20;
 
-      <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.51.02.png" alt="" width="375"><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.51.02.png" alt="" width="375"><figcaption></figcaption></figure>
 * **일단 시스템에 들어온 데이터는 모두 올바르다고 간주할 것!**
   *   assert 를 사용해서 개발 중 모두 고쳐 놓을 것!\
       \-> assert 는 프로그램 실행 중 조건이 거짓이면 프로그램을 종료하고 에러 메시지를 보여준다.
 
-      <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.52.12.png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.52.12.png" alt=""><figcaption></figcaption></figure>
 * **예외 상황이 발생할 때는 NULL 을 능동적으로 사용할 것!**
   * 사실 NULL 을 사용하는 것은 좋은 표준은 아니다..&#x20;
   *   **사용할거라면, 함수의 이름을 잘 지어서 바로 판단이 가능하게 하자**
 
-      <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.54.49.png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.54.49.png" alt=""><figcaption></figcaption></figure>
 
-      <figure><img src="../../.gitbook/assets/스크린샷 2024-04-11 11.55.54.png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/스크린샷 2024-04-11 11.55.54.png" alt=""><figcaption></figcaption></figure>
 
 ## 결론&#x20;
 

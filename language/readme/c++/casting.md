@@ -91,7 +91,7 @@ _**-> 상당히 위험한 캐스팅이다!**_
     \-> _**컴퓨터는 이진수의 값을 코드의 시점에서 해석하는 것이다!**_\
     _**-> 개발자의 의도가 있을 것이라고 생각하고, 문법적으로 이상한 캐스팅이라더라도 허용해준다.**_&#x20;
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2023-11-18 15.56.54.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2023-11-18 15.56.54.png" alt=""><figcaption></figcaption></figure>
 
 ```cpp
 int* signedNumber = new int(-10);

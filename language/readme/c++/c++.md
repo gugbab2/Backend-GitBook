@@ -5,7 +5,7 @@
 * 프로그래밍이랑 목적에 맞는 프로그래밍 언어를 사용해 구체적인 프로그램을 작성하는 것을 의미한다.
 * C++ 에서는 이렇게 작성된 소스 파일(source file)을 실행 파일(executable file)로 변환해야 실행이 가능하다.
 
-<figure><img src="../../.gitbook/assets/image (68).png" alt="" width="371"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (68).png" alt="" width="371"><figcaption></figcaption></figure>
 
 ## 2. 소스 파일 작성부터 실행 파일 실행까지의 과정
 

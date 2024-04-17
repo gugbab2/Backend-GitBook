@@ -75,16 +75,16 @@ getline(cin, mailHeader, '@');
     * string 을 선언하게 되면 기본적으로 16바이트의 용량을 할당받는다.\
       (실제 값은 heap 에 저장)
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2023-10-25 21.08.59.png" alt="" width="375"><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-25 21.08.59.png" alt="" width="375"><figcaption></figcaption></figure>
 
     * 처음 제공되는 16바이트 미만의 값으로 초기화를 하게 되면 해당 메모리에 값을 넣어준다.
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2023-10-25 21.10.16 (1).png" alt="" width="375"><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-25 21.10.16 (1).png" alt="" width="375"><figcaption></figcaption></figure>
 
     * 이전에 넣어주었던 값에 추가로 남는 메모리보다 많은 값을 넣어주게 되면, 새로운 용량을 할당 받고 포인터를 변경해준다. 그 후 값을 추가해준다. (heap)
     * 그리고 이전에 사용했던 메모리는 반환한다.
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2023-10-25 21.12.22.png" alt="" width="375"><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-25 21.12.22.png" alt="" width="375"><figcaption></figcaption></figure>
 
 #### string 의 메모리 관리 방법은 상당히 복잡하다..
 

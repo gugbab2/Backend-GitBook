@@ -33,7 +33,7 @@ int* anotherPtr = nullptr;       // OK
 
 #### nullptr 사용 예시
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-13 18.55.29.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-13 18.55.29.png" alt=""><figcaption></figcaption></figure>
 
 ## enum class
 
@@ -43,14 +43,14 @@ int* anotherPtr = nullptr;       // OK
 * **때문에, 기존의 enum 은 int 형과 동일하게 사용할 수 있었다.** \
   **-> 타입 체킹을 전혀 안한다..**
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-13 19.08.03.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-13 19.08.03.png" alt=""><figcaption></figcaption></figure>
 
 ### enum class
 
 * **기존과 다르게, 타입 체킹을 지원한다!**
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-13 19.11.50.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-13 19.11.50.png" alt=""><figcaption></figcaption></figure>
 
 * enum class 에서 사용하는 정수형을 명시할 수 있다.&#x20;
 
-<figure><img src="../../.gitbook/assets/스크린샷 2024-04-13 19.14.12.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-04-13 19.14.12.png" alt=""><figcaption></figcaption></figure>

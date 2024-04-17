@@ -25,27 +25,27 @@ if(IsStudent() == false)
 
 * 값에 의한 호출(call by value)
 
-<figure><img src="../../.gitbook/assets/스크린샷 2023-10-24 22.13.01.png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.13.01.png" alt="" width="375"><figcaption></figcaption></figure>
 
 *   참조에 의한 호출(call by reference)
 
     * c / c++\
       \-> c / c++ 는 포인터를 제공하지 않으면 call by value 처럼 동작하게 된다.
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2023-10-24 22.16.23.png" alt="" width="375"><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.16.23.png" alt="" width="375"><figcaption></figcaption></figure>
 
-    <figure><img src="../../.gitbook/assets/스크린샷 2023-10-24 22.19.46.png" alt="" width="375"><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.19.46.png" alt="" width="375"><figcaption></figcaption></figure>
 
     *   Java\
         \-> Java 는 primitive 타입이 아닌 것(reference 타입)에 대해서는 값의 주소를 제공하기 때문에, c / c++ 과 헷갈리는 부분이다.\
         \-> **해당 주소는 포인터 연산자가 아니다! 왜냐면 포인터 연산자처럼 주소를 바꿀 수 없다..**\
         \-> 자바는 성능보다는 안전함을 위한 언어이기 때문에, 포인터를 의도적으로 사용하지 않는다.
 
-        <figure><img src="../../.gitbook/assets/스크린샷 2023-10-24 22.30.59.png" alt="" width="375"><figcaption></figcaption></figure>
+        <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.30.59.png" alt="" width="375"><figcaption></figcaption></figure>
 * 포인터(pointer)
   *   c / c++ 에서 포인터 1을 더하는 연산을 할 때, **타입의 사이즈 만큼 증가하게 된다.**&#x20;
 
-      <figure><img src="../../.gitbook/assets/스크린샷 2023-10-24 22.34.33.png" alt="" width="375"><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.34.33.png" alt="" width="375"><figcaption></figcaption></figure>
 
 ### 2-2. C++ 의 참조(reference)는 위와 같이 복잡한 방법에 대한 해결책이다.
 

@@ -11,7 +11,7 @@
 
 * 템플릿을 인스턴스화할 때마다, 컴파일러가 내부적으로 코드를 생성해준다!
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 ### 이것은 무엇을 의미할까?&#x20;
 
@@ -25,12 +25,12 @@
 * 코드를 자료형마다 중복으로 작성하지 않는 대표적인 예제이다.&#x20;
 * 다음의 코드에서 개체+ 연산 시, 클래스에서 + 연산자를 오버로딩하지 않는다면, 컴파일 에러가 발생한다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 * 함수 템플릿을 호출할 때 타입을 생략 가능하다!\
   \-> Math 함수가 그렇게 작동한다! (내부적으로 static 으로 선언되어 있다)
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
 ## 클래스 템플릿&#x20;
 
@@ -69,21 +69,21 @@
     **-> 인라인 함수에서도 동일한 문제를 발견할 수 있다..** \
     **(구현체를 모두 헤더파일로 옮겼었다)**
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 * **해결책은 구현을 모두 헤더 파일로 옮겨야 한다.**&#x20;
 * 하지만 헤더 파일에 코드가 많아지는 것은 다음의 단점이 따라온다.&#x20;
   * **실행 파일의 크기가 커진다..**&#x20;
   * **헤더 파일의 변경이 있을 시 사용하는 모든 파일을 다시 컴파일 해야 하므로, 컴파일 시간이 길어진다.**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
 * 함수형 템플릿에서는 타입을 생략할 수 있었지만, **클래스 템플릿은 반드시 타입을 넣어주어야 한다!**\
   **-> 함수형 템플릿은 매개변수를 통해서 타입을 추측이 가능하다.**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 ## 템플릿 매개변수가 2개인 경우
 
@@ -93,10 +93,10 @@
 
 * 템플릿 매개변수를 통해서 외부에서 클래스 내부에 배열의 크기를 받을 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
 #### template 매개변수를 2개 받는 예시
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
