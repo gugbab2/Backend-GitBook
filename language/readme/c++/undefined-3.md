@@ -32,7 +32,8 @@
 #### std:move()
 
 * rvalue 의 참조를 반환&#x20;
-* lvalue 를 rvalue 로 반환
+* **lvalue 를 rvalue 로 반환**\
+  **-> lvalue 가 아닌, rvalue 를 사용한다는 것은 메모리 복사가 필요 없다는 것을 뜻한다.**&#x20;
 
 ## C++ 11 이전의 문제&#x20;
 
