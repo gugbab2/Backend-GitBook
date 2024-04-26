@@ -28,7 +28,7 @@
     * [새로운 STL 컨테이너](language/readme/c++/stl.md)
     * [이동생성자 및 이동대입연산자](language/readme/c++/undefined-3.md)
   * [The C++ Programming Lanuaage](language/readme/the-c++-programming-lanuaage/README.md)
-    * [3. C++ 둘러보기 : 추상화 메커니즘](language/readme/the-c++-programming-lanuaage/3.-c++.md)
+    * [6. 타입과 선언](language/readme/the-c++-programming-lanuaage/6..md)
 * [Java](language/readme-1/README.md)
   * [Object Class](language/readme-1/object-class/README.md)
     * [Object.toString()](language/readme-1/object-class/object.tostring.md)
