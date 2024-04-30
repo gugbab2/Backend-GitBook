@@ -29,6 +29,8 @@
     * [이동생성자 및 이동대입연산자](language/readme/c++/undefined-3.md)
   * [The C++ Programming Lanuaage](language/readme/the-c++-programming-lanuaage/README.md)
     * [6. 타입과 선언](language/readme/the-c++-programming-lanuaage/6..md)
+    * [7. 포인터, 배열, 참조](language/readme/the-c++-programming-lanuaage/7..md)
+    * [8. 구조체(struct), 공용체(union), 열거형(enum)](language/readme/the-c++-programming-lanuaage/8.-struct-union-enum.md)
 * [Java](language/readme-1/README.md)
   * [Object Class](language/readme-1/object-class/README.md)
     * [Object.toString()](language/readme-1/object-class/object.tostring.md)
