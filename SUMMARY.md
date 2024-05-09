@@ -35,6 +35,7 @@
     * [8. 구조체(struct), 공용체(union), 열거형(enum)](language/readme/the-c++-programming-lanuaage/8.-struct-union-enum.md)
     * [10. 표현식](language/readme/the-c++-programming-lanuaage/10..md)
     * [11. 선택 연산](language/readme/the-c++-programming-lanuaage/11..md)
+  * [std::algorithm](language/readme/std-algorithm.md)
 * [Java](language/readme-1/README.md)
   * [Object Class](language/readme-1/object-class/README.md)
     * [Object.toString()](language/readme-1/object-class/object.tostring.md)
