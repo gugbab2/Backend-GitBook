@@ -151,3 +151,94 @@ int main()
 ```
 
 ## std::transform
+
+```cpp
+template <class InputIt, class OutputIt, class UnaryOperation>
+OutputIt transform(InputIt first1, InputIt last1, OutputIt d_first,
+                   UnaryOperation unary_op);  // (1)
+                   
+template <class InputIt1, class InputIt2, class OutputIt, class BinaryOperation>
+OutputIt transform(InputIt1 first1, InputIt1 last1, InputIt2 first2,
+                   OutputIt d_first, BinaryOperation binary_op);  // (2)
+                   
+template <class ExecutionPolicy, class ForwardIt1, class ForwardIt2,
+          class ForwardIt3, class BinaryOperation>
+ForwardIt3 transform(ExecutionPolicy&& policy, ForwardIt1 first1,
+                     ForwardIt1 last1, ForwardIt2 first2, ForwardIt3 d_first,
+                     BinaryOperation binary_op);  // (3)
+```
+
+* (1) 단항함수 `unary_op` 이 `first1` 부터 `last1` 전까지 원소들을 인자로 전달하여 실행한다.&#x20;
+* (2) 이항 함수 `binary_op` 이 `first1` 부터 `last1` 전까지 원소들과 `first2` 부터의 원소들을 쌍으로 전달해서 실행합니다. 예를 들어서 `first1` 부터 `last1` 이 {1,2,3} 이고 `first2` 부터의 원소가 {4,5,6} 이면 `binary_op` 에는 `bianry_op(1,4), binary_op(2,5), binary_op(3,6)` 이 실행되는 셈입니다.
+* (3) 어떠한 방식으로 실행 시킬지. 지정할 수 있습니다. `ExecutionPolicy` 참조.
+
+#### 매개변수&#x20;
+
+* `first1, last1` `: transform` 을 적용할 원소들을 가리키는 범위
+* `first2` : 두 번째 인자들의 시작
+* `d_first` : 결과를 저장할 범위. `first1` 이나 `first2` 와 동일해도 된다.
+* `policy` : 어떠한 방식으로 실행 시킬지. `ExecutionPolicy` 참조.
+* `unary_op` : 원소들을 전달할 단항 함수. 해당 함수는 다음과 같이 생겨야 합니다.
+
+```cpp
+Ret unary(const Type &a);
+```
+
+참고로 함수의 인자로 굳이 `const&` 일 필요는 없다. `Type` 는 `InputIt` 의 역참조된 타입과 같거나 `Type` 로 변환될 수 있어야 하며, [Ret](https://modoocode.com/ret) 의 경우 `OutputIt` 의 역참조 된 타입이거나, [Ret](https://modoocode.com/ret) 에 변환되서 대입할 수 있어야 한다.
+
+* `binary_op` : 원소를 두 개 받는 이항 함수로 해당 함수는 아래와 같이 생겼다.&#x20;
+
+```cpp
+Ret binary(const Type1 &a, const Type2 &b);
+```
+
+함수의 인자로 굳이 `const&` 가 아니여도 된다. 위의 경우와 비슷하게 `InputIt1` 과 `InputIt2` 의 역참조 타입이 `Type1` 과 `Type2` 와 각각 같거나 해당으로 변환될 수 있어야만 한다.&#x20;
+
+#### 구현 예시&#x20;
+
+```cpp
+template <class InputIt, class OutputIt, class UnaryOperation>
+OutputIt transform(InputIt first1, InputIt last1, OutputIt d_first,
+                   UnaryOperation unary_op) {
+  while (first1 != last1) {
+    *d_first++ = unary_op(*first1++);
+  }
+  return d_first;
+}
+
+template <class InputIt1, class InputIt2, class OutputIt, class BinaryOperation>
+OutputIt transform(InputIt1 first1, InputIt1 last1, InputIt2 first2,
+                   OutputIt d_first, BinaryOperation binary_op) {
+  while (first1 != last1) {
+    *d_first++ = binary_op(*first1++, *first2++);
+  }
+  return d_first;
+}
+```
+
+#### 실행 예제
+
+```cpp
+// 아래 예제는 문자열을 대문자로 바꾸거나, 해당 아스키 값으로 바꿉니다.
+#include <algorithm>
+#include <cctype>
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+  std::string s("hello");
+  std::transform(
+    s.begin(), s.end(), s.begin(),
+    [](unsigned char c) -> unsigned char { return std::toupper(c); });  // HELLO
+
+  std::vector<std::size_t> ordinals;
+  std::transform(s.begin(), s.end(), std::back_inserter(ordinals),
+                 [](unsigned char c) -> std::size_t { return c; }); // 72 69 76 76 79
+
+  std::cout << s << ':';
+  for (auto ord : ordinals) {
+    std::cout << ' ' << ord;
+  }
+}
+```
