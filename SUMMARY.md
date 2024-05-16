@@ -39,6 +39,7 @@
     * [12. 함수](language/readme/the-c++-programming-lanuaage/12..md)
   * [씹어먹는 C++](language/readme/c++-1/README.md)
     * [16.1 유니폼 초기화(Uniform Initialization)](language/readme/c++-1/16.1-uniform-initialization.md)
+    * [토막글 2. 람다(lambda)](language/readme/c++-1/2.-lambda.md)
 * [Java](language/readme-1/README.md)
   * [Object Class](language/readme-1/object-class/README.md)
     * [Object.toString()](language/readme-1/object-class/object.tostring.md)
