@@ -38,7 +38,7 @@
     * [11. 선택 연산](language/readme/the-c++-programming-lanuaage/11..md)
     * [12. 함수](language/readme/the-c++-programming-lanuaage/12..md)
   * [씹어먹는 C++](language/readme/c++-1/README.md)
-    * [5.1 연산자 오버로딩1(비교, 대입 연산자)](language/readme/c++-1/5.1-1.md)
+    * [5.1 연산자 오버로딩(비교, 대입 연산자)](language/readme/c++-1/5.1.md)
     * [5-2. 연산자 오버로딩(입출력, 타입, 증감 연산자)](language/readme/c++-1/5-2..md)
     * [16.1 유니폼 초기화(Uniform Initialization)](language/readme/c++-1/16.1-uniform-initialization.md)
     * [토막글 2. 람다(lambda)](language/readme/c++-1/2.-lambda.md)
