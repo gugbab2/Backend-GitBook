@@ -42,6 +42,7 @@
     * [5.1 연산자 오버로딩(비교, 대입 연산자)](language/readme/c++-1/5.1.md)
     * [5-2. 연산자 오버로딩(이항, 입출력, 타입변환, 증감 연산자)](language/readme/c++-1/5-2..md)
     * [6-2. 가상(virtual) 함수와 다형성](language/readme/c++-1/6-2.-virtual.md)
+    * [6-3. 가상 함수에 대한 지식들](language/readme/c++-1/6-3..md)
     * [16.1 유니폼 초기화(Uniform Initialization)](language/readme/c++-1/16.1-uniform-initialization.md)
     * [토막글 2. 람다(lambda)](language/readme/c++-1/2.-lambda.md)
 * [Java](language/readme-1/README.md)
