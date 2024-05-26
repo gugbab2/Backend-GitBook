@@ -42,6 +42,7 @@
       * [15. 소스 파일과 프로그램](language/readme/the-c++-programming-lanuaage/2/15..md)
     * [3부 : 추상화 메커니즘](language/readme/the-c++-programming-lanuaage/3/README.md)
       * [16. 클래스](language/readme/the-c++-programming-lanuaage/3/16..md)
+      * [17. 생성, 소멸, 복사와 이동](language/readme/the-c++-programming-lanuaage/3/17..md)
   * [씹어먹는 C++](language/readme/c++-1/README.md)
     * [5.1 연산자 오버로딩(비교, 대입 연산자)](language/readme/c++-1/5.1.md)
     * [5-2. 연산자 오버로딩(이항, 입출력, 타입변환, 증감 연산자)](language/readme/c++-1/5-2..md)
