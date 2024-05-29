@@ -7,20 +7,20 @@
   \-> **다시 사용하지 않더라도 아래와 같은 형태로 사용하기 위해서는 함수를 정의해야만 했다.**\
   **(유지보수 비용이 증가한다)**
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
 <figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 위와 같은 문제를 해결하기 위해서 이름 없는 함수를 만들어 낼 수 있는데, 이를 lamda expression 라 부른다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 람다식이란?
 
 * 이름 없는 함수 개체&#x20;
 * 내포(nested) 되는 함수
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### 캡처 블록&#x20;
 
@@ -183,7 +183,7 @@ int main() {
 * 빈 괄호를 생략할 수 있다. \
   \-> 하지만 가독성 측면에서 명시적으로 생략하지 않는 것이 좋다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### 매개변수 예시&#x20;
 
@@ -232,7 +232,7 @@ int main()
 * mutable
   * 값에 의해 캡처된 개체를 수정할 수 있게 한다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### 지정자 예시
 
@@ -259,7 +259,7 @@ int main()
 * 선택사항이다.&#x20;
 * 반환형을 적지 않으면 반환문을 통해서 추론해준다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### 반환형 예시&#x20;
 
@@ -294,7 +294,7 @@ auto max = [](float a, float b){return a > b ? a : b; };
 * 디버깅하기 힘들어진다..\
   \-> 함수의 이름이 정해져 있지 않기 때문에, call stack 에서 바로 확인이 어렵다..
 
-<figure><img src="../../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
 * **함수 재사용성이 낮다..** \
   **-> 사람들은 보통 함수를 새로 만들기 전에 클래스에 있는 기존 함수를 찾아본다.** \
