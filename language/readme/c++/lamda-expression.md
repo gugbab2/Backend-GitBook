@@ -7,9 +7,9 @@
   \-> **다시 사용하지 않더라도 아래와 같은 형태로 사용하기 위해서는 함수를 정의해야만 했다.**\
   **(유지보수 비용이 증가한다)**
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
-
 <figure><img src="../../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../../.gitbook/assets/image (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 위와 같은 문제를 해결하기 위해서 이름 없는 함수를 만들어 낼 수 있는데, 이를 lamda expression 라 부른다.&#x20;
 

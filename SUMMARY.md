@@ -50,6 +50,8 @@
     * [6-3. 가상 함수에 대한 지식들](language/readme/c++-1/6-3..md)
     * [9-1. 코드를 찍어내는 틀 - C++ 템플릿(template)](language/readme/c++-1/9-1.-c++-template.md)
     * [9-2. 가변 길이 템플릿(Variadic template)](language/readme/c++-1/9-2.-variadic-template.md)
+    * [9-3. 템플릿 메타 프로그래밍 (Template Meta Programming)](language/readme/c++-1/9-3.-template-meta-programming.md)
+    * [9-4. 템플릿 메타 프로그래밍2](language/readme/c++-1/9-4.-2.md)
     * [16.1 유니폼 초기화(Uniform Initialization)](language/readme/c++-1/16.1-uniform-initialization.md)
     * [토막글 2. 람다(lambda)](language/readme/c++-1/2.-lambda.md)
 * [Java](language/readme-1/README.md)
