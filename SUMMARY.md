@@ -45,6 +45,7 @@
       * [17. 생성, 소멸, 복사와 이동](language/readme/the-c++-programming-lanuaage/3/17..md)
       * [18. 연산자 오버로딩](language/readme/the-c++-programming-lanuaage/3/18..md)
       * [19. 특수 연산자](language/readme/the-c++-programming-lanuaage/3/19..md)
+      * [20. 파생클래스](language/readme/the-c++-programming-lanuaage/3/20..md)
   * [씹어먹는 C++](language/readme/c++-1/README.md)
     * [2. C++ 참조자(reference) 의 도입](language/readme/c++-1/2.-c++-reference.md)
     * [5.1 연산자 오버로딩(비교, 대입 연산자)](language/readme/c++-1/5.1.md)
