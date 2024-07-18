@@ -260,7 +260,14 @@
 
 ## DB
 
-* [실무에서 외래키를 사용하지 않는 이유](db/undefined.md)
+* [DB 기본 지식](db/db/README.md)
+  * [인덱스(Index)](db/db/index.md)
+  * [실무에서 외래키를 사용하지 않는 이유](db/db/undefined.md)
+  * [ORM vs SQL Mapper](db/db/orm-vs-sql-mapper.md)
+* [Real MySQL 인프런 강의](db/real-mysql/README.md)
+  * [Part.1](db/real-mysql/part.1/README.md)
+    * [1강. CHAR vs VARCHAR](db/real-mysql/part.1/1-.-char-vs-varchar.md)
+    * [2강. VARCHAR vs TEXT](db/real-mysql/part.1/2-.-varchar-vs-text.md)
 * [JPA](db/jpa/README.md)
   * [SQL 중심적인 개발의 문제점](db/jpa/sql.md)
   * [JPA 란?](db/jpa/jpa.md)
@@ -268,7 +275,6 @@
   * [엔티티 매핑](db/jpa/undefined-1.md)
   * [연관 관계 매핑 part.1](db/jpa/part.1.md)
   * [연관 관계 매핑 part.2](db/jpa/part.2.md)
-* [ORM vs SQL Mapper](db/orm-vs-sql-mapper.md)
 
 ## Server
 
