@@ -89,7 +89,7 @@
   * [JVM 이해하기](language/readme-1/jvm/README.md)
     * [JVM, JRE, JDK](language/readme-1/jvm/jvm-jre-jdk.md)
     * [JVM 구조 이해하기](language/readme-1/jvm/jvm.md)
-    * [클래스 로더](language/readme-1/jvm/undefined.md)
+    * [클래스 로더 시스템](language/readme-1/jvm/undefined.md)
     * [JIT(Just-In-Time) 컴파일러](language/readme-1/jvm/jit-just-in-time.md)
     * [Java Reflection](language/readme-1/jvm/java-reflection.md)
   * [GC(Garbage Collector)](language/readme-1/gc-garbage-collector/README.md)
