@@ -62,35 +62,17 @@
 
 <figure><img src="../../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
 
-## 3. Old 영역에 대한 GC
-
-* 시간이 아주 많이 지나서, 언젠가 Old Generation 도 다 채워지는 날이 올때, major gc 가 발생하면서 Mark And Sweep 방식을 통해서 필요 없는 메모리를 비우는데, minor gc 에 비해서 시간이 오래 걸린다.
-* 또한, GC 가 실행될 때마다 stop-the-world 현상이 발생하는데, 이때 minor gc 보다 major gc 가 stop-the-world 현상이 더 길다.
-
-## 4. GC 에서 사용하는 알고리즘
-
-### 4.1 Reference Counting(자바에서 사용되지 않는다...)
-
-<figure><img src="../../../.gitbook/assets/image (58).png" alt="" width="375"><figcaption></figcaption></figure>
-
-* **Root Space** 는 Heap 영역 참조를 가리키고 있는 공간이다.\
-  **-> Stack 의 로컬변수**\
-  **-> Method Area 의 static 변수**\
-  **-> Native Method Stack 의 JNI 참조**
-* Reference Counting 은 힙 영역의 객체들이 각각 reference count 라는 숫자를 가지고 있다고 생각하면 좋은데, **여기서 reference count 는 몇가지 방법으로 해당 객체에 접근할 수 있는지를 의미한다.**
-* 만약 reference count 가 0 에 다다르면 해당 객체에 접근할 수 있는 방법이 없다는 뜻이므로 메모리 해제의 대상이 되는 것이다.
-* 하지만 Reference Counting 은 순환 참조 문제가 발생할 수 있다.\
-  \-> Root Space 가 모든 Heap Space 의 참조를 끊는다면, 순환 참조가 발생하게 되고, 결국 사용하지 않는 메모리 영역이 해제되지 못하고 메모리 누수가 발생하게 된다.
-
-### 4.2 Mark And Sweep(자바에서 기본적으로 사용되는 방식)
-
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 21.28.48.png" alt="" width="563"><figcaption></figcaption></figure>
-
-* Mark And Sweep 알고리즘은 Root Space 부터 해당 객체에 접근이 가능한지, 아닌지를 메모리 해제의 기준으로 삼는다.
-* **Root Space 부터 그래프 순회를 통해서 연결된 객체를 찾아내고(Mark) 연결이 끊어진 객체는 지운다(Sweep).**
-* 그림에 분산되어 있던 메모리가 이쁘게 정리된 것을 볼 수 있는데, **이 것은 메모리 파편화를 방지하는 Compaction 방식이다.**\
-  \-> **Mark And Sweep 알고리즘에서 Compaction 이 필수는 아니다.**
-* Mark And Sweep 방식을 사용하면, Root Space 부터 연결이 끊긴 순환 참조되는 객체들도 지울 수 있다.
-* 하지만, **reference count 가 0이 되면 지워버리는 Reference Counting 방식과 달리, Mark And Sweep 방식은 의도적으로 특정 순간에 GC 를 실행해야 한다.**\
-  **-> 즉 어느 순간에, 실행 중인 애플리케이션이 GC 에게 컴퓨터 리소스를 내어 주어야 한다는 것이다.**\
-  **-> \_애플리케이션과 GC 실행이 병행된다.**\_
+> ### HotSpot VM 에서 빠른 메모리 할당을 위해서 사용하는 두가지 기술&#x20;
+>
+> #### 1. bump-the-pointer
+>
+> * Eden 영역에 할당된 마지막 개체를 추적한다. 마지막 객체는 Eden 영역의 맨 위에 있다. 그리고 다음에 생성되는 개체가 있으면, 해당 개체의 크기가 Eden 영역에 넣기 적당하지만 확인한다.&#x20;
+> * 만약 해당 객체의 크기가 적당하다고 판정되면 Eden 영역에 넣게되고, 새로 생성된 객체가 맨 위에 있게된다.&#x20;
+> * 따라서 새로운 객체를 생성할 때 마지막에 추가된 객체만 점검하면 되므로 매우 빠르게 메모리 할당이 이루어진다.&#x20;
+>
+> #### 2. TLABs
+>
+> * bump-the-pointer 는 멀티 스레드 환경에서는 문제가 발생한다.&#x20;
+> * Thread-Safe 하기 위해서 만약 여러 스레드에서 사용하는 객체를 Eden 영역에 저장하려면 Lock 이 발생할 수 밖에 없고, lock-contention 때문에 성능은 매우 떨어지게 될 것이다.&#x20;
+> * HotSpot VM 에서 이를 해결한 것이 TLABs 이다.&#x20;
+> * 각각의 스레드가 각각의 몫에 해당하는 Eden 영역의 작은 덩어리를 가질 수 있도록 하는 것이다. 각 쓰레드에서 자기가 갖고 있는 TLAB 에만 접근할 수 있기 때문에, bump-the-pointer 라는 기술을 사용하더라도 아무런 Lock 없이 메모리 할당이 가능하다.

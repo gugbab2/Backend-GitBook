@@ -1,57 +1,66 @@
 # GC Part.2
 
-## 5. GC 의 실행방식&#x20;
+## 3. Old 영역에 대한 GC
 
-* Mark And Sweep 방식의 두 번째 특징은 애플리케이션과 GC 실행이 병행된다는 것이다. \
-  \-> 즉 JVM 에서 애플리케이션과 GC 를 병행하여 실행할 수 있는 여러 옵션을 제공한다.
+* Old 영역은 기본적으로 데이터가 가득 차면 GC 를 실행한다. GC 방식에 따라서 처리 절차가 달라지므로 어떤 GC 방식이 있는지 살펴보자.&#x20;
+* GC 방식은 JDK 7을 기준으로 5가지 방식이 있다.&#x20;
+  * Serial GC
+  * Parallel GC
+  * Parallel Old GC(Parallel Compaction GC)
+  * Concurrent Mark & Sweep GC(이하 CMS)
+  * G1(Garbage First) GC
+* 위 GC 방식 중 운영 서버에서 절대 사용하면 안되는 방식이 Serial GC 방식이다. Serial GC 는 데스크톱의 CPU 코어가 하나만 있을 때 사용하기 위해서 만든 방식이다. (Serial GC 를 사용하면 애플리케이션 성능이 많이 떨어진다)
 
-### 5-1. Serial GC&#x20;
+### 3-1. Serial GC
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.20.18.png" alt="" width="375"><figcaption></figcaption></figure>
 
-* Serial GC 는 하나의 스레드로 GC 를 실행하는 방식인데, 하나의 스레드로 GC 를 실행하다 보니 stop-the-world 시간이 긴 것을 알 수 있다.&#x20;
-* 싱글 스레드 환경 및 Heap 영역이 매우 작을 때 사용되는 방식이다.&#x20;
-* 참고로 Mark And Sweep 이후 메모리 파편화를 막는 Compaction 과정도 진행된다.&#x20;
+* Young 영역에서의 GC 는 앞 절에서 설명한 방식을 사용한다. Old 영역의 GC 는 mark-sweep-compact 라는 알고리즘을 사용한다.&#x20;
+  1. mark단계에서는 old영역에서 살아있는 객체를 확인한다.
+  2. sweep단계에서는 heap영역의 **앞부분부터 확인하여** 표시되지 않은객체를 제거한다.
+  3. compact단계에서는 메모리 단편화를 방지하기위해 힙의 앞부분부터 객체를 채워 넣는다.&#x20;
+* Serial GC 는 적은 메모리와 CPU 코어 개수가 적을 떄 적합한 방식이다.&#x20;
 
-### 5-2. Paralled GC
+### 3-2. Parallel GC
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.22.29.png" alt="" width="375"><figcaption></figcaption></figure>
 
-* Paralled GC 의 기본적인 처리과정은 Serial GC 와 동일하지만, 여러개의 스레드로 GC 를 실행하기 때문에, Serial GC 보다 stop-the-world 시간이 짧아진 것을 알 수 있다.&#x20;
-* 멀티 코어 환경에서 애플리케이션 속도를 향상시키기 위해서 사용되며, Java8에서 기본적으로 쓰이는 방식이다.
-* 일반적인 Paralled GC 는 minor gc 에 대해서만 멀티스레딩을 사용하고 , major gc 는 싱글 스레딩으로 수행한다.&#x20;
+* Parallel GC 는 Serial GC 와 기본적인 알고리즘은 같다.&#x20;
+* 하지만, Serial GC 는 GC 를 처리하는 스레드가 하나인 것에 비해, Parallel GC 는 GC 를 처리하는 스레드가 여러개이다. 때문에, Serial GC 보다 빠르게 객체를 처리할 수 있다.&#x20;
+* Parallel GC 는 메모리가 충분하고 코어의 개수가 많을 때 유리하다.&#x20;
 
-### 5-3. Paralled Old GC
+### 3-3. Paralled Old GC
 
-* Paralled GC 가 GC 오버헤드를 상당히 줄여주었지만, stop-the-world 는 피할 수 없다.&#x20;
-* 때문에, 더욱 발전된 방식이 Paralled Old GC 방식이다. \
-  \-> major gc 도 멀티 스레딩으로 수행하고,\
-  \-> 기존 Mark Sweep Compation 의 개선 버전인 Mark Summary Compaction 을 사용한다.&#x20;
-* 사실상 Java 7 Update 4 버전부터는 Paralled GC 를 설정해도, Paralled Old GC 가 동작한다. \
-  \-> 엄밀히 말하면 Java 8 의 디폴트 버전은 Paralled Old GC 인 셈이다.&#x20;
+* Paralled Old GC 는 JDK 5 update 6 부터 제공한 GC 방식이다.&#x20;
+* 앞서 설명한 Parallel GC 와 비교해서 Old 영역의 GC 알고리즘(Mark-Summary-Compaction)만 다르다.&#x20;
+* mark-sweep-compact 방식이 단일 스레드가 Old 영역을 검사하는 방식이라면, mark-summary-compact 방식은 여러 스레드를 사용해서 Old 영역을 탐색한다.&#x20;
+  1. mark단계에서는 old영역을 region별로 나누고 region별로 살아있는 객체를 식별한다.
+  2. sweep단계에서는 **ragion 을 확인하여** 표시되지 않은 객체를 제거한다.
+  3. compact단계에서는 메모리 단편화를 방지하기위해 힙의 앞부분부터 객체를 채워 넣는다.&#x20;
 
-## 6. G1GC
+### 3-4.  Concurrent Mark & Sweep GC(이하 CMS)
 
-### 6-1. G1GC 란?
+<figure><img src="../../../.gitbook/assets/image (123).png" alt=""><figcaption><p>Serial GC, CMS GC 비교</p></figcaption></figure>
 
-* 대규모 힙 영역을 효율적으로 관리하기 위해서 설계되었다.&#x20;
-* 힙을 영역으로 구분했다.
-  * 전체 힙을 논리적인 작은 크기의 영역으로 분할한다.&#x20;
-  * 각 영역은 young, old, Humongous(큰 객체나, 배열을 관리하는 영역) 영역으로 구분된다.&#x20;
-* **영역 기반 수집**
-  * &#x20;G1GC는 전체 힙을 작은 영역으로 분할합니다. 이렇게 분할된 영역들 중에서 **가장 가비지가 많은 영역부터 수집을 진행합니다.**&#x20;
-  * **이 방식을 통해서 힙 전체에 일어나는 GC 를 분산시켜 stop the world 를 최소화했다.**&#x20;
-* **병렬 처리**
-  * &#x20;G1GC는 다중 스레드를 사용하여 가비지 컬렉션 작업을 병렬로 처리합니다. 이를 통해 가비지 컬렉션 작업을 빠르게 수행하고 일시 중지 시간을 최소화합니다.
-* **Mixed GC**
-  * &#x20;G1GC에서는 Mixed GC라고 불리는 통합된 가비지 컬렉션을 수행합니다. Mixed GC는 Young 영역과 Old 영역을 동시에 수집하는 방식으로, 전체 힙을 한 번에 처리하므로 일시 중지 시간을 최소화할 수 있습니다.
-* **일시 중지 시간 조절**
-  * &#x20;G1GC는 일시 중지 시간을 조절하기 위해 목표 일시 중지 시간을 설정할 수 있습니다. G1GC는 설정된 목표 일시 중지 시간을 지키면서 가비지 컬렉션을 수행하며, 일시 중지 시간이 넘어가지 않도록 작업을 조절합니다.
-* **자바 9 버전부터 기본 GC 방식으로 채택되었다.**&#x20;
+* 실행 순서는 다음과 같다.&#x20;
+  1. 초기 Initial Mark 단계에서 클래스 로더에서 가장 가까운 객체 중 살아 있는 객체만을 찾는 것으로 끝낸다. (따라서 stop the world 시간이 매우 짧다)&#x20;
+  2. 그리고, Concurrent Mark 단계에서 방금 살아있다고 확인한 객체에서 참조하고 있는 객체들을 따라가면서 확인한다.&#x20;
+  3. 그 다음 Remark 단계에서는 Concurrent Mark 단계에서 새로 추가 되거나, 참조가 끊긴 객체를 확인한다. (stop the world 시간이 매우 짧다)
+  4. 마지막으로 Concurrent Sweep 단계에서 garbage 를 정리하는 작업을 실행한다.&#x20;
+* CMS GC 는 stop-the-world 시간이 매우 짧다. 때문에 모든 애플리케이션의 응답 속도가 매우 중요할 때 사용하며, Low Latency GC 라고 부른다.&#x20;
+* 하지만, CMS GC 는 stop-the-world 시간이 짧다는 장점에 반해 다음과 같은 단점이 존재한다.&#x20;
+  * 다른 GC 보다 메모리와 CPU 를 더 많이 사용한다.&#x20;
+  * Compaction 단계가 기본적으로 제공되지 않는다.&#x20;
+* 따라서, CMS GC 를 사용할 때는 신중히 검토후 사용해야 한다.&#x20;
+* 만약 조각난 메모리가 많아, Compaction 작업을 실행하면 다른 GC  방식의 stop-the-world 시간보다 stop-the-world 시간이 더 길기 때문에 Compaction 작업이 얼마나 자주, 오랫동안 수행되는지 확인해야 한다.&#x20;
 
-### 6-2. G1GC Heap 구조
+### 3-5. G1 GC
 
-<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-08 23.41.26.png" alt="" width="286"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (124).png" alt="" width="360"><figcaption></figcaption></figure>
 
-* G1GC 는 기존 힙 구조와 다르게, Young/Old 영역을 명확하게 구분하지 않는다.
-* G1GC 는 개념적으로 그들이 존재하나, 일정 크기의 논리적 단위인 region 으로 구분한다.&#x20;
+* G1 GC 를 이해하기 위해서는 지금까지의 Young 영역과 Old 영역에 대해서는 잊는 것이 좋다.&#x20;
+* 다음 그림에서 보다시피, G1 GC 는 바둑판의 각 영역에 객체를 할당하고 GC 를 실행한다. 그러다가 해당 영역이 꽉 차면 다른 영역에 객체를 할당하고 GC 를 실행한다.&#x20;
+* 즉, 지금까지 설명한 Young 의 세가지 영역에서 데이터가 Old 영역으로 이동하는 단계가 사라진 GC 방식이라고 이해하면 된다.&#x20;
+* G1 GC 는 장기적으로 말도 많고, 탈도 많은 CMS GC 를 대체하기 위해서 만들어졌다.&#x20;
+* G1 GC 의 가장큰 장점은 성능이다. 지금까지 설명한 어떤 GC 방식보다 빠르다!&#x20;
+* JDK 9 부터 기본 GC 로 사용하고 있다.&#x20;
