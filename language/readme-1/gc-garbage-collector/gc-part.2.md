@@ -43,15 +43,15 @@
 <figure><img src="../../../.gitbook/assets/image (123).png" alt=""><figcaption><p>Serial GC, CMS GC 비교</p></figcaption></figure>
 
 * 실행 순서는 다음과 같다.&#x20;
-  1. 초기 Initial Mark 단계에서 클래스 로더에서 가장 가까운 객체 중 살아 있는 객체만을 찾는 것으로 끝낸다. (따라서 stop the world 시간이 매우 짧다)&#x20;
-  2. 그리고, Concurrent Mark 단계에서 방금 살아있다고 확인한 객체에서 참조하고 있는 객체들을 따라가면서 확인한다.&#x20;
-  3. 그 다음 Remark 단계에서는 Concurrent Mark 단계에서 새로 추가 되거나, 참조가 끊긴 객체를 확인한다. (stop the world 시간이 매우 짧다)
-  4. 마지막으로 Concurrent Sweep 단계에서 garbage 를 정리하는 작업을 실행한다.&#x20;
+  1. Initial Mark(stop-the-world) : 이 단계에서는 Old 영역에 있는 모든 객체 중 GC 루트와 직접 연결된 객체를 마킹한다. (살아있는 객체)
+  2. Concurrent Mark : 애플리케이션 스레드와 병행하여 Initial Mark 단계에서 마킹된 객체들을 참조하는 객체들을 따라가면서 마킹한다.&#x20;
+  3. Remark( stop-the-world) : 이전 단계에서 놓친 살아있는 객체들을 확인해 마킹한다.&#x20;
+  4. Concurrent Sweep : 이전 과정을 통해 마킹되지 않은 객체들의 메모리를 해제한다.
+  5. Concurrnet Reset : 다음 GC 사이클을 준비하기 위해서 내부 데이터 구조를 초기화한다.&#x20;
 * CMS GC 는 stop-the-world 시간이 매우 짧다. 때문에 모든 애플리케이션의 응답 속도가 매우 중요할 때 사용하며, Low Latency GC 라고 부른다.&#x20;
 * 하지만, CMS GC 는 stop-the-world 시간이 짧다는 장점에 반해 다음과 같은 단점이 존재한다.&#x20;
   * 다른 GC 보다 메모리와 CPU 를 더 많이 사용한다.&#x20;
   * Compaction 단계가 기본적으로 제공되지 않는다.&#x20;
-* 따라서, CMS GC 를 사용할 때는 신중히 검토후 사용해야 한다.&#x20;
 * 만약 조각난 메모리가 많아, Compaction 작업을 실행하면 다른 GC  방식의 stop-the-world 시간보다 stop-the-world 시간이 더 길기 때문에 Compaction 작업이 얼마나 자주, 오랫동안 수행되는지 확인해야 한다.&#x20;
 
 ### 3-5. G1 GC
