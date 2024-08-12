@@ -87,7 +87,7 @@ void sum(Collection<Integer> c) {
 ```
 
 * 하지만 제네릭은 불공변이기 때문에, 또 다른 문제가 발생하는데, 아래 `printCollection` 처럼 모든 타입에 공통적으로 사용되는 메서드를 만들 수 없다는 것이다.&#x20;
-* **매개변수 타입을 Integer 에서 Object 로 변경하여도, 제네릭은 불공변이기 때문에, Collection\<Integer> 는 Collection\<Object> 의 하위 타입이 아니다. 이로 인해 컴파일 에러가 발생한다.**&#x20;
+* **매개변수 타입을 Integer 에서 Object 로 변경하여도, 제네릭은 불공변이기 때문에, Collection\<Integer> 는 Collection\<Object> 의 하위 타입이 아니다. 이로 인해 컴파일 에러가 발생한다.**&#x20;
 * 이러한 상황은 제네릭이 추가되기 전 보다 오히려, 실용성이 떨어졌기 때문에, 와일드카드라는 타입이 추가되었다.&#x20;
 
 ```java
