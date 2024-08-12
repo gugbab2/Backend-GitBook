@@ -74,7 +74,7 @@
   * [Generic](language/readme-1/generic/README.md)
     * [제네릭 기본](language/readme-1/generic/undefined.md)
     * [와일드카드](language/readme-1/generic/undefined-1.md)
-    * [와일드카드 GET / SET 경계](language/readme-1/generic/get-set.md)
+    * [와일드카드 GET / SET 경계](language/readme-1/generic/get-set.md)
     * [와일드카드 extends / super 사용시기](language/readme-1/generic/extends-super.md)
     * [혼동할 수 있는 와일드카드 표현](language/readme-1/generic/undefined-2.md)
   * [Collection](language/readme-1/collection/README.md)
