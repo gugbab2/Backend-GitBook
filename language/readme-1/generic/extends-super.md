@@ -3,8 +3,8 @@
 ## PECS 공식&#x20;
 
 * PESC 란, Producer-Extends / Consumer-Super 라는 단어의 약자인데 다음을 의미한다.&#x20;
-  * **외부에서 온 데이터를 생산(Producer) 한다면 \<? extends T> 를 사용 (하위타입으로 제한)**&#x20;
-  * **외부에서 온 데이터를 소비(Consumer) 한다면 \<? super T> 를 사용(상위타입으로 제한)**&#x20;
+  * **외부에서 온 데이터를 기반으로 생산(Producer) 한다면 \<? extends T> 를 사용 (하위타입으로 제한)**&#x20;
+  * **내부 데이터를 소비(Consumer) 해 외부 자원에 적재한다면 \<? super T> 를 사용(상위타입으로 제한)**&#x20;
 
 ```java
 class MyArrayList<T> {

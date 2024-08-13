@@ -93,7 +93,7 @@ parent = child;    // 공변성! (제네릭 타입 업캐스팅)
 
 ### 하한 경계 와일드카드(반공변)&#x20;
 
-* 아래 코드에서 `MyArrayList` 의 `clone` 메서드를 설계한 개발자의 의도는 `MyArrayList` 의 제네릭 타입 파라미터가 무엇이든 인자로 받은 컬렉션 매개변수에 요소들을 집어넣고 싶은 것이다.&#x20;
+* &#x20;파라미터가 무엇이든 인자로 받은 컬렉션 매개변수에 요소들을 집어넣고 싶은 것이다.&#x20;
 * 이를 위해 제네릭에 하한 경계 와일드카드를 적용시킨다.&#x20;
 * **하한 경계로 지정한 타입이 저장할 수 있는 최저 한도라는 의미이다.**&#x20;
 * 그러면 반공변 설징일 적용되어 컴파일 에러 없이 정상적으로 MyArrayList 의 요소가 들어가 소비되었음을 확인할 수 있다.&#x20;
@@ -128,7 +128,7 @@ public static void main(String[] args) {
 
     // LinkedList 에 MyArrayList 요소들 복사하기
     List&#x3C;Object> temp = new LinkedList&#x3C;>();
-    temp = list.clone(temp);
+    list.clone(temp);
 
 <strong>    // LinkedList 출력
 </strong>    System.out.println(temp); // [1, 2, 3, 4, 5]

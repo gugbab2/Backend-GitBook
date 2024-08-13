@@ -1,4 +1,4 @@
-# 와일드카드 GET / SET 경계
+# 와일드카드 GET / SET 경계
 
 ## List\<? extends U>&#x20;
 
@@ -77,8 +77,8 @@ class FruitBox {
 
         Food f2 = (Food) item.get(0); // ! 잠재적 ERROR
         Fruit f3 = (Fruit) item.get(0); // ! 잠재적 ERROR
-        Apple f4 = (Apple) item.get(0); // ! 잠재적 ERROR
-        Banana f5 = (Banana) item.get(0); // ! 잠재적 ERROR
+        Apple f4 = (Apple) item.get(0); // ! ERROR
+        Banana f5 = (Banana) item.get(0); // ! ERROR
     }
 }
 
@@ -115,7 +115,9 @@ class FruitBox {
 #### 결론
 
 * **GET : 안전하게 꺼내려면 Object 타입으로만 받아야 한다. -> super 의 특징**
+  * 비제한 와일드카드는 어떤 타입이 들어올지 모르기 때문에, 최상위 타입인 Object 로 받아야 한다.&#x20;
 * **SET : 어떠한 타입의 자료도 넣을 수 없음(null 만 삽입 가능) -> extends 의 특징**&#x20;
+  * 넣어야 하는 타입이 정해지지 않았는데? 값을 넣을수가 있나?
 * **꺼낸 타입은 Object / 저장은 NO**
 
 #### 이유
