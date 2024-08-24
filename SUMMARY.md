@@ -143,6 +143,10 @@
         * [다형성의 활용 - 인터페이스](language/readme-1/java/pilymorphism/undefined-1/undefined-2.md)
       * [다형성과 설계](language/readme-1/java/pilymorphism/undefined-2/README.md)
         * [좋은 객체 지향 프로그래밍](language/readme-1/java/pilymorphism/undefined-2/undefined.md)
+  * [자료구조](language/readme-1/undefined/README.md)
+    * [Array vs List](language/readme-1/undefined/array-vs-list.md)
+    * [HashSet vs TreeSet](language/readme-1/undefined/hashset-vs-treeset.md)
+    * [HashMap vs TreeMap](language/readme-1/undefined/hashmap-vs-treemap.md)
 
 ## CS
 
