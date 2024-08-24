@@ -1,10 +1,10 @@
 # Collection 기본
 
-<figure><img src="../../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2024-08-15 13.15.52.png" alt=""><figcaption></figcaption></figure>
 
 ## Collection 클래스
 
-\-> **Collection 을 상속하는 객체들은 for(String temp : list1) 형식의 for 문을 사용 가능하다.**
+\-> **Collection 을 상속하는 객체들은 for(String temp : list) 형식의 for 문을 사용 가능하다.**
 
 ```java
 public interface Collection<E> extends Iterable<E>
@@ -14,7 +14,6 @@ public interface Collection<E> extends Iterable<E>
   * hasNext() : 추가 데이터가 있는지 확인한다.
   * next() : 현재 위치를 다음 요소로 넘기고 그 값을 리턴해준다.
 * **Collection 인터페이스가 Iterable 인터페이스를 확장했다는 의미는, Iterator 인터페이스를 사용해 데이터를 순차적으로 가져올 수 있다는 의미가 된다.**\
-  **-> 다르게 생각하면 Collection 인터페이스는 Iterator 가 없으면 값을 가져올 수 없다는 것을 의미한다.**\
   **-> Iterator 인터페이스는 배열과 다르게 순서가 존재하지 않는다.**
 
 ### Collection 인터페이스에 선언된 주요 메서드 목록
