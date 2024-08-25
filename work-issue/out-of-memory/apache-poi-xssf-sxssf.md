@@ -1,2 +1,0 @@
-# Apache POI-XSSF/SXSSF
-
