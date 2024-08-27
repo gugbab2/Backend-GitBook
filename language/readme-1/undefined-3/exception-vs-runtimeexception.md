@@ -1,6 +1,6 @@
 # Exception vs RuntimeException
 
-<figure><img src="../../../../../.gitbook/assets/스크린샷 2023-06-25 13.46.38.png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/스크린샷 2023-06-25 13.46.38.png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## 1. Error
 
