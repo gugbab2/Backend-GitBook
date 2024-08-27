@@ -301,3 +301,8 @@
       * [4강. 페이징 쿼리 작성](db/real-mysql/part.1/4-..md)
       * [5강. Stored Function](db/real-mysql/part.1/5-.-stored-function.md)
 * [책](db/undefined-1.md)
+
+## INSIGHT
+
+* [단위 테스트 vs 통합 테스트](insight/vs.md)
+* [성능 테스트](insight/undefined.md)
