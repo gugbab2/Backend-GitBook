@@ -1,6 +1,6 @@
 # 예외처리
 
-<figure><img src="../../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
 
 ## 기본적인 예외처리 정리
 
