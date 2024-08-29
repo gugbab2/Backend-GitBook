@@ -1,0 +1,62 @@
+# 예외
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-08-29 12.02.01.png" alt="" width="563"><figcaption></figcaption></figure>
+
+## 예외의 종류는 세 가지다.&#x20;
+
+* 예외의 종류는 3가지가 존재하는데, 그 종류는 다음과 같다. \
+  \-> error, runtime exception 을 제외한 모두는 checked exception 에 해당한다.&#x20;
+  * **checked exception**&#x20;
+  * **error**
+  * **runtime exception or unchecked exception**&#x20;
+
+### error&#x20;
+
+* **에러는 자바 프로그램 밖에서 발생한 예외를 말한다.** \
+  \-> 가장 흔한 예가, 서버의 디스크가 고장 났다든지, 메인 보드가 고장나서 프로그램이 잘 동작하지 못하는 경우가 해당된다.&#x20;
+* 뭔자 자바 프로그램에 오류가 발생했을 때, 오류의 이름이 Error 로 끝나면 에러이고, Exception 으로 끝나면 예외이다.&#x20;
+* **Error, Exception 으로 끝나는 오류의 가장 큰 차이는 프로그램 안에서 발생했는지, 밖에서 발생했는지 여부이다.**&#x20;
+  * 하지만 더 큰 차이는 프로그램이 멈추어 버리냐, 계속 실행할 수 있느냐의 차이다.&#x20;
+  * 더 정확하게 말하면 **Error 는 프로세스에 영향을 주고, Exception 은 쓰레드에 영향을 준다.**&#x20;
+
+### runtime exception (unchecked exception)&#x20;
+
+* 런타임 예외는 예외가 발생할 것을 미리 감지하지 못했을 때 발생한다.&#x20;
+* 이러한 예외들은 컴파일 시 체크를 하지 않기 때문에 unchecked exception 이라고 부르는 것이다.&#x20;
+  * **`Exception` 을 바로 확장한 클래스들이 checked exception 이라고 부르고**
+  * **`RuntimeException` 을 확장한 클래스들이 unchecked exception 이다.**&#x20;
+
+### checked exception&#x20;
+
+* error, runtime exception 을 제외한 모든 예외는 checked exception 이다.&#x20;
+* 컴파일 타임에 체크해주는 예외이다.&#x20;
+
+## 모든 예외의 할아버지! java.lang.Throwable
+
+* `Error`, `Exception` 클래스 모두 `Throwable` 클래스를 상속받아 처리하도록 되어 있다.&#x20;
+* 상속 관계가 이렇게 되어있는 이유는 `Error`, `Exception` 의 성격은 다르지만 모두 동일한 이름의 메소드를 사용하여 처리할 수 있도록 하기 위함이다.&#x20;
+* 가장 유용하세 사용할 수 있는 메서드 3가지&#x20;
+  * `getMessage()` : 가장 간단한 메시지&#x20;
+  * `toString()` : 약간 더 자세한 메시지&#x20;
+  * `printStackTrace()` : 메시지와 함께 스택 트레이스 출력\
+    \-> 로그의 양이 많아질 수 있기 때문에, 개발시에만 사용하자.
+* 더 자세한 내용은 링크([https://docs.oracle.com/javame/8.0/api/cldc/api/index.html?java/lang/Throwable.html](https://docs.oracle.com/javame/8.0/api/cldc/api/index.html?java/lang/Throwable.html))
+
+## 직접 만드는 예외&#x20;
+
+```java
+public class MyException extends Exception {
+    public MyException () {
+        super(); 
+    }
+    public MyException(String message) {
+        super(message); 
+    }
+}
+```
+
+* `Throwable` 을 직접 상속 받는 클래스는 `Exception`, Error 가 있다.&#x20;
+  * Error 와 관련된 클래스는 개발자가 손댈 필요도 없고 손대어서도 안된다.&#x20;
+  * **하지만, `Exception` 을 처리하는 예외 클래스는 개발자가 임의로 추가해서 만들 수 있다.** \
+    **-> 단 한가지 조건이 있는데, Throwable 이나 그 자식 클래스를 상속받아야 한다는 것이다.**&#x20;
+* 예외 클래스가 되기 위한 조건은 위 코드와 같이 상당히 간단하다. 예외 관련 클래스를 확장하면 된다.&#x20;
