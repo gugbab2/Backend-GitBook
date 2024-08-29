@@ -40,7 +40,8 @@
   * `toString()` : 약간 더 자세한 메시지&#x20;
   * `printStackTrace()` : 메시지와 함께 스택 트레이스 출력\
     \-> 로그의 양이 많아질 수 있기 때문에, 개발시에만 사용하자.
-* 더 자세한 내용은 링크([https://docs.oracle.com/javame/8.0/api/cldc/api/index.html?java/lang/Throwable.html](https://docs.oracle.com/javame/8.0/api/cldc/api/index.html?java/lang/Throwable.html))
+* 더 자세한 내용은 링크\
+  \-> [https://docs.oracle.com/javame/8.0/api/cldc/api/index.html?java/lang/Throwable.html](https://docs.oracle.com/javame/8.0/api/cldc/api/index.html?java/lang/Throwable.html)
 
 ## 직접 만드는 예외&#x20;
 
@@ -55,8 +56,8 @@ public class MyException extends Exception {
 }
 ```
 
-* `Throwable` 을 직접 상속 받는 클래스는 `Exception`, Error 가 있다.&#x20;
-  * Error 와 관련된 클래스는 개발자가 손댈 필요도 없고 손대어서도 안된다.&#x20;
+* `Throwable` 을 직접 상속 받는 클래스는 `Exception`, `Error` 가 있다.&#x20;
+  * `Error` 와 관련된 클래스는 개발자가 손댈 필요도 없고 손대어서도 안된다.&#x20;
   * **하지만, `Exception` 을 처리하는 예외 클래스는 개발자가 임의로 추가해서 만들 수 있다.** \
-    **-> 단 한가지 조건이 있는데, Throwable 이나 그 자식 클래스를 상속받아야 한다는 것이다.**&#x20;
+    **-> 단 한가지 조건이 있는데, `Throwable` 이나 그 자식 클래스를 상속받아야 한다는 것이다.**&#x20;
 * 예외 클래스가 되기 위한 조건은 위 코드와 같이 상당히 간단하다. 예외 관련 클래스를 확장하면 된다.&#x20;

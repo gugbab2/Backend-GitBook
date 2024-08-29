@@ -77,4 +77,3 @@ private static void printByBytes(byte[] bytes) {
 }
 ```
 
-##
