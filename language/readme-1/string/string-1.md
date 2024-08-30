@@ -11,11 +11,13 @@
 ### 문자열이 같은지 비교
 
 * **boolean .equals(Object obj)** : 매개변수와 문자열이 같은지 확인
-  * 자바에서 객체는 == 가 아닌 equals 메서드를 통해서 비교할 수 있다.
-  * 하지만 String 에서는 == 으로도 비교가 가능하다.\
-    \-> 이유는, Constant Pool 이라는 것이 자바에는 존재하기 때문이다.**(String literal 만 해당된다!)**\
-    \-> **자바에서는 객체들을 재사용하기 위해서 Constant Pool 이 존재하고, String 의 경우 동일한 값을 갖는 객체가 있으면, 이미 만든 객체를 재사용한다.**\
-    **-> text, text2 는 같은 값을 같는 객체이다.**
+  * 자바에서 참조자료형은 `==` 가 아닌 `equals()` 메서드를 통해서 비교할 수 있다.
+  * 하지만 `String` 에서는 `==` 으로도 비교가 가능하다.
+    * 이유는, **Constant Pool** 이라는 것이 자바에는 존재하기 때문이다.**(String literal 만 해당된다!)**
+    * **자바에서는 객체들을 재사용하기 위해서 Constant Pool 이 존재하고, String 의 경우 동일한 값을 갖는 객체가 있으면, 이미 만든 객체를 재사용한다.**\
+      **-> 같은 레퍼런스를 사용한다.** \
+      **-> `new String("Hello, World");` 의 형태로 문자열을 생성하는 것은 Contant pool 을 사용하지 않기 때문에, 메모리 낭비가 생겨날 수 있다 ..**&#x20;
+    * **`text`, `text2` 는 같은 레퍼런스와 값을 갖는 객체이다.**
 
 ```java
 public void checkCompare(){
@@ -37,7 +39,7 @@ public void checkCompare(){
 }
 ```
 
-* **int .compareTo(String str)** : 보통 정렬을 할 때 사용하는 메서드로, 매개변수로 넘겨준 String 객체가 알파벳 순으로 앞에 있으면 양수를, 뒤에 있으면 음수를 리턴한다.
+* **int .compareTo(String str)** : 보통 정렬을 할 때 사용하는 메서드로, 매개변수로 넘겨준 String 객체보다 알파벳 순으로 앞에 있으면 음수를, 뒤에 있으면 양수를 리턴한다.
 
 ```java
 public void checkCompareTo(){

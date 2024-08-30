@@ -138,3 +138,21 @@ public class PassByReferenceExample {
 }
 
 ```
+
+## 객체의 널 체크는 반드시 필요하다!
+
+* 객체가 `null` 이라는 것은 객체가 아무런 초기화가 되어 있지 않고, 클래스에 선언되어 있는 어떤 메소드도 사용할 수 없다는 것을 의미한다.\
+  \-> 다시 말해서, 널 체크를 하지 않으면 객체에 사용할 수 있는 메소드들은 모두 예외를 발생시킨다.&#x20;
+* 아래 코드와 같이 `null` 을 체크 하는 검증 로직을 넣어주어야 `NullPointerException` 이 발생하지 않는다.
+* **널 체크는 결코 가벼운 사항이 아니다.. 장애로 이어질 수 있기 때문이다.**&#x20;
+
+```java
+public boolean nullCheck(String text) {
+    if(text == null){
+        return true; 
+    } else {
+        // ...
+        return false; 
+    }
+}
+```

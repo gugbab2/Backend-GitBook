@@ -105,7 +105,7 @@
         * [String 구조](language/readme-1/string/string.md)
         * [String 문자열을 byte 로 변환하기](language/readme-1/string/string-byte.md)
         * [String 클래스에서 자주 사용되는 메서드](language/readme-1/string/string-1.md)
-        * [String 클래스로 살펴보는 불변객체](language/readme-1/string/string-2.md)
+        * [String 클래스로 살펴보는 불변(Immutable)객체](language/readme-1/string/string-2.md)
         * [StringBuilder, StringBuffer](language/readme-1/string/immutable-string-stringbuilder-stringbuffer.md)
       * [java.lang](language/readme-1/java.lang/README.md)
         * [숫자를 처리하는 클래스](language/readme-1/java.lang/undefined.md)
