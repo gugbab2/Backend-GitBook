@@ -1,6 +1,8 @@
 # GC Part.1
 
-## 1. GC 과정 - Generational Garbage Collection
+## 1. GC 과정 - Generational Garbage Collection(HotSpot JVM 기반)
+
+\-> **HotSpot JVM 은 오라클에서 개발한 JVM 구현체 중 하나이다.**&#x20;
 
 ### 1.1 'stop-the-world' 란?
 
@@ -23,7 +25,7 @@
 
 ### 1.3 GC 흐름
 
-* 이러한 가설의 장점을 최대한 잘 살리기 위해서 **HotSpot VM(JVM 벤더 중 하나로, 성능이 높은 벤더**) 에서는 **Heap 영역**을 크게 2개로 물리적 공간을 나누었다.
+* 이러한 가설의 장점을 최대한 잘 살리기 위해서 **HotSpot VM(JVM 구현체 중 하나**) 에서는 **Heap 영역**을 크게 2개로 물리적 공간을 나누었다.
   * **Young 영역** : 새롭게 생성한 객체 대부분이 위치하는 공간으로 대부분의 객체가 금방 사용하지 않는 상태가 되기 때문에, 매우 많은 객체가 Young 영역에 생성되었다가 사라진다.\
     \-> 해당 영역에서 일어나는 GC 를 Minor GC 가 발생한다고 말한다.
   * **Old 영역** : Young 영역에서 살아남은(객체를 계속 사용하는 상태) 객체가 복사되는 공간이다. 대부분 Young 영역보다 크게 할당하고, 크기가 큰 만큼 Young 영역보다 GC 는 적게 발생한다.\
