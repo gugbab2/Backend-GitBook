@@ -47,21 +47,58 @@ public class Test{
 
 ## Atomic 변수와 CAS 알고리즘
 
+### CAS 알고리즘 동작 방식&#x20;
+
 #### CAS 알고리즘은 다음과 같은 방식으로 동작한다.&#x20;
 
 1. **메모리 위치의 현재 값이 예상 값과 동일한지 확인한다.**&#x20;
 2. **동일하다(true)면 메모리 위치의 값을 새 값으로 변경한다.**&#x20;
-3. **동일하지 않다면(false) 아무 작업도 수행하지 않고 현재 메모리 위치의 값을 반환한다.** \
+3. **동일하지 않다면(false) 아무 작업도 수행하지 않고 현재 메모리 위치의 값을 읽고서 1번 과정으로 돌아간다.**  \
    **-> 동일할 때까지 1\~3 과정을 반복한다. (결국에는 동시성 이슈를 해결하고 값을 변경하게 된다)**
 
-#### Atomic 변수에 대해서 알아보자
+### AtomicInteger 살펴보기
 
-* 멀티 쓰레드 환경에서 원자성을 보장하지 위해 Atomic 변수라는 것이 존재한다.&#x20;
-* 그 중 하나인 Atomic
+```java
+public class AtomicIntegerTest {
 
+    private static int count;
 
+    public static void main(String[] args) throws InterruptedException {
+        AtomicInteger atomicCount = new AtomicInteger(0);
+        Thread thread1 = new Thread(() -> {
+            for (int i = 0; i < 100000; i++) {
+                count++;
+                atomicCount.incrementAndGet();
+            }
+        });
 
+        Thread thread2 = new Thread(() -> {
+            for (int i = 0; i < 100000; i++) {
+                count++;
+                atomicCount.incrementAndGet();
+            }
+        });
 
+        thread1.start();
+        thread2.start();
 
-* 멀티 쓰레드 환경에서 원자성을 보장하기 위해 Atomic 변수라는 것이 존재한다.&#x20;
-* 그 중 하나인 AtomicInteger 를 살펴보면&#x20;
+        Thread.sleep(5000);
+        System.out.println("atomic 결과 : " + atomicCount.get());    // 200000
+        System.out.println("int 결과 : " + count);                   // 152298
+    }
+}
+```
+
+* `AtomicInteger` 타입인 `atomicCount` 는 의도대로 200000 이 출력된 것을 볼 수 있고, `int` 타입인 `count` 는 동기화가 지켜지지 않아 잘못된 값을 출력하는 것을 볼 수 있다.&#x20;
+
+#### 동기화가 어떻게 이루어지는지 `AtomicInteger` 클래스를 살펴보자&#x20;
+
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-09-04 21.58.23.png" alt="" width="563"><figcaption></figcaption></figure>
+
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-09-04 21.58.43.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* `volatile` 변수를 `value` 로 갖는 것을 볼 수 있다.&#x20;
+* 그리고 `compareAndSet` 메서드를 살펴보면 `expectedValue`, `newValue` 가 있는데,&#x20;
+  * 인자로 기존값(`expectedValue`)과 변경할 값(`newValue`)을 전달한다.&#x20;
+  * 변경할 값을 메모리에 전달하기 전, 메모리에 있는 값과 기존값을 비교해서 일치하는지 확인한다.&#x20;
+  * 만약 일치하면 값을 반영하고, 다르다면 후처리를 한다.(후처리는 개발자가 결정)
