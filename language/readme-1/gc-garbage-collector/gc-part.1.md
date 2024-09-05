@@ -1,5 +1,9 @@
 # GC Part.1
 
+> #### 참고 링크&#x20;
+>
+> [https://d2.naver.com/helloworld/1329](https://d2.naver.com/helloworld/1329)
+
 ## 1. GC 과정 - Generational Garbage Collection(HotSpot JVM 기반)
 
 \-> **HotSpot JVM 은 오라클에서 개발한 JVM 구현체 중 하나이다.**&#x20;

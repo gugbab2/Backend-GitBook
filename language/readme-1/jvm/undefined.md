@@ -1,5 +1,9 @@
 # 클래스 로더 시스템
 
+> #### 참고 링크&#x20;
+>
+> [https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-5.html](https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-5.html)
+
 <figure><img src="../../../.gitbook/assets/image (56).png" alt=""><figcaption></figcaption></figure>
 
 * **클래스 로더 시스템은 프로그램이  실행될 때, 클래스 수준의 정보를 메서드 영역에 올리기 위한 과정이다.**&#x20;
