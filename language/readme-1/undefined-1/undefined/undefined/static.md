@@ -1,6 +1,6 @@
 # 클래스 변수(static) 사용 주의 케이스
 
-> 참고 링크
+> #### 참고 링크&#x20;
 >
 > [https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.3.1.1](https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.3.1.1)
 

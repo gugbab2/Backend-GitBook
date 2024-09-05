@@ -1,5 +1,9 @@
 # Java volatile 과 Atomic 변수(+CAS)
 
+> #### 참고 링크
+>
+> [https://inkyu-yoon.github.io/docs/Language/Java/Volatile](https://inkyu-yoon.github.io/docs/Language/Java/Volatile)
+
 #### volatile 핵심!
 
 * 쓰레드는 성능 향상을 위해 매번 Main Memory 를 사용하는 것이 아닌 CPU Cache 를 사용해 작업을 진행한다.&#x20;
