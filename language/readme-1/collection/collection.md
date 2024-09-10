@@ -1,8 +1,8 @@
-# Collection 기본
+# Collection
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2024-08-15 13.15.52.png" alt=""><figcaption></figcaption></figure>
 
-## Collection 클래스
+## Collection
 
 \-> **Collection 을 상속하는 객체들은 for(String temp : list) 형식의 for 문을 사용 가능하다.**
 
