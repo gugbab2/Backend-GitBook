@@ -2,7 +2,7 @@
 
 ## L3 Packet
 
-<figure><img src="../../../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 패킷은 개념적으로 단위 데이터라고 생각할 수 있다.
 * Packet = L3 IP Packet
@@ -11,7 +11,7 @@
   * **특별한 이유가 없다면 1500byte 이다.(매우 작은 양)**\
     **-> 최근에 해당 크기로 보낼 수 있는 데이터가 없다..**
 
-<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 와이어샤크 툴을 사용해 패킷을 확인이 가능하다.
 

@@ -6,7 +6,7 @@
   → 예를 들어서 우리는 책에서 목차를 통해 원하는 곳으로 빠르게 이동할 수 있다.
 *   실제 DB 관련 작업 시 대부분의 속도 저하의 원인은 조회의 WHERE 문에서 발생하는데, 가장 먼저 생각해 볼 수 있는 대안으로 Index 를 생각할 수 있다.
 
-    <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-1. 인덱스 사용
 
