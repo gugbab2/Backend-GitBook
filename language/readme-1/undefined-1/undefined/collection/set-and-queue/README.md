@@ -20,15 +20,3 @@
 * `LinkedList` 는 `List` 인터페이스 뿐 아니라, `Queue`, `Deque` 인터페이스도 구현하고 있다.
 * `Queue` 는 FIFO(First In First Out) 의 자료구조로 먼저 들어온 데이터가 먼저 나간다.
 * `Deque` 는 `Queue` 를 상속받은 인터페이스, 맨 앞에 데이터를 넣거나 빼는 작업, 맨 뒤에 데이터를 빼고 넣는 작업을 수행하는데 용이한 클래스이다.
-
-### 대표적인 Queue 구현체
-
-#### LinkedList
-
-* **불연속적인 노드들로 데이터를 저장하는 Java 의 Linked List(연결 리스트) 이다.**&#x20;
-
-#### PriorityQueue
-
-#### ArrayDeque
-
-* **동적 배열을 사용하여 데이터를 저장하는 Java 의 double-ended queue(양방향 큐) 이다.**&#x20;

@@ -3,6 +3,8 @@
 > 참고 링크&#x20;
 >
 > [https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
+>
+> [https://docs.oracle.com/javase/8/docs/api/java/util/RandomAccess.html](https://docs.oracle.com/javase/8/docs/api/java/util/RandomAccess.html)
 
 ## ArrayList&#x20;
 
@@ -14,22 +16,29 @@ java.lang.Object
 ```
 
 * **`Object` -> `Collection` -> `List` -> `ArrayList` 순으로 확장한 것을 확인할 수 있다.**
-* `ArrayList` 는 아래 인터페이스를 구현한다.
-  * `Serializable` : 원격으로 객체를 전송, 파일 I/O 가능
-  * `Cloneable` : `Object` 클래스의 `clone()` 메서드가 제대로 수행될 수 있음을 지정, 복제가 가능한 객체
-  * `Iterable<E>` : forEech 구문 사용 가능&#x20;
-  * `Collection<E>` : 여러개의 데이터를 한 객체에 담아 처리할 메소드 지정
-  * `List<E>` : 순서가 보장되며, 중복을 허용하는 목록형데이터 집합을 의미&#x20;
-  * `RandomAccess` :
-    * 컬렉션이 인덱스 기반으로 빠른 임의 접근(Random Access) 을 지원한다는 신호를 제공하는 역할을 한다.&#x20;
-    * 즉, `ArrayList` 같은 컬렉션은 인덱스를 사용한 요소 접근(`get(index)` 또는 `set(index, value)`)이 상수 시간(O(1)) 안에 이루어진다는 것을 나타냅니다.
-    * `RandomAccess` 는 마커 인터페이스이다.&#x20;
+
+> `Serializable` : 원격으로 객체를 전송, 파일 I/O 가능
+>
+> `Cloneable` : `Object` 클래스의 `clone()` 메서드가 제대로 수행될 수 있음을 지정
+>
+> `Iterable<E>` : forEech 구문 사용 가능&#x20;
+>
+> `Collection<E>` : 여러개의 데이터를 한 객체에 담아 처리할 메소드 지정
+>
+> `List<E>` : 순서가 보장되며, 중복을 허용하는 목록형 데이터 집합을 의미&#x20;
+>
+> `RandomAccess` :
+>
+> * 컬렉션이 인덱스 기반으로 빠른 임의 접근(Random Access) 을 지원한다는 신호를 제공하는 역할을 한다.&#x20;
+> * 즉, `ArrayList` 같은 컬렉션은 인덱스를 사용한 요소 접근(`get(index)` 또는 `set(index, value)`)이 상수 시간(O(1)) 안에 이루어진다는 것을 나타냅니다.
+> * `RandomAccess` 는 마커 인터페이스이다.&#x20;
 
 > #### 마커 인터페이스(Mark Interface)
 >
 > * Java에서 마커 인터페이스는 **구체적인 메서드를 포함하지 않으며**, 특정 클래스가 어떤 기능을 가지고 있음을 표시하기 위해 사용
+> * 즉 마커 인터페이스는 정보성이지, 기능을 가지고 있는 것이 아니다. (빼도 기능적으로 문제는 없다)&#x20;
 
-### ArrayList 생성자
+### 생성자
 
 * `ArrayList()` : 객체를 저장할 공간이 10개인 ArrayList 객체를 만든다.
   * **10 이상의 데이터가 들어가면 크기를 늘리는 작업이 `ArrayList` 내부에서 자동으로 수행된다.**\
@@ -39,7 +48,7 @@ java.lang.Object
 * `ArrayList(Collection<? extend E> c)` : 매개변수로 넘어온 컬렉션 객체가 저장되어 있는 `ArrayList`를 만든다.
 * `ArrayList(int initialCapacity)` : 매개변수만큼의 저장공간을 갖는 `ArrayList` 를 만든다.
 
-### ArrayList 에 데이터를 담자
+### 데이터를 담자
 
 * `boolean add(E e)` : 매개변수로 들어온 데이터를 가장 끝에 담는다.
 * `void add(int index, E e)` : 매개변수로 들어온 데이터를 지정된 index 위치에 담는다.
@@ -72,7 +81,7 @@ public class ListSample {
 
 ```
 
-### ArrayList 에서 데이터를 꺼내자
+### 데이터를 꺼내자
 
 * `Int size()` : Collection 을 구현한 객체에 들어가 있는 데이터의 갯수 리턴.
   * `배열.length` 는 배열의 저장 공간 개수를 의미하지만,
@@ -93,7 +102,7 @@ public void checkArrayList5(){
 }
 ```
 
-### ArrayList 에 있는 데이터를 삭제하자
+### 데이터를 삭제하자
 
 * `void clear()` : 모든 데이터 삭제
 * `E remove(int index)` : 매개 변수에서 지정한 위치에 있는 데이터를 삭제하고 삭제한 데이터를 리턴
@@ -136,11 +145,11 @@ for(String: array){
 }
 ```
 
-### ArrayList 에 있는 데이터를 변경
+### 데이터를 변경
 
 * `E set(int index, E element)` : 지정한 위치에 해당 객체로 바꿔친다.
 
-### ArrayList 동기화 처리하기&#x20;
+### 동기화 처리하기&#x20;
 
 * `ArrayList` 를 멀티 쓰레드 환경에서 사용할 수 있도록 `Collections.synchronizedList()` 메서드가 제공된다.
 * 아래 코드와 같이 컬렉션 내 많은 객체를 동기화 처리 해준다.&#x20;
@@ -158,3 +167,31 @@ Set<String> s = Collections.synchronizedSet(new HashSet<>());
 /* HashMap 동기화 처리 */
 Map<String> m = Collections.synchronizedMap(new HashMap<>());
 ```
+
+## ArrayList 시간 복잡도(CRUD)&#x20;
+
+### 생성&#x20;
+
+* 최선 : O(1)&#x20;
+  * 요소가 배열의 끝에 추가되고, 배열의 크기 조절이 필요 없는 경우&#x20;
+* 최악 : O(n)&#x20;
+  * 배열이 가득 차서 새로운 배열을 생성하고 기존 요소를 복사해야 하는 경우&#x20;
+
+### 읽기
+
+* 최선 : O(1)&#x20;
+  * 인덱스를 통해서 배열에 접근하기에 항상 O(1) 이다.&#x20;
+* 최악 : O(1)&#x20;
+
+### 수정
+
+* 최선 : O(1)&#x20;
+  * 인덱스를 통해서 배열에 접근하기에 항상 O(1) 이다.&#x20;
+* 최악 : O(1)&#x20;
+
+### 삭제&#x20;
+
+* **최선**: O(1)
+  * 삭제하려는 요소가 배열의 마지막 요소일 때, 삭제 후 배열 크기를 줄이지 않으므로 O(1)입니다.
+* **최악**: O(n)
+  * 삭제하려는 요소가 배열의 중간에 위치할 때, 삭제 후 뒤에 있는 요소들을 앞으로 이동시켜야 하므로 O(n)입니다.

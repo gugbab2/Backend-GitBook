@@ -1,5 +1,9 @@
 # LinkedList
 
+> 참고 링크&#x20;
+>
+> [https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html)
+
 ## LinkedList
 
 ```java
@@ -14,25 +18,25 @@ java.lang.Object
 
 > `Serializable` : 원격으로 객체를 전송, 파일 I/O 가능
 >
-> `Cloneable` : Object 클래스의 _**clone() 메서드가 제대로 수행될 수 있음을 지정**_, 복제가 가능한 객체
+> `Cloneable` : Object 클래스의 **clone() 메서드가 제대로 수행될 수 있음을 지정**
 >
-> `Iterable<E>` : Iterable 인터페이스 사용을 통해서 데이터를 순차적으로 가져올 수 있다.
+> `Iterable<E>` : forEech 구문 사용 가능&#x20;
 >
 > `Collection<E>` : 여러개의 데이터를 한 데이터에 담아 처리할 메서드를 지정
 >
-> `Deque<E>` : 맨 앞, 맨 뒤의 값을 용이하게 처리하는 큐와 관련된 메소드 지정
+> `Deque<E>` : Stack, Queue 와관련된 메소드 지정
 >
 > `List<E>` : 목록형 데이터를 처리하는 것과 관련된 메서드 지정
 >
-> `Queue<E>` : 큐를 처리하는 것과 관련된 메서드 지정
+> `Queue<E>` : 큐를 처리하는 것과 관련된 메서드 지정, `Deque` 기능이 사용중인 클래스와 호환된다.&#x20;
 
-## LinkedList 생성자
+## 성자
 
 * `LinkedList()` : 비어 있는 `LinkedList` 객체를 생성한다.
 * `LinkedList(Collection<? extemds E> c)` : 매개 변수로 받은 컬렉션 객체의 데이터를 `LinkedList` 에 담는다.
 * **`LinkedList` 는 일반적인 배열 타입의 클래스와 다르게 생성자로 객체를 생성할 때 크기를 지정하지 않는다. 왜냐면 각 데이터들이 앞 뒤로 연결되는 구조이기 때문에 미리 공간을 만들어 놓을 필요가 없기 때문이다.**
 
-## LinkedList 에 데이터를 담자 (다수의 인터페이스를 구현해 동일 기능의 메서드가 많다)
+## 데이터를 담자 (다수의 인터페이스를 구현해 동일 기능의 메서드가 많다)
 
 * **`LinkedList` 객체의 가장 앞에 데이터를 추가하는 메서드**
   * `void addFirst(Object o)`
@@ -50,7 +54,7 @@ java.lang.Object
   * **내부적으로 메서드를 구현할 때 앞에 추가하는 메서드는 `addFirst()` 를 호출하고,**&#x20;
   * **마지막에 추가하는 메서드는 `add()`, `addLast()` 를 호출한다.**
 
-## LinkedList 에서 데이터를 꺼내자
+## 데이터를 꺼내자
 
 * `LinkedList` 객체의 맨 앞에 있는 데이터를 리턴한다.
   * `Object getFirst()`
@@ -64,13 +68,13 @@ java.lang.Object
 * `LinkedList` 객체의 지정한 위치에 있는 데이터를 리턴한다.
   * `Object get(int i)`
 
-## LinkedList 에 어떤 객체가 존재하는지 확인하자
+## 어떤 데이터가 존재하는지 확인하자
 
 * `boolean contains(Object o)` : 매개 변수로 넘긴 데이터가 있을 경우 true 를 리턴
 * `int indexof(Object o)` : 매개변수로 넘긴 데이터의 위치를 앞에서부터 검색
 * `int lastIndexof(Object o)` : 매개변수로 넘긴 데이터의 위치를 뒤에서부터 검색
 
-## LinkedList 에 데이터를 삭제하자
+## 데이터를 삭제하자
 
 * `LinkedList` 객체의 가장 앞에 있는 데이터를 삭제하고 리턴한다.
   * `Object remove()`
@@ -86,8 +90,37 @@ java.lang.Object
 * 매개변수로 넘겨진 객체와 동일한 데이터 중 가장 앞에 데이터를 삭제
   * `boolean remove(Object)`
 
-## LinkedList 데이터를 하나씩 검색하자
+## 데이터를 하나씩 검색하자
 
 * `ListIterator listIterator(int i)` : 매개변수에 지정된 위치부터의 데이터를 검색하기 위한 ListIterator 객체를 리턴한다.
   * **`ListIterator` 는 `Iterator` 객체가 다음 데이터만 검색할 수 있다는 단점을 보완하여, 이전 데이터도 검색할 수 있는 이터레이터다. (`next()`, `previous()`)**
 * `Iterator descendingIterator()` : `LinkedList` 의 데이터를 끝에서부터 검색하기 위한 `Iterator` 객체를 리턴한다.
+
+## LinkedList시간 복잡도(CRUD)&#x20;
+
+### 생성&#x20;
+
+* **최선**: O(1)
+  * 레퍼런스를 연결하기 때문에, 어디에 생성하든지 시간 복잡도는 동일하다.&#x20;
+* **최악**: O(1)
+
+### 읽기
+
+* **최선**: O(1)
+  * 앞부분부터 순차적으로 순회하기 때문에, 데이터가 앞부분에 있는 경우&#x20;
+* **최악**: O(n)
+  * 앞부분부터 순차적으로 순회하기 때문에, 데이터가 뒷부분에 있는 경우&#x20;
+
+### 수정
+
+* 최선 : O(1)&#x20;
+  * 앞부분부터 순차적으로 순회하기 때문에, 데이터가 앞부분에 있는 경우
+* 최악 : O(n)
+  * 앞부분부터 순차적으로 순회하기 때문에, 데이터가 뒷부분에 있는 경우
+
+### 삭제&#x20;
+
+* 최선 : O(1)&#x20;
+  * 앞부분부터 순차적으로 순회하기 때문에, 데이터가 앞부분에 있는 경우
+* 최악 : O(n)
+  * 앞부분부터 순차적으로 순회하기 때문에, 데이터가 뒷부분에 있는 경우

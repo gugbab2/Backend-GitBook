@@ -21,53 +21,6 @@
 * `int size()` : `Map` 의 크기를 리턴한다.
 * `void clear()` : `Map` 의 내용을 지운다.
 
-## Map 과 Hashtable
-
-* Map 은 Collection View 를 사용하지만 Hashtable 은 Enumeration 객체를 통해서 데이터를 처리한다.
-* Map 은 키, 값, 키-값 쌍으로 데이터를 순환하여 처리할 수 있지만, Hashtable 은 이 중에서 키-값 쌍으로 데이터를 순환하여 처리할 수 없다..
-* Map 은 이터레이션을 처리하는 도중에 데이터를 삭제하는 안전한 방법을 제공하지만, Hashtable 은 그러한 기능을 제공하지 않는다..\
-  \=> **이러한 특징은, Hashtable 이 Map 보다 일찍 만들어졌기 때문이다.**
-* Hashtable 은 Thread Safe 하지만, Map 인터페이스를 구현한 클래스는 Thread Safe 하지 않기 때문에, 다음과 같이 선언해야 한다.
-
-```java
-Map m = Collections.synchronizedMap(new HashMap(...));
-
-// 또는, 이름에 Concurrent 가 포함되어 있어야만 쓰레드에 안전하게 사용할 수 있다. 
-// 자바 1.5에 추가된 ConcurrentHashMap, CopyOnWriteArrayList 등이 있으며 
-// java.util.concurrent 패키지 소속이다.
-```
-
-## HashMap 기본
-
-```java
-java.lang.Object
-    java.util.AbstractMap<K,V>
-        java.util.HashMap<K,V>
-```
-
-> **Serializable, Cloneable, Map\<E>**
->
-> Serializable : 원격으로 객체를 전송, 파일 I/O 가능
->
-> Cloneable : Object 클래스의 _**clone() 메서드가 제대로 수행될 수 있음을 지정**_, 복제가 가능한 객체
->
-> Map\<E> : 맵의 기본 메소드 지정
-
-## HashMap 생성자
-
-* HashMap() : 16개의 공간을 갖는 HashMap 객체를 생성한다.
-* HashMap(int initalCapacity) : 매개 변수만큼의 저장 공간을 갖는, HashMap 객체를 생성한다.
-* HashMap(int initalCapacity, float loadFactor) : 첫 매개 변수의 저장 공간을 갖고, 두 번째 매개변수의 로드팩터를 갖는 HashMap 객체를 생성한다.
-*   HashMap(Map\<? extend K, ? extend V> m) : 매개 변수로 넘어온 Map 을 구현한 객체에 있는 데이터를 갖는 HashMap 객체를 생성한다.\
-    \-> HashMap 의 키는 기본자료형과 참조자료형 모두가 될 수 있다.\
-    \-> _만약 참조자료형으로 키를 설정한다면 equals(), hashcode() 메서드를 오버라이딩 해주어야 한다._\
-    \-> **그 이유는, HashMap에 put() 메서드를 사용해 객체가 들어가면 hashcode() 메서드 결과 값에 따른, 버켓(bucket) 이라는 목록(LinkedList) 형태의 바구니가 만들어진다.**\
-    **-> 만약 서로 다른 키가 저장되었는데, hashcode() 메서드의 결과값이 동일하다면 이 버켓의 여러개의 값이 들어갈 수 있다.**\
-    **-> equals() 메서드를 통해 동일한 값이 있다면, 값을 저장하지 않게 된다. ( 만약 equals() 메서드를 오버라이딩 하지 않는다면, Object.equals() 메서드를 호출 객체의 주소값만을 비교하기 때문에 항상 데이터를 저장하게 된다)**\
-    **-> 따라서, get() 메서드가 호출되면, hashCode() 결과를 확인하고, equals() 메서드를 통해 버켓에 들어간 데이터를 가져온다.**
-
-    <figure><img src="../../../../../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
-
 ## TreeMap
 
 * TreeMap 객체는 저장하면서 키를 정렬한다. (숫자 > 알파벳 대문자 > 알파벳 소문자 > 한글)
