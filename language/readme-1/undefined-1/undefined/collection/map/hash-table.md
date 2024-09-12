@@ -1,6 +1,22 @@
 # Hashtable
 
-## Hashtable&#x20;
+> 참고 링크&#x20;
+>
+> [https://docs.oracle.com/javase/8/docs/api/java/util/Hashtable.html](https://docs.oracle.com/javase/8/docs/api/java/util/Hashtable.html)
+
+## Hashtable
+
+```java
+java.lang.Object
+    java.util.Dictionary<K,V>
+        java.util.Hashtable<K,V>
+```
+
+> Serializable : 원격으로 객체를 전송, 파일 I/O 가능
+>
+> Cloneable : Object 클래스의 _**clone() 메서드가 제대로 수행될 수 있음을 지정**_, 복제가 가능한 객체
+>
+> Map\<E> : 맵의 기본 메소드 지정
 
 * key-value pair 를 저장하는 자료구조로, 해시 함수를 사용하여 데이터를 저장하는 방식이다.&#x20;
 * Hashtable 는 HashMap 과 동작 방식이 거의 동일하다. 하지만 몇가지 차이점이 있는데, 그 차이는 다음과 같다.&#x20;

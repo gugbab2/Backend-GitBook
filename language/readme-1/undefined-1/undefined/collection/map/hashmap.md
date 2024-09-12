@@ -1,5 +1,9 @@
 # HashMap
 
+> 참고 링크&#x20;
+>
+> [https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html)
+
 ## HashMap 기본
 
 ```java
@@ -8,15 +12,13 @@ java.lang.Object
         java.util.HashMap<K,V>
 ```
 
-> **Serializable, Cloneable, Map\<E>**
->
 > Serializable : 원격으로 객체를 전송, 파일 I/O 가능
 >
 > Cloneable : Object 클래스의 _**clone() 메서드가 제대로 수행될 수 있음을 지정**_, 복제가 가능한 객체
 >
 > Map\<E> : 맵의 기본 메소드 지정
 
-* HashMap 은 Hashtable 과 달리 key-value 값에 null 을 허용한다.&#x20;
+* `HashMap` 은 `Hashtable` 과 달리 key-value 값에 null 을 허용한다.&#x20;
 * 때문에, 더 유연하게 사용할 수는 있지만, 이를 처리하기 위해서 주의가 필요하며, 멀티스레드 환경에서 별도의 동기화가 필요하다.&#x20;
 
 ### 생성자
@@ -65,9 +67,9 @@ java.lang.Object
 
 ### 수정
 
-* 최선 : O(1)
-  * 해시 충돌이 없는 상태
-* 최악 : O(n)&#x20;
+* **최선**: O(1)
+  * 해시 충돌이 없는 상태&#x20;
+* **최악**: O(n)
   * 해시 충돌이 많은 경우&#x20;
 
 ### 삭제&#x20;
@@ -75,4 +77,4 @@ java.lang.Object
 * 최선 : O(1)
   * 해시 충돌이 없는 상태
 * 최악 : O(n)&#x20;
-  * 해시 충돌이 많은 경우&#x20;
+  * 해시 충돌이 많은 경우

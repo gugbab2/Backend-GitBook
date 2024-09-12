@@ -152,7 +152,7 @@
           * [ArrayDeque](language/readme-1/undefined-1/undefined/collection/set-and-queue/arraydeque.md)
         * [Map](language/readme-1/undefined-1/undefined/collection/map/README.md)
           * [HashMap](language/readme-1/undefined-1/undefined/collection/map/hashmap.md)
-          * [Hashtable](language/readme-1/undefined-1/undefined/collection/map/hashtable.md)
+          * [Hashtable](language/readme-1/undefined-1/undefined/collection/map/hash-table.md)
           * [LinkedHashMap](language/readme-1/undefined-1/undefined/collection/map/linkedhashmap.md)
           * [TreeMap](language/readme-1/undefined-1/undefined/collection/map/treemap.md)
       * [Thread](language/readme-1/thread/README.md)

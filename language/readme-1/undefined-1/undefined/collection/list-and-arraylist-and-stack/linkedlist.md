@@ -16,19 +16,13 @@ java.lang.Object
 
 * `AbstractList` 와 `AbstractSequentialList` 의 차이는, `add()`, `set()`, `remove()` 의 구현방법이 상이하다는 정도이다.
 
-> `Serializable` : 원격으로 객체를 전송, 파일 I/O 가능
->
-> `Cloneable` : Object 클래스의 **clone() 메서드가 제대로 수행될 수 있음을 지정**
->
-> `Iterable<E>` : forEech 구문 사용 가능&#x20;
->
-> `Collection<E>` : 여러개의 데이터를 한 데이터에 담아 처리할 메서드를 지정
+> `List<E>` : 목록형 데이터를 처리하는 것과 관련된 메서드 지정
 >
 > `Deque<E>` : Stack, Queue 와관련된 메소드 지정
 >
-> `List<E>` : 목록형 데이터를 처리하는 것과 관련된 메서드 지정
+> `Cloneable` : Object 클래스의 **clone() 메서드가 제대로 수행될 수 있음을 지정**
 >
-> `Queue<E>` : 큐를 처리하는 것과 관련된 메서드 지정, `Deque` 기능이 사용중인 클래스와 호환된다.&#x20;
+> `Serializable` : 원격으로 객체를 전송, 파일 I/O 가능
 
 ## 성자
 
