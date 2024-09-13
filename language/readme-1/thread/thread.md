@@ -20,7 +20,7 @@
     **(때문에 쓰레드를 경량 프로세스라 부르기도 한다)**
 * 최근에는 PC 장비도 2코어 이상이기 때문에, 대부분의 작업은 다중 쓰레드로 실행하는 것이 더 빠른 시간의 결과를 제공한다.
 
-## Runnable 인터페이스와 Thread 클래스
+## `Runnable` 인터페이스와 `Thread` 클래스
 
 #### 쓰레드를 생성하는 것은 크게 2가지 방법이 있다.
 
@@ -67,14 +67,14 @@ public class RunThreads {
 }
 ```
 
-### Thread 실행의 결과는 매번 동일하지 않다..
+### `Thread` 실행의 결과는 매번 동일하지 않다..
 
 * **위의 코드를 실행한 결과가 매번 동일하지 않다..**
 * 그 이유는 다음과 같다.
   * `start()` 메서드를 실행한다는 것은, 프로세스가 아닌 하나의 쓰레드를 JVM(프로세스)에 추가하여 실행한다는 것이다.
   * 이 때, 쓰레드 클래스에 있는 `run()` 메서드가 끝나든 끝나지 않든, 쓰레드를 시작한 메소드에서 그 다음 줄에 있는 코드를 실행한다. (비동기)
 
-### 왜 Runnable 와 Thread 를 만들었을까?
+### 왜 `Runnable` 와 `Thread` 를 왜 구분해서 만들었을까?
 
 #### 다음의 상황을 가정해보자&#x20;
 
@@ -86,7 +86,7 @@ public class RunThreads {
 * **자바에서 다중 상속은 불가능하기 때문에, 해당 클래스를 쓰레드로 만들 수 없다. 하지만 인터페이스는 여러 개의 인터페이스를 구현해도 전혀 문제가 발생하지 않는다.**&#x20;
 * **따라서 위와 같은 상황에서는 `Runnable` 인터페이스를 상속해서 구현하면 된다.**&#x20;
 
-## Thread 클래스의 생성자
+## `Thread` 클래스의 생성자
 
 * `Thread()` : 새로운 쓰레드 생성
 * `Thread(Runnable target)` : 매개변수의 `run()` 메서드를 수행하는 쓰레드
@@ -126,14 +126,7 @@ public class NameCalcThread extends Thread{
 }
 ```
 
-## 많이 사용되는 Sleep 메소드에 대해 알아보자
 
-* `Thread` 클래스에 있는 static 메서드는 대부분 JVM 에 있는 쓰레드를 관리하기 위해서 사용된다.
-* `sleep` 메서드는 쓰레드가 매개변수 시간만큼 대기한다.&#x20;
-  * `static void sleep(long millis)`
-  * `static void sleep(long millis, int nanos)`
-* 추가적으로 `Thread().sleep()` 메서드를 사용할 때는 `try-catch`로 묶어 주어야 한다.
-  * `sleep()` 메서드는 `interruptedException`을 발생시키기 때문이다.
 
 ## Thread 클래스의 주요 메서드
 
@@ -149,15 +142,45 @@ public class NameCalcThread extends Thread{
 * `Thread.state getState()` : 쓰레드의 상태를 확인한다.
 * `ThreadGroup getThreadGroup()` : 쓰레드의 그룹을 확인한다.
 
-### 쓰레드 우선순위&#x20;
+### 많이 사용되는 Sleep 메소드에 대해 알아보자
 
-* **쓰레드의 우선순위는 잘못 설정하면 장애의 원인이 되기 때문에, 되도록이면 지정하지 말자!**
-* **쓰레드의 우선순위는 대부분 기본값으로 사용하는 것을 권장한다.**
-* 만약 우선순위를 정할 일이 있다면, 숫자로 지정하기 보다는 아래 상수를 사용할 것을 권장한다.&#x20;
-  * `MAX_PRIORITY` : 가장 높은 우선순위 (10)&#x20;
-  * `NORM_PRIORITY` : 일반 쓰레드의 우선순위(5)&#x20;
-  * `MIN_PRIORITY` : 가장 낮은 우선순위(1)&#x20;
+* `Thread` 클래스에 있는 static 메서드는 대부분 JVM 에 있는 쓰레드를 관리하기 위해서 사용된다.
+* `sleep` 메서드는 쓰레드가 매개변수 시간만큼 대기한다.&#x20;
+  * `static void sleep(long millis)`
+  * `static void sleep(long millis, int nanos)`
+* 추가적으로 `Thread().sleep()` 메서드를 사용할 때는 `try-catch`로 묶어 주어야 한다.
+  * `sleep()` 메서드는 `interruptedException`을 발생시키기 때문이다.
 
-### 데몬 쓰레드란 무엇인가?&#x20;
+## 데몬 쓰레드
 
-*
+### 데몬 쓰레드란?
+
+* Java 의 쓰레드는 두가지 유형으로 나뉜다.&#x20;
+  * 사용자 쓰레드&#x20;
+    * 사용자 쓰레드는 우선순위가 높은 쓰레드이다.&#x20;
+    * JVM 은 사용자 쓰레드가 작업을 완료할 때까지 기다린 후 종료한다.&#x20;
+  * 데몬 쓰레드
+    * **사용자 쓰레드에 서비스를 제공하는 것만을 담당하는 낮은 우선순위의 쓰레드이다.**&#x20;
+    * **JVM 은 데몬쓰레드가 살아 있더라도 모든 사용자 쓰레드가 작업을 완료했다면 프로세스를 종료한다.**&#x20;
+    * **그래서 일반적으로 데몬 쓰레드에 존재하는 무한 루프는 문제를 일으키지 않는다.** \
+      **-> 데몬 쓰레드는 I/O 작업에 권장되지 않는다.** \
+      **(사용자 쓰레드가 종료되는 경우 데몬 쓰레드가 사용하던 리소스를 닫지 않고 종료될 수 있다)**&#x20;
+
+### 데몬 쓰레드 사용&#x20;
+
+* 데몬 쓰레드는 가비지 수집, 메모리 해제, 캐시에서 원치 않는 항목 제거 등 백그라운드 지원 작업 시 유용하게 사용 가능하다.&#x20;
+* 대부분의 JVM 쓰레드는 데몬 쓰레드이다.&#x20;
+* 데몬 쓰레드는 쓰레드 시작 전 데몬 쓰레드로 설정을 해주어야 한다. \
+  \-> 만약, 쓰레드 시작 후 데몬 쓰레드로 설정한다면 `IllegalThreadStateException` 이 발생한다.&#x20;
+
+```java
+// 정상 케이스 
+Thread daemonThread = new NewThread();
+daemonThread.setDaemon(true);
+daemonThread.start();
+
+// 오류 케이스 
+Thread daemonThread = new NewThread();
+daemonThread.start();
+daemonThread.setDaemon(true);    // IllegalThreadStateException 
+```

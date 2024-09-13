@@ -134,9 +134,6 @@
         * [혼동할 수 있는 와일드카드 표현](language/readme-1/generic/undefined-2.md)
       * [Collection](language/readme-1/collection/README.md)
         * [자료구조](language/readme-1/undefined/README.md)
-          * [Array vs List](language/readme-1/undefined/array-vs-list.md)
-          * [HashSet vs TreeSet](language/readme-1/undefined/hashset-vs-treeset.md)
-          * [HashMap vs TreeMap](language/readme-1/undefined/hashmap-vs-treemap.md)
           * [이진 탐색 트리 vs 레드 블랙 트리](language/readme-1/undefined-1/undefined/collection/undefined/vs.md)
         * [Collection](language/readme-1/collection/collection.md)
         * [List](language/readme-1/undefined-1/undefined/collection/list-and-arraylist-and-stack/README.md)
@@ -172,6 +169,10 @@
       * [람다](language/readme-1/undefined-6/README.md)
         * [함수형 인터페이스](language/readme-1/undefined-6/undefined.md)
         * [람다란?](language/readme-1/undefined-6/undefined-1.md)
+    * [벨둥(Bealdung)](language/readme-1/undefined-1/bealdung/README.md)
+      * [Java Concurrency](language/readme-1/undefined-1/bealdung/java-concurrency/README.md)
+        * [Java Concurrency Basics](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/README.md)
+          * [java.util.concurrent](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/java.util.concurrent.md)
 
 ## CS
 
