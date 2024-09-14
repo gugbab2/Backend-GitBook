@@ -13,7 +13,7 @@
 
 * 위와 같은 문제를 해결하기 위해서 이름 없는 함수를 만들어 낼 수 있는데, 이를 lamda expression 라 부른다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 람다식이란?
 
@@ -294,7 +294,7 @@ auto max = [](float a, float b){return a > b ? a : b; };
 * 디버깅하기 힘들어진다..\
   \-> 함수의 이름이 정해져 있지 않기 때문에, call stack 에서 바로 확인이 어렵다..
 
-<figure><img src="../../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **함수 재사용성이 낮다..** \
   **-> 사람들은 보통 함수를 새로 만들기 전에 클래스에 있는 기존 함수를 찾아본다.** \

@@ -2,7 +2,7 @@
 
 ## 이진 탐색 트리 (Binary Search Tree)
 
-<figure><img src="../../../../../../.gitbook/assets/image.png" alt="" width="347"><figcaption></figcaption></figure>
+<figure><img src="../../../../../../.gitbook/assets/image (8).png" alt="" width="347"><figcaption></figcaption></figure>
 
 #### 정의&#x20;
 
@@ -35,7 +35,7 @@
 
 ## 레드 블랙 트리 (Red Black Tree)&#x20;
 
-<figure><img src="../../../../../../.gitbook/assets/image (2).png" alt="" width="523"><figcaption></figcaption></figure>
+<figure><img src="../../../../../../.gitbook/assets/image (2) (2).png" alt="" width="523"><figcaption></figcaption></figure>
 
 #### 정의&#x20;
 
