@@ -4,7 +4,7 @@
 >
 > [https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-2.html#jvms-2.1](https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-2.html#jvms-2.1)
 
-<figure><img src="../../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 * 자바의 코드가 운영체제에서 실행되기 위해서는 아래의 과정을 거친다.
 * 자바 소스코드 -> 자바 컴파일러 -> 바이트코드 -> **JVM** -> 기계어 -> 하드웨어 및 OS
@@ -63,4 +63,4 @@
 * **JNL(Java Native Library)** : 네이티브 메서드를 사용할 수 있는 실제 객체(라이브러리)\
   \-> native 키워드를 사용한다.
 
-<figure><img src="../../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>

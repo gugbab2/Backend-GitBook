@@ -24,7 +24,7 @@ java.lang.Object
 >
 > `Serializable` : 원격으로 객체를 전송, 파일 I/O 가능
 
-## 성자
+## 생성자
 
 * `LinkedList()` : 비어 있는 `LinkedList` 객체를 생성한다.
 * `LinkedList(Collection<? extemds E> c)` : 매개 변수로 받은 컬렉션 객체의 데이터를 `LinkedList` 에 담는다.

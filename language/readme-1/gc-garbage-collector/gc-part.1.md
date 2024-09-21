@@ -2,9 +2,10 @@
 
 > #### 참고 링크&#x20;
 >
-> [https://d2.naver.com/helloworld/1329](https://d2.naver.com/helloworld/1329)
+> [https://d2.naver.com/helloworld/1329](https://d2.naver.com/helloworld/1329)\
+> [https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EA%B0%80%EB%B9%84%EC%A7%80-%EC%BB%AC%EB%A0%89%EC%85%98GC-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%F0%9F%92%AF-%EC%B4%9D%EC%A0%95%EB%A6%AC](https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EA%B0%80%EB%B9%84%EC%A7%80-%EC%BB%AC%EB%A0%89%EC%85%98GC-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%F0%9F%92%AF-%EC%B4%9D%EC%A0%95%EB%A6%AC)
 
-## 1. GC 과정 - Generational Garbage Collection(HotSpot JVM 기반)
+## 1. GC 과정 - Garbage Collection(HotSpot JVM 기반)
 
 \-> **HotSpot JVM 은 오라클에서 개발한 JVM 구현체 중 하나이다.**&#x20;
 
@@ -30,9 +31,10 @@
 ### 1.3 GC 흐름
 
 * 이러한 가설의 장점을 최대한 잘 살리기 위해서 **HotSpot VM(JVM 구현체 중 하나**) 에서는 **Heap 영역**을 크게 2개로 물리적 공간을 나누었다.
-  * **Young 영역** : 새롭게 생성한 객체 대부분이 위치하는 공간으로 대부분의 객체가 금방 사용하지 않는 상태가 되기 때문에, 매우 많은 객체가 Young 영역에 생성되었다가 사라진다.\
+  * **Young 영역** : **새롭게 생성한 객체 대부분이 위치하는 공간으로 대부분의 객체가 금방 사용하지 않는 상태가 되기 때문에, 매우 많은 객체가 Young 영역에 생성되었다가 사라진다.**\
     \-> 해당 영역에서 일어나는 GC 를 Minor GC 가 발생한다고 말한다.
-  * **Old 영역** : Young 영역에서 살아남은(객체를 계속 사용하는 상태) 객체가 복사되는 공간이다. 대부분 Young 영역보다 크게 할당하고, 크기가 큰 만큼 Young 영역보다 GC 는 적게 발생한다.\
+  * **Old 영역 : Young 영역에서 살아남은(객체를 계속 사용하는 상태) 객체가 복사되는 공간이다.** \
+    \-> 대부분 Young 영역보다 크게 할당하고, 크기가 큰 만큼 Young 영역보다 GC 는 적게 발생한다.\
     \-> 해당 영역에서 일어나는 GC 를 Major GC가 일어난다 말한다.
 
 <figure><img src="../../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
