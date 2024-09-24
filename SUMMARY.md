@@ -123,7 +123,7 @@
         * [GC(Garbage Collector)](language/readme-1/gc-garbage-collector/README.md)
           * [GC Part.1](language/readme-1/gc-garbage-collector/gc-part.1.md)
           * [GC Part.2](language/readme-1/gc-garbage-collector/gc-part.2.md)
-          * [Page](language/readme-1/undefined-1/undefined/jvm/gc-garbage-collector/page.md)
+          * [GC 튜닝](language/readme-1/undefined-1/undefined/jvm/gc-garbage-collector/gc.md)
         * [Java Reflection](language/readme-1/jvm/java-reflection.md)
       * [java.lang](language/readme-1/java.lang/README.md)
         * [Wrapper 클래스](language/readme-1/java.lang/undefined.md)
