@@ -314,6 +314,7 @@
   * [실무에서 외래키를 사용하지 않는 이유](db/db/undefined.md)
   * [ORM vs SQL Mapper](db/db/orm-vs-sql-mapper.md)
   * [문자열 vs DATE](db/db/vs-date.md)
+  * [EXPLAIN 명령어](db/db/explain.md)
 * [강의](db/undefined/README.md)
   * [Real MySQL 시즌 1](db/real-mysql/README.md)
     * [Part.1](db/real-mysql/part.1/README.md)
