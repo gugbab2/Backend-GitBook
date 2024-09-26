@@ -4,6 +4,8 @@
 >
 > [https://inpa.tistory.com/entry/JAVA-%E2%98%95-JDK-JRE-JVM-%EA%B0%9C%EB%85%90-%EA%B5%AC%EC%84%B1-%EC%9B%90%EB%A6%AC-%F0%9F%92%AF-%EC%99%84%EB%B2%BD-%EC%B4%9D%EC%A0%95%EB%A6%AC#jdk\_%EB%B2%84%EC%A0%84\_%ED%91%9C%EA%B8%B0](https://inpa.tistory.com/entry/JAVA-%E2%98%95-JDK-JRE-JVM-%EA%B0%9C%EB%85%90-%EA%B5%AC%EC%84%B1-%EC%9B%90%EB%A6%AC-%F0%9F%92%AF-%EC%99%84%EB%B2%BD-%EC%B4%9D%EC%A0%95%EB%A6%AC#jdk\_%EB%B2%84%EC%A0%84\_%ED%91%9C%EA%B8%B0)
 
+#### 자바의 중요한 철학은 "Write Once, Run Anywhere" 이다. 자바 바이트 코드는 특정 운영체제에 종속적이지 않으며, JVM 을 통해서 다양한 환경에서 실행될 수 있다.&#x20;
+
 ## JVM?
 
 * JVM은 자바 가상머신(Java Virtual Machine)의 약자로서, 직역하면 자바를 실행하는 머신이라는 건데, 그냥자바를 돌리는 프로그램 정도로 이해하면 된다.
