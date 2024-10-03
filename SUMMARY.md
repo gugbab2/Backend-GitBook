@@ -174,7 +174,9 @@
     * [벨둥(Bealdung)](language/readme-1/undefined-1/bealdung/README.md)
       * [Java Concurrency](language/readme-1/undefined-1/bealdung/java-concurrency/README.md)
         * [Java Concurrency Basics](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/README.md)
-          * [java.util.concurrent](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/java.util.concurrent.md)
+          * [Overview of the java.util.concurrent](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/overview-of-the-java.util.concurrent.md)
+          * [Guide to the Synchronized Keyword in Java](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-synchronized-keyword-in-java.md)
+          * [Guide to the Volatile Keyword in Java](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-volatile-keyword-in-java.md)
 
 ## CS
 

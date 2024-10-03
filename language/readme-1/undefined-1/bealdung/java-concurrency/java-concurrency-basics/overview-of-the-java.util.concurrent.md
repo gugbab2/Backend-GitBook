@@ -1,4 +1,4 @@
-# java.util.concurrent
+# Overview of the java.util.concurrent
 
 > 참고 링크&#x20;
 >
@@ -409,9 +409,10 @@ try {
 }
 ```
 
-## 6. CountDownLatch&#x20;
+## 6. CountDownLatch (단일 이벤트 대기용으로 사용)
 
 * `CountDownLatch` 는 특정 개수의 작업이 완료될 때까지 하나 이상의 쓰레드가 기다리도록 하는 동기화 도구이다.&#x20;
+* 재사용이 불가하다.&#x20;
 * 이 클래스는 멀티스테드 환경에서 작업을 조율하는데 매우 유용하다.&#x20;
 
 #### 제공 메서드&#x20;
@@ -478,18 +479,134 @@ public class CountDownLatchExample {
         System.out.println("All workers finished, main thread proceeding");
     }
 }
+```
+
+## 7. CyclicBarrier (쓰레드 간 협력이 필요한 경우 사용)
+
+* 여러 쓰레드가 특정 지점(장벽) 에 도착할 때까지 대기하며, 도착한 후 동작을 실행&#x20;
+* 해당 객체를 여러번 사용이 가능하다.&#x20;
+
+#### 제공 메서드
+
+* `await()`
+  * 모든 스레드가 도착할 때까지 대기합니다.
+* `reset()`
+  * 장벽을 초기 상태로 재설정합니다.
+* `getNumberWaiting()`
+  * 현재 대기 중인 스레드 수를 반환합니다.
+* `isBroken()`
+  * 장벽이 깨졌는지 여부를 확인합니다.
+
+```java
+import java.util.concurrent.CyclicBarrier;
+
+public class CyclicBarrierExample {
+    public static void main(String[] args) {
+        int numberOfThreads = 3;
+        CyclicBarrier barrier = new CyclicBarrier(numberOfThreads, () -> {
+            System.out.println("All threads reached the barrier, let's proceed.");
+        });
+
+        Runnable task = () -> {
+            try {
+                System.out.println(Thread.currentThread().getName() + " is doing work");
+                Thread.sleep(1000);
+                System.out.println(Thread.currentThread().getName() + " reached the barrier");
+                barrier.await(); // 모든 스레드가 barrier에 도착할 때까지 대기
+                System.out.println(Thread.currentThread().getName() + " is proceeding");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+
+        // 세 개의 스레드가 협력하여 동시에 실행
+        new Thread(task).start();
+        new Thread(task).start();
+        new Thread(task).start();
+    }
+}
 
 ```
 
+## 8. Semaphore (자원에 대한 접근을 제어 시 사용)
 
+* 자원에 대한 접근을 제어하는 도구로, 제한된 수의 쓰레드만이 자원에 접근할 수 있도록 허용&#x20;
+* permit 이라는 개념을 통해서 자원의 접근을 제어&#x20;
 
+#### 제공 메서드&#x20;
 
+* `acquire()`&#x20;
+  * 자원을 요청하고, 자원이 허용되면 작업을 진행한다. 자원이 없으면 대기 ..&#x20;
+* `release()`
+  * 작업이 끝난 후 자원을 반환하여 다른 쓰레드가 자원에 접근할 수 있도록 한다.&#x20;
+* `availablePermits()`&#x20;
+  * 자원에 접근 가능한 쓰레드 수를 반환한다.&#x20;
 
+```java
+import java.util.concurrent.Semaphore;
 
+public class SemaphoreExample {
+    public static void main(String[] args) {
+        Semaphore semaphore = new Semaphore(2); // 동시에 2개의 스레드만 자원에 접근 가능
 
+        Runnable task = () -> {
+            try {
+                System.out.println(Thread.currentThread().getName() + " is waiting for a permit");
+                semaphore.acquire(); // 자원 접근 요청
+                System.out.println(Thread.currentThread().getName() + " acquired a permit");
+                Thread.sleep(2000); // 자원 사용
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println(Thread.currentThread().getName() + " released a permit");
+                semaphore.release(); // 자원 반환
+            }
+        };
 
+        // 4개의 스레드가 있으나, 동시에 2개만 자원에 접근 가능
+        new Thread(task).start();
+        new Thread(task).start();
+        new Thread(task).start();
+        new Thread(task).start();
+    }
+}
 
+```
 
+## 9. ThreadFactory
+
+* 필요에 따라서 새로운 쓰레드를 만드는 쓰레드 풀의 역할을 한다.&#x20;
+* `ThreadFactory` 에서 `newThread` 메서드를 사용하게 되면 런타임에 동적으로 새로운 쓰레드를 생성할 수 있다는 장점이 있다.&#x20;
+
+```java
+public class BaeldungThreadFactory implements ThreadFactory {
+    private int threadId;
+    private String name;
+
+    public BaeldungThreadFactory(String name) {
+        threadId = 1;
+        this.name = name;
+    }
+
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, name + "-Thread_" + threadId);
+        LOG.info("created new thread with id : " + threadId +
+            " and name : " + t.getName());
+        threadId++;
+        return t;
+    }
+}
+
+// ...
+
+BaeldungThreadFactory factory = new BaeldungThreadFactory( 
+    "BaeldungThreadFactory");
+for (int i = 0; i < 10; i++) { 
+    Thread t = factory.newThread(new Task());
+    t.start(); 
+}
+```
 
 
 
