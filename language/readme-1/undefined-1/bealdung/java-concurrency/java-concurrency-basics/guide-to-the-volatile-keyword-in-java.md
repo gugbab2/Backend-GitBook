@@ -1,5 +1,9 @@
 # Guide to the Volatile Keyword in Java
 
+> 참고 링크&#x20;
+>
+> [https://www.baeldung.com/java-volatile](https://www.baeldung.com/java-volatile)
+
 ## 1. 개요&#x20;
 
 * 필요한 동기화가 없다면 컴파일러, 프로세서는 온갖 종류의 최적화를 지원한다. 이러한 최적화는 일반적으로 유익하지만 때로는 미묘한 문제를 일으킬 수 있다.&#x20;

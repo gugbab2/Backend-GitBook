@@ -1,5 +1,11 @@
 # Guide to the Synchronized Keyword in Java
 
+> 참고 링크&#x20;
+>
+> [https://www.baeldung.com/java-synchronized](https://www.baeldung.com/java-synchronized)
+
+
+
 ## 1. 개요&#x20;
 
 * 멀티쓰레드 환경에서 두 개 이상의 쓰레드가 동시에 변경 가능한 공유 데이터에 접근하게 되면 **경쟁 조건**이 발생한다.
