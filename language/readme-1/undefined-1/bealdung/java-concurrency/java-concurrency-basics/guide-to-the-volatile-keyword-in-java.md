@@ -24,6 +24,14 @@
 * **많은 사람들은 짧은 시간 후에 `42` 를 출력할 것이라고 생각할 수 있지만, 지연이 훨씬 길 수도 있다..** \
   **-> 이러한 현상은 적절한 메모리 가시성과 재정렬이 부족하기 때문이다.**&#x20;
 
+> `Thread.yield()`
+>
+> * 현재 실행 중인 쓰레드가 실행 상태에서 **대기 상태로 전환되도록 힌트를 주는 메서드이다.**&#x20;
+> * 이 메서드를 호출하면 **현재 쓰레드가 CPI 자원을 다른 쓰레드에게 양보하려고 시도한다.**&#x20;
+> * **그러나 이는 권고 사항일 뿐, JVM 스케줄러가 반드시 이 요청을 수용하는 것은 아니다.**&#x20;
+
+
+
 ```java
 public class TaskRunner {
 
@@ -48,5 +56,72 @@ public class TaskRunner {
         ready = true;
     }
 }
+```
+
+### 3-1. 메모리 가시성&#x20;
+
+* 위 코드에서 두 개의 애플리케이션 쓰레드가 있다. 메인 쓰레드와 `Reader` 쓰레드이다.&#x20;
+* OS 가 두 개의 다른 CPU 코어에서 해당 쓰레드를 스케줄링하는 시나리오를 생각해보자,&#x20;
+  * 메인 쓰레드는 `number`, `ready` 변수의 사본을 로컬 캐시에 보관한다.&#x20;
+  * `Reader` 쓰레드도 `number`, `ready` 변수의 사본을 로컬캐시에 보관한다.
+  * 메인 쓰레드는 캐시된 값을 업데이트 한다.&#x20;
+* Java 메모리 모델에서는 각 쓰레드가 CPU 의 로컬 캐시( L1, L2 Cache)를 사용하여 변수 값을 저장하고 읽을 수 있는데,&#x20;
+* **명시적으로 동기화되지 않았기 때문에, 특정 쓰레드에서 값을 변경하더라도 다른 쓰레드에서 그 변경 사항을 즉시 볼 수 있을 것이라는 보장이 없다..**&#x20;
+* **다시 말해서 `Reader` 쓰레드는 약간의 지연과 함께 업데이트 된 값을 즉시 볼수도, 전혀 못볼수도 있다.**&#x20;
+
+### 3-2. 재정렬&#x20;
+
+* 문제를 더 악화시키는 것은, `Reader` 쓰레드가 실제 프로그램 순서가 아닌 다른 순서로 실행될 수 있다.
+  * `number = 42;` 와 `ready = true;` 의 순서가 변경되어 실행될 수 있다.&#x20;
+* 재정렬은 성능 개선을 위한 최적화 기술이다.&#x20;
+
+## 4.  volatile 을 통한 일관성문제 해결&#x20;
+
+* `volatile` 을 사용하면 캐시 일관성 문제를 해결할 수 있다.&#x20;
+  * `volitile` 과 관련된 변수는 재정렬을 수행하지 않는다.&#x20;
+  * `volitile` 과 관련된 변수는 캐시 메모리에 읽고 쓰는 것이 아니라 메인 메모리에 읽고 쓴다.&#x20;
+
+```java
+public class TaskRunner {
+
+    private volatile static int number;
+    private volatile static boolean ready;
+
+    // same as before
+}
+```
+
+## 5. "Happens-Before" 규칙과 `volatile` 변수
+
+* `volatile` 변수를 이용해 두 쓰레드 간 메모리 가시성이 확실하게 보장된다.&#x20;
+* **`volatile` 변수 자체뿐만 아니라, 그 변수를 쓰기 전에 쓰레드 A 가 조작한 다른 변수들의 값도 쓰레드 B 에게 보이게 되는 것이다. 이게 바로 Happens-Before 규칙의 핵심이다.** \
+  **-> `volatile` 변수 이전의 값들 또한 메모리 가시성을 보장한다.**&#x20;
+* 구체적으로 어떻게 동작하는지 살펴보자&#x20;
+  * 쓰레드 A 가 먼저 `volatile` 변수를 변경했으면, 그 이전에 쓰레드 A 가 메모리에서 읽거나 쓴 다른 변수들도 메인 메모리에 저장된다.&#x20;
+  * 쓰레드 B 가 나중에 그 `volatile` 변수를 읽으면, 쓰레드 A 가 쓰기 전에 사용한 다른 변수들의 최신 값도 함꼐 보인다.&#x20;
+
+```java
+public class Example {
+    private static int nonVolatileVar;
+    private static volatile boolean flag;
+
+    public static void main(String[] args) {
+        Thread writer = new Thread(() -> {
+            nonVolatileVar = 42;  // nonVolatileVar에 값 42를 씀
+            flag = true;          // flag를 true로 설정 (volatile)
+        });
+
+        Thread reader = new Thread(() -> {
+            while (!flag) {
+                // flag가 true가 될 때까지 기다림
+            }
+            System.out.println(nonVolatileVar);  // flag가 true가 되면 nonVolatileVar 값을 읽음
+        });
+
+        writer.start();
+        reader.start();
+    }
+}
+
 ```
 
