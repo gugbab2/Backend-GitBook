@@ -13,7 +13,7 @@
 
 ## 2. 동기화가 필요한 이유&#x20;
 
-* 여러 쓰레드가 calculate() 메서드를 실행하는 일반적인 경쟁 조건이 발생하는 상황을 생각해보자.
+* 여러 쓰레드가 `calculate()` 메서드를 실행하는 일반적인 경쟁 조건이 발생하는 상황을 생각해보자.
 
 ```java
 public class SynchronizedMethods {
@@ -56,10 +56,10 @@ public void givenMultiThread_whenNonSyncMethod() {
 
 ### 3-1. 동기화 된 인스턴스 메서드&#x20;
 
-* 메서드 선언에 synchronized 키워드를 추가하면 메서드를 동기화할 수 있다.&#x20;
+* 메서드 선언에 `synchronized` 키워드를 추가하면 메서드를 동기화할 수 있다.&#x20;
 
 ```java
-public synchronized void synchronisedCalculate() {
+public synchronized void synchronizedCalculate() {
     setSum(getSum() + 1);
 }
 ```
@@ -73,7 +73,7 @@ public void givenMultiThread_whenMethodSync() {
     SynchronizedMethods method = new SynchronizedMethods();
 
     IntStream.range(0, 1000)
-      .forEach(count -> service.submit(method::synchronisedCalculate));
+      .forEach(count -> service.submit(method::synchronizedCalculate));
     service.awaitTermination(1000, TimeUnit.MILLISECONDS);
 
     assertEquals(1000, method.getSum());

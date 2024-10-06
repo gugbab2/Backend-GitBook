@@ -178,6 +178,7 @@
           * [Guide to the Synchronized Keyword in Java](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-synchronized-keyword-in-java.md)
           * [Guide to the Volatile Keyword in Java](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-volatile-keyword-in-java.md)
           * [Guide to the java.util.concurrent.Future](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-java.util.concurrent.future.md)
+          * [Page](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/page.md)
 
 ## CS
 
