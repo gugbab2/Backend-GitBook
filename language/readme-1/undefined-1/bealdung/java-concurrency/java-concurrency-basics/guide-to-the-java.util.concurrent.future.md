@@ -24,7 +24,7 @@
   * 구체적으로는 `Callable`, `Runnable` 작업을 받아서 이를 감싸는 `FutureTask` 를 만들고, 이를 쓰레드 풀에 제출한다.
   * 이 `FutureTask` 는 비동기 작업의 결과를 처리하고, 그 결과를 `Future` 인터페이스를 통해 반환한다.&#x20;
 
-```javascript
+```java
 public class SquareCalculator {
     
     private ExecutorService executor = Executors.newSingleThreadExecutor(); 
@@ -46,19 +46,17 @@ public class SquareCalculator {
 * `calculate()` 를 호출 하고 반환된 `Future` 를 사용하여 `Integer` 를 가져와야 한다.&#x20;
 * `Future.isDone()` 은 `executor` 가 작업 처리를 완료했는지 알려준다. 작업이 완료되면 `true` 를 반환하고, 그렇지 않으면 `false` 를 반환한다.&#x20;
 * 계산에서 실제 결과를 반환하는 메서드는 `Future.get()` 이다. 이 메서드는 작업이 완료될 때까지 실행을 차단하는 것을 볼 수 있다. \
-  \-> `Future.get()` 을 호출하기 이전에 `Future.isDone()` 을 호출해 작업이 완료되었는지를 확인하는 것이 일반적이다. \
-  \-> 이 방법을 통해서 주요 작업이 완료될 때까지 다른 코드를 실행할 수 있다.&#x20;
+  \-> `Future.get()` 을 호출하기 이전에 `Future.isDone()` 을 호출해 작업이 완료되지 않았다면, 다른 작업을 수행하는 형식으로 쓰레드 자원을 효율적으로 사용할 수 있다.&#x20;
 
-```java
-Future<Integer> future = new SquareCalculator().calculate(10); 
-
+<pre class="language-java"><code class="lang-java"><strong>Future&#x3C;Integer> future = new SquareCalculator().calculate(10); 
+</strong>
 while(!future.isDone()) {
     System.out.println("Calculating...");
     Thread.sleep(300);
 }
 
 Integer result = future.get(); 
-```
+</code></pre>
 
 * 아래와 같이 `get(long, TimeUnit)` 을 사용하는 경우도 있는데, 이는 지정된 시간 초과 기간 내에 작업이 반환되지 않으면 `TimeoutException` 을 `throw` 한다.&#x20;
 
