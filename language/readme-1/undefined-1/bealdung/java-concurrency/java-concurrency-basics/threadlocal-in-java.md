@@ -1,4 +1,4 @@
-# ThreadLocal in Java
+# ThreadLocal in Java
 
 ## 1. ThreadLocal API
 
@@ -130,8 +130,14 @@ thread context for given userId: 2 is: Context{userNameSecret='e19f6a0a-253e-423
   * 현재 실행이 완료되면, 애플리케이션은 빌린 쓰레드를 풀로 반환한다.&#x20;
   * 시간이 지나면서 애플리케이션은 동일한 쓰레드를 빌려 다른 요청을 처리한다.&#x20;
   * **애플리케이션은 지난번에 필요한 정리를 수행하지 않았으므로 새 요청에 동일한 ThreadLocal 데이터를 재사용할 수 있다.**&#x20;
-* 이 문제를 해결하는 한 가지 방법은 ThreadLocal 을 사용한 후 수동으로 제거하는 것이다.&#x20;
-* 이 접근 방식은 오류가 발생하기 쉽기에, 엄격한 검토가 필요하다.&#x20;
+* **이 문제를 해결하는 한 가지 방법은 ThreadLocal 을 사용한 후 수동으로 제거하는 것이다.**&#x20;
+
+### 4-1. ThreadPoolExecutor 확장&#x20;
+
+* 결과적으로 `ThreadPoolExecutor` 클래스를 확장하고, `beforeExecute()` 및 `afterExecute()` 메서드에 대한 사용자 정의 후 사용할 수 있다.&#x20;
+* 쓰레드 풀의 쓰레드를 사용하기 전에 `beforeExecute()` 메서드를 호출하고,
+* 쓰레드 풀에 쓰레드를 반납하기 전에 `afterExecute()` 메서드를 호출한다. \
+  \-> 해당 메서드에서 `ThreadLocal` 의 데이터를 지울 수 있다.&#x20;
 
 ```java
 import java.util.concurrent.LinkedBlockingQueue;

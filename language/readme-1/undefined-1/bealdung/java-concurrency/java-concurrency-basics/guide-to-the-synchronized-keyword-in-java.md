@@ -67,7 +67,7 @@ public synchronized void synchronizedCalculate() {
 * 메서드를 동기화하면 실제 테스트 케이스 출력이 1000이 되는 것을 확인할 수 있다.&#x20;
 
 ```java
-@Test
+ @Test
 public void givenMultiThread_whenMethodSync() {
     ExecutorService service = Executors.newFixedThreadPool(3);
     SynchronizedMethods method = new SynchronizedMethods();
@@ -93,7 +93,7 @@ public void givenMultiThread_whenMethodSync() {
  }
 ```
 
-* 이러한 메서드는 클래스와 연관된 정적 인스턴스에서 동기화된다.&#x20;
+* 이러한 메서드는 클래스와 연관된 정적 인스턴스에서 동기화된다.&#x20;
 * **JVM 내에서 클래스당 정적 객체가 하나씩 존재하기 때문에, 동기화 된 정적 메서드를 실행할 수 있는 쓰레드는 한개 뿐이다.**
 
 ```java
@@ -115,15 +115,14 @@ public void givenMultiThread_whenStaticSyncMethod() {
 * 때로는 메서드 전체를 동기화하는 것이 아닌 일부만 동기화하고 싶을 수 있다.&#x20;
 * 이때 동기화 블럭을 사용하면 된다.&#x20;
 
-```java
-public void performSynchronisedTask() {
-    synchronized (this) {
+<pre class="language-java"><code class="lang-java"><strong>public void performSynchronisedTask() {
+</strong>    synchronized (this) {
         setCount(getCount()+1);
     }
 }
-```
+</code></pre>
 
-* **동기화 블럭에 매개변수 this 를 전달한 것에 주목해라.**&#x20;
+* &#x20;**동기화 블럭에 매개변수 this 를 전달한 것에 주목해라.**&#x20;
 * **이것은 모니터 객체로, 블록 내부의 코드는 모니터 객체에서 동기화된다.**&#x20;
 * **쉽게 말해서, 모니터 객체당 하나의 쓰레드만 해당 코드 블럭을 실행할 수 있다.**&#x20;
 
