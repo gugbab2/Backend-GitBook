@@ -99,6 +99,8 @@
       * [메모리 가시성](language/readme-1/undefined/1/undefined-2.md)
       * [동기화 - synchronized](language/readme-1/undefined/1/synchronized.md)
       * [고급 동기화 - concurrent.Lock](language/readme-1/undefined/1/concurrent.lock.md)
+    * [김영한의 실전 자바 - 고급 2편, I/O, 네트워크, 리플렉션](language/readme-1/undefined/2-i-o.md)
+    * [문자 인코딩](language/readme-1/undefined/undefined-1.md)
   * [책](language/readme-1/undefined-1/README.md)
     * [자바의 신](language/readme-1/undefined-1/undefined/README.md)
       * [변수](language/readme-1/undefined-1/undefined/undefined/README.md)
