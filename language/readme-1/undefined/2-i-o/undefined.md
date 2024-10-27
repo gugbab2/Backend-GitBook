@@ -78,7 +78,7 @@
 * 기존 ASCII 문자 집합과 호환 가능&#x20;
 * 윈도우 시스템에서 계속 사용됨&#x20;
 
-## 3. 컴퓨터와 문자 인코딩3 - 전세계 문자 집합&#x20;
+## 4. 컴퓨터와 문자 인코딩3 - 전세계 문자 집합&#x20;
 
 * 전세계적으로 컴퓨터 인구가 늘어나면서, 전세계 문자를 대부분 다 표현할 수 있는 문자 집합이 필요해졌다.&#x20;
 
@@ -129,21 +129,135 @@
   * 반면 UTF-16 에서는 이들 문자가 대부분 2바이트로 인코딩된다.&#x20;
 * 장점 : ASCII 문자는 1바이트로 표현, ASCII 호환&#x20;
 * 현대의 사실상 표준 인코딩 기술&#x20;
-  * 1990 ㄴ
+  * 1990년도 후반 \~ 2000년도 초반에 인터넷과 웹이 빠르게 성장하면서 저변 확대&#x20;
+  * 2008년 W3C 웹 표준에 UTF-8 채택&#x20;
+  * 현재 대부분의 웹사이트와 애플리케이션에서 기본 인코딩으로 사용&#x20;
 
+### 정리&#x20;
 
+#### UTF-8 이 현대의 사실상 표준 인코딩 기술이 된 이유&#x20;
 
+* 저장 공간 절약과 네트워크 효율성&#x20;
+  * UTF-8 은 ASCII 문자를 포함한 많은 서양 언어의 문자에 대해 1바이트를 사용한다.&#x20;
+  * 반면에 UTF-16 은 최소 2바이트를 사용하므로, 주로 ASCII 문자로 이루어진 영문 텍스트에서는 UTF-8이 2배는 효율적이다. 특히 데이터를 네트워크로 전달할 때는 매우 큰 효율의 차이를 보인다.&#x20;
+  * 참고로 웹이 있는 문서의 80% 이상은 영문 문서이다.&#x20;
+* ASCII 와의 호환성&#x20;
+  * UTF-8 은 ASCII 와 호환된다. UTF-8 로 인코딩 된 텍스트에서 ASCII 범위에 있는 문자는 기존 ASCII 와 동일한 방식으로 처리된다.&#x20;
+  * 이로 인해 수 많은 레거시 시스템과도 호환을 유지하면서도 전 세계의 모든 문자를 표현할 수 있다.&#x20;
 
+### 결론&#x20;
 
+#### UTF-8 을 사용하자!&#x20;
 
+#### 참고 : 한글 윈도우의 경우 기존 윈도우와 호환성 때문에, 기본 인코딩을 MS949 로 유지한다. 한글 윈도우 기본 인코딩을 UTF-8 로 변경하려고 노력중이다.&#x20;
 
+## 5. 문자 인코딩 예제1&#x20;
 
+```java
+package charset;
 
+import java.nio.charset.Charset;
+import java.util.Arrays;
 
+import static java.nio.charset.StandardCharsets.*;
 
+public class EncodingMain1 {
+    private static final Charset EUC_KR = Charset.forName("EUC-KR");
+    private static final Charset MS_949 = Charset.forName("MS949");
 
+    public static void main(String[] args) {
+        System.out.println("== ASCII 영문 처리 ==");
+        encoding("A", US_ASCII);
+        encoding("A", ISO_8859_1);
+        encoding("A", EUC_KR);
+        encoding("A", UTF_8);
+        encoding("A", UTF_16BE);
 
+        System.out.println("== 한글 지원 ==");
+        encoding("가", EUC_KR);
+        encoding("가", MS_949);
+        encoding("가", UTF_8);
+        encoding("가", UTF_16BE);
 
+        System.out.println("== 문자 byte 변경 ==");
+        String str = "A";
+        byte[] bytes = str.getBytes();  // 문자 집합을 지정하지 않으면 기본 문자 집합을 사용한다.
+        System.out.println("bytes = " + Arrays.toString(bytes));
+    }
 
+    private static void encoding(String text, Charset charset) {
+        byte[] bytes = text.getBytes(charset);
+        System.out.printf("%s -> [%s] 인코딩 -> %s %sbyte\n", text, charset, Arrays.toString(bytes), bytes.length);
+    }
+}
 
+```
 
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-27 19.31.14.png" alt=""><figcaption></figcaption></figure>
+
+## 6. 문자 인코딩 예제2&#x20;
+
+```java
+package charset;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import static java.nio.charset.StandardCharsets.*;
+
+public class EncodingMain2 {
+    private static final Charset EUC_KR = Charset.forName("EUC-KR");
+    private static final Charset MS_949 = Charset.forName("MS949");
+
+    public static void main(String[] args) {
+        System.out.println("== 영문 ASCII 인코딩 ==");
+        test("A", US_ASCII, US_ASCII);
+        test("A", US_ASCII, ISO_8859_1);
+        test("A", US_ASCII, EUC_KR);
+        test("A", US_ASCII, MS_949);
+        test("A", US_ASCII, UTF_8);
+        test("A", US_ASCII, UTF_16BE);  // 디코딩 실패 케이스
+
+        System.out.println("== 한글 인코딩 - 기본 ==");
+        test("가", US_ASCII, US_ASCII);
+        test("가", ISO_8859_1, ISO_8859_1);
+        test("가", EUC_KR, EUC_KR);
+        test("가", MS_949, MS_949);
+        test("가", UTF_8, UTF_8);
+        test("가", UTF_16BE, UTF_16BE);
+
+        System.out.println("== 한글 인코딩 - 복잡한 문자 ==");
+        test("뷁", US_ASCII, US_ASCII);
+        test("뷁", ISO_8859_1, ISO_8859_1);
+        test("뷁", EUC_KR, EUC_KR);
+        test("뷁", MS_949, MS_949);
+        test("뷁", UTF_8, UTF_8);
+        test("뷁", UTF_16BE, UTF_16BE);
+
+        System.out.println("== 한글 인코딩 - 디코딩이 다른 경우 ==");
+        test("가", EUC_KR, MS_949);
+        test("뷁", MS_949, EUC_KR);      // 인코딩 가능, 디코딩 X
+        test("가", EUC_KR, US_ASCII);    // 인코딩 가능, 디코딩 X
+        test("가", MS_949, UTF_8);    // 인코딩 가능, 디코딩 X
+        test("가", UTF_8, MS_949);    // 인코딩 가능, 디코딩 X
+
+        System.out.println("== 영문 인코딩 - 디코딩이 다른 경우");
+        test("A", EUC_KR, UTF_8);
+        test("A", MS_949, UTF_8);
+        test("A", UTF_8, MS_949);
+        test("A", UTF_8, UTF_16BE);
+    }
+
+    private static void test(String text, Charset encodingCharset, Charset decodingCharset) {
+        byte[] encoded = text.getBytes(encodingCharset);
+        String decoded = new String(encoded, decodingCharset);
+        System.out.printf("%s -> [%s] 인코딩 -> %s %sbyte -> [%s] 디코딩 -> %s\n",
+                text, encodingCharset, Arrays.toString(encoded), encoded.length,
+                decodingCharset, decoded);
+    }
+}
+
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-27 19.33.19.png" alt=""><figcaption></figcaption></figure>
