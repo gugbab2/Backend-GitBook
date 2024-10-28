@@ -101,7 +101,7 @@
       * [고급 동기화 - concurrent.Lock](language/readme-1/undefined/1/concurrent.lock.md)
     * [김영한의 실전 자바 - 고급 2편, I/O, 네트워크, 리플렉션](language/readme-1/undefined/2-i-o/README.md)
       * [문자 인코딩](language/readme-1/undefined/2-i-o/undefined.md)
-      * [I/O 기본1](language/readme-1/undefined/2-i-o/i-o-1.md)
+      * [I/O 기본1](language/readme-1/undefined/2-i-o/i-o-1.md)
       * [I/O 기본2](language/readme-1/undefined/2-i-o/i-o-2.md)
   * [책](language/readme-1/undefined-1/README.md)
     * [자바의 신](language/readme-1/undefined-1/undefined/README.md)
