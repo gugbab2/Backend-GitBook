@@ -102,7 +102,7 @@ jstat -gcutil -t 8844 1000 10
 | New 영역 크기 | -XX:NewSize      | New 영역의 크기               |
 | New 영역 크기 | -XX:SurviorRatio | Eden 영역과 Survivor 영역의 비율 |
 
-<figure><img src="../../../../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 > 이 중에서 중요한 옵션은 -Xms, -Xmx, -XX:NewRatio 옵션이다.&#x20;
 >
@@ -131,7 +131,7 @@ java -Xms256m -Xmx2048m -XX:+NewRatio=2 -XX:+UseParallelGC
 * 그리고 로그를 분석해 메모리가 어떻게 할당되는지 확인한다.&#x20;
 * 그 다음에 GC 방식 / 메모리 크기를 변경해 가면서 최적의 옵션을 찾아가면 된다.&#x20;
 
-<figure><img src="../../../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 분석할 떄는 다음의 사항을 중심으로 살펴보는 것이 좋다. 이는 우선 순위 별로 나열되어 있다.&#x20;
   * Full GC 수행 시간
