@@ -10,8 +10,9 @@
   * 공정성 : 락이 들어왔을 때 `BLOCKED` 상태의 여러 스레드 중에 어떤 스레드가 락을 획득할 지 알 수 없다. 최악의 경우 특정 스레드가 너무 오랜시간 락을 획득하지 못할 수 있다.&#x20;
 * 결국 더 유연하고, 세밀한 제어가 가능한 방법들이 필요하게 되었다.&#x20;
 * 이런 문제를 해결하기 위해서 자바 1.5 부터 `java.util.concurrent` 라는 동시성 문제 해결을 위한 라이브러리 패키지가 추가된다.&#x20;
-* 이 라이브러리에는 수 많은 클래스가 있지만, 가장 기본이 되는 `LockSupport` 에 대해서 먼저 알아보자. \
-  \-> `LockSupport` 을 통해서 `synchronized` 의 가장 큰 단점인 무한 대기 문제를 해결할 수 있다.&#x20;
+* 이 라이브러리에는 수 많은 클래스가 있지만, 가장 기본이 되는 `LockSupport` 에 대해서 먼저 알아보자.&#x20;
+  * `LockSupport` 을 통해서 `synchronized` 의 가장 큰 단점인 무한 대기 문제를 해결할 수 있다. \
+    (타임아웃 가능)&#x20;
 
 ### LockSupport 기능&#x20;
 
@@ -84,7 +85,7 @@ public class LockSupportMainV2 {
         Thread thread1 = new Thread(new ParkTest(), "Thread-1");
         thread1.start();
 
-        // 잠시 대기사여 Thread-1 이 park 에 빠질 시간을 준다.
+        // 잠시 대기하여 Thread-1 이 park 에 빠질 시간을 준다.
         sleep(100);
         log("Thread-1 state : " + thread1.getState());
 
@@ -191,7 +192,7 @@ lock.unlock() // 내부에서 unpark() 사용
 * `void lockInterruptibly()`
   * 락 획득을 시도하되, 다른 스레드가 인터럽트할 수 있도록 한다.&#x20;
   * 만약 다른 스레드가 이미 락을 획득했다면, 현재 스레드는 락을 획득할 때까지 대기한다.&#x20;
-  * **대기 중에 인터럽트가 발생하면 `InterruptedException` 이 발생하 며 락 획득을 포기한다.**\
+  * **대기 중에 인터럽트가 발생하면 `InterruptedException` 이 발생하면 락 획득을 포기한다.**\
     예) 맛집에 한번 줄을 서서 기다린다. 다만 친구가 다른 맛집을 찾았다고 중간에 연락하면 포기한다.
 * `boolean tryLock()`
   * 락 획득을 시도하고, 즉시 성공 여부를 반환한다.&#x20;
@@ -220,7 +221,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReentrantLockEx { 
     // 비공정 모드 락
     private final Lock nonFairLock = new ReentrantLock(); 
-    //공정 모드 락
+    // 공정 모드 락
     private final Lock fairLock = new ReentrantLock(true);
     
     public void nonFairLockTest() {
