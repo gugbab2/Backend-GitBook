@@ -287,7 +287,8 @@ public class CreateFileV1 {
 
 ### 예제1 - 읽기&#x20;
 
-*
+* fis.read() 를 사용해서 앞서 만든 파일에서 1byte 씩 데이터를 읽는다.&#x20;
+* 파일의 크기가 10MB 이므로 fis.read() 메서드를 약 1000만번(10 \* 1024 \* 1024) 호출한다.&#x20;
 
 <pre class="language-java"><code class="lang-java">package io.buffered;
 
@@ -315,3 +316,256 @@ public class ReadFileV1 {
 }
 </code></pre>
 
+* 실행 결과를 보는데 상당히 많은 시간이 소요된다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/image (134).png" alt=""><figcaption></figcaption></figure>
+
+### 정리&#x20;
+
+* 10MB 파일 하나 쓰는데 14초, 읽는데 5초라는 매우 오랜 시간이 걸렸다.&#x20;
+* 이렇게 오래 걸린 이유는 자바에서 1byte 씩 디스크에  데이터를 전달하기 때문이다. 디스크는 1byte 의 데이터를 받아서 1byte 의 데이터를 쓴다. 이 과정을 1000만번 반복하는 것이다.&#x20;
+* 더 자세하게 설명하면 다음 2가지 이유로 느려진다.&#x20;
+  * `write()` 나 `read()` 를 호출할 때마다 OS 에 시스템 콜을 통해 파일을 읽거나 쓰는 명령어를 전달한다. 이러한 시스템 콜은 상대적으로 무거운 작업이다.&#x20;
+  * HDD, SSD 같은 장치들도 하나의 데이터를 읽고 쓸 때마다 필요한 시간이 있다. HDD 의 경우 더욱 느린데, 물리적으로 디스크 회전 시간이 필요하기 때문
+  * 이러한 무거운 작업을 무려 1000만번 반복한다.&#x20;
+
+## 5. 파일 입출력과 성능 최적화2 - 버퍼 활용
+
+### 예제2 - 쓰기&#x20;
+
+* 데이터를 먼저 buffer 라는 byte\[] 에 담아둔다.&#x20;
+  * 이렇게 데이터를 모아서 전달하거나 모아서 전달받는 용도로 사용하는 것을 버퍼라 한다.&#x20;
+* 여기서는  BUFFER\_SIZE 만큼 데이터를 모아서 write() 를 호출한다.&#x20;
+  * 예를 들어 BUFFER\_SIZE 가 10이라면 10만큼 모이면 write() 를 호출해서 10byte 를 한번에 스트림에 전달한다.&#x20;
+
+```java
+package io.buffered;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import static io.buffered.BufferedConst.*;
+
+public class CreateFileV2 {
+    public static void main(String[] args) throws IOException {
+        FileOutputStream fos = new FileOutputStream(FILE_NAME);
+        long startTime = System.currentTimeMillis();
+        
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int bufferIndex = 0;
+        
+        for (int i = 0; i < FILE_SIZE; i++) {
+            buffer[bufferIndex++] = 1;
+        
+            // 버퍼가 가득 차면 쓰고, 버퍼를 비운다.
+            if (bufferIndex == BUFFER_SIZE) {
+                fos.write(buffer);
+                bufferIndex = 0;
+            }
+        }
+        
+        // 끝 부분에 오면 버퍼가 가득차지 않고 남아있을 수 있다. 버퍼에 남은 부분 쓰기
+        if (bufferIndex > 0) {
+             fos.write(buffer, 0, bufferIndex);
+        }
+        
+        fos.close();
+        
+        long endTime = System.currentTimeMillis();
+        System.out.println("File created: " + FILE_NAME);
+        System.out.println("File size: " + FILE_SIZE / 1024 / 1024 + "MB");
+        System.out.println("Time taken: " + (endTime - startTime) + "ms");
+    }
+}
+```
+
+* 실행 결과를 보면 이전 예제의 쓰기 결과인 14초 보다 약 1000배 정도 빠른 것을 확인할 수 있다.
+
+<figure><img src="../../../../.gitbook/assets/image (135).png" alt=""><figcaption></figcaption></figure>
+
+### 버퍼 크기에 따른 쓰기 성능&#x20;
+
+#### BUFFER\_SIZE 에 따른 쓰기 성능&#x20;
+
+* 1  : 14368ms&#x20;
+* &#x20;2 : 7474ms&#x20;
+* &#x20;3 : 4829ms&#x20;
+* &#x20;10 : 1692ms&#x20;
+* &#x20;100 : 180ms&#x20;
+* &#x20;1000 : 28ms&#x20;
+* &#x20;2000 : 23ms&#x20;
+* &#x20;4000 : 16ms&#x20;
+* &#x20;8000 : 13ms&#x20;
+* &#x20;80000 : 12ms
+
+#### BUFFER 와 성능에 대한 이야기&#x20;
+
+* 많은 데이터를 한 번에 전달하면 성능을 최적화 할 수 있다. 이렇게 되면 시스템 콜도 줄어들고, HDD, SSD 같은 장치 들의 작동 횟수도 줄어든다. 예를 들어 버퍼의 크기를 1 -> 2 로 변경하면 시스템 콜 횟수는 절반으로 줄어든다.&#x20;
+* 그런데 버퍼의 크기가 커진다고 해서 속도가 계속 줄어들지는 않는다.&#x20;
+  * 왜냐하면, **디스크나 파일 시스템에서 데이터를 읽고쓰는 기본 단위가 보통 4KB 또는 8KB 이기 때문이다.**&#x20;
+* 결국 버퍼의 많은 데이터를 담아서 보내도 디스크나 파일 시스템에서 해당 단위로 나누어 저장하기 때문에, 효율에는 한계가 있다.&#x20;
+* **따라서 버퍼의 크기는 보통 4KB, 8KB 정도로  잡는 것이 효율적이다.**\
+
+
+### **예제2 - 읽기**&#x20;
+
+<pre class="language-java"><code class="lang-java">package io.buffered;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import static io.buffered.BufferedConst.BUFFER_SIZE;
+import static io.buffered.BufferedConst.FILE_NAME;
+    
+public class ReadFileV2 {
+<strong>    public static void main(String[] args) throws IOException {
+</strong>        FileInputStream fis = new FileInputStream(FILE_NAME);
+        long startTime = System.currentTimeMillis();
+        
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int fileSize = 0;
+        int size;
+        while ((size = fis.read(buffer)) != -1) {
+            fileSize += size;
+        }
+        fis.close();
+        
+        long endTime = System.currentTimeMillis();
+        System.out.println("File name: " + FILE_NAME);
+        System.out.println("File size: " + (fileSize / 1024 / 1024) + "MB");
+        System.out.println("Time taken: " + (endTime - startTime) + "ms");
+   }
+}
+</code></pre>
+
+* 실행 결과를 보면 읽기 예제 또한 약 1000배 정도 빠른 것을 확인할 수 있다.
+
+<figure><img src="../../../../.gitbook/assets/image (136).png" alt=""><figcaption></figcaption></figure>
+
+## 6. 파일 입출력과 성능 최적화3 - Buffered 스트림 쓰기&#x20;
+
+* `BufferedOutputStream` 은 버퍼 기능을 내부에서 대신 처리해준다. 따라서 단순한 코드를 유지하면서 버퍼를 사용하는 이점을 함께 누릴 수 있다.&#x20;
+
+### 예제3 - 쓰기
+
+* `BufferedOutputStream` 내부에서 단순히 버퍼 기능만 제공한다. 따라서 반드시 대상 `OutputStream` 이 있어야 한다.&#x20;
+* 여기서는 `FileOutputStream` 객체를 생성자에 전달한다.&#x20;
+* 추가로 사용할 버퍼의 크기도 함께 전달할 수 있다.&#x20;
+* 코드를 보면 버퍼를 위한 `byte[]` 을 직접 다루지 않고, 마치 예제1 과 같이 단순하게 코드를 작성할 수 있다.&#x20;
+* 만약 버퍼에 데이터가 남아있는 상태로 `close()` 가 호출되면 어떻게 될까?&#x20;
+  * `BufferOutputStream` 을 `close()` 로 닫으면 먼저 내부에서 `flush()` 를 호출한다. 따라서 버퍼에 남아 있는 데이터를 모두 전달하고 비운다.&#x20;
+  * 따라서 `close()` 를 호출해도 남은 데이터를 안전하게 저장할 수 있다.&#x20;
+  * 버퍼가 비워지고 나면 `close()` 로 `BufferOutputStream` 의 자원을 정리한다.&#x20;
+  * 그리고 나서 다음 연결된 스트림의 `close()` 를 호출한다.&#x20;
+    * 여기서는 `FileOutputStream` 의 자원이 정리된다.&#x20;
+  * **여기서 핵심은 `close()` 를 호출하면 `close()` 가 연쇄적으로 호출된다는 점이다. 따라서 마지막에 연결한 `BufferedOutputStream` 만 닫아주면 된다.**&#x20;
+
+```java
+package io.buffered;
+
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static io.buffered.BufferedConst.*;
+
+public class CreateFileV3 {
+    public static void main(String[] args) throws IOException {
+        FileOutputStream fos = new FileOutputStream(FILE_NAME);
+        BufferedOutputStream bos = new BufferedOutputStream(fos, BUFFER_SIZE);
+        long startTime = System.currentTimeMillis();
+        
+        for (int i = 0; i < FILE_SIZE; i++) {
+            bos.write(1);
+        }
+        bos.close();
+        
+        long endTime = System.currentTimeMillis();
+        System.out.println("File created: " + FILE_NAME);
+        System.out.println("File size: " + FILE_SIZE / 1024 / 1024 + "MB");
+        System.out.println("Time taken: " + (endTime - startTime) + "ms");
+    }
+}
+```
+
+<figure><img src="../../../../.gitbook/assets/image (137).png" alt=""><figcaption></figcaption></figure>
+
+### 기본 스트림, 보조 스트림&#x20;
+
+* **`FileOutputStream` 과 같이 단독으로 사용할 수 있는 스트림을 기본 스트림이라 한다.**&#x20;
+* **`BufferedOutputStream` 과 같이 단독으로 사용할 수 없고, 보조 기능을 제공하는 스트림을 보조 스트림이라고 한다.**&#x20;
+* `BufferedOutputStream` 은 `FileOutputStream` 에 버퍼라는 보조 기능을 제공한다.&#x20;
+* `BufferedOutputStream` 의 생성자를 보면 알겠지만, 반드시 `FileOutputStream` 같은 대상 `OutputStream` 이 있어야 한다.&#x20;
+
+### 예제3 - 읽기
+
+```java
+package io.buffered;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import static io.buffered.BufferedConst.BUFFER_SIZE;
+import static io.buffered.BufferedConst.FILE_NAME;
+
+public class ReadFileV3 {
+    public static void main(String[] args) throws IOException {
+        FileInputStream fis = new FileInputStream(FILE_NAME);
+        BufferedInputStream bis = new BufferedInputStream(fis, BUFFER_SIZE);
+        long startTime = System.currentTimeMillis();
+        
+        int fileSize = 0;
+        int data;
+        while ((data = bis.read()) != -1) {
+            fileSize++;
+        }
+        bis.close();
+        
+        long endTime = System.currentTimeMillis();
+        System.out.println("File name: " + FILE_NAME);
+        System.out.println("File size: " + (fileSize / 1024 / 1024) + "MB");
+        System.out.println("Time taken: " + (endTime - startTime) + "ms");
+   }
+}
+```
+
+<figure><img src="../../../../.gitbook/assets/image (138).png" alt=""><figcaption></figcaption></figure>
+
+### 버퍼를 직접 다루는 것 보다 BufferedXxx 의 성능이 떨어지는 이유&#x20;
+
+* 방법에 따른 쓰기 시간&#x20;
+  * 예제1 쓰기: 14000ms (14초)&#x20;
+  * 예제2 쓰기: 14ms (버퍼 직접 다룸)&#x20;
+  * 예제3 쓰기: 102ms (BufferedXxx)
+* 예제2는 버퍼를 직접 다루는 것이고, 예제3은 `BufferedXxx` 라는 클래스가 대신 버퍼를 처리해준다. 버퍼를 사용하는 것은 같기 때문에, 결과적으로 예제2와 예제3은 비슷한 성능이 나와야 한다. 그런데 왜 예제2가 더 빠른 것일까?&#x20;
+* **이 이유는 동기화 때문이다.**&#x20;
+  * `BufferedOutputStream` 을 포함한 `BufferedXxx` 클래스는 모두 동기화 처리가 되어 있다.&#x20;
+  * 이번 예제의 문제는 1byte 씩 저장해서 총 10MB 를 처리해야 하는데, 이렇게 하려면 `write()` 를 약 1000만 번 호출해야 한다. (10  \* 1024 \* 1024)&#x20;
+  * 결과적으로 락을 걸고 푸는 코드도 1000만 번 호출된다는 뜻이다.&#x20;
+
+```java
+@Override
+public void write(int b) throws IOException {
+    if (lock != null) {
+        lock.lock();
+        try {
+            implWrite(b);
+        } finally {
+            lock.unlock();
+        }
+    } else {
+        synchronized (this) {
+            implWrite(b);
+        }
+    } 
+}
+```
+
+#### `BufferdXxx` 클래스의 특징&#x20;
+
+* `BufferdXxx` 클래스는 자바 초창기에 만들어진 클래스인데, 처음부터 멀티 스레드를 고려해서 만든 클래스이다.&#x20;
+* 따라서 멀티 스레드에 안전하지만 락을 걸고 푸는 동기화 코드로 인해 성능이 약간 저하될 수 있다.&#x20;
+* 하지만 싱글 스레드 상황에서는 동기화 락이 필요하지 않기 때문에, 직접 버퍼를 다룰 때와 비교해서 성능이 떨어진다.&#x20;
+* 일반적인 상황이라면 이 정도 성능은 크게 문제가 되지 않기 때문에, 싱글 스레드여도 `BufferedXxx` 를 사용하면 충분하다.&#x20;
+* 물론 매우 큰 데이터를 다루어야 하고, 성능 최적화가 중요하다면 예제 2와 같이 직접 버퍼를 다루는 방법을 고려하자.&#x20;
+* 아쉽게도 동기화 락이 없는 `BufferedXxx` 클래스는 없다, 꼭 필요한 상황이라면, `BufferedXxx` 를 참고해서 동기화 코드를 제거한 클래스를 직접 만들어서 사용하면 된다.&#x20;
