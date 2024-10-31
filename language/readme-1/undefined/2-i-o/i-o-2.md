@@ -206,7 +206,7 @@ public FileReader(String fileName, Charset charset) throws IOException {
 #### FileWriter 와 OutputStreamWriter&#x20;
 
 * `FileWriter` 코드와 앞서 작성한 `OutputStreamWriter` 를 사용한 코드가 뭔가 비슷하다는 점을 알 수 있다.&#x20;
-* 딱 하나의 차이점이 있다면 이전 코드에서는 `FileOutputStream` 을 직접 생성했는데, `FileWriter` 는 생성자 내부에서 대신 `FIleOutputStream` 을 생성해준다.&#x20;
+* 딱 하나의 차이점이 있다면 이전 코드에서는 `FileOutputStream` 을 직접 생성했는데, `FileWriter` 는 생성자 내부에서 대신 `FileOutputStream` 을 생성해준다.&#x20;
 * 사실 `FileWriter` 는 `OuputStreamWriter` 를 상속한다. 그리고 다른 추가 기능도 없다.&#x20;
 * 딱 하나, 생성자에서 개발자 대신에 `FileOutputStream` 을 생성해주는 일만 대신 처리해준다.&#x20;
 * 따라서 `FileWriter` 는 `OutputStreamWriter` 를 조금 편리하게 사용하게 해줄 뿐이다. \

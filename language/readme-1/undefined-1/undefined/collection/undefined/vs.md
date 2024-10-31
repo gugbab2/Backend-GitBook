@@ -2,7 +2,7 @@
 
 ## 이진 탐색 트리 (Binary Search Tree)
 
-<figure><img src="../../../../../../.gitbook/assets/image (8).png" alt="" width="347"><figcaption></figcaption></figure>
+<figure><img src="../../../../../../.gitbook/assets/image (8) (2).png" alt="" width="347"><figcaption></figcaption></figure>
 
 #### 정의&#x20;
 

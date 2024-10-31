@@ -7,7 +7,7 @@
 * IPv4 는 32bit 의 주소체계를 갖는다.
 * 8bit \* 4 로 볼 수 있는데, 8bit 는 2의 8제곱으로 256 가지의 수를 표현할 수 있다. (0 \~ 255)
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * IP 는 8bit 씩 '.' 으로 구분하면 위와 같이 표기한다.
 * 앞에 24bit 를 Network ID, 뒤 8bit 를 Host ID 라 부른다.\
