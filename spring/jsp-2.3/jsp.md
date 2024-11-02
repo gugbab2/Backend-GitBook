@@ -1,8 +1,108 @@
 # JSP
 
-## 1. JSP 처리 과정
+## 1. JSP 란?&#x20;
+
+* JSP는 동적인 웹서버에서 동적인 페이지를 만들어 주는 서버 사이드 스크립트 언어다.
+*   설명만 들으면 서블릿(Servlet)과 같은 기능을 하는 것처럼 보인다.
+
+    (실제로 기능적으로는 굉장히 비슷하다)
+* 하지만 아주 큰 차이가 있는데 작성하는 언어의 기반이 다르다는 것이다.
+* 서블릿이 클래스의 형태를 띄고 있고 자바의 형태를 온전히 가져가는데 반해
+* JSP는 HTML 코드를 기반으로 그 사이에 자바코드를 삽입하는 식으로 만든다.
+
+### JSP 등장 배경
+
+* 아래와 같은 HTML 코드가 있다고 생각하자&#x20;
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="TestServlet" method="get">
+		이름: <input type="text" name="name"><br><br>
+		나이: <input type="text" name="age"><br><br>
+		사는곳: <input type="text" name="place"><br><br>
+		<input type="submit" value="전송">
+	</form>
+</body>
+</html>
+```
+
+<figure><img src="../../.gitbook/assets/스크린샷 2024-11-02 17.04.17.png" alt="" width="446"><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/스크린샷 2024-11-02 17.04.26.png" alt="" width="453"><figcaption></figcaption></figure>
+
+* 위와 같은 결과를 출력하는 코드를 서블릿에서 작성하게 되면 아래와 같다.\
+  (너무 복잡하다.. )&#x20;
+
+```java
+@SuppressWarnings("serial")
+@WebServlet("/TestServlet")
+public class TestServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    	throws ServletException, IOException {
+        
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter(); 
+		
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		String place = request.getParameter("place");
+		
+		out.println("<html>");
+		out.println("<head>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<p>Hello Java!</p><br>");
+		out.println("<p>당신의 이름은 "+name+"입니다.</p><br>");
+		out.println("<p>당신의 나이는 "+age+"입니다.</p><br>");
+		out.println("<p>당신의 사는곳은 "+place+"입니다.</p><br>");
+		out.println("</body>");
+		out.println("</html>");
+	}
+
+}
+```
+
+* 위 서블릿 코드를 JSP 로 작성하게 되면 아래와 같다. \
+  (가독성이 좋다!)
+
+```java
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%! String name; String age; String place; %>
+
+<%
+name = request.getParameter("name");
+age = request.getParameter("age");
+place = request.getParameter("place");
+%>
+
+<p> 당신의 이름은 <strong><%= name %></strong>입니다. </p>
+<p> 당신의 나이는 <strong><%= age %></strong>입니다. </p>
+<p> 당신의 사는 곳은 <strong><%= place %></strong>입니다. </p>
+</body>
+</html>
+```
+
+## 2. JSP 처리 과정
 
 \-> WAS 는 JSP 페이지에 대한 요청이 들어오면 다음과 같은 처리를 한다.
+
+<figure><img src="../../.gitbook/assets/스크린샷 2024-11-02 17.09.06.png" alt=""><figcaption></figcaption></figure>
 
 * **JSP에 해당하는 서블릿이 존재하지 않을 시**
   * **JSP 페이지로부터 자바 코드(.java)를 생성한다.**
@@ -16,7 +116,7 @@
   * 서블릿이 요청을 처리한 결과를 응답으로 생성한다.
   * 응답을 웹 브라우저에 전송한다.
 
-## 2. 출력 버퍼와 응답
+## 3. 출력 버퍼와 응답
 
 * JSP 페이지는 응답 결과를 곧바로 웹 브라우저에 전송하지 않는다.\
   \-> 대신 `출력 버퍼(Buffer)`라고 불리는 곳에 임시로 응답 결과를 저장했다가 버퍼가 다 차면, **`한번에 웹 브라우저에 전송한다.`**
