@@ -193,6 +193,9 @@
           * [Guide to the Volatile Keyword in Java](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-volatile-keyword-in-java.md)
           * [Guide to the java.util.concurrent.Future](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/guide-to-the-java.util.concurrent.future.md)
           * [ThreadLocal in Java](language/readme-1/undefined-1/bealdung/java-concurrency/java-concurrency-basics/threadlocal-in-java.md)
+  * [그 외](language/readme-1/undefined-2/README.md)
+    * [시스템 콜과 자바에서의 시스템 콜 사용례](language/readme-1/undefined-2/undefined.md)
+    * [자바 NIO 의 동작원리 및 IO 모델](language/readme-1/undefined-2/nio-io.md)
 
 ## CS
 
@@ -211,7 +214,7 @@
       * [9. 운영체제 시작하기](cs/os/+/9..md)
       * [10. 프로세스와 스레드](cs/os/+/10..md)
 * [NETWORK](cs/network/README.md)
-  * [네트워크 기본 지식](<cs/network/undefined/README (1).md>)
+  * [그 외](<cs/network/undefined/README (1).md>)
     * [REST API](server/rest-api/README.md)
       * [REST API](server/rest-api/rest-api.md)
       * [URI & MIME type](server/rest-api/uri-and-mime-type.md)
@@ -290,7 +293,7 @@
         * [웹서비스와 공인인증서](cs/network/ssl/pki/undefined-2.md)
   * [책](cs/network/undefined-2.md)
 * [SECURITY](cs/security/README.md)
-  * [보안 기본 지식](cs/security/undefined/README.md)
+  * [그 외](cs/security/undefined/README.md)
     * [Basic Auth](security/basic-auth.md)
     * [HMAC 기반 인증](security/hmac.md)
 * [그 외](cs/undefined/README.md)
@@ -327,22 +330,22 @@
 
 ## DB
 
-* [DB 기본 지식](db/db/README.md)
-  * [인덱스(Index)](db/db/index.md)
-  * [트랜잭션(TRANSACTION)](db/db/transaction.md)
-  * [실무에서 외래키를 사용하지 않는 이유](db/db/undefined.md)
-  * [ORM vs SQL Mapper](db/db/orm-vs-sql-mapper.md)
-  * [문자열 vs DATE](db/db/vs-date.md)
-  * [EXPLAIN 명령어](db/db/explain.md)
-* [강의](db/undefined/README.md)
-  * [Real MySQL 시즌 1](db/real-mysql/README.md)
-    * [Part.1](db/real-mysql/part.1/README.md)
-      * [1강. CHAR vs VARCHAR](db/real-mysql/part.1/1-.-char-vs-varchar.md)
-      * [2강. VARCHAR vs TEXT](db/real-mysql/part.1/2-.-varchar-vs-text.md)
-      * [3강. COUNT(\*) & COUNT(DISTINCT) 튜닝](db/real-mysql/part.1/3-.-count-and-count-distinct.md)
-      * [4강. 페이징 쿼리 작성](db/real-mysql/part.1/4-..md)
-      * [5강. Stored Function](db/real-mysql/part.1/5-.-stored-function.md)
-* [책](db/undefined-1.md)
+* [그 외](db/undefined/README.md)
+  * [인덱스(Index)](db/undefined/index.md)
+  * [트랜잭션(TRANSACTION)](db/undefined/transaction.md)
+  * [실무에서 외래키를 사용하지 않는 이유](db/undefined/undefined.md)
+  * [ORM vs SQL Mapper](db/undefined/orm-vs-sql-mapper.md)
+  * [문자열 vs DATE](db/undefined/vs-date.md)
+  * [EXPLAIN 명령어](db/undefined/explain.md)
+* [강의](db/undefined-1/README.md)
+  * [Real MySQL 시즌 1](db/undefined-1/real-mysql-1/README.md)
+    * [Part.1](db/undefined-1/real-mysql-1/part.1/README.md)
+      * [1강. CHAR vs VARCHAR](db/undefined-1/real-mysql-1/part.1/1-.-char-vs-varchar.md)
+      * [2강. VARCHAR vs TEXT](db/undefined-1/real-mysql-1/part.1/2-.-varchar-vs-text.md)
+      * [3강. COUNT(\*) & COUNT(DISTINCT) 튜닝](db/undefined-1/real-mysql-1/part.1/3-.-count-and-count-distinct.md)
+      * [4강. 페이징 쿼리 작성](db/undefined-1/real-mysql-1/part.1/4-..md)
+      * [5강. Stored Function](db/undefined-1/real-mysql-1/part.1/5-.-stored-function.md)
+* [책](db/undefined-2.md)
 
 ## INSIGHT
 

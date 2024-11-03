@@ -1,6 +1,6 @@
 ---
-description: 식
+description: 외식
 ---
 
-# 네트워크 기본 지식
+# 그 외
 

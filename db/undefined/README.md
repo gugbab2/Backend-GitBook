@@ -1,6 +1,6 @@
 ---
-description: 의
+description: 외
 ---
 
-# 강의
+# 그 외
 
