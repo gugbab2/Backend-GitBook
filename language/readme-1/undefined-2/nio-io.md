@@ -4,6 +4,8 @@
 >
 > [https://brewagebear.github.io/fundamental-nio-and-io-models](https://brewagebear.github.io/fundamental-nio-and-io-models/)\
 > [https://jenkov.com/tutorials/java-nio/buffers.html](https://jenkov.com/tutorials/java-nio/buffers.html)
+>
+> [https://medium.com/dtevangelist/event-driven-microservice-%EB%9E%80-54b4eaf7cc4a](https://medium.com/dtevangelist/event-driven-microservice-%EB%9E%80-54b4eaf7cc4a)
 
 ## 1. 바이트 코드(ByteBuffer)&#x20;
 
