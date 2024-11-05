@@ -294,6 +294,316 @@ socketChannel.configureBlocking(false);
    2. 스레드가 많아질수록 메모리 사용량은 늘고, 스레드 간 컨텍스트 스위칭이 빈번해지면서 CPU 오버헤드가 증가한다.&#x20;
    3. 수천, 수만 개의 동시 연결이 필요한 대규모 서버에서는 이 방식으로는 효율적으로 확장하기가 어렵다 ..&#x20;
 2. 스레드 대기 시간 증가&#x20;
-   1. 블로킹 I/O 를 사용할 때 스레드는 I/O 작업이 완
+   1. 블로킹 I/O 를 사용할 때 스레드는 I/O 작업이 완료될 때까지 대기 상태로 전환된다. 응답이 느리거나 지연이 발생하면 해당 스레드는 응답 대기 동안 다른 작업을 할 수 없게 되며, 이는 특히 다중 클라이언트 환경에서 비효율적이다.&#x20;
+
+* 이러한 단점을 해결하기 위해서 I/O 멀티플렉싱 모델이 탄생했다!
 
 ### 3-2. 논 블로킹 모델과 셀렉터 동작 원리&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (149).png" alt=""><figcaption></figcaption></figure>
+
+* I/O 멀티플렉싱 모델의 핵심적인 기능은 크게 세가지로 볼 수 있다.&#x20;
+
+1. 셀렉터(Selector) : 리액터 패턴에서 리액터 역할을 해주는 객체&#x20;
+2. 셀렉터블채널(SelectableChannel) : 셀렉터에 등록할 수 있는 채널들은 이 클래스를 상속받는다. 우리가 볼 예제는 소켓 채널 클래스이므로, 셀렉터에 등록할 수 있다.&#x20;
+3. 셀렉션키(SelectionKey) : 특정 채널과 셀렉터 사이에서 해당 이벤트에 대한 내용에 정보를 들고 있는데, 이 값을 토대로 이벤트 요청을 처리한다.&#x20;
+
+* 위 내용을 기반으로 전체적인 흐름을 보자면 다음과 같다.&#x20;
+
+1. 채널을 셀렉터에 등록하면 이 등록에 관련된 채널과 셀렉터와 연관 정보를 갖는 셀렉션키가 셀렉터에 저장되고 리턴된다.&#x20;
+2. 위의 셀렉션키를 토대로 어떤 채널이 자신이 등록한 모드에 대해 동작할 준비가 되면 셀렉션키는 그 준비상태를 내부적으로 저장한다.&#x20;
+3. 소켓 서버의 예시를 들자면&#x20;
+   1. 클라이언트를 `accept` 할 준비가 되면 셀렉션키는 준비상태가 된 것이고,&#x20;
+   2. 이 때 셀렉터가 `select()` 메서드를 호출해서 자신에게 등록된 모든 셀렉션키의 상태를 체크하여&#x20;
+   3. 상태가 준비상태라면 하나씩 순서대로 꺼내서 요청한 이벤트에 대해서 적절하게 처리한다.&#x20;
+
+* 이제 이 동작을 기반으로 하나씩 살펴보자.&#x20;
+
+#### 3-2-1. SelectobleChannel
+
+* 위에서 이 클래스를 상속받은 클래스만이 셀렉터에 등록될 수 있다고 하였다.&#x20;
+* 우리가 살펴볼 `SelectableChannel` 의 기능은 크기 2가지이다.&#x20;
+  * **첫번째, 소켓채널에서 본 논블로킹 모드 활성화 기능** \
+    **(해당  기능은 소켓 채널에서 다루었다)**
+  * **두번째, 어떻게 셀렉터에 등록하는가?**
+* 아래 `register()` 메서드를 통해서 채널을 셀렉터에등록할 수 있다. \
+  (세번째 인자인 Object att 는 셀렉션키에서 설명하겠다)
+* 여기서 ops 는 이벤트의 모드라고 볼 수 있다. 셀렉터에 등록할 수 있는 이벤트 모드들은 4가지가 있다.  (해당 이벤트들은 상수로 등록되어 있다)
+  1. **OP\_READ** : 서버가 클라이언트의 요청을 `read` 할 수 있을 때 발생하는 이벤트
+  2. **OP\_WRITE** : 서버가 클라이언트의 응답을 `write` 할 수 있을 때 발생하는 이벤트
+  3. **OP\_CONNECT** : 서버가 클라이언트의 접속을 허락했을 때 발생하는 이벤트
+  4. **OP\_ACCEPT** : 클라이언트가 서버에 접속했을 때 발생하는 이벤트
+
+<figure><img src="../../../.gitbook/assets/image (150).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../../.gitbook/assets/image (151).png" alt=""><figcaption></figcaption></figure>
+
+* 아래와 같은 코드로 채널을 셀렉터에 등록할 수 있다 .
+
+<pre class="language-java"><code class="lang-java">// 셀렉터 생성
+Selector selector = Selector.open();
+// 서버소켓 채널 생성
+ServerSocketChannel server = ServerSocketChannel.open();
+<strong>server.configureBlocking(false); // 논블록킹 모드 활성화
+</strong>
+ServerSocket socket = server.socket();
+SocketAddress addr = new InetSocketAddress(port);
+socket.bind(addr); // 소켓 생성 후 해당 주소에 바인드
+
+// 셀렉터에 생성된 ServerSocketChannel과 ACCEPT 이벤트 등록
+server.register(selector, SelectionKey.OP_ACCEPT); 
+
+</code></pre>
+
+* 각 채널 구현체마다 등록될 수 있는 이벤트는 다른데 아래와 같다.&#x20;
+
+| 채널 구현체              | 등록할 수 있는 이벤트                     |
+| ------------------- | -------------------------------- |
+| ServerSocketChannel | OP\_ACCEPT                       |
+| SocketChannel       | OP\_CONNECT, OP\_READ, OP\_WRITE |
+| DatagramChannel     | OP\_READ, OP\_WRITE              |
+| Pipe.SourceChannel  | OP\_READ                         |
+| Pipe.SinkChannel    | OP\_WRITE                        |
+
+* 여러 개의 이벤트를 등록할 수 있는 채널은 아래와 같이 여러개의 이벤트도 등록할 수 있으며, 하나의 셀렉터에 여러개의 채널도 등록할 수 있다.&#x20;
+
+```java
+Selector selector = Selector.open();
+
+SocketChannel channel1 = SocketChannel.open();
+channel1.configureBlocking(false);
+SocketChannel channel2 = SocketChannel.open();
+channel2.configureBlocking(false);
+ServerSocketChannel server = ServerSocketChannel.open();
+server.configureBlocking(false);
+
+server.register(selector, SelectionKey.OP_ACCEPT);
+channel1.register(selector, SelectionKey.OP_READ);
+channel2.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+
+Set<SelectionKey> keys = selector.keys();
+
+for (SelectionKey key : keys) {
+    System.out.println(key.channel().getClass() + " " + key.interestOps());
+}
+```
+
+<figure><img src="../../../.gitbook/assets/image (152).png" alt=""><figcaption></figcaption></figure>
+
+* 그림으로 보면 다음과 같을 것이다.&#x20;
+  * 셀렉터는 이렇게 이벤트가 발생한 채널들만 선택해서 각 이벤트에 맞는 동작을 하도록 모든 이벤트들에 대한 컨트롤러 역할을 한다.&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
+
+#### 3-2-2. SelectionKey&#x20;
+
+* 어떤 채널이 어떤 셀렉터에, 어떤 이벤트 모드로 등록되었는지, 그 등록한 이벤트를 수행할 준비가 되었는지에 대한 정보들을 담고 있는 객체이다.&#x20;
+  * 즉, 이벤트 처리에 대해서 셀렉터와 채널 사이에서 도와주는 역할을 하는 객체이다.&#x20;
+* 셀렉션 키에는 크게 두가지 집합이 존재한다.&#x20;
+  * **interest set**
+    * 위에서 여러 채널과 이벤트를 등록하는 예시 코드 내 `key.interestOps()` 라는 메서드가 존재한다. 이 정보들은 `register()` 할 때 등록했던 상수들 값이다.&#x20;
+    * **따라서 interest set 은 셀렉터에 등록한 이벤트 정보를 담고있는 집합이다.**&#x20;
+  * **ready set**
+    * **ready set 은 채널에서 이벤트가 발생하면 그 이벤트들을 저장하는 집합이다.**&#x20;
+* 즉, 셀렉션키는 interest set, ready set 을 활용하여 이벤트 헨들링을 도와주는 역할을 한다.&#x20;
+* `register()` 메서드의 세번째 인자인 `att` 는 셀렉션키에 참조할 객체를 추가하는 메서드이고, 해당 키에 참조할 객체가 있다면 그 객체를 리턴하고, 없다면 `null` 을 리턴한다.&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (154).png" alt=""><figcaption></figcaption></figure>
+
+* 셀렉션키에 참조된 객체는 `attachement()` 메서드로 가져올 수 있으며, `register()` 로 등록이 가능하지만, `attach()` 메서드로도 등록할 수 있다.&#x20;
+  * `attach()` 메서드로 등록된 객체는 `SelectionKey` 가 참조하고 있기 때문에, GC 대상이 되지 않는다. 때문에, `SelectionKey` 가 삭제되기 전에 명시적으로 `SelectionKey.attach(null)` 또는 `SelectionKey.cancel()` 을 호출하여 참조를 해제해야 한다.&#x20;
+  * 그렇게 해야만 메모리 누수가 발생하지 않는다.&#x20;
+
+#### 3-2-3. Selector
+
+* 셀렉터는 위에서 언급한 바와 같이 등로된 채널들이 발생시킨 이벤트에 대해 적절한 처리 핸들러로 요청을 분기해주는 컨트롤러 역할을 한다.&#x20;
+* 위에서 셀렉터에 대한 내용은 많이 언급했으니 중요한 특징만 가지고 설명하고자 한다.
+* 셀렉터 또한 등록된 이벤트를 처리하기 위해서는 자신에게 등록된 채널과 연관된 셀렉션키에 대해서 알고 있어야 한다.&#x20;
+* 그러므로 셀렉터 내부에는 셀렉션키에 대한 집합을 가지고 있다. 이 집합은 크게 3가지이며, 셀렉터 내부에는 아래의 집합들을 관리한다.&#x20;
+  * **등록된 키 집합(Registered Key Set)**
+    * 셀렉터에 등록된 모든 셀렉션키의 집합이다. 하지만 이 집합에 있는 모든 키가 유효하지는 않다.&#x20;
+    * 메서드 : `Selector.keys()`&#x20;
+  * **선택된 키 집합(Selected Key Set)**&#x20;
+    * 등록된 키 집합 내 포함되어 있다.&#x20;
+    * 셀렉션키가 수행 준비상태가 되어서 **ready set(이벤트가 발생)** 이 비어있지 않은 키들이 `Selector.select()` 메서드에 호출되어서 선택되었을 때 이 집합에 추가된다.&#x20;
+  * **취소된 키 집합(Cancelled Key Set)**&#x20;
+    * 등록된 키 집합 내 포함되어 있다.&#x20;
+    * 등록을 해제하고 싶을 때 `SelectionKey.cancel()` 메서드로 등록을 취소할 수 있는데, 이 키는 바로 유효하지 않은 키로 설정되고 취소된 키 집합에 추가된다.&#x20;
+* **주의 사항으로 셀렉터는 스레드 세이프하지만, 세 가지 키 집합은 스레드 세이프 하지 않으므로, 멀티스레드 환경에서는 반드시 동기화처리를 해주어야 한다.**&#x20;
+* 이제 셀렉터의 동작 원리에 대해서 살펴보자. 셀렉터는 `select()`, `poll()` 과 같은 시스템 콜을 래핑한 것이다.&#x20;
+  * **실제 사용 방식은 `select()` 메서드를 호출하면서 사용되는데 내부적으로 아래와 같은 방식으로 동작한다.**&#x20;
+  * **아래 1\~3 동작과정을 반복하면서 진행하는데, 그 실행 시점과 블로킹 여부만 차이가 있다.**&#x20;
+
+1. **취소된 키 집합을 체크한다.**
+   * 만약 집합이 비어 있지 않다면
+     * 이 집합에 저장된 각각의 키들은 셀렉터가 관리하는 세가지 집합에서 모두 삭제되어 각 키와 연관된 채널이 셀렉터에서 등록이 해제된다.
+2. **등록된 키 집합을 체크한다.**
+   * 만약 **ready set**이 비어있지 않은 셀렉션키가 존재한다면
+     * 등록된 키 집합에 넣는다. (이미 존재한다면 그 키를 업데이트 처리만 한다.)
+3. **셀렉터가** `selectedKeys()` **메서드를 호출한다.**
+   * 저장된 선택된 키 집합을 가져오고, 그 안에 저장된 셀렉션키의 이벤트 형식에 따라 적절한 핸들러에게 처리를 넘긴다.
+
+* 셀렉터가 제공하는 `select` 함수는 총 세가지이다.&#x20;
+
+1. `select()`&#x20;
+   * 블록킹되는 메서드이며, 선택된 키 집합이 비어있다면 키가 추가될 때까지 블록킹 된다. 그러다가 사용할 수 있는 키가 추가되면 ① \~ ③을 실행한다.
+2. `select(long timeout)`&#x20;
+   * 밀리세컨드마다 `select()` 함수와 동일하게 처리된다. 따라서, 해당 시간마다 블록킹이 된다.
+3. `selectNow()`
+   * 논블록킹 메서드이다. 따라서 이용 가능한 채널이 없으면 0을 리턴하고, 아니면 마찬가지로 등록된 키 집합안에 들어있는 셀렉션키의 개수를 리턴한다.
+
+* 여기서 추가로, `wakeup()` 메서드는 스레드가 블로킹 되어 있는 경우 이 블로킹 된 스레드를 깨우는데 사용한다.
+
+## 4. I/O 모델 및 간단한 블로킹IO & NIO 예제
+
+### 4-1. I/O 모델&#x20;
+
+* IO / NIO 를 다루면서 자주 했던 말이 블로킹과 논 블로킹이다.&#x20;
+* 이것들은 I/O 모델이라는 개념에 속해있다. 이번 포스팅에서는 4가지 I/O 모델을 다루어보자.&#x20;
+  * 블로킹(Blocking) I/O && 동기(Synchronous) I/O 모델&#x20;
+  * 논 블로킹(Non-Blocking) I/O 모델
+  * 비동기(Asynchronous) I/O 모델
+  * I/O 다중화(Multiplexing) 모델
+
+#### 4-1-1.  블로킹(Blocking) I/O && 동기(Synchronous) I/O 모델&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (157).png" alt=""><figcaption></figcaption></figure>
+
+* 위 그림을 보면 어플리케이션은 커널에서 응답이 올 때까지 블로킹된다. \
+  (다른 작업은 하지 못하고 waiting 상태가 된다)&#x20;
+* 당연히 우리의 똑똑한 선배님들은 이러한 응답을 대기하는 대기시간이 발생하기 때문에, 이 시간을 줄일 수 없을까? 고민을 하게 되었고, 그렇게 나온 I/O 모델이 논 블로킹 I/O 모델이다.&#x20;
+
+#### 4-1-2. 논 블로킹(Non-Blocking) I/O 모델
+
+<figure><img src="../../../.gitbook/assets/image (158).png" alt=""><figcaption></figcaption></figure>
+
+* 논 블로킹 모델은 그림과 같이 시스템 콜이 발생한 뒤에 응답이 끝날때까지 기다리는 것이 아니라, 제어권을 어플리케이션이 가지고 있다.&#x20;
+* 그렇다면 비동기 통신이랑은 무엇이 다른 것일까?
+
+#### 4-1-3. 비동기(Asynchronous) I/O 모델
+
+<figure><img src="../../../.gitbook/assets/image (159).png" alt=""><figcaption></figcaption></figure>
+
+* 가장 큰 차이점은 논 블로킹 I/O 모델처럼 주기적으로 처리 여부를 응답하는 것이 아니라, 커널에 시스템 콜을 한 뒤 어플리케이션은 다른 일을 하다가 커널이 콜백으로 완료 여부를 알려준다.&#x20;
+  * 즉, I/O 처리가 완료된 타이밍에 결과를 회신하는 모델이다.&#x20;
+* 차이점을 정리하자면 비동기 I/O 모델은 완료 했을 때 통지를 하지만, 논 블로킹 I/O 모델은 처리가 가능한 상태를 판단하면서 처리한다.&#x20;
+* 여기서 논 블로킹 I/O 의 단점을 생각해 볼 수 있는데, 시스템 콜이 계속해서 발생할 수 있다는 단점이 있다..&#x20;
+* 이러한 단점을 해결하기 위해서, 이벤트 등록(필요한 시점에만 물어보게끔 하는 것이다) 을 통해 이를 처리하는 방법을 고안하였고, 이 방법이 I/O 다중화 모델이다!
+
+#### 4-1-4. I/O 다중화(Multiplexing) 모델
+
+<figure><img src="../../../.gitbook/assets/image (161).png" alt="" width="550"><figcaption></figcaption></figure>
+
+* `select` 시스템 콜은 `Selector.select()` 라고 볼 수 있을 것이며, **data ready** 부분은 셀렉션키의 **ready set** 이 존재하는 경우이다.&#x20;
+* 즉, 우리가 공부한 NIO 는 I/O 다중화 모델을 구현할 수 있는 객체들이다. 이러한 개념들을 출발하여 오늘날 I/O 모델의 중심이라 볼 수 있는 이벤트 주도 아키텍처 등이 탄생했다고 볼 수 있다.&#x20;
+
+### 4-2. 간단한 블로킹IO & NIO 예제&#x20;
+
+#### 4-2-1. 블로킹 IO (전통적인 방식)&#x20;
+
+* 블로킹 IO 에서 입출력 작업이 완료될 때까지 스레드를 기다린다. 이 방식은 동기적으로, 각 요청에 대해 스레드가 하나씩 할당되어 작업을 완료할 때가지 해당 스레드가 블로킹 상태로 유지된다.&#x20;
+* 요청이 많아질 경우 많은 스레드를 생성해야 하며, 컨텍스트 스위칭 비용이 증가하여 성능에 영향을 끼칠 수 있다.&#x20;
+
+```java
+import java.io.*;
+import java.net.*;
+
+public class BlockingIOServer {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(8080)) {
+            System.out.println("Blocking I/O Server started on port 8080");
+            while (true) {
+                Socket clientSocket = serverSocket.accept(); // 클라이언트가 연결될 때까지 대기
+                handleRequest(clientSocket); // 클라이언트 요청 처리
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void handleRequest(Socket clientSocket) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+             PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true)) {
+
+            String request = reader.readLine(); // 요청이 들어올 때까지 블로킹
+            System.out.println("Received: " + request);
+            writer.println("Echo: " + request); // 응답 전송
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+* 블로킹 IO 동작&#x20;
+  * `serverSocket.accept()` 가 호출되면 클라이언트의 연결 요청이 들어올 때까지 스레드가 블로킹된다.&#x20;
+  * `clientSocket.getInputStream().readLine()` 도 클라이언트가 데이터를 보낼 때까지 블로킹된다.&#x20;
+  * **즉, 모든 입출력 작업은 완료될 때까지 스레드가 대기 상태에 있어야 한다.**&#x20;
+
+#### 4-2-2. NIO
+
+* NIO 에서는 하나의 스레드로 여러 채널을 관리할 수 있다.&#x20;
+* 각 채널은 논 블로킹 모드로 동작하여 준비된 작업만 처리한다.&#x20;
+* 이를 위해서 `Selector` 를 이용해 이벤트가 발생한 채널을 감지하고 작업을 수행한다.&#x20;
+
+```java
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.*;
+import java.util.Iterator;
+
+public class NonBlockingIOServer {
+    public static void main(String[] args) {
+        try (Selector selector = Selector.open();
+             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
+            
+            serverSocketChannel.bind(new InetSocketAddress(8080));
+            serverSocketChannel.configureBlocking(false); // 논블로킹 모드로 설정
+            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+            System.out.println("Non-blocking I/O Server started on port 8080");
+            
+            while (true) {
+                selector.select(); // 이벤트 발생할 때까지 대기
+                Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
+                
+                while (keyIterator.hasNext()) {
+                    SelectionKey key = keyIterator.next();
+                    keyIterator.remove();
+                    
+                    if (key.isAcceptable()) {
+                        // 새로운 연결 수락
+                        ServerSocketChannel server = (ServerSocketChannel) key.channel();
+                        SocketChannel client = server.accept();
+                        client.configureBlocking(false);
+                        client.register(selector, SelectionKey.OP_READ);
+                        System.out.println("Accepted connection from client");
+                    } else if (key.isReadable()) {
+                        // 데이터 읽기
+                        SocketChannel client = (SocketChannel) key.channel();
+                        ByteBuffer buffer = ByteBuffer.allocate(256);
+                        int bytesRead = client.read(buffer);
+                        
+                        if (bytesRead == -1) {
+                            client.close();
+                        } else {
+                            buffer.flip();
+                            client.write(buffer); // Echo back to client
+                            buffer.clear();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+* 논 블로킹 IO 동작&#x20;
+  * `selector.select()` 메서드를 하나 이상의 채널에 이벤트가 발생할 때까지 대기한다. 이 호출은 블로킹 상태이지만, 이벤트가 발생한 채널의 작업만 처리하므로, CPU 와 메모리를 효율적으로 사용할 수 있다.&#x20;
+  * `SelectionKey.OP_ACCEPT` 를 통해 클라이언트 연결이 수락되었을 때 이벤트를 받고,&#x20;
+  * `SelectionKey.OP_READ` 로 읽기 가능 상태인 채널에서 데이터를 읽는다.&#x20;
+  * **`SocketChannel.configureBlocking(false)` 로 설정했기 때문에, IO 작업을 수행할 때도 스레드가 블로킹 되지 않으며 다른 작업을 처리할 수 있다.**&#x20;
