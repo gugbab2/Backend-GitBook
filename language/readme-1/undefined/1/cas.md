@@ -388,29 +388,33 @@ public class CasMainV2 {
 
 * 멀티스레드를 사용해서 중간에 다른 스레드가 먼저 값을 증가시켜 버리는 경우를 알아보자. 그리고 CAS 연산이 실패하는 경우에 어떻게 되는지 알아보자.&#x20;
 * 코드를 살펴보자&#x20;
-  * **\[Thread-1 실행]**&#x20;
-    * `atomicInteger.get()` 을 사용해서 `value` 값을 읽는다 -> `getValue` 는 0이다.&#x20;
-    * `compareAndSet(0, 1)` 을 수행한다.&#x20;
-      * `compareAndSet(getValue, getValue + 1)`&#x20;
-    * CAS 연산이 성공했으므로 `value` 값은 0에서 1로 증가하고 `true` 를 반환한다.&#x20;
-    * `do~while` 문을 빠져나간다.&#x20;
-  * **\[Thread-0 실행]**
-    * **\[Thread-0]`do~while` 첫 번째 시도**
-      * `atomicIngeter.get()` 을 사용해서 `value` 값을 읽는다. -> `getValue` 는 0이다.&#x20;
-      * `compareAndSet(0, 1)` 을 수행한다.&#x20;
-        * `compareAndSet(getValue, getValue + 1)`&#x20;
-      * 그런데 `compareAndSet(0, 1)` 연산은 실패한다.&#x20;
-        * CAS 연산에서 현재 `value` 값으로 0 을 기대했지만, `Thread-1` 이 중간에 먼저 실행되면서 `value` 값을 `0 -> 1`로 변경해버렸다.&#x20;
-      * CAS 연산이 실패앴으므로 `value` 값은 변경하지 않고, `false` 를 반환한다.&#x20;
-      * 실패했으므로, `do~while` 문을 빠져나가지 못한다. `do~while` 문을 다시 시작한다.&#x20;
-        * `while(!result)` -> `while(!false)` -> `while(true)` 이므로 반복&#x20;
-    * **\[Thread-0] `do~while` 두번째 시도**&#x20;
-      * `do~while` 문이 다시 시작된다.&#x20;
-      * `atomicInteger.get()` 을 사용해서 `value` 값을 읽는다. -> `getValue` 는 1이다.&#x20;
-      * `compareAndSet(1, 2)` 을 수행한다.&#x20;
-        * `compareAndSet(getValue, getValue + 1)`&#x20;
-      * CAS 연산이 성공했으므로 `value` 값은 1에서 2로 증가하고 `true` 를 반환한다.&#x20;
-      * `do~while` 문을 빠져나간다.&#x20;
+
+#### **\[Thread-1 실행]**&#x20;
+
+* `atomicInteger.get()` 을 사용해서 `value` 값을 읽는다 -> `getValue` 는 0이다.&#x20;
+* `compareAndSet(0, 1)` 을 수행한다.&#x20;
+  * `compareAndSet(getValue, getValue + 1)`&#x20;
+* CAS 연산이 성공했으므로 `value` 값은 0에서 1로 증가하고 `true` 를 반환한다.&#x20;
+* `do~while` 문을 빠져나간다.&#x20;
+
+#### **\[Thread-0 실행]**
+
+* **\[Thread-0]`do~while` 첫 번째 시도**
+  * `atomicIngeter.get()` 을 사용해서 `value` 값을 읽는다. -> `getValue` 는 0이다.&#x20;
+  * `compareAndSet(0, 1)` 을 수행한다.&#x20;
+    * `compareAndSet(getValue, getValue + 1)`&#x20;
+  * 그런데 `compareAndSet(0, 1)` 연산은 실패한다.&#x20;
+    * CAS 연산에서 현재 `value` 값으로 0 을 기대했지만, `Thread-1` 이 중간에 먼저 실행되면서 `value` 값을 `0 -> 1`로 변경해버렸다.&#x20;
+  * CAS 연산이 실패앴으므로 `value` 값은 변경하지 않고, `false` 를 반환한다.&#x20;
+  * 실패했으므로, `do~while` 문을 빠져나가지 못한다. `do~while` 문을 다시 시작한다.&#x20;
+    * `while(!result)` -> `while(!false)` -> `while(true)` 이므로 반복&#x20;
+* **\[Thread-0] `do~while` 두번째 시도**&#x20;
+  * `do~while` 문이 다시 시작된다.&#x20;
+  * `atomicInteger.get()` 을 사용해서 `value` 값을 읽는다. -> `getValue` 는 1이다.&#x20;
+  * `compareAndSet(1, 2)` 을 수행한다.&#x20;
+    * `compareAndSet(getValue, getValue + 1)`&#x20;
+  * CAS 연산이 성공했으므로 `value` 값은 1에서 2로 증가하고 `true` 를 반환한다.&#x20;
+  * `do~while` 문을 빠져나간다.&#x20;
 
 ```java
 package thread.cas;
@@ -698,3 +702,5 @@ CAS 단점
   * 때로는 락이 더 나은 성능을 발휘할 수 있으며, CAS 가 항상 더 빠르다고 단정할 수는 없다.&#x20;
 * 따라서, 각 접근 방식의 특성을 이해하고, 애플리케이션의 특정 요구사항과 환경에 맞는 방식을 선택하는 것이 중요하다.&#x20;
 * 우리가 사용하는 자바 동시성 라이브러리들, 동기화 컬렉션들은 성능 최적화를 위해서 CAS 를 적극 활용한다. 덕분에 실무에서 CAS 를 직접 사용하는 일은 드물다.. 대신 CAS 를 사용해 최적화되어 있는 라이브러리들을 이해하고 편리하게 사용할 줄 알면 충분하다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-12 20.27.21.png" alt=""><figcaption></figcaption></figure>
