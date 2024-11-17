@@ -3,9 +3,9 @@
 ## 스레드를 직접 사용할 때 문제점&#x20;
 
 * 실무에서 스레드를 직접 생성해서 사용하면 다음과 같은 3가지 문제가 있다.
-  * 스레드 생성 시간으로 인한 성능 문제
-  * 스레드 관리 문제
-  * `Runnable` 인터페이스의 불편함
+  * **스레드 생성 시간으로 인한 성능 문제**
+  * **스레드 관리 문제**
+  * **`Runnable` 인터페이스의 불편함**
 
 #### 1. 스레드 생성 시간으로 인한 성능 문제
 
@@ -15,12 +15,13 @@
   * **운영체제 스케줄러 설정** : 새로운 스레드가 생성되면 운영체제의 스케줄러는 이 스레드를 관리하고 실행 순서를 조 정해야 한다. 이는 운영체제의 스케줄링 알고리즘에 따라 추가적인 오버헤드가 발생할 수 있다.
   * **참고로 스레드 하나는 보통 1MB 이상의 메모리를 사용한다.**
 * 스레드를 생성하는 작업은 상대적으로 무겁다. 단순히 자바 객체를 하나 생성하는 것과는 비교할 수 없을 정도로 큰 작 업이다.
-  * 예를 들어서 어떤 작업 하나를 수행할 때 마다 스레드를 각각 생성하고 실행한다면, 스레드의 생성 비용 때문에, 이미 많은 시간이 소모된다. 아주 가벼운 작업이라면, 작업의 실행 시간보다 스레드의 생성 시간이 더 오래 걸릴 수도 있다.
+  * 예를 들어서 어떤 작업 하나를 수행할 때 마다 스레드를 각각 생성하고 실행한다면, 스레드의 생성 비용 때문에, 이미 많은 시간이 소모된다.&#x20;
+  * 아주 가벼운 작업이라면, 작업의 실행 시간보다 스레드의 생성 시간이 더 오래 걸릴 수도 있다.
 * 이런 문제를 해결하려면 생성한 스레드를 재사용하는 방법을 고려할 수 있다. 스레드를 재사용하면 처음 생성할 때를 제외하고는 생성을 위한 시간이 들지 않는다. 따라서 스레드가 아주 빠르게 작업을 수행할 수 있다.
 
 #### 2. 스레드 관리 문제
 
-* 서버의 CPU, 메모리 자원은 한정되어 있기 때문에, 스레드는 무한하게 만들 수 없다.
+* 서버의 CPU, 메모리 자원은 한정되어 있기 때문에, 스레드는 무한하게 만들 수 없다..
   * 예를 들어서, 사용자의 주문을 처리하는 서비스라고 가정하자. 그리고 사용자의 주문이 들어올 때 마다 스레드를 만들어서 요청을 처리한다고 가정하겠다.
   * 서비스 마케팅을 위해 선착순 할인 이벤트를 진행한다고 가정해보자. 그러면 사용자 가 갑자기 몰려들 수 있다. 평소 동시에 100개 정도의 스레드면 충분했는데, 갑자기 10000개의 스레드가 필요한 상황 이 된다면 CPU, 메모리 자원이 버티지 못할 것이다.
   * **이런 문제를 해결하려면 우리 시스템이 버틸 수 있는, 최대 스레드의 수 까지만 스레드를 생성할 수 있게 관리해야 한다.**
@@ -45,7 +46,7 @@ public interface Runnable {
 
 #### 해결&#x20;
 
-* 위에서 말한 1,2 번의 문제를 해결하기 위해서는 스레드 풀(Thread Pool) 이 필요하다.&#x20;
+* 위에서 말한 1,2 번의 문제를 해결하기 위해서는 **스레드 풀(Thread Pool)** 이 필요하다.&#x20;
 * 이렇게 스레드 풀이라는 개념을 사용하면 스레드를 재사용할 수 있어서, 재사용시 스레드의 생성 시간을 절약할 수 있 다. 그리고 스레드 풀에서 스레드가 관리되기 때문에 필요한 만큼만 스레드를 만들 수 있고, 또 관리할 수 있다.
 * 사실 스레드 풀이라는 것이 별것이 아니다. 그냥 컬렉션에 스레드를 보관하고 재사용할 수 있게 하면 된다. 하지만 스레 드 풀에 있는 스레드는 처리할 작업이 없다면, 대기( `WAITING`) 상태로 관리해야 하고, 작업 요청이 오면 `RUNNABLE` 상태로 변경해야 한다.&#x20;
 * 막상 구현하려고 하면 생각보다 매우 복잡하다는 사실을 알게될 것이다. 여기에 생산자 소비자 문제까지 겹친다.&#x20;
@@ -89,7 +90,7 @@ public interface ExecutorService extends Executor, AutoCloseable {
 
 ### 로그 출력 유틸리티 만들기&#x20;
 
-* `ExecutorService` 의 기본 구현체는 `ThreadPoolExecutor` 이다.&#x20;
+* `ExecutorService` 의 기본 구현체는 **`ThreadPoolExecutor`** 이다.&#x20;
   * `pool` : 스레드 풀에서 관리되는 스레드의 숫자
   * `active` : 작업을 수행하는 스레드의 숫자
   * `queuedTasks` : 큐에 대기중인 작업의 숫자
@@ -204,7 +205,7 @@ public class ExecutorBasicMain {
 }
 ```
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-16 15.46.04.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-16 15.46.04.png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### ExecutorService 분석
 
@@ -217,9 +218,9 @@ public class ExecutorBasicMain {
 
       가 실행할 것이다. `main` 스레드는 작업을 큐에 보관까지만 하고 바로 다음 코드를 수행한다.&#x20;
 * `taskA~D` 요청이 블로킹 큐에 들어온다.
-* 최초의 작업이 들어오면 이때 작업을 처리하기 위해 스레드를 만든다.&#x20;
-  * 참고로 스레드 풀에 스레드를 미리 만들어두지는 않는다.
-* 작업이 들어올 때 마다 `corePoolSize`의 크기 까지 스레드를 만든다.
+* **최초의 작업이 들어오면 이때 작업을 처리하기 위해 스레드를 만든다.**&#x20;
+  * **참고로 스레드 풀에 스레드를 미리 만들어두지는 않는다.**
+* **작업이 들어올 때 마다 `corePoolSize`의 크기 까지 스레드를 만든다.**
   * 예를 들어서 최초 작업인 `taskA` 가 들어오는 시점에 스레드1을 생성하고, 다음 작업인 `taskB` 가 들어오 는 시점에 스레드2를 생성한다.
   * 이런 방식으로 `corePoolSize` 에 지정한 수 만큼 스레드를 스레드 풀에 만든다. 여기서는 2를 설정했으므 로 2개까지 만든다.
   * `corePoolSize` 까지 스레드가 생성되고 나면, 이후에는 스레드를 생성하지 않고 앞서 만든 스레드를 재 사용한다.
@@ -249,8 +250,6 @@ public class ExecutorBasicMain {
 >
 > 하자. 둘의 차이는 뒤에서 설명한다.
 
-
-
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-16 16.15.38.png" alt="" width="563"><figcaption></figcaption></figure>
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-16 16.15.55.png" alt="" width="563"><figcaption></figcaption></figure>
@@ -264,3 +263,613 @@ public class ExecutorBasicMain {
     * 쉽게 이야기해서 스레드의 실행 결과를 직접 받을 수 없다.&#x20;
     * 앞에서 공부한 `SumTask`의 예를 생각해보자. 스레드가 실행한 결과를 멤버 변수에 넣어두고, `join()` 등을 사용해서 스레드가 종료되길 기다린 다음에 멤버 변수를 통해 값을 받아야 한다.
   * **예외 처리** : `run()` 메서드는 체크 예외(checked exception)를 던질 수 없다. 체크 예외의 처리는 메서드 내부 에서 처리해야 한다.
+
+### Runnable 사용&#x20;
+
+* 이해를 돕기 위해서 `Runnable` 을 통해 별도의 스레드에서 무작위 값을 하나 구하는 간단한 코드를 만들어보자.&#x20;
+  * 무작위 값이므로 결과는 다를 수 있다.&#x20;
+  * 프로그램이 시작되면 `Thread-1` 이라는 별도의 스레드를 만든다.&#x20;
+  * `Thread-1` 이 수행하는 `MyRunnable` 은 무작위 값을 하나 구한 다음에 `value` 필드에 보관한다.&#x20;
+  * 클라이언트인 `main` 스레드가 이 별도의 스레드에서 만든 무작위 값을 얻어오려면 `Thread-1` 스레드가 종료될 때까지 기다려야 한다. 그래서 `main` 스레드는 `join()` 을 호출해서 대기한다.&#x20;
+  * 이후에 `main` 스레드에서 `MyRunnable` 인스턴스의 `value` 필드를 통해 최종 무작위 값을 획득한다.&#x20;
+* 별도의 스레드에서 만든 무작위 값 하나 받아오는 코드가 위처럼 복잡하다 ;;&#x20;
+* 작업 스레드는 간단히 값을 `return` 해서 반환하고, 요청 스레드는 그 반환 값을 받을 수 있다면 정말 간단할 것이다.&#x20;
+  * 이런 문제를 해결하기 위해서 `Executor` 프레임워크는 `Callable` 과 `Future` 이라는 인터페이스를 도입했다.&#x20;
+
+```java
+package thread.executor.future;
+
+import java.util.Random;
+
+import static util.MyLogger.log;
+import static util.ThreadUtils.sleep;
+
+public class RunnableMain {
+    public static void main(String[] args) throws InterruptedException {
+        MyRunnable task = new MyRunnable();
+        Thread thread = new Thread(task, "Thread-1");
+        thread.start();
+        thread.join();
+        int result = task.value;
+        log("result value = " + result);
+    }
+
+    static class MyRunnable implements Runnable {
+
+        int value;
+
+        @Override
+        public void run() {
+            log("Runnable 시작");
+            sleep(2000);
+            value = new Random().nextInt(10);
+            log("create value = " + value);
+            log("Runnable 완료");
+        }
+    }
+}
+
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.12.47.png" alt="" width="563"><figcaption></figcaption></figure>
+
+## Future1 - 시작&#x20;
+
+### Runnable 과 Callable 비교&#x20;
+
+#### Runnable&#x20;
+
+```java
+package java.lang;
+
+public interface Runnable {
+   void run();
+}
+```
+
+* Runnable 의 run() 은 반환 타입이 void 이다. 따라서 값을 반환할 수 없다.&#x20;
+* 또한 예외가 선언되어 있지 않다. 때문에, 해당 인터페이스를 구현하는 모든 메서드는 체크 예외를 던질 수 없다.&#x20;
+
+#### Callable&#x20;
+
+```java
+package java.util.concurrent;
+
+public interface Callable<V> {
+   V call() throws Exception;
+}
+```
+
+* `java.util.concurrent` 에서 제공되는 기능이다.&#x20;
+* `Callable` 의 `call()` 은 반환 타입이 제네릭이다. 따라서 값을 반환할 수 있다.&#x20;
+* `throw Excetpion` 예외가 선언되어 있다. 따라서 해당 인터페이스를 구현하는 모든 메서드는 체크 예외인 `Exception` 과 그 하위 예외를 모두 던질 수 있다.&#x20;
+
+### Callable 과 Future 사용&#x20;
+
+* 아래 코드를 살펴보자.&#x20;
+  * 숫자를 반환하므로 반활할 제네릭 타입을 `<Integer>` 로 선언했다.&#x20;
+  * 구현은 `Runnable` 코드와 비슷한데, 유일한 차이는 결과를 필드에 담아두는 것이 아니라, **결과를 반환한다는 점이다!**&#x20;
+  * `MyCallable` 인스턴스가 블로킹 큐에 전달되고, 스레드 풀의 스레드 중 하나가 이 작업을 실행할 것이다.&#x20;
+    * 이 때 작업의 처리 결과는 직접 반환되는 것이 아니라, `Future` 라는 특별한 인터페이스를 통해서 반환된다.&#x20;
+  * 참고로 `Future.get()` 은 `InterruptedException` , `ExecutionException` 체크 예외를 던진다. 여기서는 잡지말고 간단하게 밖으로 던지자. 예외에 대한 부분은 뒤에서 설명한다.
+
+```java
+package thread.executor.future;
+
+import java.util.Random;
+import java.util.concurrent.*;
+
+import static util.MyLogger.log;
+import static util.ThreadUtils.sleep;
+
+public class CallableMainV1 {
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ExecutorService es = Executors.newFixedThreadPool(1);
+        Future<Integer> future = es.submit(new MyCallable());
+        Integer result = future.get();
+        log("result value = " + result);
+        es.close();
+    }
+
+    static class MyCallable implements Callable<Integer> {
+
+        @Override
+        public Integer call() /*throws Exception*/ {
+            log("Callable 시작");
+            sleep(2000);
+            int value = new Random().nextInt(10);
+            log("create value = " + value);
+            log("Callable 완료");
+            return value;
+        }
+    }
+}
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.21.19.png" alt="" width="563"><figcaption></figcaption></figure>
+
+#### Executor 프레임워크의 장점&#x20;
+
+* 요청 스레드가 결과를 받아야 할 상황이라, `Callable` 을 사용한 방식은 `Runnable` 을 사용하는 방식보다 훨씬 편리하다.&#x20;
+  * **코드만 보면 복잡한 멀티스레드를 사용하는 느낌보다는, 단순한 싱글 스레드 방식으로 개발한다는 느낌이 들 것이다.**&#x20;
+  * **단순하게 `ExecutorService` 에 필요한 작업을 요청하고 결과를 받아서 사용하면 된다.**&#x20;
+* 하지만 편리한 것과 별개로 기반 원리를 잘 이해해야 문제가 없다..&#x20;
+* 여기서 잘생각해보면 애매한 부분이 있다.&#x20;
+* `future.get()` 을 호출하는 요청 스레드(`main`) 는 `future.get()` 을 호출 했을 때 2가지 상황으로 나뉘게 된다.&#x20;
+  * `MyCallable` 작업을 처리하는 스레드 풀의 스레드가 작업을 완료했다.&#x20;
+  * `MyCallable` 작업을 처리하는 스레드 풀의 스레드가 아직 작업을 완료하지 못했다.&#x20;
+* `future.get()` 을 호출했을 때 스레드 풀의 스레드가 작업을 완료했다면 반환 받을 결과가 있을 것이다. 하지만 작업을 처리중이라면 받을 수 있을까?&#x20;
+
+## Future2 - 분석&#x20;
+
+* `submit()` 의 호출로 `MyCallable` 의 인스턴스를 전달한다.&#x20;
+* 이때 `submit()` 은 `MyCallable.call()` 이 반환하는 무작위 숫자 대신에 `Future` 을 반환한다.&#x20;
+  * 생각해보면 `MyCallable` 이 즉시 실행되어 결과를 즉시 반환하는 것은 불가능하다. 왜냐면 `MyCallable` 은 즉시 실행되는 것이 아니다. 스레드 풀의 스레드가 미래의 어떤 시점에 이 코드를 대신 실행해야 한다.&#x20;
+  * `MyCallable.call()` 메서드는 호출 스레드가 실행하는 것도 아니고, 스레드 풀의 다른 스레드가 실행하기 때문에, 언제 실행이 완료 되어서 결과를 반환할 지는 알 수 없다.&#x20;
+  * 따라서 결과를 즉시 받는 것은 불가능하다. 이런 이유로, `es.submit()` 은 `MyCallable` 의 결과를 반환하는 대신에 `MyCallable` 의 결과를 나중에 받을 수 있는 Future 라는 객체를 대신 제공한다.&#x20;
+* 정리하면, `Future` 은 전달한 작업의 미래 결과를 담고 있다고 생각하면 된다.&#x20;
+
+```java
+Future<Integer> future = es.submit(new MyCallable());
+```
+
+### Future 분석&#x20;
+
+```java
+package thread.executor.future;
+
+import java.util.Random;
+import java.util.concurrent.*;
+
+import static util.MyLogger.log;
+import static util.ThreadUtils.sleep;
+
+public class CallableMainV2 {
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ExecutorService es = Executors.newFixedThreadPool(1);
+        log("submit() 호출");
+        Future<Integer> future = es.submit(new MyCallable());
+        log("future 즉시 반환, future = " + future);
+
+        log("future.get() [블로킹] 메서드 호출 시작 -> main 스레드 WAITING");
+        Integer result = future.get();
+        log("future.get() [블로킹] 메서드 호출 완료 -> main 스레드 RUNNABLE");
+
+        log("result value = " + result);
+        log("future 완료, future = " + future);
+        es.close();
+    }
+
+    static class MyCallable implements Callable<Integer> {
+
+        @Override
+        public Integer call() /*throws Exception*/ {
+            log("Callable 시작");
+            sleep(2000);
+            int value = new Random().nextInt(10);
+            log("create value = " + value);
+            log("Callable 완료");
+            return value;
+        }
+    }
+}
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.34.12.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* 실행 결과를 분석해보자.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.36.19.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* `submit()` 을 호출해서 `ExecutorService` 에 `taskA` 를 전달한다.&#x20;
+* 요청 스레드는 `es.submit(taskA)` 를 호출하고 있는 중이다.&#x20;
+* `ExecutorService` 는 전달한 `taskA` 의 미래 결과를 알 수 있는 `Future` 객체를 생성한다.
+  * `Future` 은 인터페이스다. 이 때 생성되는 실제 구현체는 `FutureTask` 이다.&#x20;
+* 그리고 생성한 `Future` 객체 안에 `taskA` 의 인스턴스를 보관한다.&#x20;
+* `Future` 내부에 `taskA` 작업의 완료 여부와, 작업의 결과 값을 가진다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.36.36.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* `submit()` 을 호출한 경우 `Future` 가 만들어지고, 전달한 작업인 `taskA` 가 바로 블로킹 큐에 담기는 것이 아니라, 그림처럼 `taskA` 를 감싸고 있는 `Future` 가 대신 블로킹 큐에 담긴다.&#x20;
+* `Future` 는 내부에 작업의 완료 여부와, 작업의 결과 값을 가진다. 작업이 완료되지 않았기 때문에, 아직은 결과값이 없다.&#x20;
+  * 로그를 보면 `Future`의 구현체는 `FutureTask` 이다.&#x20;
+  * `Future` 의 상태는 **Not completed** 이고, 연관된 작업은 전달한 `taskA(MyCallable)` 인스턴스 이다.&#x20;
+* **여기서 중요한 핵심이 있는데, 바로 작업을 전달할 때 생성된 `Future` 은 즉시 반환된다는 점이다.**&#x20;
+* 생성한 `Future` 를 즉시 반환하기 때문에, 요청 스레드는 대기하지 않고, 자유롭게 본인의 다음 코드를 호출할 수 있다.&#x20;
+  * 이것은 마치 `Thread.start()` 를 호출한 것과 비슷하다. `Thread.start()` 를 호출하면 스레드의 작업 코드가 별도의 스레드에서 실행된다. 요청 스레드는 대기하지 않고 즉시 다음 코드를 호출할 수 있다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.39.45.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* 큐에 들어있는 `Future[taskA]` 를 꺼내서 스레드 풀의 스레드1이 작업을 시작한다.&#x20;
+  * 참고로 `Future` 의 구현체인 `FutureTask` 는 `Runnable` 인터페이스도 함께 구현하고 있다.&#x20;
+* 스레드 1은 `FutureTask` 의 `run()` 메서드를 실행한다.&#x20;
+* 그리고 `run()` 메서드가 `taskA` 의 `call()` 메서드를 호출하고 그 결과를 받아서 처리한다.&#x20;
+  * `FutureTask.run()` -> `MyCallable.call()`&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.44.02.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* 스레드1&#x20;
+  * 스레드 1은 `taskA` 의 작업을 아직 처리중이다. 아직 완료하지는 않았다.&#x20;
+* 요청 스레드&#x20;
+  * 요청 스레드는 `Future` 인터스턴스의 참조를 가지고 있다.&#x20;
+  * 그리고 언제든지 본인이 필요할 때 `Future.get()` 을 호출해서 `taskA` 작업의 미래 결과를 받을 수 있다 .
+  * 요청 스레드는 작업의 결과가 필요해서 `future.get()` 을 호출한다.&#x20;
+    * `Future` 에는 완료 상태가 있다. `taskA` 의 작업이 완료되면 `Future` 의 상태도 완료로 변경된다.&#x20;
+    * 그런데 여기서 `taskA` 의 작업이 아직 완료되지 않았다. 그래서 `Future` 도 완료 상태가 아니다.&#x20;
+  * 요청 스레드가 `future.get()` 을 호출하면 `Future` 가 완료 상태가 될 때까지 대기한다.(동기)&#x20;
+    * 이때, 요청 스레드의 상태는 `RUNNABLE` -> `WAITING` 이다.&#x20;
+* `future.get()` 을 호출했을 때,&#x20;
+  * **`Future` 가 완료 상태** : `Future` 가 완료 상태면 `Future` 에 결과도 포함되어 있다. 이 경우 요청 스레드는 대기하지 않고 바로, 리턴값을 확인할 수 있다.&#x20;
+  * **`Future` 가 완료 상태가 아님** : `taskA` 가 아직 수행되지 않았거나 또는 수행 중이라는 뜻이다. 이때는 어쩔 수 없이 요청 스레드가 결과를 받기 위해 대기해야 한다. 요청 스레드가 마치 락을 얻을 때처럼, **결과를 얻기 위해 대기한다. 이처럼 스레드가 어떤 결과를 얻기 위해 대기하는 것을 블로킹(Blocking) 이라 한다.**&#x20;
+
+> #### 블로킹 메서드&#x20;
+>
+> * `Thread.join()`, `Future.get()` 처럼 메서드가 작업을 바로 수행하지 않고, 다른 작업이 완료될 때까지 기다리게 하는 메서드이다. 이러한 메서드를 호출하면 호출한 스레드는 지정된 작업이 완료될 때까지 블록(대기) 되어 다른 작업을 진행할 수 없다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.46.08.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* 요청 스레드
+  * 대기(`WAITING`) 상태로 `future.get()` 을 호출하고 대기중이다. &#x20;
+* 스레드1&#x20;
+  * `taskA` 작업을 완료한다.&#x20;
+  * `Future` 에 `taskA` 의 반환 결과를 담는다.&#x20;
+  * `Future` 의 상태를 완료로 변경한다.&#x20;
+  * 요청 스레드를 깨운다. 요청 스레드는 `WAITING` -> `RUNNABLE` 상태로 변한다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.53.55.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* 요청 스레드
+  * 요청 스레드는 `RUNNABLE` 상태가 되었다. 그리고 완료 상태의 `Future` 를 결과로 받는다. 참고로 `taskA` 의 결과가 `Future` 에 담겨있다. &#x20;
+* 스레드1
+  * 작업을 마친 스레드1은 스레드 풀로 반환된다. `RUNNABLE` -> `WAITING`
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.54.01.png" alt="" width="563"><figcaption></figcaption></figure>
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.56.50.png" alt="" width="563"><figcaption></figcaption></figure>
+
+## Future3 - 활용&#x20;
+
+### SunTask - Runnable&#x20;
+
+* 이번에는 숫자를 더하는 기능을 멀티스레드로 수행해보자.&#x20;
+
+```java
+package thread.executor.future;
+
+import static util.MyLogger.log;
+
+public class SumTaskMainV1 {
+
+    public static void main(String[] args) throws InterruptedException {
+        SumTask task1 = new SumTask(1, 50);
+        SumTask task2 = new SumTask(51, 100);
+        Thread thread1 = new Thread(task1, "thread-1");
+        Thread thread2 = new Thread(task2, "thread-2");
+
+        thread1.start();
+        thread2.start();
+
+        // 스레드가 종료될 때까지 대기
+        log("join() - main 스레드가 thread1, thread2 종료까지 대기");
+        thread1.join();
+        thread2.join();
+        log("main 스레드 대기 완료");
+
+        log("task1.result = " + task1.result);
+        log("task2.result = " + task2.result);
+
+        int sumAll = task1.result + task2.result;
+        log("task1 + task2 = " + sumAll);
+
+        log("end");
+    }
+
+    static class SumTask implements Runnable {
+
+        int startValue;
+        int endValue;
+        int result = 0;
+
+        public SumTask(int startValue, int endValue) {
+            this.startValue = startValue;
+            this.endValue = endValue;
+        }
+
+        @Override
+        public void run() {
+            log("작업 시작");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            int sum = 0;
+            for(int i=startValue; i<=endValue; i++) {
+                sum += i;
+            }
+
+            result = sum;
+            log("작업 완료 result = " + result);
+        }
+    }
+}
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 17.00.54.png" alt=""><figcaption></figcaption></figure>
+
+### SumTask - Callable&#x20;
+
+* 위 코드와 비교해서 `ExecutorService` 와 `Callable` 을 사용한 덕분에, 이전 코드보다 훨씬 더 직관적이고 깔끔하게 코드를 작성할 수 있다.&#x20;
+* 특히 작업의 결과를 반환하고, 요청 스레드에서 그 결과를 바로 받아서 처리하는 부분이 매우 직관적이다.&#x20;
+  * 코드만 보면 싱글 스레드 코드를 처리하는 것 처럼 보여진다.&#x20;
+* 추가로 `Callable.call()` 은 `throws InterruptedException` 과 같은 체크 예외도 던질 수 있다.&#x20;
+
+```java
+package thread.executor.future;
+
+import java.util.concurrent.*;
+
+import static util.MyLogger.log;
+
+public class SumTaskMainV2 {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        SumTask task1 = new SumTask(1, 50);
+        SumTask task2 = new SumTask(51, 100);
+
+        ExecutorService es = Executors.newFixedThreadPool(2);
+
+        Future<Integer> future1 = es.submit(task1);
+        Future<Integer> future2 = es.submit(task2);
+
+        Integer sum1 = future1.get();
+        Integer sum2 = future2.get();
+
+        log("task1.result = " + sum1);
+        log("task2.result = " + sum2);
+
+        int sumAll = sum1 + sum2;
+        log("task1 + task2 = " + sumAll);
+        log("End");
+
+        es.close();
+    }
+
+    static class SumTask implements Callable<Integer> {
+
+        int startValue;
+        int endValue;
+
+        public SumTask(int startValue, int endValue) {
+            this.startValue = startValue;
+            this.endValue = endValue;
+        }
+
+        @Override
+        public Integer call() throws Exception {
+            log("작업 시작");
+            Thread.sleep(2000);
+            int sum = 0;
+            for (int i = startValue; i <= endValue; i++) {
+                sum += i;
+            }
+
+            log("작업 완료 result = " + sum);
+            return sum;
+        }
+    }
+}
+
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 17.01.48.png" alt=""><figcaption></figcaption></figure>
+
+## Future4 - 이유&#x20;
+
+### Future 가 필요한 이유&#x20;
+
+#### Future 없이 결과를 직접 반환 하는 코드(가정)&#x20;
+
+* 먼저 `ExecutorService` 가 `Future` 없이 결과를 직접 반환한다고 가정해보자.&#x20;
+  * 요청 스레드는 `task1` 을 `ExecutorService` 에 요청하고 결과를 기다린다.&#x20;
+    * 작업 스레드가 작업을 수행하는데 2초가 걸린다.&#x20;
+    * 요청 스레드는 결과를 받을 때 까지 2초간 대기한다.&#x20;
+    * 요청 스레드는 2초 후에 결과를 받고 라인을 수행한다.&#x20;
+  * 요청 스레드는 `task2` 을 `ExecutorService` 에 요청하고 결과를 기다린다.&#x20;
+    * 작업 스레드가 작업을 수행하는데 2초가 걸린다.&#x20;
+    * 요청 스레드는 결과를 받을 때 까지 2초간 대기한다.&#x20;
+    * 결과를 받고 요청 스레드가 다음 라인을 수행한다.&#x20;
+* **따라서 `Future` 를 사용하지 않는 경우 결과적으로 `task1` 의 결과를 기다린 다음에 `task2` 를 요청한다. 따라서 총 4초의 시간이 걸렸다.**&#x20;
+* **이것은 마치 단일 스레드가 작업을 한 것과 비슷한 결과이다.**&#x20;
+
+```java
+Integer sum1 = es.submit(task1); // 여기서 블로킹 
+Integer sum2 = es.submit(task2); // 여기서 블로킹
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 17.05.32.png" alt="" width="563"><figcaption></figcaption></figure>
+
+#### Future 를 반환 하는 코드&#x20;
+
+* 이번에는 `Future` 를 반환한다고 가정해보자.&#x20;
+  * 요청 스레드는 `task1` 을 `ExecutorService` 에 요청한다.&#x20;
+  * 작업 스레드1은 `task1` 을 수행한다.&#x20;
+* 요청 스레드는 `task2` 를 `ExecutorService` 에 요청한다.&#x20;
+  * 요청 스레드는 즉시 `Future` 를 반환 받는다.&#x20;
+  * 작업 스레드2 는 `task2` 을 수행한다.&#x20;
+* **요청 스레드는 `task1`, `task2` 의 작업을 동시에 요청할 수 있다. 따라서 두 작업은 동시에 수행된다.**&#x20;
+  * **약 2초 뒤 `task1`, `task2` 의 작업이 모두 완료되고 결과를 받는다.**&#x20;
+
+```java
+Future<Integer> future1 = es.submit(task1); // 여기는 블로킹 아님 
+Future<Integer> future2 = es.submit(task2); // 여기는 블로킹 아님
+
+Integer sum1 = future1.get(); // 여기서 블로킹
+Integer sum2 = future2.get(); // 여기서 블로킹
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 17.20.27.png" alt="" width="563"><figcaption></figcaption></figure>
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 17.20.38.png" alt="" width="563"><figcaption></figcaption></figure>
+
+#### Future 를 잘못 활용한 예1&#x20;
+
+* 요청 스레드가 작업 하나 요청하고 그 결과를 기다린다. 그리고 그 다음에 다시  다음 요청을 전달하고 결과를 기다린다.&#x20;
+* 총 4초의 시간이 걸린다..&#x20;
+
+```java
+Future<Integer> future1 = es.submit(task1); // non-blocking 
+Integer sum1 = future1.get(); // blocking, 2초 대기
+
+Future<Integer> future2 = es.submit(task2); // non-blocking 
+Integer sum2 = future2.get(); // blocking, 2초 대기
+```
+
+#### Future 를 잘못 활용한 예2
+
+* 요청 스레드가 작업 하나 요청하고 그 결과를 기다린다. 그리고 그 다음에 다시  다음 요청을 전달하고 결과를 기다린다.&#x20;
+* 총 4초의 시간이 걸린다..&#x20;
+
+```java
+Integer sum1 = es.submit(task1).get(); // get()에서 블로킹 
+Integer sum2 = es.submit(task2).get(); // get()에서 블로킹
+```
+
+## Future5 - 정리&#x20;
+
+* `Future` 는 작업의 미래 계산의 결과를 나타내며, 계산이 완료되었는지 확인하고, 완료될 때까지 기다릴 수 있는 기능을 제공한다.&#x20;
+
+### Future 인터페이스&#x20;
+
+<pre class="language-java"><code class="lang-java">package java.util.concurrent;
+<strong>
+</strong><strong>public interface Future&#x3C;V> {
+</strong>     boolean cancel(boolean mayInterruptIfRunning);
+     boolean isCancelled();
+     boolean isDone();
+     V get() throws InterruptedException, ExecutionException;
+     V get(long timeout, TimeUnit unit)
+         throws InterruptedException, ExecutionException, TimeoutException;
+     
+     enum State {
+         RUNNING,
+         SUCCESS,
+<strong>         FAILED,
+</strong>         CANCELLED
+<strong>    }
+</strong>     default State state() {}
+}
+</code></pre>
+
+### 주요 메서드&#x20;
+
+**`boolean cancel(boolean mayInterruptIfRunning)`**
+
+* **기능** : 아직 완료되지 않은 작업을 취소한다.&#x20;
+* **매개변수** : **`mayInterruptIfRunning`**
+  * `cancel(true)` : Future 를 취소 상태로 변경한다. 이때 작업이 실행중이라면 `Thread.interrupt()` 를 호출해서 작업을 중단한다.&#x20;
+  * `cancel(false)`:`Future` 를 취소 상태로 변경한다. 단 이미 실행 중인 작업을 중단하지는 않는다.
+* **반환값** : 작업이 성공적으로 취소된 경우 `true` , 이미 완료되었거나 취소할 수 없는 경우 `false`&#x20;
+* **설명** : 작업이 실행 중이 아니거나 아직 시작되지 않았으면 취소하고, 실행 중인 작업의 경우 `mayInterruptIfRunning` 이 true 이면 중단을 시도한다.
+* **참고** : 취소 상태의 `Future` 에 `Future.get()` 을 호출하면 `CancellationException` 런타임 예외가 발생 한다.
+
+**`boolean isCancelled()`**
+
+* **기능** : 작업이 취소되었는지 여부를 확인한다.&#x20;
+* **반환값**: 작업이 취소된 경우 `true` , 그렇지 않은 경우 `false`&#x20;
+* **설명**: 이 메서드는 작업이 `cancel()` 메서드에 의해 취소된 경우에 `true` 를 반환한다.
+
+#### `boolean isDone()`
+
+* **기능** : 작업이 완료되었는지 여부를 확인한다.
+* **반환값** : 작업이 완료된 경우 `true` , 그렇지 않은 경우 `false`
+* **설명** : 작업이 정상적으로 완료되었거나, 취소되었거나, 예외가 발생하여 종료된 경우에 `true` 를 반환한다.
+
+#### `State state()`
+
+* **기능** : `Future` 의 상태를 반환한다. 자바 19부터 지원한다.
+  * `RUNNING` : 작업 실행 중&#x20;
+  * `SUCCESS` : 성공 완료&#x20;
+  * `FAILED` : 실패 완료&#x20;
+  * `CANCELLED` : 취소 완료
+
+#### `V get()`
+
+* **기능** : 작업이 완료될 때까지 대기하고, 완료되면 결과를 반환한다.&#x20;
+* **반환값** : 작업의 결과
+* **예외**
+  * `InterruptedException` : 대기 중에 현재 스레드가 인터럽트된 경우 발생
+  * `ExecutionException` : 작업 계산 중에 예외가 발생한 경우 발생
+* **설명** : 작업이 완료될 때까지 `get()` 을 호출한 현재 스레드를 대기(블록킹)한다. 작업이 완료되면 결과를 반환한 다.
+
+#### `V get(long timeout, TimeUnit unit)`
+
+* 기능 : `get()` 과 같은데, 시간 초과되면 예외를 발생시킨다.&#x20;
+* 매개변수 :
+  * `timeout` : 대기할 최대 시간
+  * `unit` : `timeout` 매개변수의 시간 단위 지정
+* 반환값 : 작업의 결과
+* 예외 :&#x20;
+  * `InterruptedException` : 대기 중에 현재 스레드가 인터럽트된 경우 발생&#x20;
+  * `ExecutionException` : 계산 중에 예외가 발생한 경우 발생
+  * `TimeoutException` : 주어진 시간 내에 작업이 완료되지 않은 경우 발생
+* 설명 : 지정된 시간 동안 결과를 기다린다. 시간이 초과되면 `TimeoutException` 을 발생시킨다.
+
+## Future7 - 예외&#x20;
+
+* `Future.get()` 을 호출하면 작업의 결과 뿐 아니라, 작업 중 발생한 예외도 받을 수 있다.&#x20;
+* 아래 코드를 살펴보자.&#x20;
+  * 요청 스레드 : `es.submit(new ExCallable())` 을 호출해서 작업을 전달한다.&#x20;
+  * 작업 스레드 : `ExCallable` 을 실행하는데, `IllegalStatementException` 예외가 발생한다.&#x20;
+    * 작업 스레드는 `Future` 에 발생한 예외를 담아둔다. 참고로 예외도 객체이다. 잡아서 필드에 보관할 수 있다.&#x20;
+    * 예외가 발생했으므로, `Future` 의 상태는 `FAILED` 가 된다.&#x20;
+  * 요청 스레드 : 결과를 얻기 위해 `future.get()` 을 호출한다 .
+    * `Future` 의 상태가 `FAILED` 면 `ExecutionException` 예외를 던진다.&#x20;
+    * 이 예외는 내부에 앞서 `Future` 에 저장해둔 `IllegalStatementException` 을 포함하고 있다.&#x20;
+    * `e.getCause()` 을 호출하면 작업에서 발생한 원본 예외를 받을 수 있다.&#x20;
+
+```java
+ package thread.executor.future;
+
+import java.util.concurrent.*;
+
+import static util.MyLogger.log;
+import static util.ThreadUtils.sleep;
+
+public class FutureExceptionMain {
+
+    public static void main(String[] args) {
+        ExecutorService es = Executors.newFixedThreadPool(1);
+        log("작업 전달");
+        Future<Integer> future = es.submit(new ExCallable());
+        sleep(1000);
+
+        try {
+            log("future.get() 호출 시도, future.state() : " + future.state());
+            Integer result = future.get();
+            log("result value = " + result);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            log("e = " + e);
+            Throwable cause = e.getCause();
+            log("cause = " + cause);
+        }
+
+        es.close();
+    }
+
+    static class ExCallable implements Callable<Integer> {
+
+        @Override
+        public Integer call() throws Exception {
+            log("Callable 실행, 예외 발생");
+            throw new IllegalStateException("ex!");
+        }
+    }
+}
+
+```
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 18.29.28.png" alt="" width="563"><figcaption></figcaption></figure>
