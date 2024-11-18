@@ -321,6 +321,7 @@
     * [JSP](spring/jsp-2.3/jsp.md)
     * [쿠키 / 세션](spring/jsp-2.3/undefined.md)
     * [MVC 패턴](spring/jsp-2.3/mvc.md)
+    * [실무 때 고민할 만한 부분](spring/undefined-1/jsp-2.3/undefined-1.md)
   * [스프링 입문을 위한 자바 객체지향의 원리와 이해](spring/undefined/README.md)
     * [객체지향의 4대 특성](spring/undefined/4.md)
     * [객체지향 설계의 5원칙](spring/undefined/5.md)
