@@ -1,48 +1,146 @@
 # 스프링이 사랑한 디자인 패턴
 
+#### 디자인 패턴은 객체 지향의 특성 중 상속(extends), 인터페이스(implements), 합성(객체를 속성으로 사용) 을 이용한다. 다른 방식은 없다.&#x20;
+
 ## 1. 어댑터 패턴(Adapter Pattern)
 
+* **어댑터는 변환기(convert) 로 서로 다른 두 인터페이스 사이에 통신이 가능하도록 하는 것이다.**
+  * 다양한 데이터베이스 시스템을 공통의 인터페이스인 JDBC 를 통해 조작한다.&#x20;
+  * 다양한 운영체제의 기계어를 JVM 을 통해서 만들어낸다.&#x20;
+* 한문장으로 정리하면 다음과 같다. \
+  "호출당하는 쪽의 메서드를 호출하는 쪽의 코드에 대응하도록 중간에 변환기를 통해 호출하는 패턴"
+
+### 어댑터 패턴이 적용되지 않은 코드&#x20;
+
+* `main()` 메서드를 살펴보면 sa, sb 를 통해 호출되는 메서드가 비슷한 일을 하지만, 다른 메서드 명을 사용하고 있는 것을 볼 수 있다.
+
 ```java
-public interface Target {
-    void doSomething();
-}
-
-public class Adaptee {
-    public void performAction(){
-        System.out.println("Action Performed");
+public class ServiceA {
+    void runServiceA() {
+        System.out.println("ServiceA");
     }
 }
 
-public class Adapter extends Target {
-    private final adaptee;
-    
-    public Adapter(Adaptee adaptee){
-        this.Adaptee = adaptee;
-    }
-    
-    @Override 
-    public void doSomething(){
-        adaptee.performAction();
+public class ServiceB {
+    void runServiceB() {
+        System.out.println("ServiceB");
     }
 }
 
-public class Client() {
-    public static void main(String[] args){
-        Adaptee adaptee = new Adaptee();
-        Targer adapter = new Adapter(adaptee);
-        adapter.doSomething();
+public class NoAdapter {
+    public static void main(String[] args) {
+        ServiceA sa = new ServiceA();
+        ServiceB sb = new ServiceB(); 
+        
+        sa.runServiceA();
+        sb.runServiceB(); 
     }
 }
 ```
 
-* 어댑터는 변환기로 서로 다른 두 인터페이스 사이에 통신이 가능하도록 하는 것이다.\
-  \-> 다른 클래스에서 비슷한 기능을 하는 메서드를 어댑터를 통해서 동일한 메시지를 통해 호출 하는 방법\
-  \-> DB 의 JDBC / 플랫폼 별 JRE
-* 어댑터 패턴은 합성(객체를 속성으로 만들어서 참조하는)을 사용하는 디자인 패턴으로 한문장으로 정리하면 다음과 같다.\
-  \-> **호출 당하는 쪽의 메서드를 호출 하는 쪽의 코드에 대응하도록 중간에 변환기(변환 클래스) 를 통해 호출하는 패턴**
-* 각각의 어탭터 클래스를 인터페이스를 통해서 더욱 더 개선할 수 있다.
+### 어댑터 패턴이 적용된 코드&#x20;
+
+#### 어댑터 패턴을 적용해 메서드 명을 통일해보자.&#x20;
+
+<pre class="language-java"><code class="lang-java"><strong>public class AdapterA {
+</strong><strong>    ServiceA sa = new ServiceA();
+</strong><strong>    
+</strong><strong>    void runService() {
+</strong><strong>        sa.runServiceA(); 
+</strong><strong>    }
+</strong><strong>}
+</strong><strong>
+</strong>public class AdapterB {
+    ServiceB sa = new ServiceB();
+    
+    void runService() {
+        sa.runServiceB(); 
+    }
+}
+
+public class NoAdapter {
+    public static void main(String[] args) {
+        AdapterA sa = new AdapterA();
+        AdapterB sb = new AdapterB(); 
+        
+        sa.runService();
+        sb.runService(); 
+    }
+}
+</code></pre>
+
+#### 인터페이스를 토입해 조금 더 개선해보자.
+
+<pre class="language-java"><code class="lang-java"><strong>public interface Adpater {
+</strong><strong>    void runService(); 
+</strong><strong>}
+</strong><strong>
+</strong><strong>public class AdapterA implements Adpater{
+</strong>    ServiceA sa = new ServiceA();
+    
+    @Override
+    void runService() {
+        sa.runServiceA(); 
+    }
+}
+
+public class AdapterB implements Adpater {
+    ServiceB sa = new ServiceB();
+    
+    @Override
+    void runService() {
+        sa.runServiceB(); 
+    }
+}
+
+public class NoAdapter {
+    public static void main(String[] args) {
+        Adpater sa = new AdapterA();
+        Adpater sb = new AdapterB(); 
+        
+        sa.runService();
+        sb.runService(); 
+    }
+}
+</code></pre>
 
 ## 2. 프록시 패턴(Proxy Pattern)
+
+* **대리자(인터페이스)를 통해서 메서드를 호출도록 하는 패턴**
+* 프록시 패턴 구현의 중요 포인트
+  * 대리자는 실제 서비스와 같은 이름으로 메서드를 구현한다. 이 때 인터페이스를 사용한다.
+  * 대리자는 실제 서비스에 대한 참조 변수를 갖는다(합성).
+  * 대리자는 실제 서비스의 같은 이름을 가진 메서드를 호출하고 그 값을 클라이언트에게 돌려준다.
+  * 대리자는 실제 서비스의 메서드 호출 전후의 별도의 로직을 수행할 수 있다.
+* **프록시 패턴은 실제 서비스 메서드의 반환 값에 가감하는 것을 목적으로 하지 않고 제어의 흐름을 변경하거나 다른 로직을 수행하기 위해 사용한다.**
+  * **실제 서비스 메서드의 반환 값에 가감하는 것을 목적으로 하는 것은 데코레이터 패턴이다.**&#x20;
+* OCP(Open Closed Principle) DIP(Dependency Inversion Principle) 원칙을 살펴볼 수 있다.
+  * OCP : 배우가 바뀌어도 배역의 역할은 변경되지 않는다.&#x20;
+  * DIP : 자동차가 타이어에 의존해야지 스노우 타이어에 의존해서는 안된다.&#x20;
+
+### 프록시 패턴이 적용되지 않은 코드&#x20;
+
+```java
+public class Service {
+    public String runSomething() {
+        return "서비스 짱!";
+    }
+}
+
+public class ClientWithNoProxy {
+    public static void main(String[] args) {
+        Service service = new Service();
+        System.out.println(service.runSomething()); 
+    }
+}
+```
+
+### 프록시 패턴이 적용된 코드&#x20;
+
+* 프록시 패턴의 경우 실제 서비스가 가진 메서드와 같은 이름의 메서드를 사용하는데, 이를 위해서 인터페이스를 사요한다.&#x20;
+* 인터페이스를 사용하면 서비스 객체가 들어갈 자리에 프록시 객체를 대신 투입해 클라이언트 쪽에서는&#x20;
+  * **실제 서비스 객체를 통해서 메서드를 호출하고 반환값을 받는지,**&#x20;
+  * **아니면 대리자 객체를 통해서 메서드를 호출하고 반환값을 받는지 전혀 모르게 처리할 수 있다.**&#x20;
 
 ```java
 public interface IService{
@@ -74,16 +172,11 @@ public class ClientProxy{
 }
 ```
 
-* 대리자(인터페이스)를 통해서 메서드를 호출도록 하는 패턴
-* 프록시 패턴 중요 포인트
-  * **대리자는 실제 서비스와 같은 이름으로 메서드를 구현한다. 이 때 인터페이스를 사용한다.**
-  * **대리자는 실제 서비스에 대한 참조 변수를 갖는다(합성).**
-  * **대리자는 실제 서비스의 같은 이름을 가진 메서드를 호출하고 그 값을 클라이언트에게 돌려준다.**
-  * **대리자는 실제 서비스의 메서드 호출 전후의 별도의 로직을 수행할 수 있다.**
-* **프록시 패턴은 실제 서비스 메서드의 반환 값에 가감하는 것을 목적으로 하지 않고 제어의 흐름을 변경하거나 다른 로직을 수행하기 위해 사용한다.**
-* OCP(Open Closed Principle) DIP(Dependency Inversion Principle) 원칙을 살펴볼 수 있다.
-
 ## 3. 데코레이터 패턴(Decorator Pattern)
+
+* 프록시 패턴과 구현 방법은 동일하지만, 목적이 다르다.&#x20;
+  * **프록시 패턴 : 제어의 흐름을 변경하거나 별도의 로직 처리를 목적으로 한다. 클라이언트가 받는 반환값을 특별한경우가 아니면 변경하지 않는다.** &#x20;
+  * **데코레이터 패턴 : 클라이언트가 받는 반환값에 장식을 더한다.**&#x20;
 
 ```java
 public interface IService{
@@ -115,19 +208,17 @@ public class ClientProxy{
 }
 ```
 
-* 기본적으로 데코레이터 패턴은 프록시 패턴과 구현 방법이 같다.\
-  \-> 하지만! 프록시 패턴은 클라이언트가 최종적으로 돌려 받는 반환값을 조작하지 않고 그대로 전달하는 반면,\
-  **데코레이터 패턴은 클라이언트가 받는 반환값에 장식을 덧입힌다!**
-* 데코레이션 패턴의 중요 포인트
-  * 장식자는 실제 서비스와 같은 이름의 메서드를 구현한다.
-  * 장식자는 실제 서비스에 대한 참조 변수를 갖는다. (합성)
-  * 장식자는 실제 서비스의 같은 이름을 가진 메서드를 호출하고,\
-    \====================================
-  * 그 값에 장식을 더해서 클라이언트에게 돌려준다.
-  * 장식자는 실제 서비스의 메서드 호출 전후에 별도의 로직을 수행할 수 있다.(비지니스 로직 등..)
-* OCP(Open Closed Principle) DIP(Dependency Inversion Principle) 원칙을 살펴볼 수 있다.
-
 ## 4. 싱글턴 패턴(Singleton Pattern)
+
+* **싱글턴 패턴은 인스턴스를 하나만 만들어서 사용하기 위한 패턴이다.**&#x20;
+  * 커넥션 풀, 스레드 풀, 디바이스 설정 객체 등과 같은 경우 여러 인스턴스를 만들게 되면 불필요한 자원을 사용하게 되고, 또 예상치 못한 결과를 맞이할 수 있다.&#x20;
+  * 싱글턴 패턴은 오직 인스턴스를 하나만 만들고 그것을 계속해서 사용하는 것이다.&#x20;
+* 싱글턴 패턴을 적용할 경우 의미상 두 개의 객체가 존재할 수 없다.&#x20;
+* 이를 위한 요소를 생각하면 다음과 같다.&#x20;
+  * **`new` 를 실행할 수 없도록 생성자에 `private` 접근제어자 사용**&#x20;
+  * **유일한 단일 객체를 반환할 수 있는 `static` 메서드 필요** &#x20;
+  * **유일한 단일 객체를 참조할 `static` 참조 변수 필요**
+* **`static` 을 사용하므로 프로세스 내에서 공유가 가능한 참조 변수를 사용할 수 있게 된다.**&#x20;
 
 <pre class="language-java"><code class="lang-java"><strong>public class Singleton{
 </strong><strong>    static Singleton singletonObject; //정적 참조 변수
@@ -145,22 +236,15 @@ public class ClientProxy{
 }
 </code></pre>
 
-* 싱글턴 패턴은 인스턴스 하나만 만들어서 사용하기 위한 패턴이다.\
-  \-> 커넥션 풀, 스레드 풀, 디바이스 설정 등과 같은 경우 인스턴스를 여러개 만들면 불필요한 자원을 사용하게 되고, 프로그램이 예상하지 못한 결과를 만들어낼 수 있다.
-* 싱글턴 패턴의 요소
-  * new 를 실행할 수 없도록 생성자에 private 접근 제어자를 설정
-  * 유일한 단일 객체에 반환할 수 있는 정적 메서드가 필요하다.
-  * 유일한 단일 객체를 참조할 정적 변수가 필요하다.
-* 주의점!
-  * **싱글턴 패턴은 하나의 객체를 공유하게 되는데, 해당 객체가 속성을 가지게 되면 사이드 이펙트가 생겨날 수 있기 때문에, 속성은 반드시 제거해야 한다.**\
-    **-> 다만 읽기 전용 속성을 가지는 것은 문제가 되지 않는다.**
-* 싱글턴 패턴의 주요 포인트
-  * **private 생성자를 갖는다.**
-  * **단일 객체 참조 변수를 정적(static) 속성으로 갖는다.**
-  * **단일 객체 참조 변수가 참조하는 단일 객체를 반환하는 getInstance() 정적(static) 메서드를 갖는다.**
-  * **단일 객체는 쓰기 가능한 속성을 갖지 않는것이 정석이다. (only read)**
+#### 주의점!&#x20;
+
+* **싱글톤 패턴은 전역 변수와 비슷한 특성을 갖게 되어서 공유 자원을 갖게 된다면 코드의 복잡성을 높일 수 있다.**&#x20;
+* **때문에, 싱글톤 객체 내에는 속성을 갖지 않도록! 하는 것이 정석이다.**&#x20;
+* **다만 읽기 전용 속성을 갖는 것은 문제가 되지 않는다.**&#x20;
 
 ## 5. 템플릿 메서드 패턴(Template Method Pattern)
+
+*
 
 ```java
 public abstract class Animal{
