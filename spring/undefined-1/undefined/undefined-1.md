@@ -242,9 +242,48 @@ public class ClientProxy{
 * **때문에, 싱글톤 객체 내에는 속성을 갖지 않도록! 하는 것이 정석이다.**&#x20;
 * **다만 읽기 전용 속성을 갖는 것은 문제가 되지 않는다.**&#x20;
 
+> 싱글톤 패턴이 안티 패턴으로 불리는 이유&#x20;
+>
+> 1. 싱글톤 패턴은 간단하고 명료한 해결책을 제시하지만, **장기적인 유지보수성과 테스트 가능성에 악영향을 미친다.**&#x20;
+> 2. 작은 프로젝트에서는 유용할 수 있으나, **대규모 시스템에서는 전역 상태관리와 결합도 증가 문제로 인해 권장되지 않는다.**&#x20;
+> 3. 싱글톤 대신 DI 컨테이너나 팩토리 패턴 등 더 나은 설계 방식을 고려하는 것이 좋다.&#x20;
+
 ## 5. 템플릿 메서드 패턴(Template Method Pattern)
 
-*
+* **템플릿 메서드 패턴은 상위 클래스에 골격(틀) 을 정의하고, 구체적인 구현은 하위 클래스에서 제공하는 디자인 패턴.**
+  * **추상클래스, 인터페이스를 통해서 구현**
+  * "상위 클래스의 템플릿 메서드에서 하위 클래스가 오버라이딩한 메서드를 호출하는 패턴"
+* **템플릿 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
+
+### 템플릿 메서드 패턴이 적용되지 않은 코드&#x20;
+
+* 강아지, 고양이 클래스 모두 `playWithOwner()` 메서드 내에서 2번째 문자열 출력을 제외하고는 다른 내용이 없다. \
+  (반복된 코드..)&#x20;
+
+```java
+public class Dog {
+
+    public void playWithOwner(){
+        System.out.println("귀염둥이 이리온");
+        System.out.println("멍멍");
+        System.out.println("잘했어");
+    }
+}    
+
+public class Cat {
+
+    public void playWithOwner(){
+        System.out.println("귀염둥이 이리온");
+        System.out.println("야옹");
+        System.out.println("잘했어");
+    }
+} 
+```
+
+### 템플릿 메서드 패턴이 적용된 코드&#x20;
+
+* `Animal` 이라는 추상클래스에서 틀을 만들고, 이를 상속한 하위 클래스에서 구현을 제공한다.&#x20;
+* `main` 메서드는 구체화된 클래스(`Dog`, `Cat`)가 아닌, 추상화된 클래스(`Animal`)를 의존하기 때문에 DIP 원칙이 지켜진 것을 확인할 수 있다.&#x20;
 
 ```java
 public abstract class Animal{
@@ -302,74 +341,92 @@ public class Driver{
 }    
 ```
 
-* **상위 클래스에 공통 로직을 수행하는 템플릿 메서드와 하위 클래스에 오버라이딩을 강제하는 추상 메서드, 또는 선택적으로 오버라이딩 할 수 있는 훅 메서드를 두는 패턴을 템플릿 메서드 패턴이라고 한다.**\
-  **-> 추상클래스, 인터페이스를 통해서 구현**
-* **"상위 클래스의 템플릿 메서드에서 하위 클래스가 오버라이딩한 메서드를 호출하는 패턴"**
-* **템플릿 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
-
 ## 6. 팩터리 메서드 패턴(Factory Method Pattern)
+
+* 팩터리는 공장을 의미한다. 공장은 물건을 생산하는데, **객체지향의 세계에서는 공장은 객체를 생산한다.**&#x20;
+* **결국, 팩터리 메서드는 객체를 생성 반환하는 메서드를 의미한다.**&#x20;
+* **여기에, 패턴이 붙으면 하위 클래스에서 팩터리 메서드를 오버라이딩해서 객체를 반환하게 하는 것을 의미한다.**&#x20;
+* **팩토리 메서드 패턴 또한 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
 
 ```java
 public abstract class Animal{
+    // 추상 팩터리 메서드 
     abstract AnimalToy getToy();
 }
 
+// 팩터리 메서드가 생성할 객체의 상위 클래스 
 public abstract class AnimalToy{
     abstract void identify();
 }
 
-public class Dog extends Animal(){
-    @Override
-    AnimalToy getToy(){
-        return new DogToy();
-    }
-}
-
+// 팩터리 메서드가 생성할 객체 
 public class DogToy extends AnimalToy{
     public void identify(){
         System.out.println("나는 테니스공, 강아지의 친구");
     }
 }
 
-public class Cat extends Animal(){
-    @Override
-    AnimalToy getToy(){
-        return new CatToy();
-    }
-}
-
+// 팩터리 메서드가 생성할 객체 
 public class CatToy extends AnimalToy{
     public void identify(){
         System.out.println("나는 캣타워, 고양이의 친구");
     }
 }
 
+public class Dog extends Animal(){
+    // 추상 팩터리 메서드 오버라이딩 
+    @Override
+    AnimalToy getToy(){
+        return new DogToy();
+    }
+}
+
+public class Cat extends Animal(){
+    // 추상 팩터리 메서드 오버라이딩 
+    @Override
+    AnimalToy getToy(){
+        return new CatToy();
+    }
+}
+
 public class Driver{
     public static void main(String[] args){
+        // 팩터리 메서드를 보유한 객체들 생성 
         Animal bolt = new Dog();
         Animal kitty = new Cat();
         
+        // 팩터리 메서드가 반환하는 객체들 
         AnimalToy boltBall = bolt.getToy();
         AnimalToy kittyTour = kitty.getToy();
         
+        // 팩터리 메서드가 반환한 객체들 사용
         boltBall.identify();
         kittyTour.identify();
     }
 }
 ```
 
-* 객체 지향에서 팩터리는 객체를 생성한다.\
-  \-> **결국 팩터리 메서드는 **_**객체를 생성 반환하는 메서드**_**를 말한다.**
-* **"오버라이드 된 메서드가 객체를 반환하는 패턴이다.** "
-* **펙터리 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
-
 ## 7. 전략 패턴(Strategy Pattern)
 
-```java
+* 전략 패턴을 구성하는 요소 세가지
+  * **전략 메서드를 가진 전략 객체**\
+    \-> 각각의 무기. 총, 검, 활 등등 ..
+  * **전략 객체를 사용하는 컨텍스트(전략 객체의 사용자/소비자)**\
+    \-> 무기를 사용할 군인
+  * **전략 객체를 생성해 컨텍스트에 주입하는 클라이언트(제3자, 전략 객체의 공급자)**\
+    \-> 군인에게 무기를 전달해 줄 보급 장교
+* 같은 문제를 템플릿 메서드 방법을 통해서도 해결할 수 있다.
+  * **템플릿 메서드 : 상속을 이용**
+  * **전략 패턴 : 객체 주입을 이용**
+* **"클라이언트가 전략을 생성해서 전략을 실행한 컨텍스트에 주입하는 패턴"**
+* **전략 메서드 패턴은 개방 폐쇄 원칙(OCP), 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
+
+<pre class="language-java"><code class="lang-java">// 전략 인터페이스 
 public interface Strategy{
     public abstract void runStrategy();
-}
-
+<strong>}
+</strong>
+// 전략 - 총 
 public class StrategyGun implements Strategy{
     @Override
     public void runStrategy(){
@@ -377,6 +434,7 @@ public class StrategyGun implements Strategy{
     }
 }
 
+// 전략 - 칼
 public class StrategySword implements Strategy{
     @Override
     public void runStrategy(){
@@ -384,6 +442,7 @@ public class StrategySword implements Strategy{
     }
 }
 
+// 전략 - 활
 public class StrategBow implements Strategy{
     @Override
     public void runStrategy(){
@@ -391,6 +450,7 @@ public class StrategBow implements Strategy{
     }
 }
 
+// 전략을 사용할 객체 - 군인 
 public class Soldier{
     void runContext(Strategy strategy){
         System.out.println("전투 시작");
@@ -399,6 +459,7 @@ public class Soldier{
     }
 }
 
+// 전략을 생성하고 주입해줄 객체 - 장교 
 public class Client{
     public static void main(String[] args){
         Strategy strategy = null;
@@ -420,28 +481,21 @@ public class Client{
         System.out.println();
     }
 }
-```
-
-* 전략 패턴을 구성하는 요소 세가지
-  * _**전략 메서드를 가진**_ 전략 객체\
-    \-> 각각의 무기. 총, 검, 활 등등 ..
-  * _**전략 객체를 사용**_하는 컨텍스트(전략 객체의 사용자/소비자)\
-    \-> 무기를 사용할 군인
-  * _**전략 객체를 생성해 컨텍스트에 주입**_하는 클라이언트(제3자, 전략 객체의 공급자)\
-    \-> 군인에게 무기를 전달해 줄 보급 장교
-* 같은 문제를 템플릿 메서드 방법을 통해서도 해결할 수 있다.
-  * **템플릿 메서드 : 상속을 이용**
-  * **전략 패턴 : 객체 주입을 이용**
-* **"클라이언트가 전략을 생성해서 전략을 실행한 컨텍스트에 주입하는 패턴"**
-* **팩터리 메서드 패턴은 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
+</code></pre>
 
 ## 8. 템플릿 콜백 패턴
 
+* 템플릿 콜백 패턴은 전략 패턴의 변형으로, 스프링의 3대 프로그래밍 모델 중 하나인 DI(의존성 주입) 에서 사용되는 특별한 형태의 전략 패턴이다.&#x20;
+* **템플릿 콜백 패턴은 전략 패턴과 모든 것이 동일한데, 전략을 익명 내부 클래스로 정의해서 사용한다는 특징이 있다.**&#x20;
+* **템플릿 콜백 패턴 또한 개방 폐쇄 원칙(OCP), 의존 역전 원칙(DIP) 를 활용하고 있음을 알 수 있다.**
+
 ```java
+// 전략 인터페이스 
 public interface Strategy{
     public abstract void runStrategy();
 }
 
+// 전략이 군인 내부로 들어왔다. 
 public class Soldier{
     void runContext(String weaponSound){
         System.out.println("전투 시작");
@@ -477,6 +531,3 @@ public class Client{
     }
 }
 ```
-
-* 전략 패턴과 거의 모든 것이 동일하고, 전략을 익명 클래스로 정의해서 사용한다.
-* **"전략을 익명 내부 클래스로 구현한 전략 패턴"**
