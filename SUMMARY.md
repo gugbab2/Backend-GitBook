@@ -328,7 +328,7 @@
     * [객체지향 설계의 5원칙](spring/undefined/5.md)
     * [스프링이 사랑한 디자인 패턴](spring/undefined-1/undefined/undefined-1.md)
     * [IoC / DI](spring/undefined/ioc-di.md)
-    * [AOP](spring/undefined/aop.md)
+    * [AOP(Aspect Oriented Programming), 관점 지향 프로그래밍](spring/undefined/aop.md)
   * [토비의 스프링 3.1](spring/3.1/README.md)
     * [Spring vs Spring Boot](spring/3.1/spring-vs-spring-boot.md)
     * [1. 오브젝트와 의존관계](spring/3.1/1./README.md)

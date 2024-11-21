@@ -5,8 +5,10 @@
 ## 1. 어댑터 패턴(Adapter Pattern)
 
 * **어댑터는 변환기(convert) 로 서로 다른 두 인터페이스 사이에 통신이 가능하도록 하는 것이다.**
-  * 다양한 데이터베이스 시스템을 공통의 인터페이스인 JDBC 를 통해 조작한다.&#x20;
-  * 다양한 운영체제의 기계어를 JVM 을 통해서 만들어낸다.&#x20;
+  * **인터페이스 상속(`implements`)  을 통해서 구현**
+  * 예시
+    * 다양한 데이터베이스 시스템을 공통의 인터페이스인 JDBC 를 통해 조작한다.&#x20;
+    * 자바에서는다양한 운영체제의 기계어를 JVM 을 통해서 만들어낸다.&#x20;
 * 한문장으로 정리하면 다음과 같다. \
   "호출당하는 쪽의 메서드를 호출하는 쪽의 코드에 대응하도록 중간에 변환기를 통해 호출하는 패턴"
 
@@ -160,7 +162,7 @@ public class Proxy implement IService{
         System.out.println("호출에 대한 흐름 제어가 주목적, 반환 결과를 그대로 전달.");
         
         service = new Service();
-        return service1.runSimething();
+        return service.runSimething();
     }
 }
 
