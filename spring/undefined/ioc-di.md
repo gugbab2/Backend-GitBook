@@ -1,10 +1,10 @@
 # IoC / DI
 
-> ### 라이브러리와 프레임워크의 차이&#x20;
+> ### 라이브러리와 프레임워크의 차이
 >
 > #### 라이브러리
 >
-> * &#x20;라이브러리는 특정 기능을 수행하는 함수, 클래스, 또는 메서드들의 집합으로, 개발자가 필요할 때 호출하여 하용하는 도구이다.&#x20;
+> * 라이브러리는 특정 기능을 수행하는 함수, 클래스, 또는 메서드들의 집합으로, 개발자가 필요할 때 호출하여 하용하는 도구이다.&#x20;
 > * **개발자가 제어권을 가진다.**&#x20;
 > * **개발시 필요한 도구를 제공한다.**&#x20;
 >
@@ -230,7 +230,7 @@ public class BeanB {
 }
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt="" width="548"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt="" width="548"><figcaption></figcaption></figure>
 
 * 필드, Setter 주입 방식&#x20;
   * 이 두가지 DI 방식은 **어플리케이션 구동 시 DI 를 하지 않는다.**&#x20;

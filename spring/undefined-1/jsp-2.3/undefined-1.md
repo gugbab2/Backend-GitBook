@@ -135,7 +135,15 @@
 
 ## 6. 서비스를 좀 더 내 마음대로 모니터링 할 수 있게 하려면?
 
-### 6-1. ServiceContextListener
+* `ServletContextListener` 를 사용해보자.&#x20;
+* **Spring Interceptor 와 비슷한 기능을 수행한다.**&#x20;
+
+### 6-1. ServletContextListener
+
+#### ServletContextListener 란?&#x20;
+
+* 웹 컨테이너는 웹 어플리케이션이 시작, 종료 되는 시점에 특정 클래스의 메서드를 실행할 수 있는 기능을 제공한다.&#x20;
+* 이 기능을 통해 웹 어플리케이션 시 필요한 초기화 작업 또는 종료된 후 사용된 자원을 반환하는 작업 등을 수행
 
 ## 7. URL 매핑에 들어가는 비용은?
 

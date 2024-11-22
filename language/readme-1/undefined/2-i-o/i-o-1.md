@@ -166,7 +166,7 @@ public class StreamStartMain2 {
 
 ## 3. InputStream, OutputStream&#x20;
 
-<figure><img src="../../../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 현대의 컴퓨터는 대부분 byte 단위로 데이터를 주고받는다. 참고롤 bit 단위는 너무 작기 때문에, byte 단위를 기본으로 사용한다.&#x20;
 * 이렇게 데이터를 주고 받는 것을 Input / Output(I/O) 라 한다.&#x20;

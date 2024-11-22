@@ -223,9 +223,9 @@ public class ClientProxy{
 * **`static` 을 사용하므로 프로세스 내에서 공유가 가능한 참조 변수를 사용할 수 있게 된다.**&#x20;
 
 <pre class="language-java"><code class="lang-java"><strong>public class Singleton{
-</strong><strong>    static Singleton singletonObject; //정적 참조 변수
+</strong><strong>    static Singleton singletonObject; // 정적 참조 변수
 </strong>    
-    private Singleton(){};            //private 생성자
+    private Singleton(){};            // private 생성자
     
     //객체 반환 정적 메서드
     public static Singleton getInstance(){
