@@ -1,7 +1,3 @@
----
-description: 빈
----
-
 # 스프링 컨테이너와 스프링 빈
 
 ## 1. 스프링 컨테이너 생성 과정
@@ -83,9 +79,9 @@ void findBeanByNameX() {
 
 ### 상속관계&#x20;
 
-* **부모 타입으로 빈을 조회하면, 자식 타입들도 함께 조회된다.**&#x20;
-  * **`Object` 타입으로 조회하면, 모든 스프링 빈을 조회하게 된다.**&#x20;
-* 때문에 부모 타입으로 조회시, 자식이 둘 이상 있으면, 빈 이름을 지정하면 된다.&#x20;
+* **부모 타입으로 빈을 조회하면, 자식 타입들도 함께 조회된다.**
+  * **`Object` 타입으로 조회하면, 모든 스프링 빈을 조회하게 된다.**
+* 때문에 부모 타입으로 조회시, 자식이 둘 이상 있으면, 빈 이름을 지정하면 된다.
 
 ```java
 AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);

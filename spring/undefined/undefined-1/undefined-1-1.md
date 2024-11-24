@@ -3,9 +3,9 @@
 ## 1. 웹 애플리케이션과 싱글톤&#x20;
 
 * 이전에 만든 스프링 없는 순수한 DI 컨테이너인 `AppConfig` 는 요청할 때마다 객체를 새로 생성한다.&#x20;
-* 문제는 보통의 웹 애플리케이션은 여러 고객이 동시에 요청한다.&#x20;
-  * 고객 트래픽이 초당 100이 나오면, 초당 100개 객체가 생성/소멸되는 꼴이다.&#x20;
-* 이 문제를 해결하기 위해서 스프링 컨테이너는 해당 객체가 딱 1개만 생성되고 공유하도록 설계한 싱글톤 패턴을 이용한다.&#x20;
+* **문제는 보통의 웹 애플리케이션은 여러 고객이 동시에 요청한다.**&#x20;
+  * **고객 트래픽이 초당 100이 나오면, 초당 100개 객체가 생성/소멸되는 꼴이다.**&#x20;
+* 이 문제를 해결하기 위해서 스프링 컨테이너는 해당 객체가 딱 1개만 생성되고 공유하도록 설계한 싱글톤 패턴을 이용한다.
 
 ```java
 @Test
@@ -48,7 +48,7 @@ void pureContainer() {
 * 싱글톤 패턴을 구현하는 코드 자체가 많아진다.
 * 의존관계상 클라이언트가 구체 클래스에 의존해서 DIP/OCP 원칙을 위반한다.&#x20;
   * 클라이언트 입장에서는 확장에 열려있어야 하고 변경에는 닫혀 있어야 한다.
-* private 생성자로 자식 클래스를 만들기가 어렵다.
+* `private` 생성자로 자식 클래스를 만들기가 어렵다.
 * **결론적으로 유연성이 떨어지기에 안티패턴으로 불린다.**
 
 ### **싱글톤 패턴의 주의점**&#x20;
@@ -57,13 +57,13 @@ void pureContainer() {
   * 특정 클라이언트에 의존적인 필드가 있으면 안된다.&#x20;
   * 특정 클라이언트가 값을 변경할 수 있는 필드가 있으면 안된다.&#x20;
   * 가급적 읽기만 가능해야 한다.&#x20;
-  * 필드 대신 자바에서 공유되지 않는 지역변수, 파라미터, ThreadLocal 등을 사용해야 한다.&#x20;
+  * 필드 대신 자바에서 공유되지 않는 지역변수, 파라미터, `ThreadLocal` 등을 사용해야 한다.&#x20;
 
 ## 3. 싱글톤 컨테이너
 
 * 스프링 컨테이너는 싱글톤 패턴의 문제점을 해결하며 객체 인스턴스를 싱글톤으로 관리한다.&#x20;
   * **싱글톤 패턴을 적용하지 않아도, 객체 인스턴스를 싱글톤으로 관리한다.**&#x20;
-* **DIP/OCP, 테스트코드 작성, private 생성자로부터 자유롭게 싱글톤을 사용할 수 있다.**&#x20;
+* **DIP/OCP, 테스트코드 작성, `private` 생성자로부터 자유롭게 싱글톤을 사용할 수 있다.**&#x20;
   * **싱글톤 컨테이너는 안티패턴이 아니다!** \
     ~~(어떻게 구현했을까?)~~&#x20;
 
@@ -76,7 +76,7 @@ void pureContainer() {
 </strong>public class AppConfig {
     @Bean
     public MemberService memberService() {
-        return new MemberServiceImpl(memberRepository());
+        return new MemberServiceImpl(memberRepository()); // 호출1
     }
 
     @Bean
@@ -86,7 +86,7 @@ void pureContainer() {
 
     @Bean
     public OrderService orderService() {
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy()); // 호출2(중복?)
     }
 
     @Bean
