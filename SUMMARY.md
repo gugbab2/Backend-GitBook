@@ -317,6 +317,8 @@
     * [의존관계 자동 주입](spring/undefined-1/undefined-3.md)
     * [빈 생명주기 콜백](spring/undefined-1/undefined-4.md)
     * [빈 스코프](spring/undefined-1/undefined-5.md)
+  * [토비의 스프링6 - 이해와 원리](spring/undefined/6/README.md)
+    * [2. 오브젝트와 의존관계](spring/undefined/6/2..md)
 * [책](<spring/undefined-1/README (1).md>)
   * [JSP 2.3 웹 프로그래밍](spring/jsp-2.3/README.md)
     * [Servlet](spring/jsp-2.3/servlet.md)
