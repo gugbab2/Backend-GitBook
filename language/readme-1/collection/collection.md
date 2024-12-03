@@ -4,7 +4,7 @@
 
 ## Collection
 
-\-> **Collection 을 상속하는 객체들은 for(String temp : list) 형식의 for 문을 사용 가능하다.**
+-> **Collection 을 상속하는 객체들은 for(String temp : list) 형식의 for 문을 사용 가능하다.**
 
 ```java
 public interface Collection<E> extends Iterable<E>
@@ -14,7 +14,7 @@ public interface Collection<E> extends Iterable<E>
   * `hasNext()` : 추가 데이터가 있는지 확인한다.
   * `next()` : 현재 위치를 다음 요소로 넘기고 그 값을 리턴해준다.
 * **`Collection` 인터페이스가 `Iterable` 인터페이스를 확장했다는 의미는, `Iterator` 인터페이스를 사용해 데이터를 순차적으로 가져올 수 있다는 의미가 된다.**\
-  **-> 순서가 존재한다는 개념은 아니다.**&#x20;
+  &#xNAN;**-> 순서가 존재한다는 개념은 아니다.**&#x20;
 
 ### Collection 인터페이스에 선언된 주요 메서드 목록
 

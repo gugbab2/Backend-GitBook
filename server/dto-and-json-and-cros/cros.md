@@ -10,15 +10,15 @@
 
 > [CORS](https://github.com/ahastudio/til/blob/main/http/20201205-cors.md)(아샬님의 간단한 CORS 설명)
 
-> [Same-origin policy](https://developer.mozilla.org/ko/docs/Web/Security/Same-origin\_policy)
+> [Same-origin policy](https://developer.mozilla.org/ko/docs/Web/Security/Same-origin_policy)
 
 동일 출처 정책(Same-origin-policy)은 웹 브라우저가 지원하는 기능에 속하고, 각 세부 사항이 브라우저마다 다르다. (**반대로 말하면 동일 출처 정책은 웹 브라우저가 아니면 아무 상관이 없다**)\
-\-> 서버는 클라이언트 요청에 대한 응답을 주었지만 웹 브라우저에서 막는다.
+-> 서버는 클라이언트 요청에 대한 응답을 주었지만 웹 브라우저에서 막는다.
 
 얻으려는 리소스의 출처(호스트)가 Front-end, 즉 현재 페이지(localhost, B/E 입장에서는 요청하는 쪽)와 다르면 접근할 수 없게 하는 보안 정책. **출처에는 포트(프로토콜 + IP + PORT)까지 포함된다는 점에 주의.**
 
 **요청 메시지**\
-**-> 다음과 같이 프론트엔드가 자신과 다른 출처의 서버에 요청을 하게 된다면 동일 출처 정책에 의해 응답이 차단된다.**
+&#xNAN;**-> 다음과 같이 프론트엔드가 자신과 다른 출처의 서버에 요청을 하게 된다면 동일 출처 정책에 의해 응답이 차단된다.**
 
 ```
 GET /posts HTTP/1.1
@@ -32,7 +32,7 @@ Origin: <http://localhost:3000> → Front-end
 > [JSONP](https://ko.wikipedia.org/wiki/JSONP)
 
 **\<script> 태그는 동일 출처를 따지지 않는다는 점을 이용.**\
-\-> 서버에서 JSON을 직접 전달하는 게 아니라, 실행되는 자바스크립트 코드를 전달하는 방식.
+-> 서버에서 JSON을 직접 전달하는 게 아니라, 실행되는 자바스크립트 코드를 전달하는 방식.
 
 ```html
 <script>
@@ -108,7 +108,7 @@ response.addHeader("Access-Control-Allow-Origin", "*");
 > [CrossOrigin](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/CrossOrigin.html)
 
 Spring Web에선 @CrossOrigin 애너테이션을 써주면 된다. 클래스, 메서드 모두 지정 가능.\
-\-> 완전 편하니 이걸 사용하자..
+-> 완전 편하니 이걸 사용하자..
 
 ```java
 @CrossOrigin("<http://localhost:3000>")

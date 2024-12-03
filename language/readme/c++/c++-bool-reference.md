@@ -30,16 +30,16 @@ if(IsStudent() == false)
 *   참조에 의한 호출(call by reference)
 
     * c / c++\
-      \-> c / c++ 는 포인터를 제공하지 않으면 call by value 처럼 동작하게 된다.
+      -> c / c++ 는 포인터를 제공하지 않으면 call by value 처럼 동작하게 된다.
 
     <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.16.23.png" alt="" width="375"><figcaption></figcaption></figure>
 
     <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.19.46.png" alt="" width="375"><figcaption></figcaption></figure>
 
     *   Java\
-        \-> Java 는 primitive 타입이 아닌 것(reference 타입)에 대해서는 값의 주소를 제공하기 때문에, c / c++ 과 헷갈리는 부분이다.\
-        \-> **해당 주소는 포인터 연산자가 아니다! 왜냐면 포인터 연산자처럼 주소를 바꿀 수 없다..**\
-        \-> 자바는 성능보다는 안전함을 위한 언어이기 때문에, 포인터를 의도적으로 사용하지 않는다.
+        -> Java 는 primitive 타입이 아닌 것(reference 타입)에 대해서는 값의 주소를 제공하기 때문에, c / c++ 과 헷갈리는 부분이다.\
+        -> **해당 주소는 포인터 연산자가 아니다! 왜냐면 포인터 연산자처럼 주소를 바꿀 수 없다..**\
+        -> 자바는 성능보다는 안전함을 위한 언어이기 때문에, 포인터를 의도적으로 사용하지 않는다.
 
         <figure><img src="../../../.gitbook/assets/스크린샷 2023-10-24 22.30.59.png" alt="" width="375"><figcaption></figcaption></figure>
 * 포인터(pointer)
@@ -51,7 +51,7 @@ if(IsStudent() == false)
 
 #### 참조는 별칭이다!
 
-\-> `int& reference = number`\
+-> `int& reference = number`\
 `int* pointer = &number` 는 완전 다른 의미이기 때문에, 주의하자!
 
 <pre class="language-cpp"><code class="lang-cpp"><strong>int number = 100;
@@ -100,4 +100,4 @@ void swap(int& number1, int& number2)
 * 컴파일러에 의해 참조는 포인터로 변경이 된다.
 * 참조는 오직 인간을 위한 것임
 * 컴파일러는 참조를 포인터로 바꾸어 준다. 기계가 이해할 수 있도록\
-  **-> 컴퓨터는 참조는 모르지만 포인터는 안다!**
+  &#xNAN;**-> 컴퓨터는 참조는 모르지만 포인터는 안다!**

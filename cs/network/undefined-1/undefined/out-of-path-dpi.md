@@ -6,9 +6,9 @@
 
 * Out of path 구조는 쉽게 Sensor(Port Mirroring) 로 생각할 수 있다.
 * Out of path 센서와 연결되는 대표적인 장치는 L2 스위치이다. \
-  **-> L2 스위치는 미러링 용 포트를 가지고 있고, 포트간의 통신 정보들을 미러링 용 포트를 통해 센서에 전달한다.**\
+  &#xNAN;**-> L2 스위치는 미러링 용 포트를 가지고 있고, 포트간의 통신 정보들을 미러링 용 포트를 통해 센서에 전달한다.**\
   **-> 해당 작업은 부하가 심한 작업이기 때문에, 높은 성능을 필요로 한다.**\
-  \-> 미러링 전용 스위치(Tab Switch) 도 존재한다. (가격이 비싸다 ;;)
+  -> 미러링 전용 스위치(Tab Switch) 도 존재한다. (가격이 비싸다 ;;)
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-01-12 17.09.01.png" alt=""><figcaption></figcaption></figure>
 
@@ -28,7 +28,7 @@
   * **국가가 지정하는 유해사이트(포르노, 마약 ..)를 제외하고는 접근 제한을 해서는 안된다. (망중립의 원칙)**
 * 유해사이트에 대한 응답으로 주고 있는 것들은 HTTP 이다. 이것을 한번 더 생각해보면 L7 HTTP 통신이 이루어지고 있다는 말이 된다.
 * HTTP 통신 단위의 흐름을 보면 다음과 같다.\
-  \-> Socket Stream > Segment > Packet&#x20;
+  -> Socket Stream > Segment > Packet&#x20;
 * 결국 네트워크 내에서는 Packet 의 단위로 통신이 이루어지게 되는데, Packet 에는 IP, TCP, HTTP 헤더 정보를 담고 있다. (TCP/IP 통신이라면 HTTP 헤더 정보는 가지고 있지 않는다)
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-01-12 16.58.26.png" alt=""><figcaption></figcaption></figure>

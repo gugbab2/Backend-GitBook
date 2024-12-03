@@ -13,4 +13,4 @@
 * `Stack` 클래스는 `Vector` 클래스를 확장해 만들었다. `Stack` 클래스의 가장 큰 특징은, LIFO(Last In First Out) 를 지원하기 위함이다.
   * 스택 메모리에 스택프레임이 들어왔다 나가는 과정을 생각해보자!
   * 이와 같은 데이터 구조를 다뤄야 할 때 Stack 클래스를 사용 할 수 있지만, `Stack` 보다는 `ArrayDeque` 를 사용한자. \
-    **-> `Stack` 에서 상속 받는 `Vector` 클래스는 deprecated 되었다.**
+    &#xNAN;**-> `Stack` 에서 상속 받는 `Vector` 클래스는 deprecated 되었다.**
