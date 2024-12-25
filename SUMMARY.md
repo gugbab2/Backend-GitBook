@@ -368,3 +368,12 @@
 
 * [단위 테스트 vs 통합 테스트](insight/vs.md)
 * [성능 테스트](insight/undefined.md)
+
+## ARCHITECTURE
+
+* [DDD](architecture/ddd/README.md)
+  * [책](architecture/ddd/undefined/README.md)
+    * [도메인 주도 설계(Domain-Driven Design)](architecture/ddd/undefined/domain-driven-design/README.md)
+      * [04 - 도메인의 격리](architecture/ddd/undefined/domain-driven-design/04.md)
+      * [05 - 소프트웨어에서 표현되는 모델](architecture/ddd/undefined/domain-driven-design/05.md)
+      * [06 - 도메인 객체의 생명주기](architecture/ddd/undefined/domain-driven-design/06.md)

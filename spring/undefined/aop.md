@@ -16,7 +16,7 @@
     * 핵심적 관리 사항 : 회원가입 비지니스 로직&#x20;
     * 공통 관심 사항 : 호출 시간 측정&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="554"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt="" width="554"><figcaption></figcaption></figure>
 
 #### AOP 장점&#x20;
 
