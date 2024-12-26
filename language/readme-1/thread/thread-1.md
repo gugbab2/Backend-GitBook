@@ -14,7 +14,7 @@
 
 ## Thread 상태 (Thread.State.NEW 형식으로 사용 가능)
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * `NEW`&#x20;
   * 쓰레드 객체는 생성되었지만, 아직 시작되지는 않는 상태
@@ -24,7 +24,7 @@
   * 쓰레드가 실행중이거나, 실행 준비가 된 상태이다.&#x20;
   * `start()` 메서드가 호출된 후, 쓰레드는 이 상태로 전환된다.&#x20;
   * 이 상태의 쓰레드는 CPU 에서 실행중이거나 또는 운영체제 스케줄러에 의해서 실행할 준비가 된 상태이다. \
-    \-> 즉, CPU 자원을 얻었다가 놓치면 다시 `RUNNABLE` 상태로 돌아간다.&#x20;
+    -> 즉, CPU 자원을 얻었다가 놓치면 다시 `RUNNABLE` 상태로 돌아간다.&#x20;
 * `BLOCKED`
   * 쓰레드가 실행 중지 상태이며, 모니터락이 풀리기를 기다리는 상태
   * 만약 특정 객체가 `synchronized` 로 인해 락이 걸려 있다면 `BLOCKED` 상태가 된다.&#x20;
