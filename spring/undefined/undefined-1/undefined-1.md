@@ -4,19 +4,19 @@
 
 * 주문 도메인 협력, 역할, 책임&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 주문 도메인 전체&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 주문 클래스 다이어그램&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 주문 객체 다이어그램&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 주문 도메인 개발&#x20;
 
@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
   * 주문 서비스 클라이언트 `OrderServiceImpl` 은 `DiscountPolicy` 인터페이스를 의존하는 것과 동시에 `FixDiscountPolicy` 혹은 `RateDiscountPolicy` 에도 의존으로 하고 있기 때문에, DIP 를 위반한다.&#x20;
 * 현재 구현한 모델의 실제 모습은 다음과 같다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 즉, 위 코드를 인터페이스에만 의존하도록 설계를 변경해야 한다.&#x20;
   * 그러나 아래 경우에는 구현체가 없기 때문에, `nullPointException` 이 발생한다.&#x20;
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
 * 별도의 설정 클래스(`AppConfig`) 를 사용하므로, OCP/DIP 원칙을 지키며 기존에 하고자 했던 설계를 했다.&#x20;
 * 비즈니스 로직상 `DiscountPolicy` 인터페이스의 구현 객체로 다른 클래스가 추가되어도, 구성 영역인 `AppConfig` 에서 수정하면 클라이언트 영역의 어떠한 코드 변경 없이 확장할 수 있다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 3. 의존 관계 주입&#x20;
 
@@ -111,7 +111,7 @@ public class OrderServiceImpl implements OrderService {
   * 정적인 의존 관계는 애플리케이션을 실행하지 않아도 분석 할 수 있다.&#x20;
     * `OrderServiceImpl` 은 `MemeberRepository` 와 `DiscountPolicy` 에 의존함을 알 수 있는 것처럼 말이다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 동적인 객체 의존 관계&#x20;
   * 런타임에 실제 생성된 객체 인스턴스의 참조가 연결된 의존 관계이다.&#x20;

@@ -3,9 +3,9 @@
 ## Queue
 
 * 선입 선출 (First-in first-out, FIFO) 자료구조\
-  \-> 배열이기 때문에, Vector 와 장단점이 비슷하다.&#x20;
+  -> 배열이기 때문에, Vector 와 장단점이 비슷하다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (6) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Queue 만들기&#x20;
 
@@ -26,10 +26,10 @@
 ## Set&#x20;
 
 * 맵의 키와 같이 정렬되는 컨테이너이다. \
-  \-> **맵에서 사용되는 키와 동일하다.**
+  -> **맵에서 사용되는 키와 동일하다.**
 * 중복되지 않는 키를 요소로 저장한다.&#x20;
 * 역시 이진 탐색 트리 기반이다.\
-  \-> 오름차순
+  -> 오름차순
 * 장단점 또한 Map 과 같다.
 
 ## List
