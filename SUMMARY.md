@@ -379,3 +379,8 @@
       * [06 - 도메인 객체의 생명주기](architecture/ddd/undefined/domain-driven-design/06.md)
       * [07 - 언어의 사용(확장 예제) (1)](architecture/ddd/undefined/domain-driven-design/07-1.md)
       * [07 - 언어의 사용(확장 예제) (2)](architecture/ddd/undefined/domain-driven-design/07-2.md)
+
+## 멘토링
+
+* [F-Lab](undefined/f-lab/README.md)
+  * [10회차(2024.12.29)](undefined/f-lab/10-2024.12.29.md)
