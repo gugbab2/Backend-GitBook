@@ -1,11 +1,11 @@
 # 스위치가 하는 일과 비용
 
-<figure><img src="../../../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 일반적으로 우리가 길을 찾아가는 과정을 생각해보자
   * 길을 가다보면 교차로를 만나게 된다.
   * 교차로에서는 운전자는 항상 경로를 선택한다.\
-    \-> 근거 : 이정표
+    -> 근거 : 이정표
   * 교차로에서 이정표에 따라 가다보면 목적지를 만나게 된다.
 * **위 비유를 바탕으로 다음과 같이 생각해볼 수 있다.**
   * **도로 : 네트워크**

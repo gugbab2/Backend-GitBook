@@ -12,21 +12,21 @@
 * **동기/비동기는 완료 여부!**
 * **블로킹/논블로킹은 차단 or 제어권 여부!**
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-1. 동기(synchronous) / 비동기(Asynchronous)
 
 * **동기는 요청한 작업에 대해서 완료 여부를 따져 순차대로 처리**하는 것을 의미한다.&#x20;
 * **비동기는 요청한 작업에 대해서 완료 여부를 따지지 않기 때문에,** 자신의 다음 작업을 그대로 수행하게 된다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 1-1-1. 비동기의 성능상 이점&#x20;
 
 * 비동기는 요청한 작업의 완료 여부를 확인하지 않고, 자신의 그 다음 작업을 수행하기 떄문에 I/O 작업, API 요청과 같은 느린 작업이 발생할 때, 기다리지 않고 동시에 멀티 작업을 진행할 수 있다.
 * 예를 들어, 웹 어플리케이션에서 결재 처리 시 결제 요청은 동기적으로 처리하여 완료 여부를 확인하지만, 결제 완료 후 영수증 이메일 전송이나 포인트 적립과 같은 부수적인 기능은 비동기로 처리해 성능을 최적화 할 수 있다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 1-1-2. 동기와 비동기는 작업 순서 처리 차이
 
@@ -34,7 +34,7 @@
   * 요청한 작업에 대한 응답을 반드시 받아야 다음 작업을 수행한다는 말이다.&#x20;
 * 따라서 동기 작업은 요청한 작업에 대해 순서가 지켜지는 것을 말하는 것이고, 비동기 작업은 순서가 지켜지지 않을 수 있다는 것을 말한다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt="" width="491"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt="" width="491"><figcaption></figcaption></figure>
 
 ### 1-2. 블로킹(Blocking) / 논블로킹(Non-Blocking)
 
@@ -44,7 +44,7 @@
   * 파일을 다 읽을 때까지 대기한다면 블로킹 방식
   * 파일을 다 읽지 않아도 다른 작업을 할 수 있다면 논블로킹 방식
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 1-2-1. 비동기와 논블로킹의 개념 차이
 
@@ -59,6 +59,6 @@
 * **호출된 함수로 제어권을 넘겨주면 블로킹**&#x20;
 * **호출된 함수로 제어권을 넘겨주지 않는다면 넌블로킹**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption><p>Blocking</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption><p>Blocking</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption><p>Non Blocking</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption><p>Non Blocking</p></figcaption></figure>
