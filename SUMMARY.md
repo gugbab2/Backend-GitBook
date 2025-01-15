@@ -382,6 +382,7 @@
     * [도메인 주도 개발 시작하기](architecture/ddd/undefined/undefined/README.md)
       * [1. 도메인 모델 시작하기](architecture/ddd/undefined/undefined/1..md)
       * [2. 아키텍처 개요](architecture/ddd/undefined/undefined/2..md)
+      * [3. 애그리거트](architecture/ddd/undefined/undefined/3..md)
 
 ## 멘토링
 

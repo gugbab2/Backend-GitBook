@@ -2,7 +2,7 @@
 
 ## 패킷의 생성과 전달
 
-<figure><img src="../../../../.gitbook/assets/image (7) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. 프로세스에서 데이터를 인터페이스(File)에 Write 해준다.\
    -> TCP/IP 프로토콜에서는 인터페이스가 Socket 이다.\
@@ -14,7 +14,7 @@
 
 ## 계층별 데이터 단위
 
-<figure><img src="../../../../.gitbook/assets/image (8) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (8) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * L1 \~ L2 : Frame
 * L3 : Packet
