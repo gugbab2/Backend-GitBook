@@ -16,7 +16,7 @@
     * 핵심적 관리 사항 : 회원가입 비지니스 로직&#x20;
     * 공통 관심 사항 : 호출 시간 측정&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt="" width="554"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="554"><figcaption></figcaption></figure>
 
 #### AOP 장점&#x20;
 
@@ -166,7 +166,7 @@ public class ExecutionTimeAop {
    1. AOP 는 메서드 실행을 중단하거나, 대체하는 것이 가능하다 .
    2.  ex) 특정 조건에서 메서드 실행을 막거나, 메서드 반환 값을 조작 (프록시 패턴?)&#x20;
 
-       <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4. HTTP 요청에 의존하지 않은 로직을  처리할 때&#x20;
    1. AOP 는 HTTP 계층에 의존하지 않으므로, 배치 작업이나 비동기 메서드에서도 적용 가능&#x20;
    2. ex) 스케줄러 기반 메서드 로깅&#x20;
