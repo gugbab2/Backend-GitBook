@@ -344,6 +344,8 @@
       * [1.4 제어의 역전(IoC)](spring/3.1/1./1.4-ioc.md)
       * [1.5 스프링의 IoC](spring/3.1/1./1.5-ioc.md)
       * [1.6 싱글톤 레지스트리와 오브젝트 스코프](spring/3.1/1./1.6.md)
+* [그 외](spring/undefined-2/README.md)
+  * [스프링 부트(SpringBoot) 탄생 배경](spring/undefined-2/springboot.md)
 
 ## DB
 
