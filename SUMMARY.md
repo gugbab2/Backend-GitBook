@@ -383,6 +383,8 @@
       * [1. 도메인 모델 시작하기](architecture/ddd/undefined/undefined/1..md)
       * [2. 아키텍처 개요](architecture/ddd/undefined/undefined/2..md)
       * [3. 애그리거트](architecture/ddd/undefined/undefined/3..md)
+      * [4. 리포지터리와 모델 구현](architecture/ddd/undefined/undefined/4./README.md)
+        * [DAO vs Repository](architecture/ddd/undefined/undefined/4./dao-vs-repository.md)
 
 ## 멘토링
 
