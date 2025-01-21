@@ -364,6 +364,15 @@
       * [3강. COUNT(\*) & COUNT(DISTINCT) 튜닝](db/undefined-1/real-mysql-1/part.1/3-.-count-and-count-distinct.md)
       * [4강. 페이징 쿼리 작성](db/undefined-1/real-mysql-1/part.1/4-..md)
       * [5강. Stored Function](db/undefined-1/real-mysql-1/part.1/5-.-stored-function.md)
+  * [토크온 41차. JPA 프로그래밍 기본 다지기](db/undefined-1/41-.-jpa/README.md)
+    * [1. JPA 소개](db/undefined-1/41-.-jpa/1.-jpa.md)
+    * [2. JPA 기초와 매핑](db/undefined-1/41-.-jpa/2.-jpa.md)
+    * [3. 필드와 컬럼 매핑](db/undefined-1/41-.-jpa/3..md)
+    * [4. 연관관계 매핑](db/undefined-1/41-.-jpa/4..md)
+    * [5. 양방향 매핑](db/undefined-1/41-.-jpa/5..md)
+    * [6. JPA 내부구조](db/undefined-1/41-.-jpa/6.-jpa.md)
+    * [7. JPA 객체지향쿼리](db/undefined-1/41-.-jpa/7.-jpa.md)
+    * [8. Spring Data JPA 와 QueryDSL 이해](db/undefined-1/41-.-jpa/8.-spring-data-jpa-querydsl.md)
 * [책](db/undefined-2.md)
 
 ## INSIGHT
