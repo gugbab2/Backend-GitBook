@@ -201,7 +201,7 @@
   * [그 외](language/readme-1/undefined-2/README.md)
     * [시스템 콜과 자바에서의 시스템 콜 사용례](language/readme-1/undefined-2/undefined.md)
     * [자바 NIO 의 동작원리 및 IO 모델](language/readme-1/undefined-2/nio-io.md)
-    * [Event Driven Architecture](language/readme-1/undefined-2/event-driven-architecture.md)
+    * [함수형 인터페이스(FunctionInterface) - 자바8](language/readme-1/undefined-2/functioninterface-8.md)
 
 ## CS
 
@@ -399,6 +399,7 @@
   * [강의](architecture/ddd/undefined-1/README.md)
     * [DDD 세레나데(NEXTSTEP)](architecture/ddd/undefined-1/ddd-nextstep/README.md)
       * [1주차](architecture/ddd/undefined-1/ddd-nextstep/1.md)
+* [Event Driven Architecture](architecture/event-driven-architecture.md)
 
 ## 멘토링
 
