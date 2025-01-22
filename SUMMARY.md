@@ -396,6 +396,9 @@
       * [3. 애그리거트](architecture/ddd/undefined/undefined/3..md)
       * [4. 리포지터리와 모델 구현](architecture/ddd/undefined/undefined/4./README.md)
         * [DAO vs Repository](architecture/ddd/undefined/undefined/4./dao-vs-repository.md)
+  * [강의](architecture/ddd/undefined-1/README.md)
+    * [DDD 세레나데(NEXTSTEP)](architecture/ddd/undefined-1/ddd-nextstep/README.md)
+      * [1주차](architecture/ddd/undefined-1/ddd-nextstep/1.md)
 
 ## 멘토링
 
