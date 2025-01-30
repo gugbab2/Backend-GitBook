@@ -410,4 +410,5 @@
 
 * [JUnit5](test/junit5/README.md)
   * [A Guide to JUnit 5](test/junit5/a-guide-to-junit-5.md)
+  * [Guide to JUnit 5 Parameterized Tests](test/junit5/guide-to-junit-5-parameterized-tests.md)
   * [AssertJ Exception Assertions](test/junit5/assertj-exception-assertions.md)

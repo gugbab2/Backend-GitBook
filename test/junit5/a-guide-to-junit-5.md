@@ -9,7 +9,7 @@
 * Java8 부터 사용이 가능하다.&#x20;
 * JUnit5 는 람다 사용을 지원하는 방향으로 개발되었다.&#x20;
 
-## **2. Architecture** <a href="#bd-dependencies-1" id="bd-dependencies-1"></a>
+## **2. 구조** <a href="#bd-dependencies-1" id="bd-dependencies-1"></a>
 
 ### JUnit Platform
 

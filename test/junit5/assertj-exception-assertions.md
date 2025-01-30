@@ -1,5 +1,9 @@
 # AssertJ Exception Assertions
 
+> 참고 링크&#x20;
+>
+> [https://www.baeldung.com/assertj-exception-assertion](https://www.baeldung.com/assertj-exception-assertion)
+
 ## 1. 개요&#x20;
 
 * 이번에는 AssertJ 라이브러리의 예외 전용 Assert 에 대해서 알아보자.&#x20;
