@@ -2,7 +2,7 @@
 
 ##
 
-<figure><img src="../../../../.gitbook/assets/image (9) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (9) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 컴퓨터가 네트워크에 연결되어 있다고 가정하면, **컴퓨터를 이제는 호스트라고 부른다!**\
   &#xNAN;**-> 호스트 : 인터넷에 연결된 컴퓨터**

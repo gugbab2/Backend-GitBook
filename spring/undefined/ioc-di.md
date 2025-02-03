@@ -230,7 +230,7 @@ public class BeanB {
 }
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt="" width="548"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (1).png" alt="" width="548"><figcaption></figcaption></figure>
 
 * 필드, Setter 주입 방식&#x20;
   * 이 두가지 DI 방식은 **어플리케이션 구동 시 DI 를 하지 않는다.**&#x20;
