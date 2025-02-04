@@ -399,6 +399,8 @@
   * [강의](architecture/ddd/undefined-1/README.md)
     * [DDD 세레나데(NEXTSTEP)](architecture/ddd/undefined-1/ddd-nextstep/README.md)
       * [1주차](architecture/ddd/undefined-1/ddd-nextstep/1.md)
+* [REFACTORING](architecture/refactoring/README.md)
+  * [일급 컬렉션(First Class Collection) 소개와 사용해야하는 이유](architecture/refactoring/first-class-collection.md)
 * [Event Driven Architecture](architecture/event-driven-architecture.md)
 
 ## 멘토링
