@@ -10,7 +10,7 @@
 
 ## 2. AssertJ 를 사용하지 않은 예제&#x20;
 
-* 예외가 발생했는지 테스트하려면 예외를 catch 해야 한다.&#x20;
+* 예외가 발생했는지 테스트하려면 예외를 `catch` 해야 한다.&#x20;
 * 아래 코드에서 예외가 발생하지 않는다면 테스트는 성공하게 되는데, 테스트에서 예외가 발생해야만 한다면 예외가 발생하지 않는 테스트는 실패한 테스트이다.&#x20;
 
 ```java
@@ -25,7 +25,7 @@ try {
 
 ### **assertThatThrownBy()** <a href="#bd-1-using-assertthatthrownby" id="bd-1-using-assertthatthrownby"></a>
 
-* 범위를 벗어난 항목을 인덱싱하면 IndexOutOfBoundsException 이 발생하는지 확인하는 코드이다.
+* 범위를 벗어난 항목을 인덱싱하면 `IndexOutOfBoundsException` 이 발생하는지 확인하는 코드이다.
 
 ```java
 assertThatThrownBy(() -> {
@@ -60,10 +60,10 @@ assertThatExceptionOfType(IndexOutOfBoundsException.class)
 
 ### **assertThatIOException 및 기타 일반 유형**  <a href="#bd-3-using-assertthatioexception-and-other-common-types" id="bd-3-using-assertthatioexception-and-other-common-types"></a>
 
-* _assertThatIllegalArgumentException()_
-* _assertThatIllegalStateException()_
-* _assertThatIOException()_
-* _assertThatNullPointerException()_
+* _`assertThatIllegalArgumentException()`_
+* _`assertThatIllegalStateException()`_
+* _`assertThatIOException()`_
+* _`assertThatNullPointerException()`_
 
 ```java
 assertThatIOException().isThrownBy(() -> {
