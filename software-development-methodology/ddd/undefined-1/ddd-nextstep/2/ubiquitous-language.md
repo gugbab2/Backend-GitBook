@@ -1,0 +1,2 @@
+# 전략적 설계 - UBIQUITOUS LANGUAGE
+

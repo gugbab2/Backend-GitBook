@@ -407,6 +407,13 @@
         * [도메인 주도 설계 등장 배경](software-development-methodology/ddd/undefined-1/ddd-nextstep/1/undefined.md)
         * [레거시 코드](software-development-methodology/ddd/undefined-1/ddd-nextstep/1/undefined-1.md)
         * [유연한 설계 - ASSERTION](software-development-methodology/ddd/undefined-1/ddd-nextstep/1/assertion.md)
+      * [2주차](software-development-methodology/ddd/undefined-1/ddd-nextstep/2/README.md)
+        * [전략적 설계 - UBIQUITOUS LANGUAGE](software-development-methodology/ddd/undefined-1/ddd-nextstep/2/ubiquitous-language.md)
+        * [전략적 설계 - BOUNDED CONTEXT](software-development-methodology/ddd/undefined-1/ddd-nextstep/2/bounded-context.md)
+      * [3주차](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/README.md)
+        * [전술적 설계 - ENTITY 와 VALUE OBJECT](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/entity-value-object.md)
+        * [전술적 설계 - AGGREGATE 와 REPOSITORY](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/aggregate-repository.md)
+        * [전술적 설계 - SERVICE](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/service.md)
 * [REFACTORING](architecture/refactoring/README.md)
   * [일급 컬렉션(First Class Collection) 소개와 사용해야하는 이유](architecture/refactoring/first-class-collection.md)
 
