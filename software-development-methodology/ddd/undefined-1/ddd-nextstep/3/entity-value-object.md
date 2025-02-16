@@ -36,7 +36,7 @@
 * 대부분의 책에서는 ENTITY 는 식별자가 있고, VALUE OBJECT 는 식별자가 없다고 한다.&#x20;
 * 하지만 제이슨은 VALUE OBJECT 도 식별자가 있다고 생각한다.&#x20;
   * 위 코드에서 **`new Name("Jason", "Park")` 자체로 식별자(값의 동등성, 복합키)로 생각한다.**&#x20;
-* 항상 `equals()`, `hashCode()` 메서드를 오버라이드 할 것을 권고한다.&#x20;
+* 항상 `equals()`, `hashCode()` 메서드를 오버라이드 할 것을 권고한다.
   * VALUE OBJECT 는 기본적으로 값의 모음 자체가 식별자의 역할을 하기 때문에 `equals()`, `hashCode()` 를 오버라이딩 해주어야 한다.&#x20;
 
 ### 불변 객체&#x20;
@@ -59,7 +59,7 @@ Cash fifty = five.mul(10);
 System.out.println(fifty);
 ```
 
-* 불변 객체에는 아래의 식별자 변경(identity mutability) 문제가 발생하지 않는다.&#x20;
+* 불변 객체에는 아래의 식별자 변경(identity mutability) 문제가 발생하지 않는다.
 
 ```java
 Map<Cash, String> map = new HashMap<>();
@@ -156,7 +156,7 @@ price.setCents(95);
 * 식별자를 갖는다.&#x20;
   * 객체의 상태 중 해당 객체의 고유한 성질을 표현할 수 있는 상태들을 식별자라고 부른다 .
 * 식별자는 엔티티 객체마다 고유해서 각 엔티티는 서로 다른 식별자를 갖는다.&#x20;
-  * 특정 규칙에 따라 생성&#x20;
+  * 특정 규칙에 따라 생성 (ex, 날짜 + 일련번호) &#x20;
   * UUID 사용&#x20;
   * 값을 직접 입력&#x20;
   * 일련번호 사용
