@@ -411,7 +411,7 @@
         * [전략적 설계 - UBIQUITOUS LANGUAGE](software-development-methodology/ddd/undefined-1/ddd-nextstep/2/ubiquitous-language.md)
         * [전략적 설계 - BOUNDED CONTEXT](software-development-methodology/ddd/undefined-1/ddd-nextstep/2/bounded-context.md)
       * [3주차](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/README.md)
-        * [전술적 설계 - ENTITY 와 VALUE OBJECT](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/entity-value-object.md)
+        * [전술적 설계 - VALUE OBJECT 와 ENTITY](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/value-object-entity.md)
         * [전술적 설계 - AGGREGATE 와 REPOSITORY](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/aggregate-repository.md)
         * [전술적 설계 - SERVICE](software-development-methodology/ddd/undefined-1/ddd-nextstep/3/service.md)
 * [REFACTORING](architecture/refactoring/README.md)

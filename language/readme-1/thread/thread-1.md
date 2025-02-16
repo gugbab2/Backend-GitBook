@@ -14,7 +14,7 @@
 
 ## Thread 상태 (Thread.State.NEW 형식으로 사용 가능)
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * `NEW`&#x20;
   * 쓰레드 객체는 생성되었지만, 아직 시작되지는 않는 상태

@@ -22,9 +22,9 @@
 * JaCoCo 를 통해서 코드 커버리지를 측정하면 아래와 같은 리포트를 확인할 수 있다.&#x20;
   * JaCoCo 리포트에서 제공하는 항목들을 보면 Instructions, Branches, Cxty, Lines, Methods, Classes 가 있다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Class Coverage&#x20;
 
@@ -82,11 +82,11 @@ assertEquals(2, calc.divide(2,1));
 //-> 메소드 커버리지 100%
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 만약 `Multiply` 메서드 테스트 케이스가 누락된다면, 아래와 같이 누락된 메서드가 표시된다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Line Coverage&#x20;
 
@@ -125,9 +125,9 @@ assertEquals(2, calc.divide(2,0)); // 추가, b가 0인 경우, Exception 구문
 assertEquals(2, calc.divide(2,1));
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```java
 @Test
@@ -136,7 +136,7 @@ assertEquals(2, calc.divide(2,1));
 assertEquals(2, calc.divide(2,0)); // 추가, b가 0인 경우, Exception 구문 테스트.
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Branch Coverage&#x20;
 
@@ -180,7 +180,7 @@ public int sum(int a, int b) {
 
 *   위 `sum` 메서드 내 인자 `a`,`b` 의 값에 따른 분기문이 존재한다. 이 조건문은 아래 케이스로 모두 테스트가 가능하다.&#x20;
 
-    <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### JaCoCo 브랜치 커버리지 결과
 
@@ -189,7 +189,7 @@ public int sum(int a, int b) {
 assertEquals(2, calc.divide(2,1)); // (Case.1) b = 1, False
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
