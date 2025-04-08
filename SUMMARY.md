@@ -217,6 +217,8 @@
 
 ## CS
 
+* [DATA STRUCTURES](cs/data-structures/README.md)
+  * [선택 정렬(Selection Sort)](cs/data-structures/selection-sort.md)
 * [OS](cs/os/README.md)
   * [강의](cs/os/undefined.md)
   * [책](cs/os/undefined-1/README.md)
