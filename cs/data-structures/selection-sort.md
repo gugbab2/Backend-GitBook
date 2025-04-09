@@ -56,7 +56,7 @@ ofile.close();
 
 * 하지만 선택 정렬은 단순한 자료형이 아닌 클래스나, 구조체를 사용하는 경우 안정성이 깨진다..&#x20;
 
-```java
+```cpp
 Element arr[] = {{2, 'a'}, {2, 'b'}, {1, 'c'}};
 int size = sizeof(arr) / sizeof(arr[0]);
 

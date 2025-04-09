@@ -19,7 +19,7 @@
 * **동기는 요청한 작업에 대해서 완료 여부를 따져 순차대로 처리**하는 것을 의미한다.&#x20;
 * **비동기는 요청한 작업에 대해서 완료 여부를 따지지 않기 때문에,** 자신의 다음 작업을 그대로 수행하게 된다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 1-1-1. 비동기의 성능상 이점&#x20;
 

@@ -10,7 +10,7 @@
   * 에릭 에반스의 "도메인 주도 설계" 의 부재가 "소프트웨어의 복잡성을 다루는 지혜" 이다.&#x20;
   * 바운디드 컨텍스트는 어려운 개념이 아니다. 어떠한 문제를 해결하고 싶은지에 맞춰서 나누는 것이다.&#x20;
 
-<figure><img src="../../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 좋은 바운디드 컨텍스트&#x20;
 
