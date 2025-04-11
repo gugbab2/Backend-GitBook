@@ -100,6 +100,8 @@
       * [6. 날짜와 시간](language/readme-1/undefined/1/6..md)
       * [7. 중첩 클래스, 내부 클래스1](language/readme-1/undefined/1/7.-1.md)
       * [8. 중첩 클래스, 내부 클래스2](language/readme-1/undefined/1/8.-2.md)
+      * [9. 예외 처리1 - 이론](language/readme-1/undefined/1/9.-1.md)
+      * [10. 예외 처리 - 실습](language/readme-1/undefined/1/10..md)
     * [김영한의 실전 자바 - 고급 1편, 멀티스레드와 동시성](language/readme-1/undefined/1-1/README.md)
       * [프로세스와 스레드 소개](language/readme-1/undefined/1-1/undefined.md)
       * [스레드 생성과 실행](language/readme-1/undefined/1-1/undefined-1.md)
