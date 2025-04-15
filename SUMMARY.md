@@ -126,6 +126,8 @@
       * [3. 클래스 - 두번째](language/readme-1/undefined/java-part2-oop-jvm/3..md)
       * [4. 상속과 관계](language/readme-1/undefined/java-part2-oop-jvm/4..md)
       * [6. JVM(Java Virtual machine) 기본 이론](language/readme-1/undefined/java-part2-oop-jvm/6.-jvm-java-virtual-machine.md)
+      * [7. JVM 과 GC 그리고 객체](language/readme-1/undefined/java-part2-oop-jvm/7.-jvm-gc.md)
+      * [8. 불변 객체와 String 클래스](language/readme-1/undefined/java-part2-oop-jvm/8.-string.md)
   * [책](language/readme-1/undefined-1/README.md)
     * [자바의 신](language/readme-1/undefined-1/undefined/README.md)
       * [변수](language/readme-1/undefined-1/undefined/undefined/README.md)
