@@ -107,6 +107,8 @@
       * [2. 제네릭 - Generic2](language/readme-1/undefined/2/2.-generic2.md)
       * [3. 컬렉션 프레임워크 - ArrayList](language/readme-1/undefined/2/3.-arraylist.md)
       * [4. 컬렉션 프레임워크 - LinkedList](language/readme-1/undefined/2/4.-linkedlist.md)
+      * [5. 컬렉션 프레임워크 - List](language/readme-1/undefined/2/5.-list.md)
+      * [6. 컬렉션 프레임워크 - 해시(Hash)](language/readme-1/undefined/2/6.-hash.md)
     * [김영한의 실전 자바 - 고급 1편, 멀티스레드와 동시성](language/readme-1/undefined/1-1/README.md)
       * [프로세스와 스레드 소개](language/readme-1/undefined/1-1/undefined.md)
       * [스레드 생성과 실행](language/readme-1/undefined/1-1/undefined-1.md)
