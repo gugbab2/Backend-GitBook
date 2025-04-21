@@ -4,7 +4,7 @@
 
 ### 컬렉션 프레임워크 - Set&#x20;
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-21 12.59.53.png" alt="" width="509"><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2025-04-21 12.59.53.png" alt="" width="509"><figcaption></figcaption></figure>
 
 #### Collection 인터페이스&#x20;
 
@@ -25,7 +25,7 @@
 
 #### HashSet 구현
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-21 13.05.43.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2025-04-21 13.05.43.png" alt=""><figcaption></figcaption></figure>
 
 ### 2. LinkedHashSet&#x20;
 
@@ -37,7 +37,7 @@
 
 #### LinkedHashSet 구현
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-21 13.08.23.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2025-04-21 13.08.23.png" alt=""><figcaption></figcaption></figure>
 
 * `LinkedHashSet`은 `HashSet`에 연결 링크만 추가한 것이다.
 * `HashSet`에 `LinkedList`를 합친 것으로 이해하면 된다.
@@ -70,7 +70,7 @@
 * 이렇게 오른쪽으로 치우치게 되면, 결과적으로 15를 검색 했을 때 데이터의 수인 5만큼 검색을 해야 한다.&#x20;
 * 따라서 이런 최악의 경우 `O(n)` 이 성능이 나온다.&#x20;
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-21 13.17.44.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2025-04-21 13.17.44.png" alt=""><figcaption></figcaption></figure>
 
 #### 이진 탐색 트리 개선&#x20;
 
@@ -80,7 +80,7 @@
 * AVL 트리, 레드-블랙 트리 같은 균형을 맞추는 다양한 알고리즘이 존재한다.
 * 자바의 `TreeSet` 은 레드-블랙 트리를 사용해서 균형을 지속해서 유지한다. 따라서 최악의 경우에도 `O(log n)` 의 성능을 제공한다.
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-21 13.19.24.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2025-04-21 13.19.24.png" alt=""><figcaption></figcaption></figure>
 
 #### 이진 탐색 트리 - 순회&#x20;
 
@@ -109,7 +109,7 @@
     * **16을 출력**한다.\
 
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-21 13.21.30.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2025-04-21 13.21.30.png" alt=""><figcaption></figcaption></figure>
 
 ## 자바가 제공하는 Set3 - 예제&#x20;
 
