@@ -21,7 +21,7 @@
 * `LockSupport` 의 대표적인 기능은 다음과 같다.&#x20;
   * `park()` : 스레드를 `WAITING` 상태로 변경한다.&#x20;
   * `parkNanos(nanos)` : 스레드를 나노초 동안만 `TIME_WAITING` 상태로 변경한다.
-    * 지정한 나노초가 지나가면, `TIME_WAITING` 상태에서 빠져나오고 `RUNNABLE` 상태로 변경된다.&#x20;
+    * 지정한 나노초가 지나가면, `TIME_WAITING` 상태에서 빠져나오고 `RUNNABLE` 상태로 변경된다.
   * `unpark(thread)` : `WAITING` 상태의 대상 스레드를 `RUNNABLE` 상태로 변경한다.&#x20;
 
 ```java
@@ -36,7 +36,7 @@ public class LockSupportMainV1 {
         Thread thread1 = new Thread(new ParkTest(), "Thread-1");
         thread1.start();
 
-        // 잠시 대기사여 Thread-1 이 park 에 빠질 시간을 준다.
+        // 잠시 대기하여 Thread-1 이 park 에 빠질 시간을 준다.
         sleep(100);
         log("Thread-1 state : " + thread1.getState());
 
@@ -63,13 +63,13 @@ public class LockSupportMainV1 {
 
 ### 인터럽트 사용&#x20;
 
-* **`WAITING` 상태의 스레드에 인터럽트가 발생하면 `WAITING` 상태에서 `RUNNABLE` 상태로 변하면서 깨어난다.**&#x20;
+* **`WAITING` 상태의 스레드에 인터럽트가 발생하면 `WAITING` 상태에서 `RUNNABLE` 상태로 변하면서 깨어난다.**
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-17 22.44.40.png" alt=""><figcaption></figcaption></figure>
 
 ## 2. LockSupport2&#x20;
 
-### 시간 대기&#x20;
+### 시간 대기
 
 * 이번에는 스레드를 특정 시간 동안만 대기하는 `parkNanos(nanos)` 를 호출하자&#x20;
 
@@ -121,11 +121,11 @@ public class LockSupportMainV2 {
 
 #### 용도&#x20;
 
-* `BLOCKED` 상태는 자바의 `synchronized` 에서 락을 획득하기 위해 대기할 때 사용된다.&#x20;
-* `WAITING`, `TIME_WAITING` 상태는 스레드가 특정 조건이나 시간 동안 대기할 때 발생하는 상태이다.&#x20;
-* `WAITING` 상태는 다양한 상황에서 사용된다.&#x20;
-  * `Thread.join()`, `LockSupport.park()`, `Object.wait()` 와 같은 메서드 호출 시 `WAITING` 상태가 된다.&#x20;
-* `TIMED_WAITING` 상태는 다양한 상황에서 사용된다.&#x20;
+* `BLOCKED` 상태는 자바의 `synchronized` 에서 락을 획득하기 위해 대기할 때 사용된다.
+* `WAITING`, `TIME_WAITING` 상태는 스레드가 특정 조건이나 시간 동안 대기할 때 발생하는 상태이다.
+* `WAITING` 상태는 다양한 상황에서 사용된다.
+  * `Thread.join()`, `LockSupport.park()`, `Object.wait()` 와 같은 메서드 호출 시 `WAITING` 상태가 된다.
+* `TIMED_WAITING` 상태는 다양한 상황에서 사용된다.
   * `Thread.join(millis)`, `LockSupport.parkNanos(nanos)`, `Object.wait(timeout)` 와 같은 메서드 호출 시 `TIMED_WAITING` 상태가 된다.&#x20;
 
 **`BLOCKED`, `WAITING`, `TIMED_WAITING` 상태 모두 스레드가 대기하며, 실행 스케줄링에 들어가지 않기 때문에, CPU 입장에서 보면 실행하지 않은 것과 비슷한 상태이다.**&#x20;
@@ -133,12 +133,12 @@ public class LockSupportMainV2 {
 * **`BLOCKED` 상태는 `synchronized` 에서만 사용하는 특별한 대기 상태라고 이해하면 된다.**&#x20;
 * **`WAITING`, `TIME_WAITING` 상태는 범용적으로 활용할 수 있는 대기 상태라고 이해하면 된다.**
 
-### LockSupport 정리&#x20;
+### LockSupport 정리
 
-* `LockSupport` 를 사용하면 스레드를 `WAITING`, `TIME_WAITING` 상태로 변경할 수 있고, 또 인터럽트를 받아서 스레드를 깨울 수도 있다.&#x20;
+* `LockSupport` 를 사용하면 스레드를 `WAITING`, `TIME_WAITING` 상태로 변경할 수 있고, 또 인터럽트를 받아서 스레드를 깨울 수도 있다.
 * 이런 기능들을 잘 활용하면  `synchronized` 의 단점인 무한 대기 문제를 해결할 수 있을 것 같다.&#x20;
 * 물론 그냥 되는 것은 아니고 `LockSupport` 를 활용해서 안전한 임계 영역을 만드는 어떤 기능을 개발해야 한다.&#x20;
-* 예를 들면 아래와 같다.&#x20;
+* 예를 들면 아래와 같다.
 
 ```java
 if (!lock.tryLock(10초)) { // 내부에서 parkNanos() 사용 
@@ -154,18 +154,18 @@ lock.unlock() // 내부에서 unpark() 사용
 ```
 
 * 하지만 이런 기능을 직접 구현하기는 매우 어렵다.&#x20;
-  * 예를 들어 스레드 10개를 동시에 실행했는데, 그중에 딱 1개의 스레드만 락을 가질 수 있도록 락 기능을 만들어야 한다.&#x20;
+  * 예를 들어 스레드 10개를 동시에 실행했는데, 그중에 딱 1개의 스레드만 락을 가질 수 있도록 락 기능을 만들어야 한다.
   * 그리고 나머지 9개의 스레드가 대기해야 하는데, 어떤 스레드가 대가하고 있는지 알수 있는 자료구조를 만들어야 하고,&#x20;
   * 대기 중인 스레드 중에 어떤 스레드를 깨울지에 대한 우선순위 결정도 필요하다.&#x20;
-* **한마디로 `LockSupport` 는 너무 저수준이다. `synchronized` 처럼 고수준의 기능이 필요하다.**&#x20;
+* **한마디로 `LockSupport` 는 너무 저수준이다. `synchronized` 처럼 고수준의 기능이 필요하다.**
 
 ## 3. ReentrantLock - 이론&#x20;
 
-* 자바 1.0 부터 존재한 `synchronized` 와 `BLOCKED` 상태를 통한 임계 영역 관리의 한계를 극복하기 위해서, \
+* 자바 1.0 부터 존재한 `synchronized` 와 `BLOCKED` 상태를 통한 임계 영역 관리의 한계를 극복하기 위해서,\
   자바 1.5 부터 `Lock` 인터페이스와 `ReentrantLock` 구현체를 제공한다.&#x20;
 * **synchronized 의 단점**&#x20;
-  * **무한대기**&#x20;
-  * **공정성**&#x20;
+  * **무한대기**
+  * **공정성**
 
 #### Lock 인터페이스&#x20;
 
@@ -176,8 +176,8 @@ lock.unlock() // 내부에서 unpark() 사용
 > #### 주의!&#x20;
 >
 > * **여기서 사용하는 락은 객체 내부에 있는 모니터 락이 아니다!**
-> * **`Lock` 인터페이스와 `ReentrantLock` 이 제공하는 기능이다!**&#x20;
-> * **모니터 락과 `BLOCKED` 상태는 `synchronized` 에서만 사용된다.**&#x20;
+> * **`Lock` 인터페이스와 `ReentrantLock` 이 제공하는 기능이다.**
+> * **모니터 락과 `BLOCKED` 상태는 `synchronized` 에서만 사용된다.**
 
 <pre class="language-java"><code class="lang-java">package java.util.concurrent.locks;
 <strong>
@@ -191,9 +191,9 @@ lock.unlock() // 내부에서 unpark() 사용
 }
 </code></pre>
 
-* `void lock()`
+* `void lock()`&#x20;
   * 락을 획득한다. 만약 다른 스레드가 이미 락을 획득했다면, 락이 풀릴 때까지 현재 스레드는 대기(`WAITING`) 한 다.&#x20;
-  * **이 메서드는 인터럽트에 응답하지 않는다.**&#x20;
+  * **이 메서드는 인터럽트에 응답하지 않는다.**
     * ex) 맛집에 한번 줄을 서면 끝까지 기다린다. 친구가 다른 맛집을 찾았다고 중간에 연락해도 포기하지 않고 기다린 다.
 * `void lockInterruptibly()`
   * **락 획득을 시도하되, 다른 스레드가 인터럽트할 수 있도록 한다.**&#x20;
@@ -218,8 +218,8 @@ lock.unlock() // 내부에서 unpark() 사용
 ### 공정성&#x20;
 
 * `Lock` 인터페이스가 제공하는 다양한 기능 덕분에 `synchronized` 의 단점인 무한 대기 문제가 해결 되었다.&#x20;
-* 그런데 공정성에 대한 문제는 남아있다.&#x20;
-* `Lock` 인터페이스의 대표적인 구현체로 `ReentrantLock` 이 있는데, 이 클래스는 스레드가 공정하게 락을 얻을 수 있는 모드를 제공한다.&#x20;
+* 그런데 공정성에 대한 문제는 남아있다.
+* `Lock` 인터페이스의 대표적인 구현체로 `ReentrantLock` 이 있는데, 이 클래스는 스레드가 공정하게 락을 얻을 수 있는 모드를 제공한다.
   * `ReentrantLock` 은 락 공정 모드와 비공정 모드로 설정할 수 있으며, 이 두 모드는 락을 획득하는 방식에서 차이가 있다.&#x20;
 
 ```java
@@ -252,15 +252,15 @@ public class ReentrantLockEx {
 
 ### 비공정 모드&#x20;
 
-* **비공정 모드는 `ReentrantLock` 의 기본 모드이다.**&#x20;
-* 이 모드에서는 락을 먼저 요청한 스레드가 락을 먼저 획득한다는 보장이 없다. 대기 중인 스레드 중 아무나 락을 획득할 수 있다.&#x20;
+* **비공정 모드는 `ReentrantLock` 의 기본 모드이다.**
+* 이 모드에서는 락을 먼저 요청한 스레드가 락을 먼저 획득한다는 보장이 없다. 대기 중인 스레드 중 아무나 락을 획득할 수 있다.
 * 이는 락을 빨리 획득할 수 있지만, 특정 스레드가 장기간 락을 획득하지 못할 가능성도 있다.&#x20;
 
 #### 비공정 모드 특징
 
 * **성능 우선 : 락 획득 속도가 빠르다.**
-* **선점 가능 : 새로운 스레드가 기존 대기 스레드보다 먼저 락을 획들할 수 있다.**&#x20;
-* **기아 현상 가능성 : 특정 스레드가 계속해서 락을 획득하지 못할 수 있다.**&#x20;
+* **선점 가능 : 새로운 스레드가 기존 대기 스레드보다 먼저 락을 획들할 수 있다.**
+* **기아 현상 가능성 : 특정 스레드가 계속해서 락을 획득하지 못할 수 있다.**
 
 ### 공정 모드
 
@@ -274,9 +274,9 @@ public class ReentrantLockEx {
 * **기아 현상 방지 : 모든 스레드가 언젠가 락을 획득할 수 있게 보장된다.**&#x20;
 * **성능 저하 : 락을 획득하는 속도가 느려질 수 있다.**&#x20;
 
-#### 비공정, 공정 모드 정리&#x20;
+#### 비공정, 공정 모드 정리
 
-* **비공정 모드는 성능을 중시하고, 스레드가 락을 빨리 획득할 수 있지만, 특정 스레드가 계속해서 락을 획득하지 못할 수 있다.**&#x20;
+* **비공정 모드는 성능을 중시하고, 스레드가 락을 빨리 획득할 수 있지만, 특정 스레드가 계속해서 락을 획득하지 못할 수 있다.**
 * **공정 모드는 스레드가 락을 획득하는 순서를 보장하여 공정성을 중시하지만, 성능이 저하될 수 있다.**&#x20;
 
 ## 4. ReentrantLock - 활용&#x20;
