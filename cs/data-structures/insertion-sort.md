@@ -39,3 +39,8 @@ for(i=1; i<size ;i++) {
 
 ## 안정성 확인&#x20;
 
+## 정렬의 복잡도 분석&#x20;
+
+버블정렬, 삽입정렬은 정렬이 된 경우에는 안쪽 반복문을 수행하지 않기 때문의 최선의 경우 시간복잡도가 O(n) 이다.&#x20;
+
+<figure><img src="../../.gitbook/assets/스크린샷 2025-04-28 10.45.41.png" alt=""><figcaption></figcaption></figure>

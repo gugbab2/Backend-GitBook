@@ -112,9 +112,9 @@ public class BackMain {
 
 ```
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-16 22.02.54.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-16 22.02.54.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-16 22.03.57.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-16 22.03.57.png" alt=""><figcaption></figcaption></figure>
 
 ### 동시성 문제 확인
 
@@ -150,7 +150,7 @@ if (balance < amount) {
 
 **최종결과 -600원**
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-16 22.28.54.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-16 22.28.54.png" alt=""><figcaption></figcaption></figure>
 
 ### 케이스2 - t1, t2 동시 실행 가정&#x20;
 
@@ -166,7 +166,7 @@ if (balance < amount) {
 **사실 해당 경우가, 더 큰일이다! 왜냐면 이전의 경우는 2번의 인출이 이루어진 것이기 때문에 찾아갈 수는 있지만,** \
 **해당 경우는 찾아가기가 매우 어렵다 ;; (**~~**아마 로그를 다 확인해야 될 것 이다;;**~~**)**
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-16 22.29.46.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-16 22.29.46.png" alt=""><figcaption></figcaption></figure>
 
 ## 3. 임계 영역(critical section)
 
@@ -267,11 +267,11 @@ public class BankAccountV2 implements BankAccount {
 }
 ```
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-17 20.06.04.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-17 20.06.04.png" alt=""><figcaption></figcaption></figure>
 
 ### synchronized 분석
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-17 20.10.04.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-17 20.10.04.png" alt=""><figcaption></figcaption></figure>
 
 모든 객체(인스턴스) 는 내부에 자신만의 락(lock) 을 가지고 있다.&#x20;
 
@@ -284,7 +284,7 @@ public class BankAccountV2 implements BankAccount {
 
 스레드 `t1`, `t2` 는 `withdraw()` 를 실행하기 직전이다.
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-17 20.12.53.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-17 20.12.53.png" alt=""><figcaption></figcaption></figure>
 
 #### 메서드 호출 시나리오를 확인해보자. (t1 이 먼저 실행된다고 가정하겠다)
 
@@ -293,7 +293,7 @@ public class BankAccountV2 implements BankAccount {
    1. `BankAccount(x001)` 인스턴스에 락이 있으므로 스레드 `t1` 은 락을 획득한다.&#x20;
    2. 스레드 `t1` 은 해당 인스턴스 락을 획득했기 때문에, `withdraw()` 메서드에 진입해 작업을 수행한다.&#x20;
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-10-17 20.14.26.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/스크린샷 2024-10-17 20.14.26.png" alt=""><figcaption></figcaption></figure>
 
 3. 스레드 `t2` 도 `withdraw()` 메서드 호출을 시도한다. `synchronized` 메서드를 호출하려면 먼저 해당 인스턴스의 락이 필요하다.
    1. 스레드 `t2` 는 `BankAcoount(x001)` 인스턴스에 있는 락 획득을 시도한다. 하지만 락이 없다.&#x20;
