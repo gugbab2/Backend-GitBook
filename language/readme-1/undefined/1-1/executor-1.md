@@ -2,7 +2,7 @@
 
 ## 스레드를 직접 사용할 때 문제점
 
-### 문제점&#x20;
+### 문제점
 
 실무에서 스레드를 직접 생성해서 사용하면 다음과 같은 3가지 문제가 있다.
 
@@ -58,8 +58,7 @@ public interface Runnable {
 
 **예외 처리 : `run()` 메서드는 체크 예외(checked exception)를 던질 수 없다.**&#x20;
 
-* 체크 예외의 처리는 메서드 내부 에서 처리해야 한다.\
-  (물론 모던 자바에서는 언체크 예외를 많이 사용하는 편이다)
+* 체크 예외의 처리는 메서드 내부에서 `try-catch` 를 통해 처리해야 한다.
 
 이런 문제를 해결하려면 반환 값도 받을 수 있고, 예외도 좀 더 쉽게 처리할 수 있는 방법이 필요하다. \
 추가로 반환 값 뿐만 아니라 해당 스레드에서 발생한 예외도 받을 수 있다면 더 좋을 것이다.
@@ -108,7 +107,7 @@ public interface Executor {
 
 `Executor` 인터페이스를 확장해서 **작업 제출,** **제어 기능**을 추가로 제공한다.
 
-주요 메서드로는 `submit()` , `close()` 가 있다. \
+주요 메서드로는 `submit()` , `close()` 가 있다.\
 (더 많은 기능이 있지만 나머지 기능들은 뒤에서 알아보자)
 
 `Executor` 프레임워크를 사용할 때는 대부분 이 인터페이스를 사용한다.
@@ -228,8 +227,8 @@ public class ExecutorBasicMain {
 
 `ThreadPoolExecutor(ExecutorService)` 는 두가지 요소로 구성되어 있다.&#x20;
 
-* 스레드 풀 : 스레드를 관리한다.&#x20;
-* `BlockingQueue` : 작업을 보관한다.&#x20;
+* 스레드 풀 : 스레드를 관리한다.
+* `BlockingQueue` : 작업을 보관한다.
   * **생산자 소비자 문제를 실행하기 위해서 단순한 큐가 아니라 `BlockingQueue` 를 사용한다.**
 
 생산자가 `es.execute(new RunnableTask("taskA"))` 를 호출하면, `RunnableTask("taskA")` 인스턴스가 `BlockingQueue` 에 보관된다.
@@ -329,7 +328,7 @@ public class ExecutorBasicMain {
     사용해서 스레드가 종료되길 기다린 다음에 멤버 변수를 통해 값을 받아야 한다.
 * **예외 처리** : `run()` 메서드는 체크 예외(checked exception)를 던질 수 없다. 체크 예외의 처리는 메서드 내부 에서 처리해야 한다.
 
-### Runnable 사용&#x20;
+### Runnable 사용
 
 이해를 돕기 위해서 `Runnable` 을 통해 별도의 스레드에서 무작위 값을 하나 구하는 간단한 코드를 만들어보자.&#x20;
 
@@ -378,7 +377,7 @@ public class RunnableMain {
   때까지 기다려야 한다. 그래서 `main` 스레드는 `join()` 을 호출해서 대기한다.&#x20;
 * 이후에 `main` 스레드에서 `MyRunnable` 인스턴스의 `value` 필드를 통해 최종 무작위 값을 획득한다.&#x20;
 
-~~**별도의 스레드에서 만든 무작위 값 하나 받아오는 코드가 위처럼 복잡하다 ;;**~~&#x20;
+~~**별도의 스레드에서 만든 무작위 값 하나 받아오는 코드가 위처럼 복잡하다 ;;**~~
 
 작업 스레드는 간단히 값을 `return` 해서 반환하고, 요청 스레드는 그 반환 값을 받을 수 있다면 정말 간단할 것이다.&#x20;
 
@@ -467,9 +466,9 @@ public class CallableMainV1 {
 * 숫자를 반환하므로 반활할 제네릭 타입을 `<Integer>` 로 선언했다.&#x20;
 * 구현은 `Runnable` 코드와 비슷한데, 유일한 차이는 결과를 필드에 담아두는 것이 아니라, **결과를 반환한다는 점이다!**
 
-#### submit() &#x20;
+#### submit()
 
-* `MyCallable` 인스턴스가 블로킹 큐에 전달되고, 스레드 풀의 스레드 중 하나가 이 작업을 실행할 것이다.&#x20;
+* `MyCallable` 인스턴스가 블로킹 큐에 전달되고, 스레드 풀의 스레드 중 하나가 이 작업을 실행할 것이다.
 * 이 때, 작업의 처리 결과는 직접 반환되는 것이 아니라, `Future` 라는 특별한 인터페이스를 통해서 반환된다.&#x20;
 * `future.get()` 을 호출하면 `MyCallable` 의 `call()` 이 반환한 결과를 받을 수 있다.
 * 참고로 `Future.get()` 은 `InterruptedException` , `ExecutionException` 체크 예외를 던진다. 여기서는 잡지말고 간단하게 밖으로 던지자. 예외에 대한 부분은 뒤에서 설명한다.
@@ -494,7 +493,8 @@ public class CallableMainV1 {
 
 ## Future2 - 분석&#x20;
 
-`Future` 는 번역하면 미래라는 뜻이고, 여기서는 미래의 결과를 받을 수 있는 객체라는 뜻이다. 그렇다면 누구의 미래의 결과를 말하는 것일까?&#x20;
+`Future` 는 번역하면 미래라는 뜻이고, 여기서는 미래의 결과를 받을 수 있는 객체라는 뜻이다. \
+그렇다면 누구의 미래의 결과를 말하는 것일까?&#x20;
 
 ```java
 Future<Integer> future = es.submit(new MyCallable());
@@ -505,7 +505,7 @@ Future<Integer> future = es.submit(new MyCallable());
 * 생각해보면 `MyCallable` 이 즉시 실행되어 결과를 즉시 반환하는 것은 불가능하다. 왜냐면 `MyCallable` 은 즉시 실행되는 것이 아니다. 스레드 풀의 스레드가 미래의 어떤 시점에 이 코드를 대신 실행해야 한다.
 * `MyCallable.call()` 메서드는 호출 스레드(`main` 스레드)가 실행하는 것도 아니고, 스레드 풀의 다른 스레드가 실행하기 때문에, 언제 실행이 완료 되어서 결과를 반환할 지는 알 수 없다.
 * 따라서, 결과를 즉시 받는 것은 불가능하다. 이런 이유로, `es.submit()` 은 `MyCallable` 의 결과를 반환하는 대신에 `MyCallable` 의 결과를 나중에 받을 수 있는 `Future` 라는 객체를 대신 제공한다.
-* 정리하면, `Future` 은 전달한 작업(`MyCallable`)의 미래 결과를 담고 있다고 생각하면 된다.
+* 정리하면, `Future` 에는 전달한 작업(`MyCallable`)의 미래 결과를 담고 있다고 생각하면 된다.
 
 ### Future 분석&#x20;
 
@@ -642,8 +642,8 @@ Feture 생성&#x20;
 스레드1
 
 1. `taskA` 작업을 완료한다.
-2. `Future` 에 `taskA` 의 리턴값을 담는다.
-3. `Future` 의 상태를 완료로 변경한다.&#x20;
+2. `Future` 의 `taskA` 리턴값을 담는다.
+3. `Future` 의 상태를 완료로 변경한다.
 4. 스레드1이 요청 스레드를 깨운다. 요청 스레드는 `WAITING` -> `RUNNABLE` 상태로 변한다.
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 16.54.01.png" alt="" width="563"><figcaption></figcaption></figure>

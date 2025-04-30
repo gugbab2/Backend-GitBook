@@ -1,23 +1,28 @@
 # 스레드 풀과 Executor 프레임워크2
 
-## ExecutorService 우아한 종료 - 소개&#x20;
+ExecutorService 우아한 종료 - 소개&#x20;
 
-* 고객의 주문을 처리하는 서버를 운영중이라 할 때, 만약 서버 기능을 업데이트 하기 위해 서버를 재시작 한다고 해보자.
-* 이때 서버 애플리케이션이 고객의 주문으로 처리하고 있는 도중에 갑자기 재시작 된다면, 해당 고객의 주문이 제대로 진행되지 못할 것이다.&#x20;
-* 가장 이상적인 방향은 새로운 주문 요청은 막고, 이미 진행중인 주문은 모두 완료한 다음 서버를 재시작 하는 것이 가장 좋을 것이다.&#x20;
-* 이처럼 서비스를 안정적으로 종료하는 것도 매우 중요하다..&#x20;
-* 이렇게 문제 없이 우아하게 종료되는 방식을 **graceful shutdown** 이라 한다.&#x20;
+고객의 주문을 처리하는 서버를 운영중이라 할 때, 만약 서버 기능을 업데이트 하기 위해 서버를 재시작 한다고 해보자.
+
+이때 서버 애플리케이션이 고객의 주문으로 처리하고 있는 도중에 갑자기 재시작 된다면, 해당 고객의 주문이 제대로 진행되지 못할 것이다.&#x20;
+
+가장 이상적인 방향은 새로운 주문 요청은 막고, 이미 진행중인 주문은 모두 완료한 다음 서버를 재시작 하는 것이 가장 좋을 것이다. (이처럼 서비스를 안정적으로 종료하는 것도 매우 중요하다..)
+
+이렇게 문제 없이 우아하게 종료되는 방식을 **graceful shutdown** 이라 한다.&#x20;
 
 ### ExecutorService 의 종료 메서드
+
+`ExecutorService` 를 줄여서 앞으로 서비스라고 하겠다. \
+`ExecutorService` 에는 종료와 관련된 다양한 메서드가 존재한다.&#x20;
 
 #### 서비스 종료&#x20;
 
 * `void shutdown()`&#x20;
-  * 새로운 작업을 받지 않고, 이미 제출된 작업을 모두 완료한 후 종료&#x20;
-  * 논 블로킹 메서드
+  * 새로운 작업을 받지 않고, 이미 제출된 작업을 모두 완료한 후 종료 (대기 작업도 포함이다)&#x20;
+  * 논 블로킹 메서드 (이 메서드를 호출한 스레드는 대기하지 않고 즉시 다음 코드를 호출한다)
 * `List<Runnable> shutdownNow()`&#x20;
-  * 실행 중인 작업을 중단하고, 대기 중인 작업을 반환하며 즉시 종료한다.&#x20;
-  * 실행 중인 작업을 중단하기 위해서 인터럽트를 발생시킨다.&#x20;
+  * 실행 중인 작업을 중단(인터럽트)하고, 대기 중인 작업을 반환하며 즉시 종료한다.
+  * 실행 중인 작업을 중단하기 위해서 인터럽트를 발생시킨다.
   * 논 블로킹 메서드&#x20;
 
 #### 서비스 상태 확인&#x20;
@@ -36,71 +41,24 @@
 #### close()&#x20;
 
 * `close()` 는 자바 19부터 지원하는 서비즈 종료 메서드이다. 이 메서드는 `shutdown()` 과 같다고 생각하면 된다.
-  * 더 정확히는 `shutdown()` 을 호출하고, 하루를 기다려도 작업이 완료되지 않으면 `shutdownNow()` 를 호출한다.
+  * 더 정확히는 `shutdown()` 을 호출하고, 하루를 기다려도 작업이 완료되지 않으면 `shutdownNow()` 를 호출한다. (거의 이런일은 없을 것이다..)&#x20;
   * 호출한 스레드에 인터럽트가 발생해도 `shutdownNow()` 를 호출한다.
 
 ## ExecutorService 우아한 종료 - 구현&#x20;
 
-* `shutdown()` 을 호출해서 이미 들어온 모든 작업을 다 처리하고 서비스를 우아하게 종료 하는 것이 가장 이상적이지만, 갑자기 요청이 너무 많이 들어와서 큐에 대기중인 작업이 너무 많아 작업 와료 어렵거나, 작업이 너무 오래 걸리거나, 또는 버그가 발생해서 특정 작업이 끝나지 않을 수 있다.&#x20;
-* 이렇게 되면 서비스가 너무 늦게 종료되거나, 종료되지 않는 문제가 발생할 수 있다.&#x20;
+`shutdown()` 을 호출해서 이미 들어온 모든 작업을 다 처리하고 서비스를 우아하게 종료 하는 것이 가장 이상적이지만, 갑자기 요청이 너무 많이 들어와서 큐에 대기중인 작업이 너무 많아 작업 완료 어렵거나, 작업이 너무 오래 걸리거나, 또는 \
+버그가 발생해서 특정 작업이 끝나지 않을 수 있다.
+
+이렇게 되면 서비스가 너무 늦게 종료되거나, 종료되지 않는 문제가 발생할 수 있다.&#x20;
+
+이럴 때는 보통 우아하게 종료하는 시간을 정한다. 예를 들어서 60초까지는 작업을 다 처리할 수 있게 기다리는 것이다. \
+그리고 60초가 지나면, 무언가 문제가 있다고 가정하고 `shutdownNow()` 를 호출해서 작업들을 강제로 종료한다.&#x20;
 
 #### close()&#x20;
 
-* `close()` 의 경우 이렇게 구현되어 있다. `shutdown()` 을 호출하고, 하루를 기다려도 작업이 완료되지 않으면 `shitdownNow()` 를 호출한다. 하지만 대부분 하루를 기다릴 수 는 없다.&#x20;
-* 우선은 `shutdown()` 을 통해 우아한 종료를 시도하고, 10초간 종료되지 않으면 `shutdownNow()` 를 통해 강제 종료하는 방식을 구현해보자.&#x20;
+`close()` 의 경우 이렇게 구현되어 있다. `shutdown()` 을 호출하고, 하루를 기다려도 작업이 완료되지 않으면 `shitdownNow()` 를 호출한다. 하지만 대부분 하루를 기다릴 수 는 없다.&#x20;
 
-### 코드 분석&#x20;
-
-#### 작업 처리에 필요한 시간&#x20;
-
-* `taskA` , `taskB` , `taskC` : 1초&#x20;
-* `longTask` : 100초
-
-#### 서비스 종료&#x20;
-
-```java
-es.shutdown();
-```
-
-* 새로운 작업을 받지 않는다. 처리 중이거나, 쿠에 이미 대기중인 작업은 처리한다. 이후에 풀의 스레드를 종료한다.&#x20;
-* `shutdown()` 은 블로킹 메서드가 아니다.. 서비스가 종료될 때 까지 `main` 스레드가 대기하지 않는다. `main` 스레드는 바로 다음 코드를 호출한다.&#x20;
-
-```java
-if (!es.awaitTermination(10, TimeUnit.SECONDS)){...}
-```
-
-* 블로킹 메서드이다.&#x20;
-* `main` 스레드는 대기하면서 서비스 종료를 10초간 기다린다.&#x20;
-  * 만약 10초 안에 모든 작업이 완료된다면 `true` 를 반환한다.&#x20;
-* 여기서 `taskA`, `taskB`, `taskC` 의 수행이 완료된다. 그런데 `longTask` 는 10초가 지나도 완료되지 않았다.&#x20;
-  * 따라서 `false` 를 반환한다.&#x20;
-
-#### 서비스 정상 종료 실패 -> 강제 종료 시도&#x20;
-
-```java
-// 정상 종료가 너무 오래 걸리면
-log("서비스 정상 종료 실패 -> 강제 종료 시도");
-es.shutdownNow();
-// 작업(자원정리)이 취소될 때 까지 대기한다.
-if(!es.awaitTermination(10, TimeUnit.SECONDS)){
-    log("서비스가 종료되지 않았습니다.");
-}
-```
-
-* 정상 종료가 10초 이상 너무 오래 걸렸다.&#x20;
-* `shutdownNow()` 를 통해 강제 종료에 들어간다. `shutdown()` 과 마찬가지로 블로킹 메서드가 아니다.&#x20;
-* 강제 종료를 하면 작업 중인 스레드에 인터럽트가 발생한다. 다음 로그를 통해 인터럽트를 확인할 수 있다.&#x20;
-* 인터럽트가 발생하면서 스레드도 작업을 종료하고, `shutdownNow()` 를 통한 강제 `shutdown` 도 완료된다.
-
-#### 서비스 종료 실패&#x20;
-
-* 그런데 마지막에 강제 종료인 `es.shutdownNow()` 를 호출한 다음 왜 10초를 기다릴까?&#x20;
-* **`shutdownNow()` 가 작업 중인 스레드에 인터럽트를 호출하는 것은 맞다. 인터럽트를 호출하더라도 여러가지 이유로 작업에 시간이 걸릴 수 있다.**&#x20;
-  * **인터럽트 이후에 자원을 정리하는 어떤 간단한 작업을 수행할 수 있다. 이런 시간을 기다려주는 것이다.**&#x20;
-* **극단적이지만 최악의 경우 스레드가 인터럽트를 받을 수 없는 코드를 수행할 수 있다. 이 경우 인터럽트 예외가 발생하지 않고 스레드도 계속 수행한다.**&#x20;
-  * 때문에, 10초간 대기해도 작업이 완료되지 않는다면 **"서비스가 종료되지 않았습니다."** 라는 로그를 남겨두어야 나중에 문제를 확인할 수 있다 .
-
-#### 인터럽트를 받을수 없는 코드 &#x20;
+우선은 `shutdown()` 을 통해 우아한 종료를 시도하고, 10초간 종료되지 않으면 `shutdownNow()` 를 통해 강제 종료하는 방식을 구현해보자.&#x20;
 
 ```java
 package thread.executor;
@@ -128,7 +86,9 @@ public class ExecutorShutdownMain {
     }
 
     private static void shutdownAndAwaitTermination(ExecutorService es) {
-        es.shutdown();  // non-blocking, 새로운 작업을 받지 않고 처리중이거나, 큐에 이미 대기중에 작업은 처리한다. 이후에 풀의 스레드를 종료한다.
+        // non-blocking,
+        // 새로운 작업을 받지 않고 처리중이거나 이미 대기중에 작업은 처리한다. 이후에 풀의 스레드를 종료한다.
+        es.shutdown();  
         try {
             // 이미 대기중인 작업들을 모두 완료할 때까지 10초 기다린다.
             if(!es.awaitTermination(10, TimeUnit.SECONDS)){
@@ -148,18 +108,128 @@ public class ExecutorShutdownMain {
 }
 ```
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 18.46.35.png" alt="" width="563"><figcaption></figcaption></figure>
+### 코드 분석
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 18.46.41.png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-30 16.09.46.png" alt=""><figcaption></figcaption></figure>
 
-## Executor 스레드 풀 관리 - 소개&#x20;
+#### 작업 처리에 필요한 시간&#x20;
 
-* `ExecutorService` 의 기본 구현체인 `ThreadPoolExecutor` 의 생성자는 다음 속성을 사용한다.&#x20;
-  * `corePoolSize` : 스레드 풀에서 관리되는 기본 스레드의 수
-  * `maximumPoolSize` : 스레드 풀에서 관리되는 최대 스레드 수&#x20;
-  * `keepAliveTime`, `TimeUnit unit` : 기본 스레드 수를 초과해서 만들어진 초과 스레드가 생존할 수 있는 대기 시간, 이 시간 동안 처리할 작업이 없다면 초과 스레드는 제거된다.&#x20;
-  * `BlockingQueue workQueue` : 작업을 보관한 블로킹 큐&#x20;
-* 아래 코드를 살펴보자.&#x20;
+* `taskA` , `taskB` , `taskC` : 1초&#x20;
+* `longTask` : 100초
+
+#### 서비스 종료&#x20;
+
+```java
+es.shutdown();
+```
+
+* 새로운 작업을 받지 않는다. 처리 중이거나, 큐에 이미 대기중인 작업은 처리한다. 이후에 풀의 스레드를 종료한다.&#x20;
+* `shutdown()` 은 블로킹 메서드가 아니다.. 서비스가 종료될 때 까지 `main` 스레드가 대기하지 않는다. \
+  `main` 스레드는 바로 다음 코드를 호출한다.&#x20;
+
+```java
+if (!es.awaitTermination(10, TimeUnit.SECONDS)){...}
+```
+
+* 블로킹 메서드이다.&#x20;
+* `main` 스레드는 대기하면서 서비스 종료를 10초간 기다린다.&#x20;
+  * 만약 10초 안에 모든 작업이 완료된다면 `true` 를 반환한다.&#x20;
+* 여기서 `taskA`, `taskB`, `taskC` 의 수행이 완료된다. 그런데 `longTask` 는 10초가 지나도 완료되지 않았다.&#x20;
+  * 따라서 `false` 를 반환한다.&#x20;
+
+#### 서비스 정상 종료 실패 -> 강제 종료 시도&#x20;
+
+```java
+// 정상 종료가 너무 오래 걸리면
+log("서비스 정상 종료 실패 -> 강제 종료 시도");
+es.shutdownNow();
+// 작업(자원정리)이 취소될 때 까지 대기한다.
+if(!es.awaitTermination(10, TimeUnit.SECONDS)){
+    log("서비스가 종료되지 않았습니다.");
+}
+```
+
+* 정상 종료가 10초 이상 너무 오래 걸렸다.
+* `shutdownNow()` 를 통해 강제 종료에 들어간다. `shutdown()` 과 마찬가지로 블로킹 메서드가 아니다.
+* 강제 종료를 하면 작업 중인 스레드에 인터럽트가 발생한다. 다음 로그를 통해 인터럽트를 확인할 수 있다.
+* 인터럽트가 발생하면서 스레드도 작업을 종료하고, `shutdownNow()` 를 통한 강제 `shutdown` 도 완료된다.
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-30 16.13.10.png" alt=""><figcaption></figcaption></figure>
+
+#### 서비스 종료 실패&#x20;
+
+그런데 마지막에 강제 종료인 `es.shutdownNow()` 를 호출한 다음 왜 10초를 기다릴까?&#x20;
+
+**`shutdownNow()` 가 작업 중인 스레드에 인터럽트를 호출하는 것은 맞다. 인터럽트를 호출하더라도 여러 이유로 작업에 시간이 걸릴 수 있다. 인터럽트 이후에 자원을 정리하는 어떤 간단한 작업을 수행할 수 있다. 이런 시간을 기다려주는 것이다.**&#x20;
+
+**극단적이지만 최악의 경우 스레드가 인터럽트를 받을 수 없는 코드를 수행할 수 있다. 이 경우 인터럽트 예외가 발생하지 않고 스레드도 계속 수행한다.**&#x20;
+
+#### 인터럽트를 받을수 없는 코드&#x20;
+
+```java
+while(true) { // Empty }
+```
+
+위 작업을 수행하는 스레드는 자바를 강제 종료해야 작업을 종료할 수 있다.&#x20;
+
+* 또는 인터럽트를 인지하지 못할 수도 있다..
+
+이런 경우를 대비해서 강제 종료 후 10초간 대기해도 작업이 완료되지 않는다면 **"서비스가 종료되지 않았습니다."** 라는 \
+로그를 남겨두어야 나중에 문제를 확인할 수 있다.
+
+## Executor 스레드 풀 관리 - 코드&#x20;
+
+이번 챕터에서는 Executor 프레임워크가 어떤식으로 스레드를 관리하는지 알아보자.&#x20;
+
+이 부분을 알아두면 실무에서 대량의 요청을 스레드에서 어떤식으로 처리해야 하는지에 대한 기본기를 쌓을 수 있다.&#x20;
+
+`ExecutorService` 의 기본 구현체인 `ThreadPoolExecutor` 의 생성자는 다음 속성을 사용한다.&#x20;
+
+* `corePoolSize` : 스레드 풀에서 관리되는 기본 스레드의 수
+* `maximumPoolSize` : 스레드 풀에서 관리되는 최대 스레드 수&#x20;
+* `keepAliveTime`, `TimeUnit unit` : 기본 스레드 수를 초과해서 만들어진 초과 스레드가 생존할 수 있는 대기 시간, 이 시간 동안 처리할 작업이 없다면 초과 스레드는 제거된다.&#x20;
+* `BlockingQueue workQueue` : 작업을 보관한 블로킹 큐&#x20;
+
+#### 예제
+
+`corePoolSize`, `maximumPoolSize` 의 차이를 알아보는 예제를 만들자.
+
+```java
+package thread.executor;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+
+import static util.MyLogger.log;
+
+public abstract class ExecutorUtils {
+
+    public static void printState(ExecutorService executorService) {
+        if (executorService instanceof ThreadPoolExecutor poolExecutor) {
+            int pool = poolExecutor.getPoolSize();
+            int active = poolExecutor.getActiveCount();
+            int queuedTasks = poolExecutor.getQueue().size();
+            long completedTask = poolExecutor.getCompletedTaskCount();
+            log("[pool=" + pool + ", active=" + active + ", queuedTasks=" + queuedTasks + ", completedTask=" + completedTask + "]");
+        } else {
+            log(executorService);
+        }
+    }
+    
+    // 추가
+    public static void printState(ExecutorService executorService, String taskName) {
+        if (executorService instanceof ThreadPoolExecutor poolExecutor) {
+            int pool = poolExecutor.getPoolSize();
+            int active = poolExecutor.getActiveCount();
+            int queuedTasks = poolExecutor.getQueue().size();
+            long completedTask = poolExecutor.getCompletedTaskCount();
+            log(taskName + " -> [pool=" + pool + ", active=" + active + ", queuedTasks=" + queuedTasks + ", completedTask=" + completedTask + "]");
+        } else {
+            log(executorService);
+        }
+    }
+}
+```
 
 ```java
 package thread.executor.poolsize;
@@ -217,22 +287,37 @@ public class PoolSizeMainV1 {
 }
 ```
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.03.22.png" alt="" width="563"><figcaption></figcaption></figure>
+```java
+ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(2);
+ExecutorService es = new ThreadPoolExecutor(2, 4, 3000, TimeUnit.MILLISECONDS, workQueue)
+```
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.03.38.png" alt="" width="563"><figcaption></figcaption></figure>
+* 작업을 보관할 블로킹 큐의 구현체로 `ArrayBlockingQueue(2)` 를 사용했다. 사이즈를 2로 설정했으므로 최대 2개까지 작업을 큐에 보관할 수 있다.&#x20;
+* `corePoolSize=2`, `maximumPoolSize=4` 를 사용해서 기본 스레드는 2개, 최대 스레드는 4개로 설정했다.&#x20;
+  * 스레드 풀에 기본 2개의 스레드를 운영한다. 요청이 너무 많거나 급한 경우 스레드 풀은 최대 4개까지 스레드를 증가시켜서 사용할 수 있다.
+* `3000`, `TimeUint.MILLISECONDS`
+  * 초과 스레드가 생존할 수 있는 대기 시간을 뜻한다. 이 시간 동안 초과 스레드가 처리할 작업이 없다면 초과 스레드는 제거된다.&#x20;
+  * 여기서는 3000 밀리초(3초) 를 설정했으므로, 초과 스레드가 3초간 작업을 하지 않고 대기한다면 초과 스레드는 스레드 풀에서 제거된다.&#x20;
 
-## Executor 스레드 풀 관리 - 분석&#x20;
+#### 실행 결과&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-30 16.37.06.png" alt=""><figcaption></figcaption></figure>
+
+## Executor 스레드 풀 관리 - 분석
 
 ### 실행 분석&#x20;
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.04.12.png" alt="" width="563"><figcaption></figcaption></figure>
 
 * `task1` 작업을 요청한다.&#x20;
-* `Executor` 는 스레드 풀에 스레드가 `core` 사이즈 만큼 있는지 확인한다.&#x20;
-  * `core` 사이즈 만큼 없다면 스레드를 하나 생성한다 .
-  * 작업을 처리하기 위해 스레드를 하나 생성했기 때문에, 작업을 큐에 넣을 필요 없이, 해당 스레드가 바로 작업을 처리한다.&#x20;
+* `Executor` 는 스레드 풀에 스레드가 `core` 사이즈 만큼 있는지 확인한다.
+  * `core` 사이즈 만큼 없다면 스레드를 하나 생성한다.
+  * 작업을 처리하기 위해 스레드를 하나 생성했기 때문에, 작업을 큐에 넣을 필요 없이, 해당 스레드가 바로 작업을 \
+    처리한다.&#x20;
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.05.31.png" alt="" width="563"><figcaption></figcaption></figure>
+
+* 새로 만들어진 스레드1이 `task1` 을 수행한다.&#x20;
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.05.38.png" alt="" width="563"><figcaption></figcaption></figure>
 
@@ -243,37 +328,51 @@ public class PoolSizeMainV1 {
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.07.11.png" alt="" width="563"><figcaption></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.08.37.png" alt="" width="563"><figcaption></figcaption></figure>
-
 * `task3` 작업을 요청한다.&#x20;
 * `Executor` 는 스레드 풀에 스레드가 `core` 사이즈 만큼 있는지 확인한다.&#x20;
 * `core` 사이즈 만큼 스레드가 이미 만들어져 있고, 스레드 풀에 사용할 수 있는 스레드가 없으므로 이 경우 큐에 작업을 보관한다.&#x20;
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.08.37.png" alt="" width="563"><figcaption></figcaption></figure>
+
 * `task4` 작업 또한 큐에 작업을 보관한다.&#x20;
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.09.26.png" alt="" width="563"><figcaption></figcaption></figure>
 
+* `task5` 작업을 요청한다.&#x20;
+* `Executor` 는 스레드 풀의 스레드 core 사이즈 만큼 있는지 확인한다. -> core 사이즈 만큼 있다.&#x20;
+* `Executor` 는 큐에 보관을 시도한다. -> 큐가 가득 찼다.&#x20;
+
+큐가 가득 차면 긴급 상황으로 대기하는 작업이 꽉 찰 정도로 요청이 많다는 뜻이다. \
+이 경우 Executor 는 max(`aximumPoolSize`) 사이즈까지 초과 스레드를 만들어서 작업을 수행한다.&#x20;
+
+* 초과 스레드인 스레드3 을 만든다.&#x20;
+* 스레드3 이 작업을 처리한다.
+
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.11.27.png" alt="" width="563"><figcaption></figcaption></figure>
 
-* `task5` 작업을 요청한다.&#x20;
-* `Executor` 는 스레드 풀의 스레드 core 사이즈 만큼 차있는지 확인한다. -> 차있다.&#x20;
-* `Executor` 는 큐에 보관을 시도한다. -> 큐가 가득 찼다.&#x20;
-* 큐가 가득 차면 긴급 상황으로 `maximumPoolSize` 까지 초과 스레드를 만들어서 작업한다.&#x20;
-  * 초과 스레드인 스레드3 을 만든다.&#x20;
-* 스레드3 이 작업을 처리한다.&#x20;
-* `task6` 또한 초과 스레드가 작업을 처리한다.&#x20;
+* `task6` 또한 큐가 가득 찼다.&#x20;
+* 초과 스레드인 스레드4가 이 작업을 처리한다.&#x20;
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.12.00.png" alt="" width="563"><figcaption></figcaption></figure>
 
 * `task7` 작업을 요청한다.&#x20;
 * 큐가 가득 찼다.&#x20;
-* 스레드 풀의 스레드도 max 사이즈 만큰 가득 찼다.&#x20;
-* `RejectedExecutionException` 이 발생한다.&#x20;
+* 스레드 풀의 스레드도 max 사이즈 만큼 가득 찼다.&#x20;
+* `RejectedExecutionException` 이 발생한다.
+
+이 경우 큐에 넣을 수도 없고, 작업을 수행할 스레드도 만들 수 없다. 따라서 작업을 거절한다.
 
 <figure><img src="../../../../.gitbook/assets/스크린샷 2024-11-17 19.13.14.png" alt="" width="563"><figcaption></figcaption></figure>
 
-* 모든 작업이 완료되고, 초과 스레드들은 지정된 시간동안 작업을 하지 않고 대기하면 제거된다.&#x20;
-  * 긴급한 작업이 끝난 것으로 이해하면 된다.&#x20;
-* **여기서 참고로 작업 요청이 계속해서 들어오면 지정된 시간은 계속 초기화된다.**&#x20;
+* 모든 작업이 완료되고,&#x20;
+* 초과 스레드들은 지정된 시간동안 작업을 하지 않고 대기하면 제거된다. 긴급한 작업이 끝난 것으로 이해하면 된다.
+* 여기서는 지정한 3초간 스레드3, 스레드4가 작업을 진행하지 않았기 때문에 스레드 풀에서 제거된다.
+* 참고로 작업 요청이 계속해서 들어오면 지정된 시간은 계속 초기화된다.
+
+<figure><img src="../../../../.gitbook/assets/스크린샷 2025-04-30 16.49.10.png" alt=""><figcaption></figcaption></figure>
+
+* 초과 스레드가 제거된 모습이다.&#x20;
+* 이후에 `shutdown()` 이 진행되면 풀의 스레드도 모두 제거된다.&#x20;
 
 ## Executor 전략 - 고정 풀 전략&#x20;
 
