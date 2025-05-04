@@ -134,7 +134,7 @@
       * [문자 인코딩](language/readme-1/undefined/2-i-o/undefined.md)
       * [I/O 기본1](language/readme-1/undefined/2-i-o/i-o-1.md)
       * [I/O 기본2](language/readme-1/undefined/2-i-o/i-o-2.md)
-      * [IO 활용](language/readme-1/undefined/2-i-o/io.md)
+      * [I/O 활용](language/readme-1/undefined/2-i-o/i-o.md)
       * [File, Files](language/readme-1/undefined/2-i-o/file-files.md)
     * [기초 탄탄! 독하게 시작하는 Java - Part2: OOP 와 JVM](language/readme-1/undefined/java-part2-oop-jvm/README.md)
       * [2. 클래스 - 첫 번째](language/readme-1/undefined/java-part2-oop-jvm/2..md)
