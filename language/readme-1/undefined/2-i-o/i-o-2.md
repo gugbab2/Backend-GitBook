@@ -125,7 +125,7 @@ public class ReaderWriterMainV2 {
 
 <figure><img src="../../../../.gitbook/assets/image (142).png" alt=""><figcaption></figcaption></figure>
 
-* 데이터를 읽을 때는 `int ch = read()` 를 제공하는데, 여기서는 문자 하나인 `char` 형으로 데이터를 받게 된다. 그런데 실제 반환 타입은 `int` 형이므로 `char` 형으로 캐스팅하여 사용하면 된다.                  &#x20;
+* 데이터를 읽을 때는 `int ch = read()` 를 제공하는데, 여기서는 문자 하나인 `char` 형으로 데이터를 받게 된다. 그런데 실제 반환 타입은 `int` 형이므로 `char` 형으로 캐스팅하여 사용하면 된다.
 * 자바의 `char` 형은 파일의 끝(EOF)인 `-1` 를 표현할 수 없으므로 대신 `int` 를 반환한다.&#x20;
 * 그림을 보면 데이터를 읽을 때, `FileInputStream` 에서 `byte[]` 를 읽은 것을 확인할 수 있다. \
   `InputStreamReader` 는 이렇게 읽은 `byte[]` 을 문자인 `char` 로 변경해서 반환한다. 물론 `byte` 를 문자로 변경할 때도 문자 집합이 필요하다.&#x20;
@@ -154,7 +154,8 @@ public class ReaderWriterMainV2 {
 
 우리가 앞서 본 `OuputStreamWriter` 는 바로 문자를 다루는 `Wrtier` 클래스의 자식이다. 그래서 `write(String)`  이 가능한 것이다. `OutputStreamWriter` 는 문자를 받아서 byte 로 변경한 다음에 byte 를 다루는 `OutputStream` 으로 데이터를 전달했던 것이다.&#x20;
 
-**여기서 꼭! 기억해야 할 중요한 사실이 있다. 처음에 언급했듯이 모든 데이터는 byte 단위(숫자)로 저장된다.** 따라서 `Writer` 가 아무리 문자를 다룬다고 해도 문자를 바로 저장할 수는 없다. 이 클래스에 문자를 전달하면 결과적으로 내부에서는 지정된 문자 집합을 사용해서 문자를 byte 로 인코딩해서 저장한다.
+**여기서 꼭! 기억해야 할 중요한 사실이 있다. 처음에 언급했듯이 모든 데이터는 byte 단위(숫자)로 저장된다.** \
+따라서 `Writer` 가 아무리 문자를 다룬다고 해도 문자를 바로 저장할 수는 없다. 이 클래스에 문자를 전달하면 결과적으로 내부에서는 지정된 문자 집합을 사용해서 문자를 byte 로 인코딩해서 저장한다.
 
 ### FileWriter, FileReader
 
@@ -198,7 +199,7 @@ public class ReaderWriterMainV3 {
 
 `new FileWriter(FILE_NAME, UTF_8)`&#x20;
 
-* `FileWriter` 에 파일명과, 문자 집합(인코딩 셋) 을 전달한다.&#x20;
+* `FileWriter` 에 파일명과, 문자 집합(인코딩 셋) 을 전달한다.
 * `FileWriter` 는 사실 내부에서 스스로 `FileOutputStream` 을 하나 생성해서 사용한다.&#x20;
 * 모든 데이터는 byte 단위로 저장된다는 사실을 다시 떠올려보자
 
