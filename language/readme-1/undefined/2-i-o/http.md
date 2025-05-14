@@ -171,6 +171,7 @@ Accept-Language: ko,en;q=0.9,en-US;q=0.8,ko-KR;q=0.7
 11:02:09.672 [ 11:02:14.678 [ HTTP/1.1 200 OK
 Content-Type: text/html
 Content-Length: 20
+
 &#x3C;h1>Hello World&#x3C;/h1>
 11:02:14.680 [ main] HTTP 응답 전달 완료
 14:39:09.761 [ main] favicon 요청
@@ -214,6 +215,7 @@ Accept-Language: ko,en;q=0.9,en-US;q=0.8,ko-KR;q=0.7
 HTTP/1.1 200 OK
 Content-Type: text/html
 Content-Length: 20
+
 <h1>Hello World</h1>
 ```
 
@@ -637,7 +639,7 @@ HTTP 메시지에서 **시작 라인(URL을 포함)**&#xACFC; **HTTP 헤더**의
 
 지금처럼 UTF-8이 표준화된 시대에 왜 URL은 ASCII만 사용할 수 있을까?
 
-#### HTTP 에서 URL 이 ASCII 문자를 사용하는 이유&#x20;
+#### HTTP 에서 URL 이 ASCII 문자를 사용하는 이유
 
 * 인터넷이 처음 설계되던 시기(1980\~1990년대)에, 대부분의 컴퓨터 시스템은 ASCII 문자 집합을 사용했다.
 *   전 세계에서 사용하는 다양한 컴퓨터 시스템과 네트워크 장비 간의 호환성을 보장하기 위해, URL은 단일한 문자
