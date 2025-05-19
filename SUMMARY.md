@@ -147,6 +147,8 @@
       * [람다가 필요한 이유](language/readme-1/undefined/3/undefined.md)
       * [람다](language/readme-1/undefined/3/undefined-1.md)
       * [함수형 인터페이스](language/readme-1/undefined/3/undefined-2.md)
+      * [람다 활용](language/readme-1/undefined/3/undefined-3.md)
+      * [람다 vs 익명 클래스](language/readme-1/undefined/3/vs.md)
     * [기초 탄탄! 독하게 시작하는 Java - Part2: OOP 와 JVM](language/readme-1/undefined/java-part2-oop-jvm/README.md)
       * [2. 클래스 - 첫 번째](language/readme-1/undefined/java-part2-oop-jvm/2..md)
       * [3. 클래스 - 두번째](language/readme-1/undefined/java-part2-oop-jvm/3..md)
