@@ -151,7 +151,7 @@ public class LockSupportMainV2 {
 `LockSupport` 를 사용하면 스레드를 `WAITING`, `TIME_WAITING` 상태로 변경할 수 있고,\
 또 인터럽트를 받아서 스레드를 깨울 수도 있다.
 
-이런 기능들을 잘 활용하면  `synchronized` 의 단점인 무한 대기 문제를 해결할 수 있을 것 같다.
+**이런 기능들을 잘 활용하면  `synchronized` 의 단점인 무한 대기 문제를 해결할 수 있을 것 같다.**
 
 물론 그냥 되는 것은 아니고 `LockSupport` 를 활용해서 안전한 임계 영역을 만드는 어떤 기능을 개발해야 한다.
 
