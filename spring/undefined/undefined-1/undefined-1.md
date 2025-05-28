@@ -11,7 +11,7 @@ ApplicationContext applicationContext =
 
 * `ApplicationContext` 를 스프링 컨테이너라고 한다.&#x20;
 * `ApplicationContext` 는 인터페이스이다.&#x20;
-* XML 기반 혹은 어노테이션 기반의 설정 클래스 방식 중 선택할 수 있다.&#x20;
+* XML 기반 or 어노테이션 기반의 설정 클래스 방식 중 선택할 수 있다.&#x20;
 * `AnnotationConfigApplicationContext` 는 `ApplicationContext` 인터페이스의 구현체이다.&#x20;
 
 ### 스프링 컨테이너의 생성 과정&#x20;
@@ -30,12 +30,12 @@ ApplicationContext applicationContext =
 
 * 스프링 컨테이너는 파라미터로 넘어온 설정 클래스 정보(`AppConfig.class`) 를 사용해서 스프링 빈을 등록한다.&#x20;
 * 빈 이름의 디폴트 값은 메서드 이름이다.
-  * 빈 이름을 직접 부여할 수도 있다.&#x20;
+  * 빈 이름을 직접 부여할 수도 있다.
   * `@Bean(name="orderService")` 으로 직접 설정 가능&#x20;
 
 > #### 주의 : 빈 이름은 항상 다른 이름을 부여해야 한다.&#x20;
 >
-> #### 같은 이름을 부여하면, 다른 빈이 무시되거나, 기존 빈을 덮어버리거나 설정에 따라 오류가 발생한다.&#x20;
+> #### 같은 이름을 부여하면, 다른 빈이 무시되거나, 기존 빈을 덮어버리거나 설정에 따라 오류가 발생한다.
 
 #### 3. 스프링 빈 의존관계 설정 - 준비
 
@@ -45,7 +45,7 @@ ApplicationContext applicationContext =
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-05-29 19.56.12.png" alt=""><figcaption></figcaption></figure>
 
-* 스프링 컨테이너는 설정 클래스 정보(`AppConfig.class`) 를 참고해서 의존 관계를 주입(DI) 한다.&#x20;
+* 스프링 컨테이너는 설정 클래스 정보(`AppConfig.class`) 를 참고해서 의존 관계를 주입(DI) 한다.
 * 싱글톤 컨테이너로, 단순히 자바 코드를 호출하는 것과는 차이가 있다.&#x20;
 
 > #### 참고&#x20;
@@ -323,12 +323,13 @@ public class ApplicationContextExtendsFindTest {
 
 ### ApplicationContext
 
-* BeanFactory 기능을 모두 상속받아서 제공&#x20;
+* `BeanFactory` 기능을 모두 상속받아서 제공&#x20;
 * 빈 관리 및 조회 기능 뿐만이 아니라, 여러 부가 기능을 제공&#x20;
-  * 메시지 소스를 활용한 국제화 기능
-  * 환경변수 : 로컬, 개발, 운영 등을 구분해서 처리
-  * 애플리케이션 이벤트
-  * 편리한 리소스 조회 등 ..
+  * `MessageSource` : 메시지 소스를 활용한 국제화 기능
+  * `EnvironmentCapable` : 환경변수 : 로컬, 개발, 운영 등을 구분해서 처리
+  * `ApplicationEventPublicher` : 애플리케이션 이벤트
+  * `ResourceLoader` : 편리한 리소스 조회&#x20;
+  * 등등 ..
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-05-29 20.01.55.png" alt=""><figcaption></figcaption></figure>
 

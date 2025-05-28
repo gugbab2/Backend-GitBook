@@ -266,7 +266,7 @@
     * [스프링 핵심 원리 이해2 - 객체 지향 원리 적용](spring/undefined/undefined-1/2.md)
     * [스프링 컨테이너와 스프링 빈](spring/undefined/undefined-1/undefined-1.md)
     * [싱글톤 컨테이너](spring/undefined/undefined-1/undefined-1-1.md)
-    * [컴포넌트 스캔과 의존관계 자동 주입하기](spring/undefined/undefined-1/undefined-2.md)
+    * [컴포넌트 스캔](spring/undefined/undefined-1/undefined-2.md)
     * [의존관계 자동 주입](spring/undefined-1/undefined-3.md)
     * [빈 생명주기 콜백](spring/undefined-1/undefined-4.md)
     * [빈 스코프](spring/undefined-1/undefined-5.md)
