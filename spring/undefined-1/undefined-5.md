@@ -1,6 +1,5 @@
 ---
 description: 프
-hidden: true
 ---
 
 # 빈 스코프
