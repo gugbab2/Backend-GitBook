@@ -51,10 +51,11 @@ void pureContainer() {
 #### 싱글톤 패턴의 문제점
 
 * 싱글톤 패턴을 구현하는 코드 자체가 많아진다.
-* 의존관계상 클라이언트가 구체 클래스에 의존한다. -> DIP/OCP 원칙을 위반한다.&#x20;
-* 테스트하기 어렵다.&#x20;
+* 의존관계상 클라이언트가 구체 클래스에 의존한다.&#x20;
+  * 추상화에 의존하지 않는다면 DIP/OCP 원칙을 위반한다.&#x20;
+* 테스트하기 어렵다.
   * 전역 상태를 가지기에 각 테스트마다 독립성이 회손된다.&#x20;
-* 내부 속성을 변경하거나, 초기화하기 어렵다.&#x20;
+* 내부 속성을 변경하거나, 초기화하기 어렵다.
 * `private` 생성자로 자식 클래스를 만들기가 어렵다.
 * **결론적으로 유연성이 떨어지기에 안티패턴으로 불린다.**
 
@@ -74,20 +75,17 @@ void pureContainer() {
 
 ```java
 @Test
-@DisplayName("스프링 없는 순수한 DI 컨테이너")
-void pureContainer() {
-    AppConfig appConfig = new AppConfig();
-    // 1. 조회 : 호출할 때 마다 객체를 생성
-    MemberService memberService1 = appConfig.memberService();
+@DisplayName("스프링 컨테이너와 싱글톤")
+void singletonContainer() {
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
-    // 2. 조회 : 호출할 때 마다 객체를 생성
-    MemberService memberService2 = appConfig.memberService();
+    MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+    MemberService memberService2 = ac.getBean("memberService", MemberService.class);
 
-    // 참조값이 다른 것을 확인
     System.out.println("memberService1 = " + memberService1);
     System.out.println("memberService2 = " + memberService2);
 
-    assertThat(memberService1).isNotSameAs(memberService2);
+    assertThat(memberService1).isSameAs(memberService2);
 }
 ```
 
@@ -95,17 +93,17 @@ void pureContainer() {
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-05-28 08.31.26.png" alt=""><figcaption></figcaption></figure>
 
-* 스프링 컨테이너 덕분에 고객의 요청이 올 때 마다 객체를 생성하는 것이 아니라, 이미 만들어진 객체를 공유해서 효율적으로 재사용할 수 있다.&#x20;
+스프링 컨테이너 덕분에 고객의 요청이 올 때 마다 객체를 생성하는 것이 아니라, 이미 만들어진 객체를 공유해서 효율적으로 재사용할 수 있다.&#x20;
 
 ## 4. 싱글톤 방식의 주의점&#x20;
 
 * 싱글톤 패턴이든,  스프링 같은 싱글톤 컨테이너를 사용하든, 객체 인스턴스를 하나만 생성해서 공유하는 싱글톤 방식은 여러 클라이언트가 하나의 같은 객체 인스턴스를 공유하기 때문에, 싱글톤 객체는 상태를 유지(stateful)하게 설계하면 안된다.&#x20;
-* 무상태(stateless) 로 설계해야 한다.&#x20;
+* **무상태(stateless) 로 설계해야 한다.**&#x20;
   * 특정 클라이언트에 의존적인 필드가 있으면 안된다.&#x20;
   * 특정 클라이언트가 값을변경할 수 있는 필드가 있으면 안된다.&#x20;
   * 가급적 읽기만 가능해야 한다.&#x20;
   * 필드 대신에 자바에서 공유되지 않는, 지역변수, 파라미터, `ThreadLocal` 등을 사용해야 한다.&#x20;
-* 스프링 빈의 필드에 공유 값을 설정하면 정말 큰 장애가 발생할 수 있다.&#x20;
+* **스프링 빈의 필드에 공유 값을 설정하면 정말 큰 장애가 발생할 수 있다!**
 
 #### 상태를 유지할 경우 발생하는 문제점 예시&#x20;
 
@@ -259,8 +257,10 @@ public class ConfigurationSingletonTest {
 ## 6. @Configuration과 바이트코드 조작의 마법
 
 스프링 컨테이너는 싱글톤 레지스트리다. 따라서 스프링 빈이 싱글톤이 되도록 보장해주어야 한다. \
-그런데 스프링이 자바 코드까지 어떻게 하기는 어렵다. 저 자바 코드를 보면 분명 3번 호출되어야 하는 것이 맞다.\
-그래서 스프링은 클래스의 바이트코드를 조작하는 라이브러리를 사용한다.\
+그런데 스프링이 자바 코드까지 어떻게 하기는 어렵다. 위 자바 코드를 보면 분명 `memberRepository` 는 3번 호출되어야 하는 것이 맞다.
+
+그래서 스프링은 클래스의 바이트코드를 조작하는 라이브러리를 사용한다.
+
 모든 비밀은 `@Configuration` 을 적용한 `AppConfig` 에 있다.
 
 ```java
@@ -309,9 +309,8 @@ public MemberRepository memberRepository() {
 
 ### @Configuration 을 적용하지 않고, @Bean 만 적용하면 어떻게 될까?
 
-`@Configuration` 을 붙이면 바이트코드를 조작하는 CGLIB 기술을 사용해서 싱글톤을 보장하지만, 만약 `@Bean`만 적용하면 어떻게 될까?
-
-#### 정리&#x20;
+`@Configuration` 을 붙이면 바이트코드를 조작하는 CGLIB 기술을 사용해서 싱글톤을 보장하지만, \
+만약 `@Bean`만 적용하면 어떻게 될까?
 
 * `@Bean`만 사용해도 스프링 빈으로 등록되지만, 싱글톤을 보장하지 않는다.
   * `memberRepository()` 처럼 의존관계 주입이 필요해서 메서드를 직접 호출할 때 싱글톤을 보장하지 않는다.

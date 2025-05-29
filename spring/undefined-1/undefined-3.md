@@ -82,8 +82,9 @@ public class OrderServiceImpl implements OrderService {
 
 * 이름 그대로 필드에 바로 주입하는 방법이다.
 * 특징
-  * 코드가 간결해서 개발자들을 유혹, 하지만.. 외부에서 변경이 불가능해서 테스트하기 힘들다는 치명적인 단점이 있다! (Mock 객체 생성 불가)&#x20;
-  * DI 프레임워크(스프링) 이 없다면 아무것도 할수가 없다.
+  * **코드가 간결해서 개발자들을 유혹, 하지만.. 외부에서 변경이 불가능해서 테스트하기 힘들다는 치명적인 단점이 있다! (Mock 객체 생성 불가)**&#x20;
+  * **DI 프레임워크(스프링) 이 없다면 아무것도 할수가 없다.**
+    * **테스트 중 순수한 자바로 테스트하는 경우가 매우 많다!**&#x20;
   * 사용하지 말자!
     * 애플리케이션의 실제 코드와 관계 없는 테스트 코드를 작성하기가 매우 어렵다. \
       (필드 주입을 사용할 경우, 필요한 객체를 넣어주는 곳이 없다..)
@@ -213,10 +214,9 @@ private DiscountPolicy discountPolicy
 public class FixDiscountPolicy implements DiscountPolicy {}
 ```
 
-```java
-@Component
-public class RateDiscountPolicy implements DiscountPolicy {}
-```
+<pre class="language-java"><code class="lang-java"><strong>@Component
+</strong>public class RateDiscountPolicy implements DiscountPolicy {}
+</code></pre>
 
 그리고 이렇게 의존관계 자동 주입을 실행하면
 
@@ -314,7 +314,7 @@ public class FixDiscountPolicy implements DiscountPolicy {}
 
 #### @Primary, @Qualifier 활용
 
-코드에서 자주 사용하는 메인 데이터베이스의 커넥션을 획득하는 스프링 빈이 있고, 코드에서 특별한 기능으로 가끔 사용하는 서브 데이터베이스의 커넥션을 획득하는 스프링 빈이 있다고 생각해보자. 메인 데이터베이스의 커넥션을 획득하는 스프링 빈은 `@Primary` 를 적용해서 조회하는 곳에서 `@Qualifier` 지정 없이 편리하게 조회하고, 서브 데이터베이스 커넥션 빈을 획득할 때는 `@Qualifier` 를 지정해서 명시적으로 획득 하는 방식으로 사용하면 코드를 깔끔하게 유지할 수 있다. 물론 이때 메인 데이터베이스의 스프링 빈을 등록할 때 \`@Qualifier\` 를 지정해주는 것은 상관없다.
+코드에서 자주 사용하는 메인 데이터베이스의 커넥션을 획득하는 스프링 빈이 있고, 코드에서 특별한 기능으로 가끔 사용하는 서브 데이터베이스의 커넥션을 획득하는 스프링 빈이 있다고 생각해보자. 메인 데이터베이스의 커넥션을 획득하는 스프링 빈은 `@Primary` 를 적용해서 조회하는 곳에서 `@Qualifier` 지정 없이 편리하게 조회하고, 서브 데이터베이스 커넥션 빈을 획득할 때는 `@Qualifier` 를 지정해서 명시적으로 획득 하는 방식으로 사용하면 코드를 깔끔하게 유지할 수 있다. 물론 이때 메인 데이터베이스의 스프링 빈을 등록할 때 `@Qualifier` 를 지정해주는 것은 상관없다.
 
 #### @Primary, @Qualifier 우선순위
 
@@ -332,7 +332,7 @@ public class FixDiscountPolicy implements DiscountPolicy {}
 설정 정보를 기반으로 애플리케이션을 구성하는 부분과 실제 동작하는 부분을 명확하게 나누는 것이 이상적이지만, 개발자 입장에서 스프링 빈을 하나 등록할 때 `@Component` 만 넣어주면 끝나는 일을 `@Configuration` 설정 정보에 가서 `@Bean` 을 적고, 객체를 생성하고, 주입할 대상을 일일이 적어주는 과정은 상당히 번거롭다.\
 또, 관리할 빈이 많아서 설정 정보가 커지면 설정 정보를 관리하는 것 자체가 부담이 된다. 그리고 결정적으로 자동 빈 등록을 사용해도 OCP, DIP 를 지킬 수 있다.
 
-#### 수동 빈 등록은 언제 사용하냐?
+### 수동 빈 등록은 언제 사용하냐?
 
 * 업무 로직 빈: 웹을 지원하는 컨트롤러, 핵심 비즈니스 로직이 있는 서비스, 데이터 계층의 로직을 처리하는 리포지토리등이 모두 업무 로직이다. 보통 비즈니스 요구사항을 개발할 때 추가되거나 변경된다.
 * 기술 지원 빈: 기술적인 문제나 공통 관심사(AOP)를 처리할 때 주로 사용된다. 데이터베이스 연결이나, 공통 로그 처리 처럼 업무 로직을 지원하기 위한 하부 기술이나 공통 기술들이다.

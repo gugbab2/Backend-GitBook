@@ -31,7 +31,7 @@ ApplicationContext applicationContext =
 * 스프링 컨테이너는 파라미터로 넘어온 설정 클래스 정보(`AppConfig.class`) 를 사용해서 스프링 빈을 등록한다.&#x20;
 * 빈 이름의 디폴트 값은 메서드 이름이다.
   * 빈 이름을 직접 부여할 수도 있다.
-  * `@Bean(name="orderService")` 으로 직접 설정 가능&#x20;
+  * `@Bean(name="orderService")` 으로 직접 설정 가능
 
 > #### 주의 : 빈 이름은 항상 다른 이름을 부여해야 한다.&#x20;
 >
@@ -47,6 +47,7 @@ ApplicationContext applicationContext =
 
 * 스프링 컨테이너는 설정 클래스 정보(`AppConfig.class`) 를 참고해서 의존 관계를 주입(DI) 한다.
 * 싱글톤 컨테이너로, 단순히 자바 코드를 호출하는 것과는 차이가 있다.&#x20;
+  * 각 빈은 Default 값이 싱글톤으로써 하나의 인스턴스가 공유된다.&#x20;
 
 > #### 참고&#x20;
 >
@@ -329,7 +330,6 @@ public class ApplicationContextExtendsFindTest {
   * `EnvironmentCapable` : 환경변수 : 로컬, 개발, 운영 등을 구분해서 처리
   * `ApplicationEventPublicher` : 애플리케이션 이벤트
   * `ResourceLoader` : 편리한 리소스 조회&#x20;
-  * 등등 ..
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-05-29 20.01.55.png" alt=""><figcaption></figcaption></figure>
 
@@ -340,7 +340,6 @@ public class ApplicationContextExtendsFindTest {
   * XML
   * Groovy
   * ...&#x20;
-  *
 
 ## 8. 스프링 빈 설정 메타 정보 - BeanDefinition&#x20;
 
