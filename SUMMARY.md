@@ -275,7 +275,7 @@
     * [3. 오브젝트와 의존관계2](spring/undefined/6/3.-2.md)
     * [4. 테스트](spring/undefined/6/4..md)
     * [5. 템플릿](spring/undefined/6/5..md)
-    * [6.예외](spring/undefined/6/6..md)
+    * [6. 예외](spring/undefined/6/6..md)
     * [7. 서비스 추상화](spring/undefined/6/7..md)
   * [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술](spring/undefined/mvc-1/README.md)
     * [서블릿](spring/undefined/mvc-1/undefined.md)
