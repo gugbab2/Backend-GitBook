@@ -300,7 +300,7 @@
       * [1.5 스프링의 IoC](spring/3.1/1./1.5-ioc.md)
       * [1.6 싱글톤 레지스트리와 오브젝트 스코프](spring/3.1/1./1.6.md)
 * [그 외](spring/undefined-2/README.md)
-  * [스프링 부트(SpringBoot) 탄생 배경](spring/undefined-2/springboot.md)
+  * [POJO(Plain Old Java Object)](spring/undefined-2/pojo-plain-old-java-object.md)
 
 ## CS
 
@@ -409,6 +409,7 @@
   * [그 외](cs/security/undefined/README.md)
     * [Basic Auth](security/basic-auth.md)
     * [HMAC 기반 인증](security/hmac.md)
+    * [JWT(JSON Web Token)](cs/security/undefined/jwt-json-web-token.md)
 * [그 외](cs/undefined/README.md)
   * [동기/비동기 & 블로킹/논블록킹](cs/undefined/and.md)
 
@@ -450,6 +451,8 @@
       * [세션6. TDD 주기 첫 번째 경험](software-development-methodology/tdd/undefined/spring-boot-tdd/6.-tdd.md)
       * [세션7. TDD 주기 반복](software-development-methodology/tdd/undefined/spring-boot-tdd/7.-tdd.md)
       * [세션8. 시스템 데이터](software-development-methodology/tdd/undefined/spring-boot-tdd/8..md)
+      * [세션9. 예상하지 못한 테스트 실패](software-development-methodology/tdd/undefined/spring-boot-tdd/9..md)
+      * [세션10. 조회 기능 개발](software-development-methodology/tdd/undefined/spring-boot-tdd/10..md)
   * [그 외](software-development-methodology/tdd/undefined-1/README.md)
     * [단위 테스트(Unit Test) 작성의 필요성](software-development-methodology/tdd/undefined-1/unit-test.md)
     * [JUnit5](software-development-methodology/tdd/undefined-1/junit5/README.md)
