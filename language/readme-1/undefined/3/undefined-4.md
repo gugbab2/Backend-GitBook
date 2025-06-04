@@ -334,7 +334,7 @@ public class MethodRefEx2 {
 
 #### 메서드 참조에서 매개변수를 생략하는 이유&#x20;
 
-함수형 인터페이스의 시그니처(매개변수와 반환 타입) 가 이미 정해져 있고, 컴파일러가 그 시그니ㅏ처를 바탕으로 메서드 참조와 연결해주기 떄문에, 명시적으로 매개변수를 작성하지 않아도 자동으로 추론되어 호출된다.&#x20;
+함수형 인터페이스의 시그니처(매개변수와 반환 타입) 가 이미 정해져 있고, 컴파일러가 그 시그니처를 바탕으로 메서드 참조와 연결해주기 떄문에, 명시적으로 매개변수를 작성하지 않아도 자동으로 추론되어 호출된다.&#x20;
 
 ## 메서드 참조3 - 임의 객체의 인스턴스 메서드 참조
 
@@ -406,7 +406,7 @@ Function<Person, String> fun2 = Person::introduce // 메서드 참조 (타입::�
 
 ### 임의 객체의 인스턴스 메서드 참조&#x20;
 
-(Reference to an instance method of an arbitrary object of a particular type)
+"`(Reference to an instance method of an arbitrary object of a particular type)`"
 
 이런 메서드 참조를 **특정 타입의 임의 객체의 인스턴스 참조**라 한다.\
 &#xNAN;**(실제로 메서드 참조 기능 중 가장 많이 사용된다)**
@@ -430,7 +430,7 @@ Person::introduce
 
 ## 메서드 참조4 - 활용1&#x20;
 
-임의 객체의 인스턴스 참조가 실제 어떻게 사용되는지 알아보자.&#x20;
+임의 객체의 인스턴스 참조가 실제 어떻게 사용되는지 알아보자.
 
 ```java
 package mtehodref;

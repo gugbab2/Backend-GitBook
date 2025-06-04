@@ -1,8 +1,8 @@
 # 스트림API1 - 기본
 
-## 스트림 API 시작&#x20;
+## 스트림 API 시작
 
-우리는 앞서 필터와 맵 등을 여러 함수와 함께 사용하는 `MyStreamV3` 를 직접 만들었다.&#x20;
+우리는 앞서 필터와 맵 등을 여러 함수와 함께 사용하는 `MyStreamV3` 를 직접 만들었다.
 
 ```java
 List<String> result = MyStreamV3.of(students)
@@ -34,8 +34,8 @@ public class StreamStartMain {
         // "B" 로 시작하는 이름만 필터 후 대문자로 바꿔서 리스트 수집
         Stream<String> stream = names.stream();
         List<String> result = stream
-                .filter(name -> name.startsWith("B"))
-                .map(s -> s.toUpperCase())
+                .filter(name -> name.startsWith("B"))        
+                .map(s -> s.toUpperCase())        
                 .toList();
 
         System.out.println("=== 외부 반복 ===");
@@ -60,10 +60,9 @@ public class StreamStartMain {
 
 #### 스트림 생성&#x20;
 
-```java
-List<String> names = List.of("Apple", "Banana", "Berry", "Tomato");
-Stream<String> stream = names.stream();
-```
+<pre class="language-java"><code class="lang-java"><strong>List&#x3C;String> names = List.of("Apple", "Banana", "Berry", "Tomato");
+</strong><strong>Stream&#x3C;String> stream = names.stream();
+</strong></code></pre>
 
 * `List.of(...)` 로 미리 몇 가지 과일 이름을 담은 리스트를 생성했다.&#x20;
 * `List` 의 `stream()` 메서드를 사용하면 **자바가 제공하는 스트림**을 생성할 수 있다.&#x20;
@@ -125,8 +124,8 @@ names.stream()
 
 #### 정의&#x20;
 
-* **스트림(Stream)** 은 자바 8부터 추가된 기능으로, **데이터의 흐름을 추상화**해서 다루는 도구이다.&#x20;
-* **컬렉션(Collection) 또는 배열** 등의 요소들을 연산 파이프라인을 통해 **연속적인 형태**로 처리할 수 있게 해준다.&#x20;
+* 스트림(Stream) 은 자바 8부터 추가된 기능으로, **데이터의 흐름을 추상화**해서 다루는 도구이다.&#x20;
+* 컬렉션(Collection) 또는 배열 등의 요소들을 **연산 파이프라인을 통해 연속적인 형태로 처리**할 수 있게 해준다.&#x20;
   * 연산 파이프라인 : 여러 연산(중간 연산, 최종 연산) 을 체이닝해서 데이터를 변환, 필터링, 계산하는 구조
 
 #### 스트림의 특징&#x20;
@@ -262,7 +261,7 @@ public class LazyEvalMain1 {
 #### 정리&#x20;
 
 * 두 방식의 결과는 같지만, 실제 실행 과정에서 차이가 있다.&#x20;
-* 핵심은 자바 스트림은 중간 단계에서 **데이터를 모아서 한 방에 처리하지 않고**, 한 요소가 중간 연산을 통과하면 곧 바로 다음 중간 연산으로 이어지는 **파이프라인 형태를 가진다는 점이다.**
+* 핵심은 자바 스트림은 중간 단계에서 데이터를 모아서 한 방에 처리하지 않고, 한 요소가 중간 연산을 통과하면 곧 바로 다음 중간 연산으로 이어지는 **파이프라인 형태를 가진다는 점이다.**
 
 ## 지연 연산&#x20;
 
@@ -332,7 +331,7 @@ public class LazyEvalMain2 {
 
 #### 즉시 연산&#x20;
 
-* 우리가 만든 MyStreamV3 는 즉시(Eager) 연산을 사용하고 있다.&#x20;
+* 우리가 만든 `MyStreamV3` 는 즉시(Eager) 연산을 사용하고 있다.&#x20;
 * 그 결과, 최종 연산 없이도 중간 연산이 실행되어, 필요 이상의 연산이 수행되기도 한다.&#x20;
 
 #### 지연 연산&#x20;

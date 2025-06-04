@@ -368,7 +368,7 @@ public class TerminalOperationMain {
 
 스트림 API에는 **기본형(primitive) 특화 스트림**이 존재한다.
 
-자바에서는 `IntStream`, `LongStream`, `DoubleStream` 세 가지 형태를 제공하여 **기본 자료형(int, long,double)에 특화된 기능**을 사용할 수 있게 한다.
+자바에서는 `IntStream`, `LongStream`, `DoubleStream` 세 가지 형태를 제공하여 **기본 자료형(`int`, `long`, `double`)에 특화된 기능**을 사용할 수 있게 한다.
 
 * 예를 들어, `IntStream` 은 **합계 계산**, **평균**, **최솟값**, **최댓값** 등 정수와 관련된 연산을 좀 더 편리하게 제공하고, **오토박싱/언박싱** 비용을 줄여 성능도 향상시킬 수 있다.
 
@@ -454,7 +454,7 @@ public class PrimitiveStreamMain {
 <figure><img src="../../../../.gitbook/assets/스크린샷 2025-05-21 13.23.30.png" alt="" width="444"><figcaption></figcaption></figure>
 
 * **기본형 특화 스트림(IntStream, LongStream, DoubleStream)** 을 이용하면 숫자 계산(합계, 평균, 최대·최소 등)을 간편하게 처리하고, 박싱/언박싱 오버헤드를 줄여 **성능상의 이점**도 얻을 수 있다.
-* **range(), rangeClosed()** 같은 메서드를 사용하면 범위를 쉽게 다룰 수 있어 **반복문 대신**에 자주 쓰인다.
+* **`range()`, `rangeClosed()`** 같은 메서드를 사용하면 범위를 쉽게 다룰 수 있어 **반복문 대신**에 자주 쓰인다.
 * `mapToXxx`, `boxed()` 등의 메서드를 잘 활용하면 **객체 스트림**과 **기본형 특화 스트림**을 자유롭게 오가며 다양한 작업을 할 수 있다.
 * `summaryStatistics()` 를 이용하면 합계, 평균, 최솟값, 최댓값 등 통계 정보를 **한 번에** 구할 수 있어 편리하다.&#x20;
 
