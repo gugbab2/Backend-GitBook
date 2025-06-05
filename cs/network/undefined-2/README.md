@@ -1,6 +1,6 @@
 ---
-description: 책
+description: 외식
 ---
 
-# 책
+# 그 외
 

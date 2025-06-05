@@ -1,6 +1,6 @@
 ---
-description: 문
+description: 의
 ---
 
-# 외워서 끝내는 네트워크 핵심이론 - 기초
+# 강의
 
