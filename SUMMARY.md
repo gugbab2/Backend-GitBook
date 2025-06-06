@@ -392,6 +392,7 @@
       * [섹션6. HTTP 메서드 활용](cs/network/undefined/http/6.-http.md)
       * [섹션7. HTTP 상태 코드](cs/network/undefined/http/7.-http.md)
       * [섹션8. HTTP 헤더1 - 일반 헤더](cs/network/undefined/http/8.-http-1.md)
+      * [섹션9. HTTP 헤더2 - 캐시와 조건부 요청](cs/network/undefined/http/9.-http-2.md)
   * [책](cs/network/undefined-1/README.md)
     * [그림으로 배우는 네트워크 원리](cs/network/undefined-1/undefined/README.md)
       * [1. 네트워크 기본](cs/network/undefined-1/undefined/1..md)
