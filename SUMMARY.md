@@ -349,7 +349,6 @@
         * [TCP 연결 종료 및 상태 변화](cs/network/undefined/undefined/l4-tcp-udp/tcp-1.md)
         * [TCP, UDP 헤더 형식과 게임서버 특징](cs/network/undefined/undefined/l4-tcp-udp/tcp-udp-1.md)
         * [TCP 가 연결이라는 착각](cs/network/undefined/undefined/l4-tcp-udp/tcp-2.md)
-        * [TCP 연결과 게임버그](cs/network/undefined/undefined/l4-tcp-udp/tcp-3.md)
       * [웹을 이루는 핵심기술](cs/network/undefined/undefined/undefined/README.md)
         * [DNS](cs/network/undefined/undefined/undefined/dns.md)
         * [URL, URI](cs/network/undefined/undefined/undefined/url-uri.md)
