@@ -14,19 +14,19 @@
 
 #### 직접 만든 프레임워크 -> 스프링 MVC 비교&#x20;
 
-* FrontController -> DispatcherServlet
-* handlerMappingMap -> HandlerMapping
-* MyHandlerAdapter -> HandlerAdapter
-* ModelView -> ModelAndView
-* viewResolver -> ViewResolver
-* MyView -> View
+* `FrontController` -> `DispatcherServlet`
+* `handlerMappingMap` -> `HandlerMapping`
+* `MyHandlerAdapter` -> `HandlerAdapter`
+* `ModelView` -> `ModelAndView`
+* `viewResolver` -> `ViewResolver`
+* `MyView` -> `View`
 
 ### DispatcherServlet 구조 살펴보기&#x20;
 
 `org.springframework.web.servlet.DispatcherServlet`
 
 스프링 MVC도 프론트 컨트롤러 패턴으로 구현되어 있다.\
-스프링 MVC의 프론트 컨트롤러가 바로 디스패처 서블릿(DispatcherServlet)이다.\
+스프링 MVC의 프론트 컨트롤러가 바로 디스패처 서블릿(`DispatcherServlet`)이다.\
 그리고 이 디스패처 서블릿이 바로 스프링 MVC의 핵심이다.
 
 #### DispatcherServlet 서블릿 등록&#x20;
@@ -103,7 +103,7 @@ protected void render(ModelAndView mv, HttpServletRequest request,
 6. **viewResolver 호출** : 뷰 리졸버를 찾고 실행한다.
    1. JSP의 경우: `InternalResourceViewResolver` 가 자동 등록되고, 사용된다.
 7. **View 반환**: 뷰 리졸버는 뷰의 논리 이름을 물리 이름으로 바꾸고, 렌더링 역할을 담당하는 뷰 객체를 반환한다.
-   1. JSP의 경우 `InternalResourceView(JstlView)` 를 반환하는데, 내부에 forward() 로직이 있다.
+   1. JSP의 경우 `InternalResourceView(JstlView)` 를 반환하는데, 내부에 `forward()` 로직이 있다.
 8. **뷰 렌더링** : 뷰를 통해서 뷰를 렌더링 한다.
 
 #### 인터페이스 살펴보기&#x20;
@@ -122,7 +122,7 @@ protected void render(ModelAndView mv, HttpServletRequest request,
 
 스프링 MVC는 코드 분량도 매우 많고, 복잡해서 내부 구조를 다 파악하는 것은 쉽지 않다. 사실 해당 기능을 직접 확장 하거나 나만의 컨트롤러를 만드는 일은 없으므로 걱정하지 않아도 된다. 왜냐하면 스프링 MVC는 전세계 수 많은 개발자들의 요구사항에 맞추어 기능을 계속 확장해왔고, 그래서 **여러분이 웹 애플리케이션을 만들 때 필요로 하는 대부분의 기능이 이미 다 구현되어 있다.**
 
-그래도 이렇게 핵심 동작방식을 알아두어야 향후 문제가 발생했을 때 어떤 부분에서 문제가 발생했는지 쉽게 파악하고, 문제를 해결할 수 있다. 그리고 확장 포인트가 필요할 때, 어떤 부분을 확장해야 할지 감을 잡을 수 있다. 실제 다른 컴포넌트를 제공하거나 기능을 확장하는 부분들은 강의를 진행하면서 조금씩 설명하겠다. 지금은 전체적인 구조가 이렇게 되어 있구나 하고 이해하면 된다.
+**그래도 이렇게 핵심 동작방식을 알아두어야 향후 문제가 발생했을 때 어떤 부분에서 문제가 발생했는지 쉽게 파악하고, 문제를 해결할 수 있다.** 그리고 확장 포인트가 필요할 때, 어떤 부분을 확장해야 할지 감을 잡을 수 있다. 실제 다른 컴포넌트를 제공하거나 기능을 확장하는 부분들은 강의를 진행하면서 조금씩 설명하겠다. 지금은 전체적인 구조가 이렇게 되어 있구나 하고 이해하면 된다.
 
 우리가 지금까지 함께 개발한 MVC 프레임워크와 유사한 구조여서 이해하기 어렵지 않았을 것이다.
 
@@ -140,10 +140,8 @@ protected void render(ModelAndView mv, HttpServletRequest request,
 
 ```java
 public interface Controller {
-
-    ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse
-response) throws Exception;
-
+    ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) 
+        throws Exception;
 }
 ```
 
@@ -215,7 +213,7 @@ HandlerAdapter
 #### 1. 핸들러 매핑으로 핸들러 조회&#x20;
 
 1. `HandlerMapping` 을 순서대로 실행해서, 핸들러를 찾는다.
-2.  이 경우 빈 이름으로 핸들러를 찾아야 하기 때문에 이름 그대로 빈 이름으로 핸들러를 찾아주는
+2.  이 경우, 빈 이름으로 핸들러를 찾아야 하기 때문에 이름 그대로 빈 이름으로 핸들러를 찾아주는
 
     `BeanNameUrlHandlerMapping` 가 실행에 성공하고 핸들러인 `OldController` 를 반환한다.
 
@@ -322,7 +320,7 @@ spring.mvc.view.suffix=.jsp
 
 #### 뷰 리졸버 - InternalResourceViewResolver
 
-스프링 부트는 `InternalResourceViewResolver` 라는 뷰 리졸버를 자동으로 등록하는데, 이때`application.properties` 에 등록한 `spring.mvc.view.prefix`, `spring.mvc.view.suffix` 설정 정보를 사용해서 등록한다.
+스프링 부트는 `InternalResourceViewResolver` 라는 뷰 리졸버를 자동으로 등록하는데, 이때 `application.properties` 에 등록한 `spring.mvc.view.prefix`, `spring.mvc.view.suffix` 설정 정보를 사용해서 등록한다.
 
 ### 뷰 리졸버 동작 방식&#x20;
 
@@ -372,7 +370,8 @@ spring.mvc.view.suffix=.jsp
 * `RequestMappingHandlerMapping`
 * `RequestMappingHandlerAdapter`
 
-앞서 보았듯이 가장 우선순위가 높은 핸들러 매핑과 핸들러 어댑터는 `RequestMappingHandlerMapping`, `RequestMappingHandlerAdapter` 이다.\
+앞서 보았듯이 가장 우선순위가 높은 핸들러 매핑과 핸들러 어댑터는 `RequestMappingHandlerMapping`, `RequestMappingHandlerAdapter` 이다.
+
 `@RequestMapping` 의 앞글자를 따서 만든 이름인데, 이것이 바로 지금 스프링에서 주로 사용하는 애노테이션 기반의\
 컨트롤러를 지원하는 핸들러 매핑과 어댑터이다. **실무에서는 99.9% 이 방식의 컨트롤러를 사용**한다.
 

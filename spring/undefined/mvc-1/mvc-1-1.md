@@ -33,14 +33,13 @@ public class MappingController {
 #### 매핑 정보
 
 * `@RestController`
-  * `@Controller` 는 반환 값이 String 이면 뷰 이름으로 인식된다. 그래서 뷰를 찾고 뷰가 랜더링 된다.&#x20;
+  * `@Controller` 는 반환 값이 `String` 이면 뷰 이름으로 인식된다. 그래서 뷰를 찾고 뷰가 랜더링 된다.&#x20;
   *   `@RestController` 는 반환 값으로 뷰를 찾는 것이 아니라, **HTTP 메시지 바디에 바로 입력**한다. 따라서
 
       실행 결과로 ok 메세지를 받을 수 있다. `@ResponseBody` 와 관련이 있는데, 뒤에서 더 자세히 설명한다.
 * `@RequestMapping("/hello-basic")`
-  *   `/hello-basic` URL 호출이 오면 이 메서드가 실행되도록 매핑한다.
-
-      대부분의 속성을 `배열[]` 로 제공하므로 다중 설정이 가능하다. `{"/hello-basic", "/hello-go"}`
+  * `/hello-basic` URL 호출이 오면 이 메서드가 실행되도록 매핑한다.
+  * 대부분의 속성을 `배열[]` 로 제공하므로 다중 설정이 가능하다. `{"/hello-basic", "/hello-go"}`
 
 #### HTTP 메서드&#x20;
 
@@ -292,7 +291,7 @@ public class RequestHeaderController {
 
 * MAP과 유사한데, 하나의 키에 여러 값을 받을 수 있다.
 * HTTP header, HTTP 쿼리 파라미터와 같이 하나의 키에 여러 값을 받을 때 사용한다.
-  * **keyA=value1\&keyA=value2**
+  * `keyA=value1&keyA=value2`
 
 ```java
 MultiValueMap<String, String> map = new LinkedMultiValueMap();
@@ -310,12 +309,12 @@ List<String> values = map.get("keyA");
 #### 클라이언트에서 서버로 요청 데이터를 전달할 때는 주로 다음 3가지 방법을 사용한다.&#x20;
 
 * **GET - 쿼리 파라미터**
-  * /ur&#x6C;**?username=hello\&age=20**
+  * `/url?username=hello&age=20`
   * 메시지 바디 없이, URL의 쿼리 파라미터에 데이터를 포함해서 전달
   * 예) 검색, 필터, 페이징등에서 많이 사용하는 방식
 * **POST - HTML Form**
-  * content-type: application/x-www-form-urlencoded
-  * 메시지 바디에 쿼리 파리미터 형식으로 전달 username=hello\&age=20
+  * `content-type: application/x-www-form-urlencoded`
+  * 메시지 바디에 쿼리 파리미터 형식으로 전달 `username=hello&age=20`
   * 예) 회원 가입, 상품 주문, HTML Form 사용
 * **HTTP message body**에 데이터를 직접 담아서 요청
   * HTTP API에서 주로 사용, JSON, XML, TEXT
@@ -379,7 +378,7 @@ public class RequestParamController {
 
 **request.getParamter()**
 
-여기서는 단순히 HttpServletRequest가 제공하는 방식으로 요청 파라미터를 조회했다.
+여기서는 단순히 `HttpServletRequest`가 제공하는 방식으로 요청 파라미터를 조회했다.
 
 ## 5. HTTP 요청 파라미터 - @RequestParam
 
@@ -404,8 +403,8 @@ public String requestParamV2(
 
 #### @RequestParam의 `name(value)` 속성이 파라미터 이름으로 사용
 
-* @RequestParam("**username**") String **memberName**
-* -> request.getParameter("**username**")
+* `@RequestParam("username") String memberName`
+* \=> `request.getParameter("username")`
 
 #### **requestParamV3**
 
@@ -443,74 +442,72 @@ public String requestParamV4(String username, int age) {
 >
 > `@RequestParam` 이 있으면 명확하게 요청 파리미터에서 데이터를 읽는 다는 것을 알 수 있다.
 
-### 주의! 스프링 부터 3.2 파라미터 이름 인식 문제&#x20;
-
-다음 예외가 발생하면 해당 내용을 참고하자.
-
-```
-java.lang.IllegalArgumentException: Name for argument of type [java.lang.String]
-not specified, and parameter name information not found in class file either.
-```
-
-주로 다음 두 애노테이션에서 문제가 발생한다.\
-`@RequestParam`, `@PathVariable`
-
-#### @RequestParam 관련&#x20;
-
-```java
-//애노테이션에 username이라는 이름이 명확하게 있다. 문제 없이 작동한다.
-@RequestMapping("/request")
-public String request(@RequestParam("username") String username) {
-    ...
-}
-
-//애노테이션에 이름이 없다. -parameters 옵션 필요
-@RequestMapping("/request")
-public String request(@RequestParam String username) {
-    ...
-}
-
-//애노테이션도 없고 이름도 없다. -parameters 옵션 필요
-@RequestMapping("/request")
-public String request(String username) {
-    ...
-}
-```
-
-#### **@PathVariable 관련(이후에 학습한다)**
-
-```java
-//애노테이션에 userId라는 이름이 명확하게 있다. 문제 없이 작동한다.
-public String mappingPath(@PathVariable("userId") String userId) {
-    ...
-}
-
-//애노테이션에 이름이 없다. -parameters 옵션 필요
-public String mappingPath(@PathVariable String userId) {
-    ...
-}
-```
-
-#### 해결 방안1 (권장)&#x20;
-
-애노테이션에 이름을 생략하지 않고 다음과 같이 이름을 항상 적어준다. **이 방법을 권장한다.**
-
-* `@RequestParam("username") String username`
-* `@PathVariable("userId") String userId`
-
-#### 해결 방안 2,3&#x20;
-
-...&#x20;
-
-#### 문제 원인&#x20;
-
-참고로 이 문제는 Build, Execution, Deployment -> Build Tools -> Gradle에서 Build and run using를 IntelliJ IDEA로 선택한 경우에만 발생한다. Gradle로 선택한 경우에는 Gradle이 컴파일 시점에 해당 옵션을 자동으로 적용해준다.
-
-자바를 컴파일할 때 매개변수 이름을 읽을 수 있도록 남겨두어야 사용할 수 있다. 컴파일 시점에 `-parameters` 옵션을 사용하면 매개변수 이름을 사용할 수 있게 남겨둔다.
-
-스프링 부트 3.2 전까지는 바이트코드를 파싱해서 매개변수 이름을 추론하려고 시도했다. 하지만 스프링 부트 3.2 부터는 이런 시도를 하지 않는다.
-
-
+> #### 주의 - 스프링 부터 3.2 파라미터 이름 인식 문제&#x20;
+>
+> 다음 예외가 발생하면 해당 내용을 참고하자.
+>
+> ```
+> java.lang.IllegalArgumentException: Name for argument of type [java.lang.String]
+> not specified, and parameter name information not found in class file either.
+> ```
+>
+> 주로 다음 두 애노테이션에서 문제가 발생한다.\
+> `@RequestParam`, `@PathVariable`
+>
+> #### @RequestParam 관련&#x20;
+>
+> ```java
+> //애노테이션에 username이라는 이름이 명확하게 있다. 문제 없이 작동한다.
+> @RequestMapping("/request")
+> public String request(@RequestParam("username") String username) {
+>     ...
+> }
+>
+> //애노테이션에 이름이 없다. -parameters 옵션 필요
+> @RequestMapping("/request")
+> public String request(@RequestParam String username) {
+>     ...
+> }
+>
+> //애노테이션도 없고 이름도 없다. -parameters 옵션 필요
+> @RequestMapping("/request")
+> public String request(String username) {
+>     ...
+> }
+> ```
+>
+> #### **@PathVariable 관련(이후에 학습한다)**
+>
+> ```java
+> //애노테이션에 userId라는 이름이 명확하게 있다. 문제 없이 작동한다.
+> public String mappingPath(@PathVariable("userId") String userId) {
+>     ...
+> }
+>
+> //애노테이션에 이름이 없다. -parameters 옵션 필요
+> public String mappingPath(@PathVariable String userId) {
+>     ...
+> }
+> ```
+>
+> #### 해결 방안1 (권장)&#x20;
+>
+> 애노테이션에 이름을 생략하지 않고 다음과 같이 이름을 항상 적어준다. **이 방법을 권장한다.**
+>
+> * `@RequestParam("username") String username`
+> * `@PathVariable("userId") String userId`
+>
+> #### 해결 방안 2,3&#x20;
+>
+> ~~pass ...~~&#x20;
+>
+> #### 문제 원인&#x20;
+>
+> 참고로 이 문제는 Build, Execution, Deployment -> Build Tools -> Gradle에서 Build and run using를 IntelliJ IDEA로 선택한 경우에만 발생한다. Gradle로 선택한 경우에는 Gradle이 컴파일 시점에 해당 옵션을 자동으로 적용해준다.
+>
+> 자바를 컴파일할 때 매개변수 이름을 읽을 수 있도록 남겨두어야 사용할 수 있다. 컴파일 시점에 `-parameters` 옵션을 사용하면 매개변수 이름을 사용할 수 있게 남겨둔다.
+>
+> 스프링 부트 3.2 전까지는 바이트코드를 파싱해서 매개변수 이름을 추론하려고 시도했다. 하지만 스프링 부트 3.2 부터는 이런 시도를 하지 않는다.
 
 #### 파라미터 필수 여부 - requestParamRequired
 
@@ -637,7 +634,7 @@ public String modelAttributeV2(HelloData helloData) {
 `@ModelAttribute` 는 생략할 수 있다.\
 그런데 `@RequestParam` 도 생략할 수 있으니 혼란이 발생할 수 있다.
 
-스프링은 해당 생략시 다음과 같은 규칙을 적용한다.
+#### 스프링은 파라미터 애노테이션 생략시 다음과 같은 규칙을 적용한다.
 
 * `String`, `int`, `Integer` 같은 단순 타입 =`@RequestParam`
 * 나머지 = `@ModelAttribute` (argument resolver 로 지정해둔 타입 외)
