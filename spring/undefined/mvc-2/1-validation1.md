@@ -23,7 +23,7 @@
 >
 > * 클라이언트 검증은 조작할 수 있으므로 보안에 취약하다.&#x20;
 > * 서버만으로 검증하면, 즉각적인 고객 사용성이 부족해진다.&#x20;
-> * 둘을 적절히 섞어서 사용하되, 최종적으로 서버 검증은 필수&#x20;
+> * **둘을 적절히 섞어서 사용하되, 최종적으로 서버 검증은 필수**&#x20;
 > * API 방식을 사용하면 API 스펙을 잘 정의해서 검증 오류를 API 응답 결과에 잘 남겨주어야 함&#x20;
 
 ## 2. 검증 직접 처리 - 소개&#x20;
@@ -485,7 +485,9 @@ public ObjectError(String objectName, String defaultMessage) {}
 
 `BindingResult` 는 인터페이스이고, `Errors` 인터페이스를 상속받고 있다.\
 실제 넘어오는 구현체는 `BeanPropertyBindingResult` 라는 것인데, 둘다 구현하고 있으므로 `BindingResult` \
-대신에 `Errors` 를 사용해도 된다. `Errors` 인터페이스는 단순한 오류 저장과 조회 기능을 제공한다.\
+대신에 `Errors` 를 사용해도 된다.&#x20;
+
+`Errors` 인터페이스는 단순한 오류 저장과 조회 기능을 제공한다.\
 `BindingResult` 는 여기에 더해서 추가적인 기능들을 제공한다. `addError()` 도 `BindingResult` 가 제공하므로 여기서는 `BindingResult` 를 사용하자. 주로 관례상 `BindingResult` 를 많이 사용한다.
 
 #### 정리&#x20;
@@ -544,8 +546,8 @@ public String addItemV2(@ModelAttribute Item item, BindingResult bindingResult, 
 ```java
 public FieldError(String objectName, String field, String defaultMessage);
 public FieldError(String objectName, String field, @Nullable Object
-rejectedValue, boolean bindingFailure, @Nullable String[] codes, @Nullable
-Object[] arguments, @Nullable String defaultMessage)
+rejectedValue, boolean bindingFailure, @Nullable String[] codes, 
+@Nullable Object[] arguments, @Nullable String defaultMessage)
 ```
 
 파라미터 목록&#x20;

@@ -9,8 +9,8 @@
 ```java
 public FieldError(String objectName, String field, String defaultMessage);
 public FieldError(String objectName, String field, @Nullable Object
-rejectedValue, boolean bindingFailure, @Nullable String[] codes, @Nullable
-Object[] arguments, @Nullable String defaultMessage)
+rejectedValue, boolean bindingFailure, @Nullable String[] codes, 
+@Nullable Object[] arguments, @Nullable String defaultMessage)
 ```
 
 파라미터 목록&#x20;
@@ -186,7 +186,10 @@ bindingResult.rejectValue("price", "range", new Object[]{1000, 1000000}, null)
 
 **축약된 오류 코드**
 
-`FieldError()` 를 직접 다룰 때는 오류 코드를 `range.item.price` 와 같이 모두 입력했다. 그런데`rejectValue()` 를 사용하고 부터는 오류 코드를 `range` 로 간단하게 입력했다. 그래도 오류 메시지를 잘 찾아서 출력한다. 무언가 규칙이 있는 것 처럼 보인다. 이 부분을 이해하려면 `MessageCodesResolver` 를 이해해야 한다. 왜 이런식으로 오류 코드를 구성하는지 바로 다음에 자세히 알아보자.
+`FieldError()` 를 직접 다룰 때는 오류 코드를 `range.item.price` 와 같이 모두 입력했다.&#x20;
+
+그런데 `rejectValue()` 를 사용하고 부터는 오류 코드를 `range` 로 간단하게 입력했다. 그래도 오류 메시지를 잘 찾아서 출력한다. 무언가 규칙이 있는 것 처럼 보인다. 이 부분을 이해하려면 `MessageCodesResolver` 를 이해해야 한다. \
+왜 이런식으로 오류 코드를 구성하는지 바로 다음에 자세히 알아보자.
 
 ## 9. 오류 코드와 메시지 처리3&#x20;
 
@@ -200,7 +203,7 @@ bindingResult.rejectValue("price", "range", new Object[]{1000, 1000000}, null)
 
 단순하게 만들면 범용성이 좋아서 여러곳에서 사용할 수 있지만, 메시지를 세밀하게 작성하기 어렵다. 반대로 너무 자세하게 만들면 범용성이 떨어진다. 가장 좋은 방법은 범용성으로 사용하다가, 세밀하게 작성되어야 하는 경우에 세밀한 내용이 적용되도록 메시지에 단계를 두는 방법이다.&#x20;
 
-예를 들어서 `required` 라고 오류 코드를 사용한다고 가정해보자.\
+예를 들어, `required` 라고 오류 코드를 사용한다고 가정해보자.\
 다음과 같이 `required` 라는 메시지만 있으면 이 메시지를 선택해서 사용하는 것이다.
 
 ```
@@ -538,11 +541,13 @@ public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, 
 }
 ```
 
-지금 컨트롤러 내 검증 코드는 굳이 스프링 인터페이스를 상속받지 않고 사용해도 되는 구조이다.&#x20;
+**지금 컨트롤러 내 검증 코드는 굳이 스프링 인터페이스를 상속받지 않고 사용해도 되는 구조이다..**
 
 ## 14. Validator 분리2&#x20;
 
-스프링이 `Validator` 인터페이스를 별도로 제공하는 이유는 체계적으로 검증 기능을 도입하기 위해서다. 그런데 앞에서는 검증기를 직접 불러서 사용했고, 이렇게 사용해도 된다. 그런데 `Validator` 인터페이스를 사용해서 검증기를 만들면 스프링의 추가적인 도움을 받을 수 있다.
+스프링이 `Validator` 인터페이스를 별도로 제공하는 이유는 체계적으로 검증 기능을 도입하기 위해서다.&#x20;
+
+그런데 앞에서는 검증기를 직접 불러서 사용했고, 이렇게 사용해도 된다. 그런데 `Validator` 인터페이스를 사용해서 검증기를 만들면 스프링의 추가적인 도움을 받을 수 있다.
 
 #### @Component 추가&#x20;
 
@@ -603,9 +608,11 @@ public void init(WebDataBinder binder) {
 }
 ```
 
-이렇게 `WebDataBinder` 에 검증기를 추가하면 해당 컨트롤러에서는 검증기를 자동으로 적용할 수 있다.\
-`@InitBinder` ->  해당 컨트롤러에만 영향을 준다. 글로벌 설정은 별도로 해야한다.\
-(요청마다 `WebDataBinder` 객체를 생성한다.)
+이렇게 `WebDataBinder` 에 검증기를 추가하면 해당 컨트롤러에서는 검증기를 자동으로 적용할 수 있다.
+
+* `@InitBinder` ->  해당 컨트롤러에만 영향을 준다. 글로벌 설정은 별도로 해야한다.
+
+요청마다 `WebDataBinder` 객체를 생성한다.
 
 #### @Validated 적용
 
@@ -629,12 +636,16 @@ public String addItemV6(@Validated @ModelAttribute Item item, BindingResult bind
 }
 ```
 
-validator를 직접 호출하는 부분이 사라지고, 대신에 검증 대상 앞에 `@Validated` 가 붙었다.
+`validator`를 직접 호출하는 부분이 사라지고, 대신에 검증 대상 앞에 `@Validated` 가 붙었다.
 
 #### 동작 방식&#x20;
 
 `@Validated`는 검증기를 실행하라는 애노테이션이다.\
-이 애노테이션이 붙으면 앞서 `WebDataBinder` 에 등록한 검증기를 찾아서 실행한다. 그런데 여러 검증기를 등록한다면 그 중에 어떤 검증기가 실행되어야 할지 구분이 필요하다. 이때 `supports()` 가 사용된다. 여기서는 `supports(Item.class)` 호출되고, 결과가 `true` 이므로 `ItemValidator` 의 `validate()`가 호출된다.
+이 애노테이션이 붙으면 앞서 `WebDataBinder` 에 등록한 검증기를 찾아서 실행한다.&#x20;
+
+**그런데 여러 검증기를 등록한다면 그 중에 어떤 검증기가 실행되어야 할지 구분이 필요하다.**&#x20;
+
+**이때, `supports()` 가 사용된다. 여기서는 `supports(Item.class)` 호출되고, 결과가 `true` 이므로 `ItemValidator` 의 `validate()`가 호출된다.**
 
 ```java
 @Component

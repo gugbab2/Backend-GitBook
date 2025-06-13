@@ -552,7 +552,7 @@ void hello(@RequestBody HelloData data) {}
 * 메시지 컨버터가 메시지를 쓸 수 있는지 확인하기 위해 `canWrite()` 를 호출한다.
   * 대상 클래스 타입을 지원하는가.
     * 예) return의 대상 클래스 (`byte[]`, `String`, `HelloData` )
-  * HTTP 요청의 Accept 미디어 타입을 지원하는가.(더 정확히는 `@RequestMapping` 의 `produces` )
+  * HTTP 요청의 Accept 미디어 타입을 지원하는가. (더 정확히는 `@RequestMapping` 의 `produces` )
     * 예) `text/plain`, `application/json`, `*/*`
 * `canWrite()` 조건을 만족하면 `write()` 를 호출해서 HTTP 응답 메시지 바디에 데이터를 생성한다.
 
