@@ -289,6 +289,8 @@
     * [검증1 - Validation1](spring/undefined/mvc-2/1-validation1.md)
     * [검증1 - Validation2](spring/undefined/mvc-2/1-validation2.md)
     * [검증2 - Bean Validation](spring/undefined/mvc-2/2-bean-validation.md)
+    * [로그인 처리1 - 쿠키, 세션](spring/undefined/mvc-2/1.md)
+    * [로그인 처리2 - 필터, 인터셉터](spring/undefined/mvc-2/2.md)
 * [책](<spring/undefined-1/README (1).md>)
   * [JSP 2.3 웹 프로그래밍](spring/jsp-2.3/README.md)
     * [Servlet](spring/jsp-2.3/servlet.md)

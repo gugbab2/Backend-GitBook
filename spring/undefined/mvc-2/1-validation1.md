@@ -469,13 +469,13 @@ public ObjectError(String objectName, String defaultMessage) {}
 
 **예) @RequestBody에 바인딩 시 타입 오류가 발생하면?**&#x20;
 
-* `BindingResult` 가 없으면 -> `HttpMessageNotReadableException` 또는 `InvalidFormatException` (하이버네이트 Validator 사용 시)과 같은 예외가 발생한다.&#x20;
-* `BindingResult` 가 있으면 -> 타입 오류가 발생하더라도 스프링은 `HttpMessageConverter` 단계에서 예외를 즉시 발생시키지 않고, 해당 오류 정보를 `BindingResult` 객체에 담는다.&#x20;
+* `BindingResult` 가 없으면 -> `@RequestBody`를 통해 객체로 변환하는 `HttpMessageConverter` 단계에서 타입 오류가 발생하면, `ItemSaveForm`과 같은 객체를 만들지 못하기 때문에, **컨트롤러 자체가 호출되지 않고 그 전에 `HttpMessageNotReadableException`과 같은 예외가 발생한다.**&#x20;
+* `BindingResult` 가 있으면 -> `HttpMessageConverter` 단계에서 타입 오류가 발생하면, **`@RequestBody`의 `BindingResult` 유무와 관계없이 동일하게 `HttpMessageNotReadableException`과 같은 예외가 발생하고 컨트롤러는 호출되지 않는다.**
 
 #### **BindingResult에 검증 오류를 적용하는 3가지 방법**
 
 * `@ModelAttribute`, `@RequestBody`의 객체에 타입 오류 등으로 바인딩이 실패하는 경우 스프링이 `FieldError` 생성해서 `BindingResult` 에 넣어준다.
-* 개발자가 직접 넣어준다.
+* 컨트롤러 내부에서 개발자가 직접 넣어준다.
 * `Validator` 사용 이것은 뒤에서 설명
 
 #### BindingResult 와 Errors&#x20;

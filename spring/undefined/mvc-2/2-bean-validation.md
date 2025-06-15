@@ -35,11 +35,9 @@ Bean Validation을 구현한 기술중에 일반적으로 사용하는 구현체
 
 #### 하이버네이트 Validator 관련 링크&#x20;
 
-* 공식 사이트: http://hibernate.org/validator/
-* 공식 메뉴얼: https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html\_single/
-*   검증 애노테이션 모음: https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/
-
-    html\_single/#validator-defineconstraints-spec
+* 공식 사이트: [http://hibernate.org/validator/](http://hibernate.org/validator/)
+* 공식 메뉴얼: [https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html\_single/](https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/)
+* 검증 애노테이션 모음: [https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html\_single/#validator-defineconstraints-spec](https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#validator-defineconstraints-spec)
 
 ## 2. Bean Validation 시작&#x20;
 
@@ -1030,7 +1028,9 @@ POST http://localhost:8080/validation/api/items/add
 ]
 </code></pre>
 
-`return bindingResult.getAllErrors();` 는 `ObjectError` 와 `FieldError` 를 반환한다. 스프링이 이 객체를 JSON으로 변환해서 클라이언트에 전달했다. 여기서는 예시로 보여주기 위해서 검증 오류 객체들을 그대로 반환했다. **실제 개발할 때는 이 객체들을 그대로 사용하지 말고, 필요한 데이터만 뽑아서 별도의 API 스펙을 정의하고 그에 맞는 객체를 만들어서 반환해야 한다.**
+`return bindingResult.getAllErrors();` 는 `ObjectError` 와 `FieldError` 를 반환한다. 스프링이 이 객체를 JSON으로 변환해서 클라이언트에 전달했다. 여기서는 예시로 보여주기 위해서 검증 오류 객체들을 그대로 반환했다.&#x20;
+
+**실제 개발할 때는 이 객체들을 그대로 사용하지 말고, 필요한 데이터만 뽑아서 별도의 API 스펙을 정의하고 그에 맞는 객체를 만들어서 반환해야 한다.**
 
 검증 오류 요청 로그&#x20;
 
@@ -1052,7 +1052,8 @@ Field error in object 'itemSaveForm' on field 'quantity': rejected value
 
 HTTP 요청 파리미터를 처리하는 `@ModelAttribute` 는 각각의 필드 단위로 세밀하게 적용된다. 그래서 특정 필드에 타입이 맞지 않는 오류가 발생해도 나머지 필드는 정상 처리할 수 있었다.
 
-`HttpMessageConverter` 는 `@ModelAttribute` 와 다르게 각각의 필드 단위로 적용되는 것이 아니라, 전체 객체 단위로 적용된다.\
+`HttpMessageConverter` 는 `@ModelAttribute` 와 다르게 각각의 필드 단위로 적용되는 것이 아니라, 전체 객체 단위로 적용된다.
+
 따라서 메시지 컨버터의 작동이 성공해서 `ItemSaveForm` 객체를 만들어야 `@Valid`, `@Validated` 가 적용된다.
 
 * `@ModelAttribute` 는 필드 단위로 정교하게 바인딩이 적용된다. 특정 필드가 바인딩 되지 않아도 나머지 필드는 정상 바인딩 되고, Validator를 사용한 검증도 적용할 수 있다.

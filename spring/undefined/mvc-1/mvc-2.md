@@ -572,7 +572,7 @@ void hello(@RequestBody HelloData data) {}
 
 ### ArgumentResolver
 
-생각해보면, 애노테이션 기반의 컨트롤러는 매우 다양한 파라미터를 사용할 수 있었다. \
+생각해보면, 애노테이션 기반의 컨트롤러는 매우 다양한 파라미터를 사용할 수 있었다.\
 `HttpServletRequest`, `Model` 은 물론이고, `@RequestParam`, `@ModelAttribute` 같은 애노테이션 그리고`@RequestBody`, `HttpEntity` 같은 HTTP 메시지를 처리하는 부분까지 매우 큰 유연함을 보여주었다.
 
 이렇게 파라미터를 유연하게 처리할 수 있는 이유가 바로 `ArgumentResolver` 덕분이다.
@@ -621,7 +621,8 @@ public interface HandlerMethodArgumentResolver {
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-06-11 10.05.33.png" alt=""><figcaption></figcaption></figure>
 
-HTTP 메시지 컨버터는 어디쯤 있을까?\
+HTTP 메시지 컨버터는 어디쯤 있을까?
+
 HTTP 메시지 컨버터를 사용하는 `@RequestBody` 도 컨트롤러가 필요로 하는 파라미터의 값에 사용된다.\
 `@ResponseBody` 의 경우도 컨트롤러의 반환 값을 이용한다.
 

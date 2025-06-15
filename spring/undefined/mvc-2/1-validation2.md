@@ -99,7 +99,8 @@ bindingResult.addError(new FieldError("item", "itemName", item.getItemName(), fa
 목표&#x20;
 
 * `FieldError` , `ObjectError` 는 다루기 너무 번거롭다.
-* 오류 코드도 좀 더 자동화 할 수 있지 않을까? 예) `item.itemName` 처럼?
+* 오류 코드도 좀 더 자동화 할 수 있지 않을까? \
+  ex, `item.itemName` 처럼?
 
 컨트롤러에서 `BindingResult` 는 검증해야 할 객체인 `target` 바로 다음에 온다. 따라서 `BindingResult` 는 이미 본인이 검증해야 할 객체인 `target` 을 알고 있다.
 
