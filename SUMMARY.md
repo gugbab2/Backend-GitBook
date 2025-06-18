@@ -291,6 +291,8 @@
     * [검증2 - Bean Validation](spring/undefined/mvc-2/2-bean-validation.md)
     * [로그인 처리1 - 쿠키, 세션](spring/undefined/mvc-2/1.md)
     * [로그인 처리2 - 필터, 인터셉터](spring/undefined/mvc-2/2.md)
+    * [예외 처리와 오류 페이지](spring/undefined/mvc-2/undefined.md)
+    * [API 예외 처리](spring/undefined/mvc-2/api.md)
 * [책](<spring/undefined-1/README (1).md>)
   * [JSP 2.3 웹 프로그래밍](spring/jsp-2.3/README.md)
     * [Servlet](spring/jsp-2.3/servlet.md)
@@ -519,3 +521,5 @@
 
 * [F-Lab](undefined/f-lab/README.md)
   * [10회차(2024.12.29)](undefined/f-lab/10-2024.12.29.md)
+* [원티드 바이브 코딩](undefined/undefined/README.md)
+  * [1. Cursor 세팅 & 바이브 코딩 기초 배우기](undefined/undefined/1.-cursor-and.md)

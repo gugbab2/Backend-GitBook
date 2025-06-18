@@ -492,7 +492,8 @@ HTTP 메시지 컨버터는 HTTP 요청, HTTP 응답 둘 다 사용된다.&#x20;
 ...
 ```
 
-스프링 부트는 다양한 메시지 컨버터를 제공하는데, 대상 클래스 타입과 미디어 타입 둘을 체크해서 사용여부를 결정한다. 만약 만족하지 않으면 다음 메시지 컨버터로 우선순위가 넘어간다.&#x20;
+스프링 부트는 다양한 메시지 컨버터를 제공하는데, 대상 클래스 타입과 미디어 타입 둘을 체크해서 사용여부를 결정한다.\
+만약 만족하지 않으면 다음 메시지 컨버터로 우선순위가 넘어간다.&#x20;
 
 몇가지 주요한 메시지 컨버터를 알아보자.&#x20;
 
@@ -505,7 +506,7 @@ HTTP 메시지 컨버터는 HTTP 요청, HTTP 응답 둘 다 사용된다.&#x20;
   * 요청 예) `@RequestBody String data`
   * 응답 예) `@ResponseBody return "ok"` 쓰기 미디어타입 `text/plain`
 * `MappingJackson2HttpMessageConverter` : `application/json`
-  * 클래스 타입: 객체 또는 `HashMap`, 미디어타입 `application/json` 관련
+  * 클래스 타입: **객체** 또는 `HashMap`, 미디어타입 `application/json` 관련
   * 요청 예) `@RequestBody HelloData data`
   * 응답 예) `@ResponseBody return helloData` 쓰기 미디어타입 `application/json` 관련
 

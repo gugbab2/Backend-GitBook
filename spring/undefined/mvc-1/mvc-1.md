@@ -42,7 +42,8 @@
 * 스프링 MVC는 `DispatcherServlet` 의 부모인 `FrameworkServlet` 에서 `service()` 를 오버라이드 해두었다.&#x20;
 * `FrameworkServlet.service()` 를 시작으로 여러 메서드가 호출되면서 `DispatcherServlet.doDispatch()` 가 호출된다.
 
-지금부터 `DispatcherServlet` 의 핵심인 `doDispatch()` 코드를 분석해보자. 최대한 간단히 설명하기 위해 예외 처리, 인터셉터 기능은 제외했다.
+지금부터 `DispatcherServlet` 의 핵심인 `doDispatch()` 코드를 분석해보자. \
+최대한 간단히 설명하기 위해 예외 처리, 인터셉터 기능은 제외했다.
 
 `DispatcherServlet.doDispatch()`
 
@@ -128,7 +129,7 @@ protected void render(ModelAndView mv, HttpServletRequest request,
 
 ## 2. 핸들러 매핑과 핸들러 어댑터&#x20;
 
-핸들러 매핑과 핸들러 어댑터가 어떤 것들이 어떻게 사용되는지 알아보자.&#x20;
+핸들러 매핑과 핸들러 어댑터가 어떤 것들이 어떻게 사용되는지 알아보자.
 
 지금은 전혀 사용하지 않지만, 과거에 주로 사용했던 스프링이 제공하는 간단한 컨트롤러로 핸들러 매핑과 어댑터를 이해해보자.&#x20;
 

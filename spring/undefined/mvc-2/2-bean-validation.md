@@ -363,7 +363,7 @@ private String itemName;
 > Bean Validation 애노테이션마다 메시지소스 파라미터를 넣는 형식이 다를 수 있다.&#x20;
 >
 > 때문에, 어노테이션을 사용할 때마다 레퍼런스를 참고해 파라미터 형식을 살펴보고 사용하는 것이 가장 정확하다. \
-> https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html\_single/#validator-defineconstraints-spec
+> [https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html\_single/#validator-defineconstraints-spec](https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#validator-defineconstraints-spec)
 
 ## 5. Bean Validation - 오브젝트 오류
 
@@ -987,7 +987,7 @@ chain: hello.itemservice.domain.item.Item["price"])]
 
 #### 검증 오류 요청&#x20;
 
-이번에는 HttpMessageConverter 는 성공하지만, 검증(Validator) 에서 오류가 발생하는 경유를 확인해보자.&#x20;
+이번에는 HttpMessageConverter 는 성공하지만, 검증(Validator) 에서 오류가 발생하는 경우를 확인해보자.&#x20;
 
 ```
 POST http://localhost:8080/validation/api/items/add
