@@ -18,7 +18,7 @@
 
 #### 웹 애플리케이션&#x20;
 
-웹 애플리케이션은 사용자 요청별로 별도의 쓰레드가 할당되고, 서블릿 컨테이너 안에서 실행된다. \
+웹 애플리케이션은 사용자 요청별로 별도의 쓰레드가 할당되고, 서블릿 컨테이너 안에서 실행된다.\
 애플리케이션에서 예외가 발생했는데, 어디선가 `try-catch` 로 예외를 잡아서 처리하면 아무런 문제가 없다. \
 그런데 만약에 애플리케이션에서 예외를 잡지 못하고 서블릿 밖으로 예외가 전달되면 어떻게 동작할까?&#x20;
 
@@ -74,11 +74,12 @@ HTTP Status 404 – Not Found
 
 ### response.sendError(HTTP 상태 코드, 오류 메시지)&#x20;
 
-오류가 발생했을 때 `HttpServletResponse` 가 제공하는 `sendError` 라는 메서드를 사용해도 된다. 이것을 호출 한다고 당장 예외가 발생하는 것은 아니지만, 서블릿 컨테이너(WAS)에게 오류가 발생했다는 점을 전달할 수 있다.
+오류가 발생했을 때 `HttpServletResponse` 가 제공하는 `sendError` 라는 메서드를 사용해도 된다. 이것을 호출 \
+한다고 당장 예외가 발생하는 것은 아니지만, 서블릿 컨테이너(WAS)에게 오류가 발생했다는 점을 전달할 수 있다.
 
 이 메서드를 사용하면 HTTP 상태 코드와 오류 메시지도 추가할 수 있다.
 
-* `response.sendError(HTTP 상태 코드)`&#x20;
+* `response.sendError(HTTP 상태 코드)`
 * `response.sendError(HTTP 상태 코드, 오류 메시지)`&#x20;
 
 #### ServletExController - 추가&#x20;
@@ -277,7 +278,8 @@ public class ErrorPageController {
 필터는 이런 경우를 위해서 `dispatcherTypes` 라는 옵션을 제공한다.
 
 이전 강의의 마지막에 다음 로그를 추가했다.\
-`log.info("dispatchType={}", request.getDispatcherType())` \
+`log.info("dispatchType={}", request.getDispatcherType())`&#x20;
+
 그리고 출력해보면 오류 페이지에서 `dispatchType=ERROR`로 나오는 것을 확인할 수 있다.
 
 고객이 처음 요청하면 `dispatcherType=REQUEST` 이다.\
@@ -297,7 +299,7 @@ public enum DispatcherType {
 
 ### 필터와 DispatcherType&#x20;
 
-필터와 DispatcherType이 어떻게 사용되는지 알아보자.
+필터와 `DispatcherType`이 어떻게 사용되는지 알아보자.
 
 #### LogFilter - DispatcherType 로그 추가
 
@@ -376,9 +378,10 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 
-`filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST,`` ``DispatcherType.ERROR);`
+`filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);`
 
-이렇게 두 가지를 모두 넣으면 클라이언트 요청은 물론이고, 오류 페이지 요청에서도 필터가 호출된다.\
+이렇게 두 가지를 모두 넣으면 클라이언트 요청은 물론이고, 오류 페이지 요청에서도 필터가 호출된다.
+
 아무것도 넣지 않으면 기본 값이 `DispatcherType.REQUEST`이다. 즉 클라이언트의 요청이 있는 경우에만 필터가 적용된다. 특별히 오류 페이지 경로도 필터를 적용할 것이 아니면, 기본 값을 그대로 사용하면 된다. \
 (물론 오류 페이지 요청 전용 필터를 적용하고 싶으면 `DispatcherType.Error` 만 지정하면 된다)
 

@@ -13,7 +13,7 @@ rejectedValue, boolean bindingFailure, @Nullable String[] codes,
 @Nullable Object[] arguments, @Nullable String defaultMessage)
 ```
 
-파라미터 목록&#x20;
+파라미터 목록
 
 * `objectName` : 오류가 발생한 객체 이름
 * `field` : 오류 필드
@@ -144,7 +144,7 @@ public String addItemV4(@ModelAttribute Item item, BindingResult bindingResult, 
         bindingResult.rejectValue("quantity", "max", new Object[]{9_999}, null);
     }
 
-    // 특정 필  드가 아닌 복합 룰 검증
+    // 특정 필드가 아닌 복합 룰 검증
     if(item.getPrice() != null && item.getQuantity() != null) {
         int resultPrice = item.getPrice() * item.getQuantity();
         if(resultPrice < 10_000) {
@@ -454,7 +454,7 @@ typeMismatch=타입 오류입니다.
 
 메시지 코드 생성 전략은 그냥 만들어진 것이 아니다. Bean Validation 을 학습하면 그 진가를 확인할 수 있을 것이다.&#x20;
 
-## 13. Validator 분리1&#x20;
+## 13. Validator 분리1
 
 목표&#x20;
 
@@ -495,7 +495,7 @@ public class ItemValidator implements Validator {
             errors.rejectValue("quantity", "max", new Object[]{9_999}, null);
         }
 
-        // 특정 필  드가 아닌 복합 룰 검증
+        // 특정 필드가 아닌 복합 룰 검증
         if(item.getPrice() != null && item.getQuantity() != null) {
             int resultPrice = item.getPrice() * item.getQuantity();
             if(resultPrice < 10_000) {

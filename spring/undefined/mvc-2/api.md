@@ -10,7 +10,8 @@ HTML 페이지의 경우 지금까지 설명한 것처럼 4xx, 5xx 와 같은 �
 
 그런데 API 의 경우에는 생각할 내용이 더 많다. 오류 페이지는 단순히 고객에게 오류 화면을 보여주고 끝이지만, API 는 각 오류 상황에 맞는 오류 응답 스펙을 정하고, JSON 으로 데이터를 내려주어야 한다.&#x20;
 
-지금부터 API 의 경우 어떻게 예외 처리를 하면 좋은지 알아보자. \
+지금부터 API 의 경우 어떻게 예외 처리를 하면 좋은지 알아보자.&#x20;
+
 API도 오류 페이지에서 설명했던 것 처럼 처음으로 돌아가서 서블릿 오류 페이지 방식을 사용해보자.
 
 #### WebServiceCustomizer 다시 동작&#x20;
@@ -120,7 +121,7 @@ public ResponseEntity<Map<String, Object>> errorPage500Api(
 }
 ```
 
-`produces = MediaType.APPLICATION_JSON_VALUE` 의 뜻은 클라이언트가 요청하는 HTTP Header의 `Accept` 의 값이 `application/json` 일 때 해당 메서드가 호출된다는 것이다. 결국 클라어인트가 받고 싶은 미디어 타입이 json이면 이 컨트롤러의 메서드가 호출된다.
+`produces = MediaType.APPLICATION_JSON_VALUE` 의 뜻은 클라이언트가 요청하는 HTTP Header의 `Accept` 의 값이 `application/json` 일 때 해당 메서드가 호출된다는 것이다. 결국 클라어인트가 받고 싶은 미디어 타입이 JSON 이면 이 컨트롤러의 메서드가 호출된다.
 
 응답 데이터를 위해서 `Map` 을 만들고 `status`, `message` 키에 값을 할당했다. Jackson 라이브러리는 `Map`을JSON 구조로 변환할 수 있다.
 
@@ -128,7 +129,8 @@ public ResponseEntity<Map<String, Object>> errorPage500Api(
 
 ## 2. API 예외 처리 - 스프링 부트 기본 오류 처리&#x20;
 
-API 예외 처리도 스프링 부트가 제공하는 기본 오류 방식을 사용할 수 있다. \
+API 예외 처리도 스프링 부트가 제공하는 기본 오류 방식을 사용할 수 있다.&#x20;
+
 스프링 부트가 제공하는 `BasicErrorController` 코드를 보자.&#x20;
 
 #### BasicErrorController 코드&#x20;
@@ -168,7 +170,9 @@ public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {}
 
 #### 목표&#x20;
 
-예외가 발생해서 서블릿을 넘어 WAS까지 예외가 전달되면 HTTP 상태코드가 500으로 처리된다. 발생하는 예외에 따라서 400, 404 등등 다른 상태코드로 처리하고 싶다.\
+예외가 발생해서 서블릿을 넘어 WAS까지 예외가 전달되면 HTTP 상태코드가 500으로 처리된다.&#x20;
+
+발생하는 예외에 따라서 400, 404 등등 다른 상태코드로 처리하고 싶다.\
 오류 메시지, 형식등을 API마다 다르게 처리하고 싶다.
 
 #### 상태코드 변환&#x20;
@@ -299,9 +303,9 @@ public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resol
 예제로 알아보자. \
 먼저 사용자 정의 예외를 하나 추가하자.&#x20;
 
-UserException&#x20;
+#### UserException&#x20;
 
-```
+```java
 package hello.exception.exception;
 
 public class UserException extends RuntimeException{
@@ -348,7 +352,7 @@ public MemberDto getMember(@PathVariable("id") String id) {
 }
 ```
 
-이제 이 예외를 처리하는 UserHandlerExceptionResolver 를 만들어보자.&#x20;
+이제 이 예외를 처리하는 `UserHandlerExceptionResolver` 를 만들어보자.&#x20;
 
 #### UserHandlerExceptionResolver&#x20;
 
@@ -408,7 +412,7 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
 }
 ```
 
-HTTP 요청 해더의 `ACCEPT` 값이 `application/json` 이면 JSON으로 오류를 내려주고, 그 외 경우에는 error/500에 있는 HTML 오류 페이지를 보여준다.
+HTTP 요청 헤더의 `ACCEPT` 값이 `application/json` 이면 JSON으로 오류를 내려주고, 그 외 경우에는 error/500에 있는 HTML 오류 페이지를 보여준다.
 
 #### WebConfig에 UserHandlerExceptionResolver 추가
 
@@ -424,7 +428,7 @@ public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resol
 
 `ExcpetionResolver` 를 활용하면 컨트롤러에서 예외가 발생해도 `ExceptionResolver` 에서 예외를 처리해버린다. \
 따라서 예외가 발생해도 서블릿 컨테이너까지 예외가 전달되지 않고, 스프링 MVC 에서 예외 처리는 끝이 난다. \
-결과적으로 WAS 입장에서는 정상 처리가 된 것이다. 이렇게 예외를 이곳에서 처리할 수 있다는 것이 이 기술의 핵심이다!
+**결과적으로 WAS 입장에서는 정상 처리가 된 것이다. 이렇게 예외를 이곳에서 처리할 수 있다는 것이 이 기술의 핵심이다!**
 
 서블릿 컨테이너까지 예외가 올라가면 복잡하고 지저분하게 추가 프로세스가 실행된다. \
 반면에 `ExceptionResolver` 를 사용하면 예외 처리가 깔끔해진다.&#x20;
@@ -538,9 +542,9 @@ public String responseStatusEx2() {
 #### 코드 확인&#x20;
 
 `DefaultHandlerExceptionResolver.handleTypeMismatch` 를 보면 다음과 같은 코드를 확인할 수 있다.\
-`response.sendError(HttpServletResponse.SC_BAD_REQUEST)` (400)
+\=> `response.sendError(HttpServletResponse.SC_BAD_REQUEST)` (400)
 
-결국 `response.sendError()` 를 통해서 문제를 해결한다.\
+결국, `response.sendError()` 를 통해서 문제를 해결한다.\
 `sendError(400)` 를 호출했기 때문에 WAS에서 다시 오류 페이지(`/error`)를 내부 요청한다.
 
 **ApiExceptionController - 추가**
@@ -811,8 +815,7 @@ public class ExampleAdvice1 {}
 public class ExampleAdvice2 {}
 
 // Target all Controllers assignable to specific classes
-@ControllerAdvice(assignableTypes = {ControllerInterface.class,
-AbstractController.class})
+@ControllerAdvice(assignableTypes = {ControllerInterface.class,AbstractController.class})
 public class ExampleAdvice3 {}
 ```
 

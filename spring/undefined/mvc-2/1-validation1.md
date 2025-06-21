@@ -474,7 +474,9 @@ public ObjectError(String objectName, String defaultMessage) {}
 
 #### **BindingResult에 검증 오류를 적용하는 3가지 방법**
 
-* `@ModelAttribute`, `@RequestBody`의 객체에 타입 오류 등으로 바인딩이 실패하는 경우 스프링이 `FieldError` 생성해서 `BindingResult` 에 넣어준다.
+*   `@ModelAttribute`의 객체에 타입 오류 등으로 바인딩이 실패하는 경우 스프링이 `FieldError` 생성해서 `BindingResult` 에 넣어준다.
+
+    (`@RequestBody` 의 경우 컨트롤러를 호출하기 이전에 튕겨버린다)
 * 컨트롤러 내부에서 개발자가 직접 넣어준다.
 * `Validator` 사용 이것은 뒤에서 설명
 

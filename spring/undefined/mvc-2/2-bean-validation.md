@@ -296,9 +296,10 @@ public class ValidationItemControllerV3 {
    2. 실패하면 `typeMismatch` 로 `FieldError` 추가&#x20;
 2. Validator 적용
 
-#### 바인딩에 성공한 필트만 Bean Validation 적용&#x20;
+#### 바인딩에 성공한 필드만 Bean Validation 적용&#x20;
 
-BeanValidator는 바인딩에 실패한 필드는 BeanValidation을 적용하지 않는다.\
+**BeanValidator는 바인딩에 실패한 필드는 BeanValidation을 적용하지 않는다.**
+
 생각해보면 타입 변환에 성공해서 바인딩에 성공한 필드여야 BeanValidation 적용이 의미 있다.\
 (일단 모델 객체에 바인딩 받는 값이 정상으로 들어와야 검증도 의미가 있다.)
 
@@ -393,7 +394,7 @@ public class Item {
 @PostMapping("/add")
 public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
-    // 특정 필  드가 아닌 복합 룰 검증
+    // 특정 필드가 아닌 복합 룰 검증
     if(item.getPrice() != null && item.getQuantity() != null) {
         int resultPrice = item.getPrice() * item.getQuantity();
         if(resultPrice < 10_000) {
@@ -902,8 +903,10 @@ public class ValidationItemControllerV4 {
 
 > #### 참고
 >
-> `@ModelAttribute` 는 HTTP 요청 파라미터(URL 쿼리 스트링, POST Form)를 다룰 때 사용한다.\
-> `@RequestBody` 는 HTTP Body의 데이터를 객체로 변환할 때 사용한다. 주로 API JSON 요청을 다룰 때 사용한다.
+> `@ModelAttribute` 는 HTTP 요청 파라미터(URL 쿼리 스트링, POST Form)를 다룰 때 사용한다.
+>
+> `@RequestBody` 는 HTTP Body의 데이터를 객체로 변환할 때 사용한다. \
+> 주로 API JSON 요청을 다룰 때 사용한다.
 
 ValidationItemApiController 생성
 

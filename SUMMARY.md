@@ -298,6 +298,8 @@
     * [커넥션풀과 데이터소스 이해](spring/undefined/db-1/undefined.md)
     * [트랜잭션 이해](spring/undefined/db-1/undefined-1.md)
     * [스프링과 문제 해결 - 트랜잭션](spring/undefined/db-1/undefined-2.md)
+    * [자바 예외 이해](spring/undefined/db-1/undefined-3.md)
+    * [스프링과 문제 해결 - 예외처리, 반복](spring/undefined/db-1/undefined-4.md)
 * [책](<spring/undefined-1/README (1).md>)
   * [JSP 2.3 웹 프로그래밍](spring/jsp-2.3/README.md)
     * [Servlet](spring/jsp-2.3/servlet.md)
