@@ -5,7 +5,8 @@
 #### NullPointException 문제&#x20;
 
 * 자바에서 `null` 은 "값이 없음" 을 표현하는 가장 기본적인 방법이다.
-* 하지만 `null` 을 잘못 사용하거나 `null` 참조에 대해 메서드르 호출하면 `NullPointException` 이 발생하여 프로그램이 예기치 않게 종료될 수 있다.
+* 하지만, `null` 을 잘못 사용하거나 `null` 참조에 대해 메서드르 호출하면 `NullPointException` 이 발생하여 \
+  프로그램이 예기치 않게 종료될 수 있다.
 * 특히 여러 메서드가 연쇄적으로 호출되어 내부에서 `null` 체크가 누락되면, 추적하기 어렵고 디버깅 비용이 증가한다.&#x20;
 
 #### 가독성 저하&#x20;
@@ -22,7 +23,8 @@
 
 * 이러한 문제를 해결하고자 자바 8부터 `Optional` 클래스를 도입했다.&#x20;
 * `Optional` 은 "값이 있을 수도 있고, 없을 수도 있음" 을 명시적으로 표현해주어, 메서드의 호출 의도를 좀 더 분명하게 드러낸다.&#x20;
-* `Optional` 을 사용하면 "빈 값" 을 표현할 때, 더 이상 `null` 자체를 넘겨주지 않고 `Optional.empty()` 처럼 의도를 드러내는 객체를 사용할 수 있다.
+* `Optional` 을 사용하면 "빈 값" 을 표현할 때, 더 이상 `null` 자체를 넘겨주지 않고 `Optional.empty()` 처럼 \
+  의도를 드러내는 객체를 사용할 수 있다.
 * 그 결과, `Optional` 을 사용하면 `null` 체크 로직을 간결하게 만들고, 특정 경우에 `NullPointException` 이 발생할 수 있는 부분을 빌드 타임이나, IDE, 코드 리뷰에서 더 쉽게 파악할 수 있게 해준다.&#x20;
 
 ### null 을 직접 반환하는 경우
@@ -116,11 +118,11 @@ public class OptionalStartMain2 {
 
 * 이번에는 `Optional<String>` 을 반환하도록 변경했다.&#x20;
 * `Optional.ofNullable(findName)` 을 통해 `null` 이 될 수도 있는 값을 `Optional` 로 감싼다.
-*   메서드 시그니처(`Optional<String> findNameById(Long id)` )만 보고도 "반환 결과가 있을 수도, 없
-
-    을 수도 있겠구나"라고 명시적으로 인지할 수 있다.
+* 메서드 시그니처(`Optional<String> findNameById(Long id)` )만 보고도 "반환 결과가 있을 수도, \
+  없을 수도 있겠구나"라고 명시적으로 인지할 수 있다.
 * `Optional.orElse("대체값")` : 옵셔널에 값이 있으면 해당 값을 반환하고, 값이 없다면 대체값을 반환한다.
-* `findAndPrint()` 메서드에서는 `Optional<String>` 을 받아서, `orElse("UNKNOWN")` 로 "빈 값"인 경우 대체 문자열을 지정할 수 있다.
+* `findAndPrint()` 메서드에서는 `Optional<String>` 을 받아서, `orElse("UNKNOWN")` 로 "빈 값"인 경우 \
+  대체 문자열을 지정할 수 있다.
 *   이 방식은 "값이 없을 수도 있다"는 점을 호출하는 측에 명확히 전달하므로, 놓치기 쉬운 `null` 체크를 강제하고
 
     코드의 안정성을 높인다.
@@ -140,17 +142,13 @@ public final class Optional<T> {
 
 #### 정의
 
-*   `java.util.Optional<T>` 는 "존재할 수도 있고 존재하지 않을 수도 있는" 값을 감싸는 일종의 컨테이너 클래
-
-    스이다.
+* `java.util.Optional<T>` 는 "존재할 수도 있고 존재하지 않을 수도 있는" 값을 감싸는 일종의 컨테이너 클래스이다.
 * 내부적으로 `null` 을 직접 다루는 대신, `Optional` 객체에 감싸서 `Optional.empty()` 또는`Optional.of(value)` 형태로 다룬다.
 
 #### 등장 배경&#x20;
 
 * "값이 없을 수 있다" 는 상황을 프로그래머가 명시적으로 처리하도록 유도하고, 런타임 `NullPointException` 을 예방하기 위해서 도입되었다.&#x20;
-*   코드를 보는 사람이나 협업하는 팀원 모두가, 해당 메서드의 반환값이 비어있을 수도 있음을 알 수 있게 되어 오류
-
-    를 줄일 수 있다.
+* 코드를 보는 사람이나 협업하는 팀원 모두가, 해당 메서드의 반환값이 비어있을 수도 있음을 알 수 있게 되어 오류를 줄일 수 있다.
 
 #### 참고&#x20;
 
@@ -264,7 +262,7 @@ public class OptionalRetrievalMain {
         System.out.println("getValue = " + getValue);
 //        String getValue2 = optEmpty.get();  // 런타임 에러
 
-        // 값이 있느면 그 값, 없으면 지정된 기본값 사용
+        // 값이 있으면 그 값, 없으면 지정된 기본값 사용
         System.out.println("===  3. orElse() ===");
         String value1 = optVale.orElse("기본값");
         String empty1 = optEmpty.orElse("기본값");
@@ -320,11 +318,11 @@ public class OptionalRetrievalMain {
 #### Optional 값 처리 메서드&#x20;
 
 * `ifPresent(Consumer<? super T> action)`&#x20;
-  * 값이 존재하면 action 실행
+  * 값이 존재하면 `action` 실행
   * 값이 없으면 아무것도 안 함
 * `ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)`&#x20;
-  * 값이 존재하면 action 실행
-  * 값이 없으면 emptyAction 실행
+  * 값이 존재하면 `action` 실행
+  * 값이 없으면 `emptyAction` 실행
 * `map(Function<? super T, ? extends U> mapper)`&#x20;
   * 값이 있으면 `mapper` 를 적용한 결과`(Optional<U>)` 반환
   * 값이 없으면 `Optional.empty()` 반환
@@ -480,13 +478,10 @@ debug(30)              // 3. 메서드를 호출한다. 이때 계산된 30의 �
 
 자바는 `10 + 20` 이라는 연산을 처리할 순서가 되면 그때 바로 즉시 평가(계산) 한다.
 
-우리에게는 너무 자연스러운 방식이기 때문에 아무런 문제가 될 것이 없어 보인다.
-
+우리에게는 너무 자연스러운 방식이기 때문에 아무런 문제가 될 것이 없어 보인다.\
 그런데 이런 방식이 때로는 문제가 되는 경우가 있다.
 
-
-
-**debug(100 + 200)** 연산을 통해 어떤 문제가 있는지 알아보자.
+#### **debug(100 + 200)** 연산을 통해 어떤 문제가 있는지 알아보자.
 
 ```java
 System.out.println("=== 디버그 모드 끄기 ===");
@@ -647,7 +642,7 @@ public class OrElseGetMain {
 
 #### 두 메서드의 차이
 
-* `orElse(T other)` 는 "빈 값이면 `other` 를 반환"하는데, `other` 를 "항상" 미리 계산한다.
+* `orElse(T other)` 는 "빈 값이면 `other` 를 반환"하는데, `other` 를 **"항상" 미리 계산한다.**
   * 따라서 `other` 를 생성하는 비용이 큰 경우, 실제로 값이 있을 때도 쓸데없이 생성 로직이 실행될 수 있다.
   * `orElse()` 에 넘기는 표현식은 **호출 즉시 평가**하므로 **즉시 평가(eager evaluation)**&#xAC00; 적용된다.
 * `orElseGet(Supplier supplier)` 은 빈 값이면 `supplier` 를 통해 값을 생성하기 때문에, **값이 있을 때는**`supplier` **가 호출되지 않는다.**
@@ -663,9 +658,7 @@ public class OrElseGetMain {
 
 `orElseGet(Supplier supplier)`&#x20;
 
-*   주로 **orElse()에 넘길 값의 생성 비용이 큰 경우**, 혹은 **값이 들어있을 확률이 높아 굳이 매번 대체 값을 계산할 필**
-
-    **요가 없는 경우**에 사용한다.
+* 주로 **orElse()에 넘길 값의 생성 비용이 큰 경우**, 혹은 **값이 들어있을 확률이 높아 굳이 매번 대체 값을 계산할 필요가 없는 경우**에 사용한다.
 
 정리하면, **단순한 대체 값**을 전달하거나 코드가 매우 간단하다면 **orElse()** 를 사용하고, **객체 생성 비용이 큰 로직**이 들어있고, **Optional에 값이 이미 존재할 가능성이 높다면** `orElseGet()` 을 고려해볼 수 있다.
 
@@ -877,23 +870,14 @@ public static void main(String[] args) {
     증가시킬 수 있다.
 * 다음과 같은 경우  **`Optional` 사용이 오히려 불필요**할 수 있다.
   * "항상 값이 있는" 상황
-    *   비즈니스 로직상 `null` 이 될 수 없는 경우, 그냥 일반 타입을 사용하거나, 방어적 코드로 예외를 던지
-
-        는 편이 낫다.
+    * 비즈니스 로직상 `null` 이 될 수 없는 경우, 그냥 일반 타입을 사용하거나, 방어적 코드로 예외를 던지는 편이 낫다.
   * "값이 없으면 예외를 던지는 것"이 더 자연스러운 상황
-    *   예를 들어, ID 기반으로 무조건 존재하는 DB 엔티티를 찾아야 하는 경우, `Optional` 대신 예외를
-
-        던지는 게 API 설계상 명확할 수 있다. 물론 이런 부분은 비즈니스 상황에 따라 다를 수 있다.
+    * 예를 들어, ID 기반으로 무조건 존재하는 DB 엔티티를 찾아야 하는 경우, `Optional` 대신 예외를 던지는 게 API 설계상 명확할 수 있다. 물론 이런 부분은 비즈니스 상황에 따라 다를 수 있다.
   * "흔히 비는 경우"가 아니라 "흔히 채워져 있는" 경우
-    *   `Optional` 을 쓰면 매번 `.get()`, `orElse()`, `orElseThrow()` 등 처리가 강제되므로 오히려
-
-        코드가 장황해질 수 있다.
+    * `Optional` 을 쓰면 매번 `.get()`, `orElse()`, `orElseThrow()` 등 처리가 강제되므로 오히려 코드가 장황해질 수 있다.
   * "성능이 극도로 중요한" 로우레벨 코드
-    *   `Optional` 은 래퍼 객체를 생성하므로, 수많은 객체가 단기간에 생겨나는 영역(예: 루프 내부)에서는
-
-        성능 영향을 줄 수 있다. (일반적인 비즈니스 로직에서는 문제가 되지 않는다. 극한 최적화가 필요한
-
-        코드라면 고려 대상)
+    * `Optional` 은 래퍼 객체를 생성하므로, 수많은 객체가 단기간에 생겨나는 영역(예: 루프 내부)에서는 성능 영향을 줄 수 있다. \
+      (일반적인 비즈니스 로직에서는 문제가 되지 않는다. 극한 최적화가 필요한 코드라면 고려 대상)
 
 #### 예제 코드&#x20;
 
