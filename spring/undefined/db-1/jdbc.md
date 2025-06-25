@@ -4,7 +4,7 @@
 
 ### JDBC 등장 이유&#x20;
 
-애플리케이션을 개발할 떄 중요한 데이터는 대부분 데이터베이스에 보관한다.&#x20;
+애플리케이션을 개발할 때 중요한 데이터는 대부분 데이터베이스에 보관한다.&#x20;
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-06-18 18.17.55.png" alt=""><figcaption></figcaption></figure>
 
@@ -14,9 +14,9 @@
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-06-18 18.18.43.png" alt="" width="563"><figcaption><p> </p></figcaption></figure>
 
-1. 커넥션 연결: 주로 TCP/IP를 사용해서 커넥션을 연결한다.
-2. SQL 전달: 애플리케이션 서버는 DB가 이해할 수 있는 SQL을 연결된 커넥션을 통해 DB에 전달한다.
-3. 결과 응답: DB는 전달된 SQL을 수행하고 그 결과를 응답한다. 애플리케이션 서버는 응답 결과를 활용한다.
+1. **커넥션 연결** : 주로 TCP/IP를 사용해서 커넥션을 연결한다.
+2. **SQL 전달** : 애플리케이션 서버는 DB가 이해할 수 있는 SQL을 연결된 커넥션을 통해 DB에 전달한다.
+3. **결과 응답** : DB는 전달된 SQL을 수행하고 그 결과를 응답한다. 애플리케이션 서버는 응답 결과를 활용한다.
 
 #### 애플리케이션 서버와 DB - DB 변경&#x20;
 
@@ -75,19 +75,19 @@ JDBC 의 등장으로 다음 2가지 문제가 해결되었다.&#x20;
 ### JDBC 와 최신 데이터 접근 기술&#x20;
 
 JDBC는 1997년에 출시될 정도로 오래된 기술이고, 사용하는 방법도 복잡하다. 그래서 최근에는 JDBC를 직접 사용하기 \
-보다는 JDBC를 편리하게 사용하는 다양한 기술이 존재한다. 대표적으로 SQL Mapper와 ORM 기술로 나눌 수 있다.
+보다는 JDBC를 편리하게 사용하는 다양한 기술이 존재한다. 대표적으로 **SQL Mapper**와 **ORM** 기술로 나눌 수 있다.
 
-#### JDBC 직접 사용&#x20;
+#### JDBC 직접 사용
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-06-18 18.27.26.png" alt="" width="563"><figcaption></figcaption></figure>
 
-#### SQL Mapper&#x20;
+#### SQL Mapper
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-06-18 18.27.52.png" alt="" width="563"><figcaption></figcaption></figure>
 
-* SQL Mapper&#x20;
-  * 장점 : JDBC 를 편리하게 사용하도록 도와준다.&#x20;
-    * SQL 응답 결과를 객체로 편리하게 반환해준다.&#x20;
+* SQL Mapper
+  * 장점 : JDBC 를 편리하게 사용하도록 도와준다.
+    * SQL 응답 결과를 객체로 편리하게 반환해준다.
     * JDBC 반복 코드를 제거해준다.&#x20;
   * 단점 : 개발자가 SQL 을 직접 작성해야 한다.&#x20;
   * 대표 기술: 스프링 JdbcTemplate, MyBatis
@@ -205,7 +205,8 @@ class DBConnectionUtilTest {
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-06-18 18.35.08.png" alt=""><figcaption></figcaption></figure>
 
-JDBC가 제공하는 `DriverManager` 는 라이브러리에 등록된 DB 드라이버들을 관리하고, 커넥션을 획득하는 기능을 제공한다.
+JDBC가 제공하는 `DriverManager` 는 라이브러리에 등록된 DB 드라이버들을 관리하고, 커넥션을 획득하는 기능을 \
+제공한다.
 
 1. 애플리케이션 로직에서 커넥션이 필요하면 `DriverManager.getConnection()` 을 호출한다.
 2. `DriverManager` 는 라이브러리에 등록된 드라이버 목록을 자동으로 인식한다. 이 드라이버들에게 순서대로 다음 \
@@ -477,7 +478,7 @@ public class MemberRepositoryV0 {
 
 #### ResultSet
 
-* `ResultSet` 은 다음과 같이 생긴 데이터 구조이다. 보통 select 쿼리의 결과가 순서대로 들어간다.
+* `ResultSet` 은 다음과 같이 생긴 데이터 구조이다. 보통 `select` 쿼리의 결과가 순서대로 들어간다.
   * 예를 들어서 `select member_id, money` 라고 지정하면 `member_id`, `money` 라는 이름으로 데이터가 저장된다.
   * 참고로 `select *` 을 사용하면 테이블의 모든 컬럼을 다 지정한다.
 * `ResultSet` 내부에 있는 커서(`cursor` )를 이동해서 다음 데이터를 조회할 수 있다.
