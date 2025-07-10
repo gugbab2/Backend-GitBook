@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 }
 ```
 
-**중요! 생성자가 딱 1개만 있으면 @Autowired를 생략해도 자동 주입 된다.** 물론 스프링 빈에만 해당한다.
+**중요! 생성자가 딱 1개만 있으면 `@Autowired`를 생략해도 자동 주입 된다.** 물론 스프링 빈에만 해당한다.
 
 ```java
 @Component
@@ -82,7 +82,8 @@ public class OrderServiceImpl implements OrderService {
 
 * 이름 그대로 필드에 바로 주입하는 방법이다.
 * 특징
-  * **코드가 간결해서 개발자들을 유혹, 하지만.. 외부에서 변경이 불가능해서 테스트하기 힘들다는 치명적인 단점이 있다! (Mock 객체 생성 불가)**&#x20;
+  * **코드가 간결해서 개발자들을 유혹,** \
+    **하지만.. 외부에서 변경이 불가능해서 테스트하기 힘들다는 치명적인 단점이 있다! (Mock 객체 생성 불가)**&#x20;
   * **DI 프레임워크(스프링) 이 없다면 아무것도 할수가 없다.**
     * **테스트 중 순수한 자바로 테스트하는 경우가 매우 많다!**&#x20;
   * 사용하지 말자!
@@ -168,12 +169,12 @@ public void setNoBean3(Optional<Member> member) {
 
 #### 불변
 
-* 대부분의 의존관계 주입은 한번 일어나면 애플리케이션 종료 시점에서 의존관계를 변경할 일이 없다.
+* **대부분의 의존관계 주입은 한번 일어나면 애플리케이션 종료 시점에서 의존관계를 변경할 일이 없다.**
   * 오히려 대부분의 의존관계는 변하면 안된다. (불변해야 한다)
 * 수정자 주입을 사용하게 되면 `setter` 를 `public` 으로 열어두어야 한다.
 * 꼭 만들어두면 누군가가 실수를 저지른다.
   * 변경해서는 안되는 경우 메서드를 열어두는 건 좋은 방법이 아니다.
-* 생성자 주입은 생성 시 딱 한번만 호출되기에 이후에 호출될 일이 없다! 따라서 불변하게 설계할 수 있다.&#x20;
+* **생성자 주입은 생성 시 딱 한번만 호출되기에 이후에 호출될 일이 없다! 따라서 불변하게 설계할 수 있다.**&#x20;
 
 #### 누락
 
@@ -264,7 +265,7 @@ private DiscountPolicy rateDiscountPolicy
 
 `@Qualifier` 는 추가 구분자를 붙여주는 방법이다. 주입시 추가적인 방법을 제공하는 것이지 빈 이름을 변경하는 것은 아니다.
 
-**빈 등록시 @Qualifier를 붙여 준다.**
+**빈 등록시 `@Qualifier`를 붙여 준다.**
 
 ```java
 @Component
@@ -278,7 +279,7 @@ public class RateDiscountPolicy implements DiscountPolicy {}
 public class FixDiscountPolicy implements DiscountPolicy {}
 ```
 
-**주입시에 @Qualifier를 붙여주고 등록한 이름을 적어준다.**
+**주입시에 `@Qualifier`를 붙여주고 등록한 이름을 적어준다.**
 
 ```java
 @Autowired
@@ -299,7 +300,7 @@ public DiscountPolicy setDiscountPolicy(
 
 ### @Primary 사용
 
-`@Primary` 는 우선순위를 정하는 방법이다. `@Autowired` 시에 여러 빈이 매칭되면 `@Primary` 가 우선권을 가진다.
+`@Primary` 는 우선순위를 정하는 방법이다. `@Autowired` 시에 여러 빈이 매칭되면 `@Primary`가 우선권을 가진다.
 
 `rateDiscountPolicy` 가 우선권을 가지도록 하자.
 
@@ -329,7 +330,8 @@ public class FixDiscountPolicy implements DiscountPolicy {}
 결론부터 이야기하면, 스프링이 나오고 시간이 갈 수록 점점 자동을 선호하는 추세다. 스프링은 `@Component` 뿐만 아니라 `@Controller` , `@Service` , `@Repository`처럼 계층에 맞추어 일반적인 애플리케이션 로직을 자동으로 스캔할 수 있도록 지원한다. \
 거기에 더해서 최근 스프링 부트는 컴포넌트 스캔을 기본으로 사용하고, 스프링 부트의 다양한 스프링 빈들도 조건이 맞으면 자동으로 등록하도록 설계했다.
 
-설정 정보를 기반으로 애플리케이션을 구성하는 부분과 실제 동작하는 부분을 명확하게 나누는 것이 이상적이지만, 개발자 입장에서 스프링 빈을 하나 등록할 때 `@Component` 만 넣어주면 끝나는 일을 `@Configuration` 설정 정보에 가서 `@Bean` 을 적고, 객체를 생성하고, 주입할 대상을 일일이 적어주는 과정은 상당히 번거롭다.\
+설정 정보를 기반으로 애플리케이션을 구성하는 부분과 실제 동작하는 부분을 명확하게 나누는 것이 이상적이지만, 개발자 입장에서 스프링 빈을 하나 등록할 때 `@Component` 만 넣어주면 끝나는 일을 `@Configuration` 설정 정보에 가서 `@Bean` 을 적고, 객체를 생성하고, 주입할 대상을 일일이 적어주는 과정은 상당히 번거롭다.
+
 또, 관리할 빈이 많아서 설정 정보가 커지면 설정 정보를 관리하는 것 자체가 부담이 된다. 그리고 결정적으로 자동 빈 등록을 사용해도 OCP, DIP 를 지킬 수 있다.
 
 ### 수동 빈 등록은 언제 사용하냐?

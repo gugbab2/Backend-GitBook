@@ -334,9 +334,8 @@ public int logic() {
 }
 ```
 
-*   실행해보면 `prototypeBeanProvider.getObject()` 을 통해서 항상 새로운 프로토타입 빈이 생성되는 것
-
-    을 확인할 수 있다.
+* 실행해보면 `prototypeBeanProvider.getObject()` 을 통해서 항상 새로운 프로토타입 빈이 생성되는 것을 \
+  확인할 수 있다.
 *   `ObjectProvider` 의 `getObject()` 를 호출하면 내부에서는 스프링 컨테이너를 통해 해당 빈을 찾아서 반환
 
     한다. (**DL**)

@@ -2,7 +2,7 @@
 
 ## 1. 컴포넌트 스캔과 의존관계 자동 주입 시작하기&#x20;
 
-*   지금까지 스프링 빈을 등록할 때는 자바 코드의 `@Bean`이나 XML의 \<bean> 등을 통해서 설정 정보에 직접 등
+*   지금까지 스프링 빈을 등록할 때는 자바 코드의 `@Bean`이나 XML의 `<bean>` 등을 통해서 설정 정보에 직접 등
 
     록할 스프링 빈을 나열했다.
 *   예제에서는 몇개가 안되었지만, 이렇게 등록해야 할 스프링 빈이 수십, 수백개가 되면 일일이 등록하기도 귀찮고,
@@ -31,9 +31,11 @@ public class AutoAppConfig {
 ```
 
 * 컴포넌트 스캔을 사용하려면 먼저 `@ComponentScan` 을 설정 정보에 붙여주면 된다.
-* 기존의 AppConfig와는 다르게 `@Bean`으로 등록한 클래스가 하나도 없다!
+* 기존의 `AppConfig`와는 다르게 `@Bean`으로 등록한 클래스가 하나도 없다!
 
-> 참고 : 컴포넌트 스캔을 사용하면 `@Configuration` 이 붙은 설정 정보도 자동으로 등록되기 때문에, AppConfig, TestConfig 등 앞서 만들어두었던 설정 정보도 함께 등록되고, 실행되어 버린다. 그래서`excludeFilters` 를 이용해서 설정정보는 컴포넌트 스캔 대상에서 제외했다. 보통 설정 정보를 컴포넌트 스캔대상에서 제외하지는 않지만, 기존 예제 코드를 최대한 남기고 유지하기 위해서 이 방법을 선택했다.
+> 참고 : 컴포넌트 스캔을 사용하면 `@Configuration` 이 붙은 설정 정보도 자동으로 등록되기 때문에, `AppConfig`, `TestConfig` 등 앞서 만들어두었던 설정 정보도 함께 등록되고, 실행되어 버린다.&#x20;
+>
+> 그래서`excludeFilters` 를 이용해서 설정정보는 컴포넌트 스캔 대상에서 제외했다. 보통 설정 정보를 컴포넌트 스캔대상에서 제외하지는 않지만, 기존 예제 코드를 최대한 남기고 유지하기 위해서 이 방법을 선택했다.
 
 컴포넌트 스캔은 이름 그대로 `@Component` 애노테이션이 붙은 클래스를 스캔해서 스프링 빈으로 등록한다. `@Component` 를 붙여주자.
 
@@ -49,7 +51,8 @@ public class MemoryMemberRepository implements MemberRepository {}
 public class RateDiscountPolicy implements DiscountPolicy {}
 ```
 
-이전에 AppConfig에서는 `@Bean` 으로 직접 설정 정보를 작성했고, 의존관계도 직접 명시했다. 이제는 이런 설정 정보 자체가 없기 때문에, 의존관계 주입도 이 클래스 안에서 해결해야 한다.
+이전에 `AppConfig`에서는 `@Bean` 으로 직접 설정 정보를 작성했고, 의존관계도 직접 명시했다.\
+이제는 이런 설정 정보 자체가 없기 때문에, 의존관계 주입도 이 클래스 안에서 해결해야 한다.
 
 `@Autowired` 는 의존관계를 자동으로 주입해준다. 자세한 룰은 조금 뒤에 설명하겠다.
 
@@ -121,7 +124,7 @@ public class AutoAppConfigTest {
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-05-28 10.32.39.png" alt=""><figcaption></figcaption></figure>
 
-* 생성자의 @Autowired 를 지정하면, 스프링 컨테이너가 자동으로 해당 스프링 빈을 찾아서 주입한다.&#x20;
+* 생성자의 `@Autowired` 를 지정하면, 스프링 컨테이너가 자동으로 해당 스프링 빈을 찾아서 주입한다.
 * 생성자에 파라미터가 많아도 다 찾아서 자동으로 주입한다.
 
 ## 2. 탐색 위치와 기본 스캔 대상&#x20;
@@ -197,11 +200,9 @@ public class MemoryMemberRepository implements MemberRepository {}
 ```java
 @Configuration
 @ComponentScan(
-    excludeFilters = @Filter(type = FilterType.ANNOTATION, classes =
-Configuration.class)
+    excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
 public class AutoAppConfig {
-    
     @Bean(name = "memoryMemberRepository")
     public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
@@ -229,7 +230,7 @@ definition: replacing
 
 ```
 Consider renaming one of the beans or enabling overriding by setting
-spring.main.allow-bean-definition-overriding=true`
+spring.main.allow-bean-definition-overriding=true
 ```
 
 스프링 부트인 `CoreApplication` 을 실행해보면 오류를 볼 수 있다.

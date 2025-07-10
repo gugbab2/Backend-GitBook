@@ -9,8 +9,8 @@ ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(AppConfig.class); 
 ```
 
-* `ApplicationContext` 를 스프링 컨테이너라고 한다.&#x20;
-* `ApplicationContext` 는 인터페이스이다.&#x20;
+* `ApplicationContext` 를 스프링 컨테이너라고 한다.
+* `ApplicationContext` 는 인터페이스이다.
 * XML 기반 or 어노테이션 기반의 설정 클래스 방식 중 선택할 수 있다.&#x20;
 * `AnnotationConfigApplicationContext` 는 `ApplicationContext` 인터페이스의 구현체이다.&#x20;
 
@@ -20,7 +20,7 @@ ApplicationContext applicationContext =
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2023-05-29 19.53.46.png" alt=""><figcaption></figcaption></figure>
 
-* `new AnnotationConfigApplicationContext(AppConfig.class)`
+* `new AnnotationConfigApplicationContext(AppConfig.class)`&#x20;
 * 스프링 컨테이너를 생성할 때는 구성 정보를 지정해주어야 한다.&#x20;
 * 여기서는 `AppConfig.class` 를 구성 정보로 지정했다. &#x20;
 
@@ -51,7 +51,9 @@ ApplicationContext applicationContext =
 
 > #### 참고&#x20;
 >
-> 스프링은 빈을 생성하고, 의존관계를 주입하는 단계가 나누어져 있다. 그런데 이렇게 자바 코드로 스프링 빈을 등록하면 생성자를 호출하면서 의존관계 주입도 한번에 처리된다. 여기서는 이해를 돕기 위해 개념적으로 나누어 설명했다. 자세한 내용은 의존관계 자동 주입에서 다시 설명하겠다.
+> 스프링은 빈을 생성하고, 의존관계를 주입하는 단계가 나누어져 있다.&#x20;
+>
+> 그런데 이렇게 자바 코드로 스프링 빈을 등록하면 생성자를 호출하면서 의존관계 주입도 한번에 처리된다. 여기서는 이해를 돕기 위해 개념적으로 나누어 설명했다. 자세한 내용은 의존관계 자동 주입에서 다시 설명하겠다.
 
 ## 2. 컨테이너에 등록된 모든 빈 조회&#x20;
 

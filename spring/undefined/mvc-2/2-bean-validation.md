@@ -300,15 +300,15 @@ public class ValidationItemControllerV3 {
 
 **BeanValidator는 바인딩에 실패한 필드는 BeanValidation을 적용하지 않는다.**
 
-생각해보면 타입 변환에 성공해서 바인딩에 성공한 필드여야 BeanValidation 적용이 의미 있다.\
+생각해보면 타입 변환에 성공해서 바인딩에 성공한 필드여야 Bean Validation 적용이 의미 있다.\
 (일단 모델 객체에 바인딩 받는 값이 정상으로 들어와야 검증도 의미가 있다.)
 
-`@ModelAttribute` -> 각각의 필드 타입 변환시도 -> 변환에 성공한 필드만 BeanValidation 적용
+`@ModelAttribute` -> 각각의 필드 타입 변환시도 -> 변환에 성공한 필드만 Bean Validation 적용
 
 예)&#x20;
 
-* `itemName`에 문자 "A" 입력 ->  타입 변환 성공 -> `itemName` 필드에 BeanValidation 적용
-* `price` 에 문자 "A" 입력 -> "A"를 숫자 타입 변환 시도 실패 -> typeMismatch FieldError 추가 -> `price` 필드는 BeanValidation 적용 X
+* `itemName`에 문자 "A" 입력 ->  타입 변환 성공 -> `itemName` 필드에 Bean Validation 적용
+* `price` 에 문자 "A" 입력 -> "A"를 숫자 타입 변환 시도 실패 -> typeMismatch FieldError 추가 -> `price` 필드는 Bean Validation 적용 X
 
 ## 4. Bean Validation - 에러 코드&#x20;
 
