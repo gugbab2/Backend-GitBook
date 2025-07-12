@@ -249,6 +249,7 @@
         * [1장 - 자바 기술 시스템 소개](language/readme-1/undefined-1/jvm/1/1.md)
       * [2부 - 자동 메모리 관리](language/readme-1/undefined-1/jvm/2/README.md)
         * [2장 - 자바 메모리 영역과 메모리 오버플로](language/readme-1/undefined-1/jvm/2/2.md)
+        * [3장 - 가비지 컬렉터와 메모리 할당 전략](language/readme-1/undefined-1/jvm/2/3.md)
   * [그 외](language/readme-1/undefined-2/README.md)
     * [시스템 콜과 자바에서의 시스템 콜 사용례](language/readme-1/undefined-2/undefined.md)
     * [자바 NIO 의 동작원리 및 IO 모델](language/readme-1/undefined-2/nio-io.md)
