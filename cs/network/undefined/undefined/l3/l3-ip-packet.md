@@ -2,7 +2,7 @@
 
 ## L3 Packet
 
-<figure><img src="../../../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 패킷은 개념적으로 단위 데이터라고 생각할 수 있다.
 * Packet = L3 IP Packet
@@ -13,11 +13,11 @@
 * IP 패킷의 이론적 크기는 **65,535 바이트**이다. 하지만, 이 IP 패킷이 실제로 네트워크를 통해 전송되려면, 하위 계층인 데이터 링크 계층(L2)의 물리적 매체(예: 이더넷 케이블, Wi-Fi)에 실려야 한다. 때문에, **MTU**는 바로 이 **L2 계층의 물리적 매체가 한 번에 처리하고 전송할 수 있는 L3 패킷(IP 패킷)의 최대 크기**를 정의한다.&#x20;
 * 와이어샤크 툴을 사용해 패킷을 확인이 가능하다.
 
-<figure><img src="../../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Encapsulation 과 Decapsulation
 
-<figure><img src="../../../../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Encapsulation : 단위화, 보안성 강화\
   -> 러시아 전통인형 마트료시카를 생각하자\

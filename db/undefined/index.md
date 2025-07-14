@@ -6,7 +6,7 @@
   → 예를 들어서 우리는 책에서 목차를 통해 원하는 곳으로 빠르게 이동할 수 있다.
 *   실제 DB 관련 작업 시 대부분의 속도 저하의 원인은 조회의 WHERE 문에서 발생하는데, 가장 먼저 생각해 볼 수 있는 대안으로 Index 를 생각할 수 있다.
 
-    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-1. 인덱스 사용
 
@@ -58,7 +58,7 @@ CREATE INDEX USER_COMPANY_INDEX ON USER(COMPANY_ID);
 
 → 책 페이지를 알기에 바로 펼침
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 클러스터 인덱스를 구성하기 위해서 **데이터 페이지를 정렬한 후, 루트페이지를 만들게 된다.**
   * 클러스터 인덱스가 생성될 때, 데이터 페이지는 클러스터 인덱스 키 값에 따라 정렬되며, 이 정렬된 데이터에 기반하여 인덱스 트리가 구성됩니다. 루트 페이지는 인덱스 트리의 최상위 노드입니다.
@@ -96,7 +96,7 @@ CREATE INDEX USER_COMPANY_INDEX ON USER(COMPANY_ID);
 
 -> 넌 클러스터 인덱스는 목차를 통해 페이지를 찾아감
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 넌 클러스터 인덱스는 데이터 페이지를 변경하지 않고, 별도의 장소에 인덱스 페이지를 생성한다.
 * **인덱스 페이지 구성**

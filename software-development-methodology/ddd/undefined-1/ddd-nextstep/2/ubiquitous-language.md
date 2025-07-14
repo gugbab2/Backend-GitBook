@@ -6,7 +6,7 @@
 * 코드의 가독성을 높여서 코드를 분석하고 이해하는 시간을 절약한다.
 * 용어가 정의 될 때마다 용어 사전에 이를 기록하고 명확하게 정의 함으로써 추후 또는 다른 사람들도 공통된 언어를 사용할 수 있도록 한다. (용어 사전 정의!)
 
-<figure><img src="../../../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 효과적인 모델링&#x20;
 

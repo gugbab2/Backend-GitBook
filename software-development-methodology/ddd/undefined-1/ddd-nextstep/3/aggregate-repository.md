@@ -2,7 +2,7 @@
 
 ## AGGREGATE
 
-<figure><img src="../../../../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 * DDD 를 하게 되면 무수한!! VALUE OBJECT, ENTITY 가 등장하게 되고, 이는 분할의 결과물이다.
 * 관련 객체를 하나로 묶은 군집을 AGGREGATE 라고 부른다. (논리적 구조)
