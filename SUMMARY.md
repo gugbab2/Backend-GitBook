@@ -547,6 +547,8 @@
 ## 멘토링
 
 * [F-Lab](undefined/f-lab/README.md)
-  * [10회차(2024.12.29)](undefined/f-lab/10-2024.12.29.md)
+  * [1회차 - (2025.06.30 / 이력서 컨펌)](undefined/f-lab/1-2025.06.30.md)
+  * [2회차 - (2025.07.15 / JVM)](undefined/f-lab/2-2025.07.15-jvm.md)
+  * [3회차 - (2025.07.21 / G1GC)](undefined/f-lab/3-2025.07.21-g1gc.md)
 * [원티드 바이브 코딩](undefined/undefined/README.md)
   * [1. Cursor 세팅 & 바이브 코딩 기초 배우기](undefined/undefined/1.-cursor-and.md)
