@@ -99,7 +99,7 @@ G1은 힙을 크기가 동일한 여러 개의 힙 영역으로 분할한다. �
     * 이 과정에서 RSet(Remembered Set) 과 쓰기 장벽(Write Barrier) 이 중요한 역할을 한다.&#x20;
     * 쓰기 장벽이 객체 참조 변경을 감지하면 Card Table 에 표시하고, 이를 바탕으로 RSet 이 업데이트된다.&#x20;
 * **Mixed GC (복합 GC) (자주색 작은 원들)**&#x20;
-  * **트리거** : Cleanup 단계 이후, Old Generation 에 회수할 가비지가 충분히 많다고 판단될 때 여러 차례 Mixed GC 가 발생할 수 있다.
+  * **트리거** : Cleanup 단계 이후, Old Generation 여러 차례 Mixed GC 가 발생할 수 있다.
   * **STW 여부 : O**&#x20;
   * **주요 동작**&#x20;
     * CSet (Collection Set) 구성: GC가 실제로 청소할 대상 Region들의 집합인 CSet을 구성한다. 이 CSet에는 항상 현재 Young Generation Region(Eden과 Survivor)이 포함되고, 여기에 Old Generation Region 중에서 동시 마킹 단계에서 가장 가비지가 많다고 식별된 Region들이 추가돼요. G1GC는 설정된 GC 멈춤 시간 목표를 지키면서 가장 효율적으로 공간을 회수할 수 있는 Old Region들을 우선적으로 선택해서 CSet에 포함시켜요.
@@ -129,7 +129,7 @@ G1GC 는 힙 크기를 관리하는 방식에 있어 몇가지 특징을 가진�
 
 ### 3.2 Preiodic Garbage Collections (주기적인 가비지 수집)&#x20;
 
-G1GC는 완전히 주기적으로 작동하는 것은 아니지만, 특정 조건이 충족될 때 GC 사이클을 시작합니다.
+G1GC는 완전히 주기적으로 작동하는 것은 아니지만, 특정 조건이 충족될 때 GC 사이클을 시작합니다.&#x20;
 
 * Young-only GC: 주로 Eden 영역이 가득 찼을 때 발생합니다. 이는 애플리케이션의 객체 할당 속도에 따라 매우 자주 발생할 수 있습니다.
 * Space-reclamation Phase: Old Generation의 힙 점유율이 `IHOP`을 초과할 때 동시 마킹 사이클이 시작되고, \
