@@ -17,21 +17,21 @@
    2. G1GC 는 Heap 을 **작은 Region(1\~32MB)** 으로 잘라 관리 \
       (전체 메모리를 작은 리전 단위로 관리하면 된다)&#x20;
 3. **단편화(Fragmentation) 방지**
-   1. CMS 는 Compaction 이 없어서 오래 실행하면 메모리 단편화가 발생.&#x20;
-   2. G1 은 객체를 복사(Compaction) 해 Heap 을 연속된 공간으로 유지 -> 단편화(Fragmentation) 방지&#x20;
+   1. CMS 는 Compaction 이 없어서 오래 실행하면 메모리 단편화가 발생.
+   2. G1 은 객체를 재배치(Evacuation) 해 Heap 을 연속된 공간으로 유지 -> 단편화(Fragmentation) 방지&#x20;
 4. **Throughput 과 Pause Time 의 균형**&#x20;
    1. 멈춤 시간을 줄이면서도 애플리케이션 처리량(Throughput) 을 크게 희생하지 않도록 최적화&#x20;
    2. GC 작업을 나누어 점진적으로 수행해 애플리케이션 성능 저하 최소화
 
 ### 1.2 G1GC 트레이드 오프&#x20;
 
-#### G1GC 는 다른 처리량 중심 GC 보다 처리량이 떨어진다.&#x20;
+#### ✅ G1GC 는 다른 처리량 중심 GC 보다 처리량이 떨어진다.&#x20;
 
 * G1GC 는 STW 를 짧고 예측 가능하게 만들기 위해서 Heap 을 작은 Region 단위로 나누어 관리한다. 이로 이해 GC 작업이 더 자주 발생할 수 있고, GC 마다 관리해야 할 메타데이터 오버헤드도 증가한다.
 * 반면 Parallel GC 같은 처리량 중심 GC 는 한 번에 Heap 전체를 회수하여 GC 호출 횟수를 줄이고 처리량을 극대화한다.&#x20;
 * 결론 : G1GC 는 처리량 측면에서는 처리량 중심 GC 에 비해서 낮을 수 있지만, STW 이 짧아 안정적인 서비스 제공에 초점을 맞춘다. (STW 가 짧아야, 사용자 경험이 좋아진다)&#x20;
 
-#### 처리량이 줄어들면 결국 OOM 이 발생할 수 있는데, 처리량을 줄이는 것이 의미가 있는가?&#x20;
+#### ✅ 처리량이 줄어들면 결국 OOM 이 발생할 수 있는데, 처리량을 줄이는 것이 의미가 있는가?&#x20;
 
 * 처리량을 줄여 STW 가 짧아지면 사용자 경험이 좋아지기 때문에, 의미가 있다!
 * 하지만, 처리량이 극단적으로 낮아져 GC 가 메모리를 충분히 회수하지 못하면 OOM 이 발생할 위험이 있다. \
@@ -41,7 +41,7 @@
   * Heap Pressure 증가 시 Pause Time 목표를 일부 깨고 추가 Region 회수&#x20;
   * 그래도 부족하면 Full GC(STW) 수행으로 메모리 확보&#x20;
 
-JDK 9 부터 G1 은 Default GC 이다.&#x20;
+JDK 9 부터 G1 은 Default GC 이다.
 
 ## 2. 기본 개념&#x20;
 
@@ -69,7 +69,8 @@ G1은 힙을 크기가 동일한 여러 개의 힙 영역으로 분할한다. �
 >
 > * **Region (영역)** : 힙을 구성하는 가장 기본적인 단위로, 기본 크기는 1MB 에서 32 MB 까지 설정될 수 있다. G1GC 는 이 영역들을 독립적으로 GC 대상으로 삼고, Young, Old, Humongus(매우 큰 객체) 등의 역할을 동적으로 할당한다.&#x20;
 > * **Remembered Set (RSet)**&#x20;
->   * 각 영역(Region)마다 존재하는 데이터 구조로, 다른 영역에서 해당 영역으로 들어오는 참조(Incoming References)를 기록합니다. 예를 들어 Old 영역의 객체가 Young 영역의 객체를 참조하는 경우, 해당 Young 영역의 RSet에 이 참조 정보가 기록되어 Minor GC(Mark Young-Only Phase) 시 전체 Old 영역을 탐색하지 않고도 RSet만 확인해 살아있는 Young 객체를 효율적으로 추적할 수 있습니다.&#x20;
+>   * 각 영역(Region)마다 존재하는 데이터 구조로, 리전과 리전 사이의 레퍼런스를 기록한다.&#x20;
+>   * 예를 들어 Old 영역의 객체가 Young 영역의 객체를 참조하는 경우, 해당 Young 영역의 RSet에 이 참조 정보가 기록되어 Minor GC 시 전체 Old 영역을 탐색하지 않고도 RSet만 확인해 살아있는 Young 객체를 효율적으로 추적할 수 있습니다.&#x20;
 >   * 반대로 Young 영역의 객체가 Old 영역의 객체를 참조하는 경우에도 해당 Old 영역의 RSet에 이 참조가 기록되며, Initial Mark 및 Concurrent Mark 단계에서는 이 RSet을 사용해 Young → Old 참조를 추적하고 Old 영역 객체의 생존 여부를 마킹하여 객체 그래프의 일관성을 유지합니다.&#x20;
 >   * 이처럼 RSet은 Old → Young뿐만 아니라 Young → Old 참조까지 관리해 Minor GC와 Major GC 모두에서 영역 간 참조를 빠르고 효율적으로 처리할 수 있도록 합니다.
 > * **Card Table (카드 테이블)** : 힙 전체를 작은 **카드(Card)** 단위로 나눈 비트맵이다. 각 카드는 특정 메모리 범위를 나타내며, 해당 카드 내의 객체에서 다른 영역으로 참조가 수정될 때 카드를 **더티(Dirty)** 상태로 표시한다. RSet 업데이트는 이 Card Table 을 통해 간접적으로 이루어진다. Write Barrier 가 객체 참조 변경을 감지하면 해당 카드를 더티 상태로 바꾸고, 나중에 GC 스레드가 더티 카드를 스캔하여 RSet 을 업데이트 한다.&#x20;
@@ -88,23 +89,44 @@ G1은 힙을 크기가 동일한 여러 개의 힙 영역으로 분할한다. �
 
 * **마킹이 일어나는 시점 : Young 영역 (대부분은 Eden 영역) 이 가득 차서 새로운 객체를 할당할 공간이 부족할 때 발생한다.** 이 과정은 애플리케이션 스레드가 일시 중지 되는 **STW 상태에서 진행된다.**
 * **마킹 과정** : Young GC 에서는 Old 영역처럼 복잡한 동시성 마킹 단계를 가지지 않는다. 대신, STW 상태에서 다음과 같은 방식으로 "살아있는 객체" 를 식별하고 정리한다.&#x20;
-  * **루트(GC Root) 스캔** : 스택 변수, 정적 변수 등.. **GC Root 에서 직접 접근 가능한 Young 영역의 객체들을 마킹한다.**&#x20;
+  * **루트(GC Root) 스캔** : 스택 변수, 정적 변수 등.. **GC Root 에서 직접 접근 가능한 Young 영역의 객체들을 마킹한다. 단순히 Root 에 걸린 객체만 마킹하는 것이 아니라, Root 에서 시작해 Young 영역의 객체 그래프 전체를 따라가며 도달 가능한 모든 객체를 탐색하고 마킹**한다.
   * **RSet 활용 : Old 영역에서 Young 영역의 객체를 참조하는 경우**를 효율적으로 처리하기 위해 해당 Young 영역의 RSet 을 확인한다. **RSet** 에 기록된 참조 정보를 통해 Old 영역 전체를 스캔하지 않고도 Old 에서 Young 으로의 참조를 파악하고, 참조되는 Young 영역의 객체들을 살아있는 것으로 마킹한다.&#x20;
   * **Evacuation (생존 객체 복사)** : 앞서 마킹된(살아있는) 객체들은 새로운 Survivor 영역이나 Old 영역으로 **복사**된다. G1GC 는 **Copying Collector** 이기 때문에, 살아있는 객체를 새로운 공간으로 옮기는 것 자체가 해당 객체를 "마킹"하고 "유지"하는 행위이다. **복사되지 않는 객체는 자동으로 가비지로 간주되어 회수**된다. 복사된 후 기존 Young 영역은 비워지고 **Free List** 에 추가되어 재사용 가능해진다.&#x20;
 
 2. Space-Reclamation Phase (Old 영역 마킹 및 Mixed GC)&#x20;
 
-* **마킹이 일어나는 시점 :** Old 영역의 점유율이 **Initation Heap Occupancy Percent (IHOP) 임계값(기본값 45%)** 에 도달하면 G1GC 는 Old 영역 마킹을 위한 Concurrent Marking Cycle 을 시작한다. 이 사이클은 동시성(Concurrent) 작업과 STW 작업이 혼한되어 진행된다.&#x20;
+* **마킹이 일어나는 시점 :** Old 영역의 점유율이 **Initation Heap Occupancy Percent (IHOP) 임계값(기본값 45%)** 에 도달하면 G1GC 는 Old 영역 마킹을 위한 Concurrent Marking Cycle 을 시작한다. 이 사이클은 동시성(Concurrent) 작업과 STW 작업이 혼재되어 진행된다.&#x20;
 * **마킹 과정**&#x20;
   * **1. Initial Mark (초기 마킹 - STW)**&#x20;
     * **시점** : Old 영역 마킹 사이클의 시작이다. 주로 **Young GC 와 함께 수행된다.**&#x20;
     * **목적** : GC Root에서 직접 접근 가능한 Old 영역 객체를 살아있는 것으로 마킹합니다. 이는 다음 동시성 마킹 단계의 시작점 역할을 합니다.
-    * **관련 용어** : 이 단계에서 Card Table의 더티 마킹을 하거나, RSet을 업데이트하지 않습니다. RSet의 업데이트는 Mutator(애플리케이션 스레드)의 Write Barrier가 참조 변경 시 수행합니다. Initial Mark는 RSet과 Card Table을 "조회"만 하며, 매우 짧은 STW를 유발합니다.
+    * **관련 용어** : 이 단계에서 **Card Table** 의 더티 마킹을 스캔하여 **RSet** 을 부분적으로 업데이트 할 수 있다. 짧은 STW 를 유발한다.&#x20;
   * **2. Root Region Scanning (루트 영역 스캔 - Concurrent)**&#x20;
-    * 시점 : Initial Mark 이후 바로 시작된다.&#x20;
-    * 목적 : **Young 영역에서 Old 영역으로 가는 참조(Young → Old, 주로 Survivor → Old)**&#xC5D0; 의해 추가적으로 접근 가능한 Old 객체를 마킹합니다. 이는 객체 그래프 확장을 위한 Root 집합을 완성하는 데 기여합니다.
-    * 특징 : 애플리케이션 스레드와 "동시(Concurrent)" 로 실행되므로 STW 가 발생하지 않는다. **Root Region Scanning은 Initial Mark가 놓칠 수 있는 Young 영역 내의 중요한 참조를 보완하여**, 다음 Concurrent Mark 단계가 올바른 시작점에서 진행되도록 돕습니다.
-  * 3\.&#x20;
+    * **시점** : Initial Mark 이후 바로 시작된다.&#x20;
+    * **목적** : **Young 영역에서 Old 영역으로 가는 참조(Young → Old, 주로 Survivor → Old)**&#xC5D0; 의해 추가적으로 접근 가능한 Old 객체를 마킹한다. 이는 객체 그래프 확장을 위한 Root 집합을 완성하는 데 기여한다.&#x20;
+    * **특징** : 애플리케이션 스레드와 "동시(Concurrent)" 로 실행되므로 STW 가 발생하지 않는다. **Root Region Scanning은 Initial Mark가 놓칠 수 있는 Young 영역 내의 중요한 참조를 보완하여**, 다음 Concurrent Mark 단계가 올바른 시작점에서 진행되도록 돕습니다.
+  * 3\. Concurrent Marking (동시성 마킹 - Concurrnet)&#x20;
+    * **시점** : Root Region Scanning 이후 시작된다.&#x20;
+    * **목적** : 힙 전체를 스캔하여, Initial Mark 단계에서 마킹된 객체들을 시작으로 **도달 가능한(Reachable) 모든 살아있는 객체를 찾아서 마킹한다.**&#x20;
+    * **관련 용어** : **SATB(Snapshot-At-The-Beginning) 알고리즘을 사용하여 마킹 시작 시점의 스냅샷을 기준으로 살아있는 객체를 판단한다.** 애플리케이션 스레드의 객체 참조 변경은 Write Barrier 를 통해 기록하게 되고, 이는 **SATB 버퍼(애플리케이션 스레드가 변경하는 내용이 저장)**&#xC5D0; 저장된다. \
+      각 영역의 **TAMS(Top-At-Mark-Start) 값 이후에 할당된 객체는 Concurrent Mark 시작 시점 이후에 생성된 객체로, 별도의 스캔 없이 자동으로 살아있는 것으로 간주된다**. 즉, TAMS 이전에 존재하던 객체들만 마킹 대상이 된다.&#x20;
+  * 4\. Remark (재마킹 - STW)&#x20;
+    * 시점 : Concurrent Marking 이 완료된 후 시작된다.&#x20;
+    * 목적 : Concurrent Marking 단계에서 **Write Barrier 를 통해 기록된 SATB 버퍼를 비우고**, 애플리케이션 스레드가 동시성 마킹 중에 변경한 참조들을 **최종적으로 반영하여 누락되었을 수 있는 살아있는 객체를 찾아 마킹한다.**&#x20;
+    * 특징 : 짧은 STW 를 유발한다. 이 단계에서 최종적으로 살아있는 객체 집합(마킹) 이 확정된다.&#x20;
+  * 5\. Cleanup (정리 - STW & Concurrent)&#x20;
+    * 시점 : Remark 단계 이후 시작된다.&#x20;
+    * 목적 :&#x20;
+      * 마킹 정보를 기반으로 완전히 비어있는 영역(Region)들을 식별하고 즉시 회수해요. 회수된 영역들은 Free List에 추가됩니다.
+      * 살아있는 객체 비율(Live Ratio)이 낮은 Old 영역들을 분석합니다. G1GC는 이 분석을 통해 다음 Evacuation 단계(Mixed GC)에서 실제로 GC할 대상이 되는 Old 영역들을 선별하고 CSet(Collection Set)을 구성합니다. 즉, 이 단계에서 다음 Mixed GC에 포함될 Old 영역들이 최종적으로 결정되는 것입니다.
+    * 특징 :&#x20;
+      * 초기 작업(비어있는 Region 회수 등) 은 짧은 STW 상태에서 이루어진다.&#x20;
+      * 이후 남은 작업(Old 영역 분석 및 통계 자료 갱신)은 Concurrnet 하게 이루어진다.&#x20;
+  * 6\. Evacuation (재배치 - STW, Mixed GC 의 핵심)
+    * **시점**: Cleanup 단계 이후 시작되며, Mixed GC의 핵심 부분이다.
+    * **목적**: Cleanup에서 선정된 CSet(Collection Set)에 포함된 GC할 가치가 높은 Old 영역과 현재 Young 영역의 살아있는 객체들을 새로운 빈 영역으로 **복사(Evacuation)**&#xD55C;다. 이 과정에서 선택된 Region들의 메모리 조각화가 해소(Compaction)된다.
+    * **관련 용어**: Evacuation이 완료되면 CSet에 있던 영역들은 모두 비워지고 Free List에 추가된다.
+    * **특징**: 이 단계는 **STW(Stop-The-World)**&#xB85C; 동작하며, G1GC는 Evacuation 과정에서 발생하는 STW 시간이 사용자가 설정한 목표 시간(-XX:MaxGCPauseMillis) 내에 들어오도록 CSet의 크기를 자동으로 조절한다.
 
 ## 3. G1GC 의 내부 동작 방식
 
