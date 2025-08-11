@@ -562,3 +562,4 @@
     * [멀티 프로세스 & 멀티 스레드](undefined/f-lab/5-2025.08.11/and-1.md)
     * [스레드를 많이 쓸수록 항상 성능이 좋아질까?](undefined/f-lab/5-2025.08.11/undefined.md)
     * [가상 메모리와 MMU](undefined/f-lab/5-2025.08.11/mmu.md)
+    * [Java 의 미래 Virtual Thread](undefined/f-lab/5-2025.08.11/java-virtual-thread.md)
