@@ -558,5 +558,5 @@
     * [스레드를 많이 쓸수록 항상 성능이 좋아질까?](undefined/f-lab/5-2025.08.11/undefined.md)
     * [가상 메모리와 MMU](undefined/f-lab/5-2025.08.11/mmu.md)
     * [Java 의 미래 Virtual Thread](undefined/f-lab/5-2025.08.11/java-virtual-thread.md)
-  * [7회차 - (2025.08.25 / 프로젝트 얘기, HashMap)](undefined/f-lab/7-2025.08.25-hashmap/README.md)
-    * [요구사항 정의](undefined/f-lab/7-2025.08.25-hashmap/undefined.md)
+  * [7회차 - (2025.09.01 / 프로젝트 얘기, HashMap)](undefined/f-lab/7-2025.09.01-hashmap/README.md)
+    * [HashMap 이해](undefined/f-lab/7-2025.09.01-hashmap/hashmap.md)
