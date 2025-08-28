@@ -485,6 +485,7 @@
     * [조인1 - 내부 조인](db/undefined-1/undefined/1.md)
     * [조인2 - 외부 조인과 기타 조인](db/undefined-1/undefined/2.md)
     * [서브쿼리](db/undefined-1/undefined/undefined.md)
+    * [UNION](db/undefined-1/undefined/union.md)
 * [책](db/undefined-2.md)
 
 ## Software Development Methodology&#x20;
@@ -560,3 +561,9 @@
     * [Java 의 미래 Virtual Thread](undefined/f-lab/5-2025.08.11/java-virtual-thread.md)
   * [7회차 - (2025.09.01 / 프로젝트 얘기, HashMap)](undefined/f-lab/7-2025.09.01-hashmap/README.md)
     * [HashMap 이해](undefined/f-lab/7-2025.09.01-hashmap/hashmap.md)
+
+***
+
+* [기술면접 질문](undefined-1/README.md)
+  * [2025](undefined-1/2025/README.md)
+    * [일급 컬렉션이란? (08.28)](undefined-1/2025/08.28.md)
