@@ -486,6 +486,8 @@
     * [조인2 - 외부 조인과 기타 조인](db/undefined-1/undefined/2.md)
     * [서브쿼리](db/undefined-1/undefined/undefined.md)
     * [UNION](db/undefined-1/undefined/union.md)
+    * [CASE 문](db/undefined-1/undefined/case.md)
+    * [View](db/undefined-1/undefined/view.md)
 * [책](db/undefined-2.md)
 
 ## Software Development Methodology&#x20;
