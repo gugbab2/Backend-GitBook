@@ -4,16 +4,16 @@
 
 ### @Entity
 
-* `@Entity` 가 붙은 클래스는 JPA 가 관리, 엔티티라 한다.&#x20;
-* JPA 를 사용해서 테이블과 매핑할 클래스는 `@Entity` 가 필수&#x20;
+* `@Entity` 가 붙은 클래스는 JPA 가 관리, 엔티티라 한다.
+* JPA 를 사용해서 테이블과 매핑할 클래스는 `@Entity` 가 필수
 
 #### 주의점&#x20;
 
 * **기본 생성자 필수**(파라미터가 없는 `public`, `protected` 생성자)
 * `final` 클래스, `enum`, `interface`, `inner` 클래스 사용X&#x20;
-* 저장할 필드에 `final` 사용 X&#x20;
+* DB 에 저장할 필드에 `final` 사용 X&#x20;
 
-#### 속성 : name&#x20;
+#### 속성 : name
 
 * JPA 에서 사용할 엔티티 이름을 지정한다.&#x20;
 * 기본값 : 클래스 이름을 그대로 사용&#x20;
@@ -42,7 +42,7 @@
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-07-01 16.55.58.png" alt="" width="563"><figcaption></figcaption></figure>
 
-#### 데이터베이스 스키마 자동 생성 - 주의&#x20;
+#### 데이터베이스 스키마 자동 생성 - 주의
 
 * **운영 장비에는 절대 `create`, `create-drop`, `update` 사용하면 안된다!**
   * **운영 서버에는 약 1억건 가까운 데이터를 가지고 있는 경우도 많다.**&#x20;
@@ -57,7 +57,7 @@
   * `@Column(nullable = false, length = 10)`
 * 유니크 제약 조건 추가
   * `@Table(uniqueConstraints = {@UniqueConstraint( name = "NAME_AGE_UNIQUE", columnNames = {"NAME", "AGE"} )})`
-* DDL 생성 기능은 DDL 을 자동 생성할 때만 사용되고 JPA 의 실행 로직에는 영향을 주지 않는다.&#x20;
+* **DDL 생성 기능은 DDL 을 자동 생성할 때만 사용되고 JPA 의 실행 로직에는 영향을 주지 않는다.**&#x20;
 
 ## 3. 필드와 컬럼 매핑&#x20;
 
@@ -104,11 +104,11 @@ public class Member {
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-07-01 17.16.35.png" alt=""><figcaption></figcaption></figure>
 
-### @Enumerated&#x20;
+### @Enumerated
 
-* 자바 enum 타입을 매핑할 때 사용&#x20;
-* **주의! ORDINAL 사용 X**&#x20;
-  * **enum 타입을 순서(숫자) 로 저장하게 되면 이후 enum 타입을 추가하거나 삭제했을 때 정합성 문제가 발생!**
+* 자바 `enum` 타입을 매핑할 때 사용&#x20;
+* **주의! `ORDINAL` 사용 X**&#x20;
+  * **`enum` 타입을 순서(숫자) 로 저장하게 되면 이후 `enum` 타입을 추가하거나 삭제했을 때 정합성 문제가 발생!**
   * **운영에서는 정말 큰 문제다!**
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-07-01 17.21.00.png" alt=""><figcaption></figcaption></figure>
@@ -116,18 +116,19 @@ public class Member {
 ### @Temporal&#x20;
 
 * 날짜 타입(`java.util.Date`, `java.util.Calendar`) 을 매핑할 때 사용&#x20;
-* 참고 : `LocalDate`, `LocalDateTime` 을 사용할 때는 생략 가능&#x20;
+* **참고 : `LocalDate`, `LocalDateTime` 을 사용할 때는 생략 가능**\
+  **(Java 8 부터는 대부분 `LocalDate`, `LocalDateTime` 을 사용하니 사실상 `@Temporal` 을 사용할 경우가 없다)**
 
 <figure><img src="../../../.gitbook/assets/스크린샷 2025-07-01 17.24.58.png" alt=""><figcaption></figcaption></figure>
 
 ### @Lob&#x20;
 
-데이터베이스 BLOB, CLOB 타입과 매핑&#x20;
+데이터베이스 `BLOB`, `CLOB` 타입과 매핑&#x20;
 
 * `@Lob` 에는 지정할 수 있는 속성이 없다.&#x20;
-* 매핑하는 필드 타입이 문자면 CLOB 매핑, 나머지는 BLOB 매핑&#x20;
-  * CLOB: String, char\[], java.sql.CLOB
-  * BLOB: byte\[], java.sql. BLOB
+* 매핑하는 필드 타입이 문자면 `CLOB` 매핑, 나머지는 `BLOB` 매핑&#x20;
+  * CL**OB:** `String`, `char[]`, `java.sql.CLOB`
+  * BLOB: `byte[]`, `java.sql.BLOB`
 
 ### @Transient
 
@@ -144,7 +145,7 @@ private Integer temp;
 
 #### 기본기 매핑 어노테이션&#x20;
 
-* `@Id`&#x20;
+* `@Id`
 * `@GeneratedValue`
 
 ```java
@@ -152,14 +153,15 @@ private Integer temp;
 private Long id;
 ```
 
-#### 기본 키 매핑 방법&#x20;
+#### 기본 키 매핑 방법
 
 * 직접 할당 : `@Id` 만 사용&#x20;
-* 자동 생성 (`@GeneratedValue`)&#x20;
+* &#x20; 자동 생성 (`@GeneratedValue`)&#x20;
   * IDENTITY : 데이터베이스에 위임, MySQL&#x20;
+    * _"나는 잘 모르겠고 DB 너가 알아서 해줘 "_
   * SEQUENCE : 데이터베이스 시퀸스 오브젝트 사용, ORACLE
-    * `@SequenceGenerator` 필요&#x20;
-  * TABLE : 키 생성용 테이블 사용, 모든 DB 에서 사용&#x20;
+    * 테이블마다 시퀀스를 만들고 싶을 때 : `@SequenceGenerator` 필요&#x20;
+  * TABLE : 키 생성용 테이블 사용, 모든 DB 에서 사용
     * `@TableGenerator` 필요&#x20;
   * AUTO : 방언에 따라 자동 지정 : 기본값
 
@@ -168,16 +170,18 @@ private Long id;
 * 기본 키 생성을 데이터베이스에 위임&#x20;
 *   주로 MySQL, PostgreSQL, SQL Server, DB2에서 사용
 
-    (예: MySQL의 AUTO\_ INCREMENT)
+    (예: MySQL의 `AUTO_ INCREMENT`)
 * JPA 는 보통 트랜잭션 커밋 시점에 INSERT SQL 실행&#x20;
-* **AUTO\_INCREMENT 는 데이터베이스에 INSERT SQL 을 실행 한 이후에 ID 값을 알 수 있음**&#x20;
-* **때문에, IDENTITY 전략은 `em.persist()` 시점에 즉시 INSERT SQL 실행하고 DB 에서 식별자를 조회**&#x20;
+* **`AUTO_INCREMENT` 는 데이터베이스에 INSERT SQL 을 실행 한 이후에 ID 값을 알 수 있음**
+* **때문에, IDENTITY 전략은 `em.persist()` 시점에 즉시 INSERT SQL 실행하고 DB 에서 식별자를 조회**
+  * 식별자 조회 후, 식별자를 기반으로 영속성 컨텍스트 내 1차 캐시에 저장한다.
 
 ### SEQUENCE 전략&#x20;
 
 * 데이터베이스 시퀀스는 유일한 값을 순서대로 생성하는 특별한 데이터베이스 오브젝트 (예 : 오라클 시퀀스)&#x20;
 * 오라클, PostgreSQL, DB2, H2 데이터베이스에서 사용
-* `em.persist()` 실행 시 데이터베이스 시퀀스를 조회한다. (INSERT SQL 을 실행하지는 않는다)
+* **`em.persist()` 실행 시 데이터베이스 시퀀스를 조회한다. (INSERT SQL 을 실행하지는 않는다)**
+  * 식별자 조회 후, 식별자를 기반으로 영속성 컨텍스트 내 1차 캐시에 저장한다.
 
 #### SEQUENCE 전략 - 매핑&#x20;
 
@@ -200,14 +204,28 @@ public class Member {
 > * `allocationSize` 속성 만큼 한번에 시퀀스 값을 메모리에 올려놓고 사용한다.&#x20;
 > * 때문에, 애플리케이션에서 메모리에 올려둔 시퀀스를 다 사용하기 이전까지 IO 를 하지 않는다.&#x20;
 > * **동시성 문제가 발생할 수 있을 것이라 생각하지만, 각 요청마다 새로운 시퀀스를 사용할 것이기 때문에, 문제는 발생하지 않는다.**
->   * 1번 요청 -> 시퀀스 1 \~ 50 확보&#x20;
+>   * 1번 요청 -> 시퀀스 1 \~ 50 확보
 >   * 2번 요청 -> 시퀀스 51 \~ 100 확보
+>
+>
+>
+> #### 참고 - 여러개의 서버가 시퀀스를 요청하면 동시성 문제가 발생하지 않을까?&#x20;
+>
+> `allocationSize=50` 이라고 하면,&#x20;
+>
+> * 서버 A → DB 시퀀스에서 값을 한 번 뽑아오면서 **\[1\~50] 구간**을 임대받음
+> * 서버 B → 동시에 호출하면 DB가 그 다음 값부터 줘서 **\[51\~100] 구간**을 임대받음
+> * 서버 C → 이어서 **\[101\~150] 구간** …
+>
+> 이렇게 서버마다 다른 구간을 나눠서 사용하기 때문에, 동시성 문제가 발생하지 않는다.&#x20;
 
 ### TABLE 전략&#x20;
 
 * 키 생성 전용 테이블을 하나 만들어서 데이터베이스 시퀀스를 흉내내는 전략&#x20;
 * 장점 : 모든 데이터베이스에 적용 가능&#x20;
-* 단점 : 성능&#x20;
+* 단점 : 성능
+  * 테이블을 직접 사용하다보니 락을 포함한 다양한 성능 문제가 있다.
+  * **운영에서는 성능 문제로 사용하기가 부담스럽다..**
 
 #### TABLE 전략 - 매핑
 
@@ -239,8 +257,10 @@ public class Member {
 
 ### 권장하는 식별자 전략&#x20;
 
-* 기본 키 제약 조건 : null 아님, 유일, **변하면 안된다.**
-* **미래까지 이 조건을 만족하는 자연키는 찾기 어렵다..** \
-  **대리키(대체키)를 사용하자!**&#x20;
-* 예를 들어, 주민등록번호도 기본 키로 적절하지 않다..&#x20;
+* **기본 키 제약 조건 : `null` 아님, 유일, 변하면 안된다.**
+* **미래까지 이 조건(변하면 안된다) 을 만족하는 자연키(주민번호, 전화번호 등등..)는 찾기 어렵다..**
+  * 대리키(대체키)를 사용하자!
+* 예를 들어, 주민등록번호도 기본 키로 적절하지 않다..
+  * 과거에 나라에서 갑자기 주민번호를 보관하면 안된다는 정책이 있었다..&#x20;
+  * 해당 PK 를 사용하는 모든 테이블에 영향이 간다.. (비용이 엄청나다..)
 * **권장 : Long 형 + 대체키 + 키 생성전략 사용**
