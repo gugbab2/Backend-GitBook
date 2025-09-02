@@ -481,6 +481,7 @@
   * [자바 ORM 표준 JPA 프로그래밍 - 기본편](db/undefined-1/orm-jpa/README.md)
     * [영속성 관리 - 내부 동작 방식](db/undefined-1/orm-jpa/undefined.md)
     * [엔티티 매핑](db/undefined-1/orm-jpa/undefined-1.md)
+    * [연관관계 매핑 기초](db/undefined-1/orm-jpa/undefined-2.md)
   * [김영한의 실전 데이터베이스 - 기본편](db/undefined-1/undefined/README.md)
     * [조인1 - 내부 조인](db/undefined-1/undefined/1.md)
     * [조인2 - 외부 조인과 기타 조인](db/undefined-1/undefined/2.md)

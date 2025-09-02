@@ -264,3 +264,333 @@ public class Member {
   * 과거에 나라에서 갑자기 주민번호를 보관하면 안된다는 정책이 있었다..&#x20;
   * 해당 PK 를 사용하는 모든 테이블에 영향이 간다.. (비용이 엄청나다..)
 * **권장 : Long 형 + 대체키 + 키 생성전략 사용**
+
+## 5. 실전 예제1 - 요구사항 분석과 기본 매핑&#x20;
+
+### 요구사항 분석&#x20;
+
+* 회원은 상품을 주문할 수 있다.&#x20;
+* 주문 시 여러 종류의 상품을 선택할 수 있다.&#x20;
+
+### 도메인 모델 분석&#x20;
+
+* 회원과 주문의 관계 : 회원은 여러 번 주문할 수 있다. (일대다)&#x20;
+* 주문과 상품의 관계 : 주문할 때 여러 상품을 선택할 수 있다. 반대로 같은 상품도 여러 번 주문될 수 있다. 주문상품 이라는 모델을 만들어서 다대다 관계를 일대다, 다대일 관계로 풀어냄
+
+<figure><img src="../../../.gitbook/assets/스크린샷 2025-08-31 20.06.28.png" alt=""><figcaption></figcaption></figure>
+
+### 테이블 설계&#x20;
+
+<figure><img src="../../../.gitbook/assets/스크린샷 2025-08-31 20.07.30.png" alt=""><figcaption></figcaption></figure>
+
+### 엔티티 설계와 매핑&#x20;
+
+<figure><img src="../../../.gitbook/assets/스크린샷 2025-08-31 20.07.45.png" alt=""><figcaption></figcaption></figure>
+
+### 설계 기반의 코드
+
+#### 상품(`Item`)
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Item {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ITEM_ID")
+    private Long id;
+
+    private String name;
+    private int price;
+    private int StockQuantity;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getStockQuantity() {
+        return StockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        StockQuantity = stockQuantity;
+    }
+}
+```
+
+#### 회원(`Member`)
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.*;
+
+@Entity
+public class Member {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+    private String name;
+    private String city;
+    private String street;
+    private String zipCode;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+}
+
+```
+
+#### 주문(`Order`)
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "ORDERS")
+public class Order {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ID")
+    private Long id;
+
+    @Column(name = "MEMBER_ID")
+    private Long MemberId;
+
+    private LocalDateTime orderDate;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getMemberId() {
+        return MemberId;
+    }
+
+    public void setMemberId(Long memberId) {
+        MemberId = memberId;
+    }
+
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+}
+```
+
+```java
+package jpabook.jpashop.domain;
+
+public enum OrderStatus {
+    ORDER, CANCEL
+}
+```
+
+#### 주문상품(`OrderItem`)
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class OrderItem {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ITEM_ID")
+    private Long id;
+
+    @Column(name = "ITEM_ID")
+    private Long itemId;
+    @Column(name = "ORDER_ID")
+    private Long orderId;
+
+    private int orderPrice;
+    private int count;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public int getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(int orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+}
+```
+
+### 데이터 중심 설계의 문제점&#x20;
+
+* **현재 방식은 객체 설계를 테이블 설계에 맞춘 방식이다.** \
+  **때문에, 다음 코드와 같이 객체지향적이지 못한 코드가 만들어진다.**
+
+```java
+package jpabook.jpashop;
+
+import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+public class jpaMain {
+
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        try {
+
+            Order order = em.find(Order.class, 1L);
+            Long memberId = order.getMemberId();
+
+            // 객체지향적 코드라면 order.getMember() 가 가능해야 한다!
+            Member member = em.find(Member.class, memberId);
+
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+
+        emf.close();
+    }
+}
+
+```
+
+* 테이블의 외래키를 객체에 그대로 가져온다.(객체지향적이지 못하다..)&#x20;
+* 객체 그래프 탐색이 불가능하다.&#x20;
+* 참조가 없으므로 UML 도 잘못되었다.&#x20;
+
+**위 문제를 해결하기 위해서 연관관계 매핑이 필요하다.**&#x20;
