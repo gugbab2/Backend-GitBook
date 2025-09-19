@@ -478,3 +478,108 @@ public class Team {
     }
 }
 ```
+
+## 5. 실전 예제2 - 연관관계 매핑 시작&#x20;
+
+### 테이블 구조&#x20;
+
+테이블 구조는 이전과 같다.&#x20;
+
+<figure><img src="../../../.gitbook/assets/스크린샷 2025-09-06 10.46.37.png" alt=""><figcaption></figcaption></figure>
+
+### 객체 구조&#x20;
+
+참조를 사용하도록 변경&#x20;
+
+<figure><img src="../../../.gitbook/assets/스크린샷 2025-09-06 10.46.57.png" alt=""><figcaption></figcaption></figure>
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class Member {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+    private String name;
+    private String city;
+    private String street;
+    private String zipCode;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
+
+    ...
+}
+```
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "ORDERS")
+public class Order {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ID")
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    private LocalDateTime orderDate;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    ...
+}
+```
+
+```java
+package jpabook.jpashop.domain;
+
+import javax.persistence.*;
+
+@Entity
+public class OrderItem {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ITEM_ID")
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;
+
+    private int orderPrice;
+    private int count;
+
+    ...
+}
+```
