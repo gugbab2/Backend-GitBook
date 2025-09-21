@@ -1,4 +1,4 @@
-# 7회차 - (2025.09.01HashMap)
+# 7회차 - (2025.09.01 / HashMap)
 
 ## 1. Java HashMap 코드 리뷰
 
