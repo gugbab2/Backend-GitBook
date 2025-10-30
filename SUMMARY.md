@@ -584,4 +584,4 @@
   * [개발환경 세팅](company/buptle/undefined/README.md)
     * [BuptleBiz 2.0](company/buptle/undefined/buptlebiz-2.0.md)
   * [비커밍 교육](company/buptle/undefined-1/README.md)
-    * [계약(계약 검토)](company/buptle/undefined-1/undefined.md)
+    * [1주차 - 계약(계약 검토)](company/buptle/undefined-1/1.md)
