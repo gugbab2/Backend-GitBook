@@ -577,11 +577,3 @@
 * [기술면접 질문](undefined-1/README.md)
   * [2025](undefined-1/2025/README.md)
     * [일급 컬렉션이란? (08.28)](undefined-1/2025/08.28.md)
-
-## COMPANY
-
-* [BUPTLE](company/buptle/README.md)
-  * [개발환경 세팅](company/buptle/undefined/README.md)
-    * [BuptleBiz 2.0](company/buptle/undefined/buptlebiz-2.0.md)
-  * [비커밍 교육](company/buptle/undefined-1/README.md)
-    * [1주차 - 계약(계약 검토)](company/buptle/undefined-1/1.md)
