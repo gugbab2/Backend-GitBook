@@ -303,8 +303,7 @@ public class SimpleListMainV3 {
 * 그림과 같이 정적인 클래스의 의존 관계를 정적 의존 관계라 한다.
 * `test()` 메서드를 클라이언트라고 가정. `test()` 메서드는 `SimpleList` 라는 인터페이스에만 의존한다.
   * 이것을 추상화에 의존한다고 표현한다.
-* 덕분에 `SimpleList` 인터페이스의 구현체인 `BasicList`, `SyncList`, `SyncProxyList` 중에 어떤 것을 사용하든, 클라이언트인 `test()` 의 코드는 전혀 변경하지 않아도 된다.\
-
+* 덕분에 `SimpleList` 인터페이스의 구현체인 `BasicList`, `SyncList`, `SyncProxyList` 중에 어떤 것을 사용하든, 클라이언트인 `test()` 의 코드는 전혀 변경하지 않아도 된다.<br>
 
 #### 런타임 의존 관계&#x20;
 

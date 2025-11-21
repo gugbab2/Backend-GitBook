@@ -5,8 +5,7 @@
   &#xNAN;**-> 아래 3가지 메서드 모두 리턴 타입이 입출력과 관련된 클래스이다.**&#x20;
   * `static PrintStream err` : 에러 및 오류를 출력할 때 사용
   * `static InputStream in` : 입력값을 처리할 때 사용
-  * `static PrintStream out` : 출력값을 처리할 때 사용\
-
+  * `static PrintStream out` : 출력값을 처리할 때 사용<br>
 
 ## 1. 시스템 속성(Property) 값 관리
 

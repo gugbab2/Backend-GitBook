@@ -11,8 +11,7 @@
 
 <figure><img src="../../../../../.gitbook/assets/스크린샷 2024-01-19 12.54.50.png" alt=""><figcaption></figcaption></figure>
 
-*   MD 계열\
-
+*   MD 계열<br>
 
     <figure><img src="../../../../../.gitbook/assets/스크린샷 2024-01-19 12.58.32.png" alt="" width="375"><figcaption></figcaption></figure>
 

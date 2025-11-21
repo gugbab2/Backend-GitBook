@@ -359,8 +359,7 @@ public class TxLevelTest {
 
 * `read()` : 해당 메서드에 `@Transactional` 이 없다. 이 경우 더 상위인 클래스를 확인한다.
   * 클래스에 `@Transactional(readOnly = true)` 이 적용되어 있다. 따라서 트랜잭션이 적용되고 \
-    `readOnly = true` 옵션을 사용하게 된다.\
-
+    `readOnly = true` 옵션을 사용하게 된다.<br>
 
 ### 인터페이스에 @Transactional 적용
 

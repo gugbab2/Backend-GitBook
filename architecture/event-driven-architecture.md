@@ -13,7 +13,7 @@
 
 ## &#x20;Event Driven MicroService?&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (162).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (162).png" alt=""><figcaption></figcaption></figure>
 
 * Event Driven MicroService(EDM) 은 MSA 가 적용된 시스템에서 이벤트 발생 시 해당 이벤트 로그를 보관하고 이를 기반으로 동작하며, 비동기 통신을 통해 시스템 내 통합(integration) 을 수행하는 Architecture 이다.&#x20;
 
@@ -94,7 +94,7 @@
 
 #### 폴리글랏 (서비스 별 다른 스팩을 가지는 것을 의미)&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (163).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (163).png" alt=""><figcaption></figcaption></figure>
 
 * 모바일, SNS, IOT 등 다양한 시스템이 발전하고 있는 상황에서 이들 시스템이 다루는 데이터는 스트림 형태의 비정형 데이터가 많다.&#x20;
 * 매우 빠른 읽기/쓰기 성능을 지원해야 하고 분산형 구조를 통해 데이터를 여러 대의 서버에 저장한다. 상호 복제해 특정 서버에 장애가 발생했을 때에도 데이터 유실이나 서비스 중지가 없는 형태의 구조 등 기존 관계형 DB 에 최적화 되지 않은 기능을 요구한다.&#x20;
@@ -114,7 +114,7 @@
 
 ### 비즈니스 흐름&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (164).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (164).png" alt=""><figcaption></figcaption></figure>
 
 * 핫초코를 구매하는 과정을 생각해보자.
   * 메뉴 선택&#x20;
@@ -153,8 +153,7 @@
     * 서비스 간 반정규화 된 동일한 데이터를 변경할 때 요청 받은 서비스가 반정규화된 데이터가 위한 서비스를 모두 찾아서 변경하도록 처리해야 한다.&#x20;
     * 데이터 오너 서비스가 반정규화 해간 서비스 리스트를 관리하지 않는 이상 그에 따른 데이터의 일관성을 유지하기가 어렵다.&#x20;
   * **동기 통신의 비용**
-    * 외부에서 API 를 통해 요청이 전달되었을 때, 응답을 하기까지 연관된 모든 서비스의 자원을 홀딩한다. \
-
+    * 외부에서 API 를 통해 요청이 전달되었을 때, 응답을 하기까지 연관된 모든 서비스의 자원을 홀딩한다. <br>
 * **비동기 메세지 큐 방식은 시스템 내 통합에 적합하다.**&#x20;
   * 서비스 간 결합도가 낮아진다.&#x20;
   * 서비스 흐름이 단순해진다.&#x20;

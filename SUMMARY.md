@@ -262,7 +262,7 @@
     * [자바 NIO 의 동작원리 및 IO 모델](language/readme-1/undefined-2/nio-io.md)
     * [함수형 인터페이스(FunctionInterface) - 자바8](language/readme-1/undefined-2/functioninterface-8.md)
 
-## FRAMEWORK
+## framework
 
 * [Spring](framework/spring/README.md)
   * [강의](framework/spring/undefined/README.md)
