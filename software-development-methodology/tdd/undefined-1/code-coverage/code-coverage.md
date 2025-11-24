@@ -82,7 +82,7 @@ assertEquals(2, calc.divide(2,1));
 //-> 메소드 커버리지 100%
 ```
 
-<figure><img src="../../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 만약 `Multiply` 메서드 테스트 케이스가 누락된다면, 아래와 같이 누락된 메서드가 표시된다.&#x20;
 

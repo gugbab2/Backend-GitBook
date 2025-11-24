@@ -344,6 +344,8 @@
   * [강의](framework/django/undefined/README.md)
     * [\[실전! Django 입문\]](framework/django/undefined/django/README.md)
       * [섹션6. Django ORM 이해하기](framework/django/undefined/django/6.-django-orm.md)
+      * [섹션8. Django REST Framework 을 이용한 API 개발](framework/django/undefined/django/8.-django-rest-framework-api/README.md)
+        * [Django, DRF Serializers](framework/django/undefined/django/8.-django-rest-framework-api/django-drf-serializers.md)
 
 ## CS
 

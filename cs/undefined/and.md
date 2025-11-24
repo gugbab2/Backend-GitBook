@@ -12,7 +12,7 @@
 * **동기/비동기는 완료 여부!**
 * **블로킹/논블로킹은 차단 or 제어권 여부!**
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-1. 동기(synchronous) / 비동기(Asynchronous)
 
@@ -26,7 +26,7 @@
 * 비동기는 요청한 작업의 완료 여부를 확인하지 않고, 자신의 그 다음 작업을 수행하기 떄문에 I/O 작업, API 요청과 같은 느린 작업이 발생할 때, 기다리지 않고 동시에 멀티 작업을 진행할 수 있다.
 * 예를 들어, 웹 어플리케이션에서 결재 처리 시 결제 요청은 동기적으로 처리하여 완료 여부를 확인하지만, 결제 완료 후 영수증 이메일 전송이나 포인트 적립과 같은 부수적인 기능은 비동기로 처리해 성능을 최적화 할 수 있다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### 1-1-2. 동기와 비동기는 작업 순서 처리 차이
 
