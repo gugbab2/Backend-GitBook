@@ -261,6 +261,9 @@
     * [시스템 콜과 자바에서의 시스템 콜 사용례](language/readme-1/undefined-2/undefined.md)
     * [자바 NIO 의 동작원리 및 IO 모델](language/readme-1/undefined-2/nio-io.md)
     * [함수형 인터페이스(FunctionInterface) - 자바8](language/readme-1/undefined-2/functioninterface-8.md)
+* [Python](language/python/README.md)
+  * [Python Official Tutorial](language/python/python-official-tutorial.md)
+  * [Fluent Python](language/python/fluent-python.md)
 
 ## framework
 
@@ -346,6 +349,12 @@
       * [섹션6. Django ORM 이해하기](framework/django/undefined/django/6.-django-orm.md)
       * [섹션8. Django REST Framework 을 이용한 API 개발](framework/django/undefined/django/8.-django-rest-framework-api/README.md)
         * [\[DRF\] Serializer는 도대체 어떻게 데이터를 JSON으로 바꿀까?](framework/django/undefined/django/8.-django-rest-framework-api/drf-serializer-json.md)
+
+## DEVOPS
+
+* [Docker](devops/docker/README.md)
+  * [Docker 기본개념](devops/docker/docker.md)
+  * [현업에서 자주 사용하는 Docker CLI 익히기](devops/docker/docker-cli.md)
 
 ## CS
 
