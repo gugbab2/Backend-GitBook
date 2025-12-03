@@ -8,7 +8,9 @@
 
 ### Django의 태생적 한계 : "나는 HTML 만드는 기계인데?"
 
-Django 는 원래 풀스택 프레임워크로 태어났다. DB 에서 데이터를 꺼내서 HTML(Template) 에 예브게 채워 넣어 브라우저에게 주는 것이 주특기였다. 이 역할을 했던 것이 바로 ModelForm(데이터 검증) 과 Template Engine(화면) 이다.&#x20;
+Django 는 원래 풀스택 프레임워크로 태어났다. DB 에서 데이터를 꺼내서 HTML(Template) 에 예쁘게 채워 넣어 브라우저에게 주는 것이 주특기였다. 이 역할을 했던 것이 바로 ModelForm(데이터 검증) 과 Template Engine(화면) 이다.&#x20;
+
+**또한 Django 는 전체 설계가 Model 을 중심으로 되어있기 때문에, ModelForm 은 Model 에 정의된 제약들을 통해서 수 많은 검증 로직들을 구현하지 않아도 되었다.**&#x20;
 
 ### 시대의 변화 : "이제 JSON 을 주세요!"
 
@@ -18,6 +20,8 @@ Django 는 원래 풀스택 프레임워크로 태어났다. DB 에서 데이터
 * 해결 : Django 가 원래 쓰던 ModelForm 이랑 비슷하게 만들자. 대신 HTML 말고 JSON 을 만들게 하자.&#x20;
 
 그렇게 탄생한 것이 DRF(Django REST Framework) 이고, 그 핵심 도구가 Serializer(직렬화기) 이다.&#x20;
+
+**Serializer 또한 Django 의 Model 중심 설계의 이점을 가져가 Model 에 정의된 제약들을 통해서 수 많은 검증 로직들을 구현하지 않아도 되었다.**&#x20;
 
 즉, Serializer 는 API 시대를 위한 ModelForm 이라고 이해하면 가장 정확하다.&#x20;
 

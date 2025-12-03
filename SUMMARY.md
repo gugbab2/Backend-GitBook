@@ -345,10 +345,18 @@
     * [POJO(Plain Old Java Object)](framework/spring/undefined-2/pojo-plain-old-java-object.md)
 * [Django](framework/django/README.md)
   * [강의](framework/django/undefined/README.md)
-    * [\[실전! Django 입문\]](framework/django/undefined/django/README.md)
+    * [실전! Django 입문](framework/django/undefined/django/README.md)
       * [섹션6. Django ORM 이해하기](framework/django/undefined/django/6.-django-orm.md)
       * [섹션8. Django REST Framework 을 이용한 API 개발](framework/django/undefined/django/8.-django-rest-framework-api/README.md)
         * [\[DRF\] Serializer는 도대체 어떻게 데이터를 JSON으로 바꿀까?](framework/django/undefined/django/8.-django-rest-framework-api/drf-serializer-json.md)
+    * [실전! Django 활용](framework/django/undefined/django-1/README.md)
+      * [섹션2. 프로젝트 세팅](framework/django/undefined/django-1/2..md)
+      * [섹션3. 상품 노출](framework/django/undefined/django-1/3..md)
+      * [섹션4. 상품 검색](framework/django/undefined/django-1/4..md)
+      * [섹션5. 결제](framework/django/undefined/django-1/5..md)
+      * [섹션6. 포인트 시스템](framework/django/undefined/django-1/6..md)
+      * [섹션7. ORM 이해하기](framework/django/undefined/django-1/7.-orm.md)
+      * [섹션8. Service Layer 분리](framework/django/undefined/django-1/8.-service-layer.md)
 
 ## DEVOPS
 
