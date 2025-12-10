@@ -9,7 +9,7 @@ Dockerfile 을 이용해서 Docker 이미지를 만들 수 있다.&#x20;
 Dockerhub 에 올려놓은 Docker 이미지가 아닌, 나만의 Docker 이미지를 만들고 싶을 수 있다.&#x20;
 
 * 예를 들어, 내가 만든 Spring Boot 프로젝트가 있다. 내가 만든 Spring Boot 프로젝트 자체를 Docker 이미지로 만들고 싶을 수 있다.&#x20;
-* 이럴 때에도 Dockerfile 을 활용하면 나만의 Docker 이미지를 만들 수 있다.&#x20;
+* 이럴 때에, Dockerfile 을 활용하면 나만의 Docker 이미지를 만들 수 있다.&#x20;
 
 Dockerfile 은 Docker 이미지를 만들게 해주는 역할이다.&#x20;
 
