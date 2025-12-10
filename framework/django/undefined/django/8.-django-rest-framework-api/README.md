@@ -7,7 +7,7 @@
   * 직렬화 : Django 모델 인스턴스를 곧바로 JSON 형태로 변환
   * 역직렬화 : **클라이언트가 보낸 데이터를 빠르게 유효성 검사**하여 사용 가능
 
-<figure><img src="../../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### ShortURLResponseSerializer 정의&#x20;
 

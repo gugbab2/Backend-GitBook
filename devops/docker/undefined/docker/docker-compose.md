@@ -88,7 +88,7 @@ $ docker compose down
 
 #### 1. Spring Boot 프로젝트 세팅&#x20;
 
-<figure><img src="../../.gitbook/assets/image (262).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (262).png" alt=""><figcaption></figcaption></figure>
 
 * Java 17 버전을 선택&#x20;
 * Dependencies 는 `Spring Boot DevTools`, `Spring Web`, `Spring Data JPA`, `MySQL Driver`  선택&#x20;
@@ -178,7 +178,7 @@ $ docker logs [Container ID]
 
 #### 컨테이너로 실행시킨 Spring Boot 가 MySQL 에 연결이 안 되는 이유
 
-<figure><img src="../../.gitbook/assets/image (263).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (263).png" alt=""><figcaption></figcaption></figure>
 
 * 각각의 컨테이너는 자신만의 네트워크망과 IP 주소를 가지고 있다. 호스트 컴퓨터 입장에서 localhost 는 호스트 컴퓨터를 가리키지만, Spring Boot 컨테이너 입장에서 localhost 는 Spring Boot 컨테이너를 가리킨다.&#x20;
 * 그런데, Spring Boot 의 코드를 작성할 때 DB 정보를 아래와 같이 입력했었다. Spring Boot 가 실행되는환경인 컨테이너 입장에서 `localhost:3306` 이라는 주소는, Spring Boot 컨테이너 내부에 있는 3306 포트와 연결을 시도하게 된다. 하지만 Spring Boot 가 실행되는 컨테이너 내부의  3306 포트에는 아무것도 실행되고 있지 않다.&#x20;
