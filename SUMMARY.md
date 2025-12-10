@@ -365,6 +365,7 @@
   * [현업에서 자주 사용하는 Docker CLI 익히기](devops/docker/docker-cli.md)
   * [Docker Volume 을 활용해 데이터 유실 방지하기](devops/docker/docker-volume.md)
   * [Dockerfile 을 활용해 이미지 직접 만들기](devops/docker/dockerfile.md)
+  * [Docker Compose 를 활용해 컨테이너 관리하기](devops/docker/docker-compose.md)
 
 ## CS
 
