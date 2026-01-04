@@ -373,6 +373,7 @@
 * [Git](devops/git/README.md)
   * [기계인간 종립님과 함께하는 소프트웨어 개발의 지혜\<Git 편>](devops/git/less-than-git-greater-than/README.md)
     * [섹션1. Git 의 데이터베이스](devops/git/less-than-git-greater-than/1.-git.md)
+    * [섹션2. Git References](devops/git/less-than-git-greater-than/2.-git-references.md)
 
 ## AI
 
