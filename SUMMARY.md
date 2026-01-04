@@ -370,6 +370,15 @@
       * [Docker Compose 를 활용해 컨테이너 관리하기](devops/docker/undefined/docker/docker-compose.md)
   * [그 외](devops/docker/undefined-1/README.md)
     * [도커는 OS 위에서 어떻게 격리된 것처럼 보이는가?](devops/docker/undefined-1/os.md)
+* [Git](devops/git/README.md)
+  * [기계인간 종립님과 함께하는 소프트웨어 개발의 지혜\<Git 편>](devops/git/less-than-git-greater-than/README.md)
+    * [섹션1. Git 의 데이터베이스](devops/git/less-than-git-greater-than/1.-git.md)
+
+## AI
+
+* [RAG](ai/rag/README.md)
+  * [RAG 를 활용한 LLM Application 개발(feat. LangChain)](ai/rag/rag-llm-application-feat.-langchain/README.md)
+    * [배경지식](ai/rag/rag-llm-application-feat.-langchain/undefined.md)
 
 ## CS
 
