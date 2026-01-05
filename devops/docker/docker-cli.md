@@ -103,7 +103,7 @@ docker image rm nginx
 docker run -d -p 4000:80 nginx
 ```
 
-<figure><img src="../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 컨테이너 조회 / 중지 / 삭제&#x20;
 

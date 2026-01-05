@@ -1,8 +1,8 @@
-# 도커는 OS 위에서 어떻게 격리된 것처럼 보이는가?
+# 도커의 작동 원리
 
 > **도커의 정체는 '리눅스 커널의 기능을 이용해 격리된 척하는 프로세스' 이다.**&#x20;
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. 도커의 거짓말 : 격리 (Namespaces)&#x20;
 

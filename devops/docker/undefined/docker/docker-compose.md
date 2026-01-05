@@ -200,4 +200,3 @@ spring:
 * `compose.yml` MySQL 서비스 이름을 my-db 로 설정해두었다.&#x20;
 * **Spring Boot 내 `application.yml` 파일에서 해당 서비스 이름을 사용하면 `compose.yml` 에서 정의한 서비스와 연결을 시도하게 되고,**&#x20;
 * 실행해보면 정상 연결되는 것을 확인할 수 있다.&#x20;
-
