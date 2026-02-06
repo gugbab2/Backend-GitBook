@@ -382,6 +382,9 @@
 * [RAG](ai/rag/README.md)
   * [RAG 를 활용한 LLM Application 개발(feat. LangChain)](ai/rag/rag-llm-application-feat.-langchain/README.md)
     * [배경지식](ai/rag/rag-llm-application-feat.-langchain/undefined.md)
+* [Agent](ai/agent/README.md)
+  * [7가지 프로젝트로 배우는 LLM AI 에이전트 개발](ai/agent/7-llm-ai/README.md)
+    * [chapter 2. LLM 기반의 에이전트 기술 기반 체계](ai/agent/7-llm-ai/chapter-2.-llm.md)
 
 ## CS
 
