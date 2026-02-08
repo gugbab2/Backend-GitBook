@@ -385,6 +385,7 @@
 * [Agent](ai/agent/README.md)
   * [7가지 프로젝트로 배우는 LLM AI 에이전트 개발](ai/agent/7-llm-ai/README.md)
     * [chapter 2. LLM 기반의 에이전트 기술 기반 체계](ai/agent/7-llm-ai/chapter-2.-llm.md)
+    * [chapter 3. OpenAI API, LangChain, LlamaIndex](ai/agent/7-llm-ai/chapter-3.-openai-api-langchain-llamaindex.md)
 
 ## CS
 
