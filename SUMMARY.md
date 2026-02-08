@@ -386,6 +386,7 @@
   * [7가지 프로젝트로 배우는 LLM AI 에이전트 개발](ai/agent/7-llm-ai/README.md)
     * [chapter 2. LLM 기반의 에이전트 기술 기반 체계](ai/agent/7-llm-ai/chapter-2.-llm.md)
     * [chapter 3. OpenAI API, LangChain, LlamaIndex](ai/agent/7-llm-ai/chapter-3.-openai-api-langchain-llamaindex.md)
+    * [chapter 4. 에이전트1 : 자동화된 사무 구현 Assistants API & DALLE3 모델을 이용한 프레젠테이션 제작](ai/agent/7-llm-ai/chapter-4.-1-assistants-api-and-dalle3.md)
 
 ## CS
 
