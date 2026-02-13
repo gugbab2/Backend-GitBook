@@ -266,6 +266,8 @@
     * [1부 데이터 구조체](language/python/fluent-python/1/README.md)
       * [1장 파이썬 데이터 모델](language/python/fluent-python/1/1.md)
       * [2장 시퀀스의 배열](language/python/fluent-python/1/2.md)
+  * [Python 개발자를 위한 프로세스, 스레드, 그리고 동시성 이해하기](language/python/python.md)
+  * [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](language/python/python-gil.md)
   * [CGI, WSGI, ASGI 의 차이](language/python/cgi-wsgi-asgi.md)
 
 ## framework
