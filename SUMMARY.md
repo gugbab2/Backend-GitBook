@@ -266,6 +266,7 @@
     * [1부 데이터 구조체](language/python/fluent-python/1/README.md)
       * [1장 파이썬 데이터 모델](language/python/fluent-python/1/1.md)
       * [2장 시퀀스의 배열](language/python/fluent-python/1/2.md)
+  * [CGI, WSGI, ASGI 의 차이](language/python/cgi-wsgi-asgi.md)
 
 ## framework
 
