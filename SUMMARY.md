@@ -262,13 +262,16 @@
     * [자바 NIO 의 동작원리 및 IO 모델](language/readme-1/undefined-2/nio-io.md)
     * [함수형 인터페이스(FunctionInterface) - 자바8](language/readme-1/undefined-2/functioninterface-8.md)
 * [Python](language/python/README.md)
-  * [Fluent Python](language/python/fluent-python.md)
-    * [1부 데이터 구조체](language/python/fluent-python/1/README.md)
-      * [1장 파이썬 데이터 모델](language/python/fluent-python/1/1.md)
-      * [2장 시퀀스의 배열](language/python/fluent-python/1/2.md)
-  * [Python 개발자를 위한 프로세스, 스레드, 그리고 동시성 이해하기](language/python/python.md)
-  * [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](language/python/python-gil.md)
-  * [CGI, WSGI, ASGI 의 차이](language/python/cgi-wsgi-asgi.md)
+  * [책](language/python/undefined/README.md)
+    * [Fluent Python](language/python/undefined/fluent-python/README.md)
+      * [1부 데이터 구조체](language/python/undefined/fluent-python/1/README.md)
+        * [1장 파이썬 데이터 모델](language/python/undefined/fluent-python/1/1.md)
+        * [2장 시퀀스의 배열](language/python/undefined/fluent-python/1/2.md)
+  * [그 외](language/python/undefined-1/README.md)
+    * [Python 개발자를 위한 CPython 완전 가이드](language/python/undefined-1/python-cpython.md)
+    * [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](language/python/undefined-1/python-gil.md)
+    * [Python 개발자를 위한 멀티스레드와 동시성 완전 가이드](language/python/undefined-1/python.md)
+    * [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포 (비동기 코루틴 작업 정리 필요)](language/python/undefined-1/python-cgi-wsgi-asgi.md)
 
 ## framework
 
