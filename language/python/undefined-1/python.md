@@ -2,22 +2,11 @@
 
 ### 들어가며
 
-파이썬은 자바와 동시성 모델이 근본적으로 다릅니다. \*\*GIL(Global Interpreter Lock)\*\*이라는 고유한 제약이 존재하고, 이를 우회하기 위해 `multiprocessing`과 `asyncio`라는 독자적인 경로를 발전시켜 왔습니다. 이 문서는 OS 수준의 기초부터, 파이썬의 실전 동시성 패턴, 그리고 미래의 방향까지를 **기승전결** 구조로 정리합니다.
-
-**문서 구성:**
-
-| 파트            | 내용                  | 핵심 질문                         |
-| ------------- | ------------------- | ----------------------------- |
-| **기 (1\~2장)** | OS 기초 + 파이썬 스레드의 정체 | 컴퓨터는 어떻게 여러 작업을 동시에 하는가?      |
-| **승 (3장)**    | 동시성 문제와 동기화         | 왜 멀티스레드는 위험한가? 어떻게 안전하게 만드는가? |
-| **전 (4장)**    | 생산자/소비자 패턴          | 실전에서 스레드 간 협력은 어떻게 하는가?       |
-| **결 (5\~6장)** | 고수준 도구 + 미래 방향      | 실무에서는 무엇을 쓰는가? 파이썬은 어디로 가는가?  |
+파이썬은 자바와 동시성 모델이 근본적으로 다릅니다. **GIL(Global Interpreter Lock)**&#xC774;라는 고유한 제약이 존재하고, 이를 우회하기 위해 `multiprocessing`과 `asyncio`라는 독자적인 경로를 발전시켜 왔습니다. 이 문서는 OS 수준의 기초부터, 파이썬의 실전 동시성 패턴, 그리고 미래의 방향까지를 정리합니다.
 
 ***
 
-## Part 1. 기(起) — 토대를 다지다
-
-***
+## Part 1. 기반 지식
 
 ### 1장. OS가 프로그램을 실행하는 방법
 
@@ -29,10 +18,7 @@
 
 **멀티프로세싱:** CPU 코어가 여러 개라면 **물리적으로** 동시에 여러 작업을 처리할 수 있습니다.
 
-| 구분 | 멀티태스킹              | 멀티프로세싱        |
-| -- | ------------------ | ------------- |
-| 관점 | 소프트웨어 (OS 스케줄러)    | 하드웨어 (CPU 코어) |
-| 원리 | 시분할로 동시 실행처럼 보이게 함 | 실제로 동시에 실행    |
+<table><thead><tr><th width="106.953125">구분</th><th>멀티태스킹</th><th>멀티프로세싱</th></tr></thead><tbody><tr><td>관점</td><td>소프트웨어 (OS 스케줄러)</td><td>하드웨어 (CPU 코어)</td></tr><tr><td>원리</td><td>시분할로 동시 실행처럼 보이게 함</td><td>실제로 동시에 실행</td></tr></tbody></table>
 
 #### 1.2 프로세스와 스레드
 
@@ -49,18 +35,13 @@
 
 #### 1.3 컨텍스트 스위칭 — 깊이 이해하기
 
-스레드를 번갈아 실행할 때마다, 현재 스레드의 상태를 저장하고, 다음 스레드의 상태를 복원해야 합니다. 이 비용을 **컨텍스트 스위칭 비용**이라고 합니다. "안 할수록 좋다"는 단순한 결론보다, **어떤 일이 일어나는지** 이해하는 것이 중요합니다.
+스레드를 번갈아 실행할 때마다, 현재 스레드의 상태를 저장하고, 다음 스레드의 상태를 복원해야 합니다. 이 비용을 **컨텍스트 스위칭 비용**이라고 합니다.&#x20;
+
+"안 할수록 좋다"는 단순한 결론보다, **어떤 일이 일어나는지** 이해하는 것이 중요합니다.
 
 **핵심 용어 정리**
 
-| 용어           | 설명                                                                                 |
-| ------------ | ---------------------------------------------------------------------------------- |
-| **가상 주소 공간** | 각 프로세스가 "나만 메모리 전체를 쓰고 있다"고 착각하게 만드는 구조. 프로세스 A, B가 같은 주소를 써도 실제 RAM에서는 다른 위치를 가리킴 |
-| **페이지 테이블**  | 가상 주소 → 물리 주소 변환표. 프로세스마다 자신만의 것을 가짐                                               |
-| **MMU**      | CPU 안의 하드웨어 장치. 가상 주소를 물리 주소로 실제 변환하는 역할                                           |
-| **TLB**      | MMU 안의 캐시. 최근 변환 결과를 저장해두어 빠르게 재사용                                                 |
-| **PCB**      | 프로세스의 모든 상태 정보를 저장하는 자료구조 (레지스터, 프로그램 카운터, 페이지 테이블 포인터 등)                          |
-| **TCB**      | 스레드의 상태 정보를 저장하는 자료구조. PCB보다 훨씬 가벼움 (레지스터, 스택 포인터 등 스레드 고유 정보만)                    |
+<table><thead><tr><th width="215.26953125">용어</th><th>설명</th></tr></thead><tbody><tr><td><strong>가상 주소 공간</strong></td><td>각 프로세스가 "나만 메모리 전체를 쓰고 있다"고 착각하게 만드는 구조. <br>(프로세스 A, B가 같은 주소를 써도 실제 RAM에서는 다른 위치를 가리킴)</td></tr><tr><td><strong>페이지 테이블</strong></td><td>가상 주소 → 물리 주소 변환표. 프로세스마다 자신만의 것을 가짐</td></tr><tr><td><strong>MMU</strong></td><td>CPU 안의 하드웨어 장치. 가상 주소를 물리 주소로 실제 변환하는 역할</td></tr><tr><td><strong>TLB</strong></td><td>MMU 안의 캐시. 최근 변환 결과를 저장해두어 빠르게 재사용</td></tr><tr><td><strong>PCB</strong><br><strong>(Process Control Block)</strong> </td><td>프로세스의 모든 상태 정보를 저장하는 자료구조 <br>(레지스터, 프로그램 카운터, 페이지 테이블 포인터 등)</td></tr><tr><td><strong>TCB</strong><br><strong>(Thread Control Block)</strong> </td><td>스레드의 상태 정보를 저장하는 자료구조. PCB보다 훨씬 가벼움 <br>(레지스터, 스택 포인터 등 스레드 고유 정보만)</td></tr></tbody></table>
 
 ```
 CPU가 가상 주소 0x1000에 접근하려 할 때:
@@ -115,11 +96,7 @@ CPU가 가상 주소 0x1000에 접근하려 할 때:
 
 #### 1.4 CPU 바운드 vs I/O 바운드
 
-| 구분         | CPU 바운드                 | I/O 바운드                        |
-| ---------- | ----------------------- | ------------------------------ |
-| 특징         | 계산, 알고리즘 등 CPU를 100% 사용 | 네트워크, DB, 파일 등 대기 시간이 긴 작업     |
-| 스레드 전략     | CPU 코어 수에 맞춤            | 대기 시간 동안 다른 작업 가능, 더 많은 스레드 가능 |
-| **파이썬 전략** | `multiprocessing` 사용    | `threading` 또는 `asyncio` 사용    |
+<table><thead><tr><th width="127.47265625">구분</th><th>CPU 바운드</th><th>I/O 바운드</th></tr></thead><tbody><tr><td>특징</td><td>계산, 알고리즘 등 CPU를 100% 사용</td><td>네트워크, DB, 파일 등 대기 시간이 긴 작업</td></tr><tr><td>스레드 전략</td><td>CPU 코어 수에 맞춤</td><td>대기 시간 동안 다른 작업 가능, 더 많은 스레드 가능</td></tr><tr><td><strong>파이썬 전략</strong></td><td><code>multiprocessing</code> 사용</td><td><code>threading</code> 또는 <code>asyncio</code> 사용</td></tr></tbody></table>
 
 **웹 서버 실무 예시:** 사용자 요청 하나를 처리할 때 CPU는 1%만 쓰고, 99%는 DB 응답을 기다린다면 — 이것은 전형적인 I/O 바운드 작업입니다. 코어가 4개라도 스레드를 4개로 제한하면 안 됩니다.
 
@@ -132,8 +109,6 @@ CPU가 가상 주소 0x1000에 접근하려 할 때:
 #### 2.1 파이썬 스레드는 어떻게 만들어지는가?
 
 자바가 JNI를 통해 OS 기능을 호출하듯, CPython도 C로 작성된 내부 코드를 통해 OS의 스레드 생성 기능을 호출합니다.
-
-python
 
 ```python
 import threading
@@ -148,12 +123,7 @@ t.start()
 2. 이 C 코드가 OS에 맞는 시스템 콜을 실행 (Linux: `pthread_create()`, Windows: `CreateThread()`)
 3. OS가 실제 네이티브 스레드를 생성하고, CPython은 이 네이티브 스레드와 Python `Thread` 객체를 연결
 
-|           | Java                            | Python (CPython)             |
-| --------- | ------------------------------- | ---------------------------- |
-| 스레드 생성 코드 | `thread.start()`                | `thread.start()`             |
-| 내부 호출     | `start0()` (native method, JNI) | C 함수 (CPython 내부)            |
-| OS 호출     | `pthread_create()` 등            | `pthread_create()` 등         |
-| 결과        | Java Thread ↔ OS Thread 매핑      | Python Thread ↔ OS Thread 매핑 |
+<table><thead><tr><th width="156.8359375"></th><th>Java</th><th>Python (CPython)</th></tr></thead><tbody><tr><td>스레드 생성 코드</td><td><code>thread.start()</code></td><td><code>thread.start()</code></td></tr><tr><td>내부 호출</td><td><code>start0()</code> (native method, JNI)</td><td>C 함수 (CPython 내부)</td></tr><tr><td>OS 호출</td><td><code>pthread_create()</code> 등</td><td><code>pthread_create()</code> 등</td></tr><tr><td>결과</td><td>Java Thread ↔ OS Thread 매핑</td><td>Python Thread ↔ OS Thread 매핑</td></tr></tbody></table>
 
 구조적으로 매우 유사합니다. 차이점은 자바는 JNI라는 명시적 인터페이스를 사용하는 반면, CPython은 인터프리터 자체가 C로 작성되어 별도 인터페이스 없이 직접 OS 함수를 호출한다는 점입니다.
 
@@ -161,7 +131,7 @@ t.start()
 
 스레드는 동작하는 레벨에 따라 세 가지로 구분됩니다.
 
-**하드웨어 스레드:** 코어의 연산 속도가 메모리보다 빠르기 때문에, 메모리 대기 시간 동안 다른 스레드의 작업을 수행할 수 있도록 한 것입니다. 인텔의 하이퍼스레딩이 대표적입니다. 싱글 코어에 하드웨어 스레드가 2개라면, OS는 이를 듀얼 코어로 인식합니다.
+**하드웨어 스레드:** 코어의 연산 속도가 메모리보다 빠르기 때문에, 메모리 대기 시간 동안 다른 스레드의 작업을 수행할 수 있도록 한 것입니다. **인텔의 하이퍼스레딩**이 대표적입니다. 싱글 코어에 하드웨어 스레드가 2개라면, OS는 이를 듀얼 코어로 인식합니다.
 
 **커널 레벨 스레드 (네이티브 스레드):** OS 커널이 직접 생성하고 관리하는 스레드입니다. 컨텍스트 스위칭에 커널이 개입하므로 비용이 발생합니다.
 
@@ -198,6 +168,18 @@ Python Thread 3  ↔  OS Thread 3  →  코어 3
 **M:1 모델**
 
 여러 유저 레벨 스레드가 하나의 커널 레벨 스레드에 연결됩니다. CPython은 이 모델을 사용하지 않지만, GIL 때문에 CPU 바운드 작업에서는 **사실상 M:1처럼 동작**한다는 점이 흥미롭습니다.
+
+```
+실제 구조 (1:1):
+스레드 A ──→ 커널 스레드 A ──→ 코어 1 (GIL 보유, 실행 중)
+스레드 B ──→ 커널 스레드 B ──→ 코어 2 (GIL 대기, 놀고 있음)
+스레드 C ──→ 커널 스레드 C ──→ 코어 3 (GIL 대기, 놀고 있음)
+
+결과적으로:
+스레드 A ──┐
+스레드 B ──┼──→ 실행되는 건 1개뿐 ← M:1과 동일한 효과
+스레드 C ──┘
+```
 
 **M:N 모델 — asyncio의 동작 방식**
 
@@ -243,8 +225,6 @@ GIL은 **한 번에 하나의 스레드만 파이썬 바이트코드를 실행�
 
 **방법 1: 함수를 직접 전달 (가장 일반적 — 자바의 Runnable 방식과 유사)**
 
-python
-
 ```python
 import threading
 import time
@@ -268,8 +248,6 @@ print(f"{threading.current_thread().name}: main 종료")
 
 **방법 2: Thread 클래스 상속 (자바의 Thread 상속과 유사)**
 
-python
-
 ```python
 import threading
 import time
@@ -289,13 +267,11 @@ t.start()
 t.join()
 ```
 
-자바에서 `Runnable` 구현이 권장되었던 것처럼, 파이썬에서도 \*\*함수를 전달하는 방식(방법 1)\*\*이 더 파이썬답고 일반적입니다.
+자바에서 `Runnable` 구현이 권장되었던 것처럼, 파이썬에서도 **함수를 전달하는 방식(방법 1)**&#xC774; 더 파이썬답고 일반적입니다.
 
 #### 2.7 데몬 스레드
 
 자바와 동일한 개념입니다. 모든 사용자(비데몬) 스레드가 종료되면 데몬 스레드도 자동 종료됩니다.
-
-python
 
 ```python
 import threading
@@ -314,8 +290,6 @@ print("메인 스레드 종료 → 데몬 스레드도 자동 종료")
 ```
 
 #### 2.8 스레드 기본 정보와 생명 주기
-
-python
 
 ```python
 import threading
@@ -340,8 +314,6 @@ print(f"식별자: {t.ident}")             # None (start() 후 할당)
 #### 2.9 join() — 스레드 종료 대기
 
 자바와 동일한 개념입니다.
-
-python
 
 ```python
 import threading
@@ -370,9 +342,9 @@ print(f"합계: {total}")  # 5050
 
 #### 2.10 인터럽트 — 파이썬의 스레드 중단
 
-자바에서는 `thread.interrupt()`로 스레드에 인터럽트 신호를 보낼 수 있었습니다. **파이썬에는 스레드 인터럽트 메커니즘이 없습니다.** 대신 `threading.Event`를 사용합니다.
+자바에서는 `thread.interrupt()`로 스레드에 인터럽트 신호를 보낼 수 있었습니다.&#x20;
 
-python
+**파이썬에는 스레드 인터럽트 메커니즘이 없습니다.** 대신 `threading.Event`를 사용합니다.
 
 ```python
 import threading
@@ -407,9 +379,7 @@ t.join()
 
 ***
 
-## Part 2. 승(承) — 동시성 문제와 동기화
-
-***
+## Part 2. 동시성 문제와 동기화
 
 ### 3장. 공유 자원을 안전하게 다루기
 
@@ -418,8 +388,6 @@ t.join()
 #### 3.1 공유 자원과 레이스 컨디션
 
 자바의 출금 예제와 동일한 문제가 파이썬에서도 발생합니다.
-
-python
 
 ```python
 import threading
@@ -458,13 +426,68 @@ print(f"최종 잔액: {account.balance}")
 # 실제: -600원이 될 수 있음! (둘 다 검증 통과)
 ```
 
-**문제의 본질:** 검증 단계와 출금 단계 사이에 다른 스레드가 끼어들어 `balance` 값을 바꿀 수 있습니다. 이런 코드 영역을 \*\*임계 영역(Critical Section)\*\*이라고 합니다. 여러 스레드가 동시에 접근해서는 안 되는 공유 자원을 수정하는 부분입니다.
+**문제의 본질:** 검증 단계와 출금 단계 사이에 다른 스레드가 끼어들어 `balance` 값을 바꿀 수 있습니다. 이런 코드 영역을 **임계 영역(Critical Section)**&#xC774;라고 합니다. 여러 스레드가 동시에 접근해서는 안 되는 공유 자원을 수정하는 부분입니다.
+
+> #### GIL이 보장하는 것과 안 하는 것
+>
+> GIL은 **바이트코드 명령어 1개**의 실행이 원자적임을 보장합니다. 하지만 파이썬 코드 한 줄이 반드시 바이트코드 1개인 건 아닙니다.
+>
+> ````python
+> count = 0
+>
+> def increment():
+>     global count
+>     count += 1   # 이게 한 줄이지만...
+> ```
+>
+> `count += 1`을 바이트코드로 보면:
+> ```
+> LOAD_GLOBAL   count   # 1. count 값을 읽어옴
+> LOAD_CONST    1       # 2. 상수 1을 로드
+> BINARY_ADD            # 3. 더함
+> STORE_GLOBAL  count   # 4. 결과를 count에 저장
+> ```
+>
+> **4개의 바이트코드**로 이루어져 있습니다. GIL은 각 바이트코드 사이에서 스레드 전환이 일어날 수 있습니다.
+>
+> ## 문제가 발생하는 시나리오
+> ```
+> count = 0 인 상태에서 두 스레드가 count += 1 실행
+>
+> 스레드 A: LOAD_GLOBAL count  → 0을 읽음
+>           ──── 여기서 GIL 전환! ────
+> 스레드 B: LOAD_GLOBAL count  → 0을 읽음 (아직 0)
+>           LOAD_CONST 1
+>           BINARY_ADD         → 1
+>           STORE_GLOBAL count → count = 1
+>           ──── GIL 전환! ────
+> 스레드 A: LOAD_CONST 1
+>           BINARY_ADD         → 1 (0 + 1, 아까 읽은 값 기준)
+>           STORE_GLOBAL count → count = 1
+>
+> 결과: 2가 되어야 하는데 1이 됨!
+> ````
+>
+> #### 그래서 락이 필요
+>
+> ```python
+> import threading
+>
+> count = 0
+> lock = threading.Lock()
+>
+> def increment():
+>     global count
+>     with lock:         # 임계 영역 시작
+>         count += 1     # 이 안에서는 다른 스레드가 끼어들 수 없음
+>                        # 임계 영역 끝
+> ```
+>
+> `lock`을 잡으면 다른 스레드가 같은 `lock`을 잡으려 할 때 대기하게 되니, 바이트코드 중간에 끼어드는 문제를 방지할 수 있습니다.
 
 #### 3.2 Lock — 파이썬의 synchronized
 
 자바의 `synchronized`에 대응하는 것이 `threading.Lock`입니다.
-
-python
 
 ```python
 import threading
@@ -504,8 +527,6 @@ print(f"최종 잔액: {account.balance}")  # 항상 200원 (정상)
 
 **`with` 문과 Lock:** `with self._lock:`은 자바의 `synchronized` 블록과 같은 역할입니다. `with` 블록을 벗어나면 자동으로 락이 해제되므로, 예외가 발생해도 안전합니다.
 
-python
-
 ```python
 # with 문 없이 수동으로 사용하는 경우 (권장하지 않음)
 self._lock.acquire()
@@ -520,7 +541,7 @@ finally:
 
 자바의 `ReentrantLock`에 대응합니다. 같은 스레드가 이미 획득한 락을 다시 획득할 수 있습니다.
 
-python
+* 데드락 상황에서 사용한다.&#x20;
 
 ```python
 import threading
@@ -551,8 +572,6 @@ outer()  # 정상 동작 (Lock이었다면 데드락 발생)
 
 **파이썬 Lock의 상황:** `Lock.acquire(timeout=5)`처럼 타임아웃을 지정할 수 있다는 점에서 자바의 기본 `synchronized`보다는 유연합니다. 하지만 `Condition`을 활용한 세밀한 제어가 필요한 상황은 동일하게 발생합니다.
 
-python
-
 ```python
 import threading
 
@@ -572,9 +591,7 @@ else:
 
 ***
 
-## Part 3. 전(轉) — 생산자/소비자 패턴
-
-***
+## Part 3. 생산자/소비자 패턴
 
 ### 4장. 스레드 간 협력 — 생산자/소비자 문제
 
@@ -582,7 +599,7 @@ else:
 
 #### 4.1 문제 정의
 
-생산자는 데이터를 만들고, 소비자는 데이터를 소비합니다. 둘 사이에 \*\*버퍼(큐)\*\*가 있습니다.
+생산자는 데이터를 만들고, 소비자는 데이터를 소비합니다. 둘 사이에 **버퍼(큐)**&#xAC00; 있습니다.
 
 * 버퍼가 가득 차면 → 생산자는 기다려야 함
 * 버퍼가 비어 있으면 → 소비자는 기다려야 함
@@ -590,8 +607,6 @@ else:
 자바에서 이 문제를 해결하기 위해 `synchronized` → `wait()/notify()` → `ReentrantLock + Condition` → `BlockingQueue`로 발전시켰습니다. 파이썬에서도 동일한 단계를 밟아봅니다.
 
 #### 4.2 1단계: Lock만 사용 — 데이터를 버리는 구현
-
-python
 
 ```python
 import threading
@@ -628,8 +643,6 @@ class NaiveBoundedQueue:
 
 자바의 `BoundedQueueV2`에서 발생한 것과 **동일한 문제**가 파이썬에서도 발생합니다.
 
-python
-
 ```python
 import threading
 import time
@@ -662,8 +675,6 @@ class SleepBoundedQueue:
 #### 4.4 3단계: Condition — wait/notify 패턴
 
 자바의 `Object.wait()/notify()`에 대응하는 것이 파이썬의 `threading.Condition`입니다. **핵심은 대기할 때 락을 반납한다는 것**입니다.
-
-python
 
 ```python
 import threading
@@ -710,8 +721,6 @@ class ConditionBoundedQueue:
 
 자바의 `BoundedQueueV5` (ReentrantLock + 2개의 Condition)에 해당합니다.
 
-python
-
 ```python
 import threading
 
@@ -744,9 +753,9 @@ class EfficientBoundedQueue:
 
 #### 4.6 5단계: queue.Queue — 파이썬의 BlockingQueue
 
-자바의 `java.util.concurrent.BlockingQueue`에 대응하는 것이 파이썬의 `queue.Queue`입니다. **실무에서는 항상 이것을 사용하세요.** 위의 구현들은 원리를 이해하기 위한 것입니다.
+자바의 `java.util.concurrent.BlockingQueue`에 대응하는 것이 파이썬의 `queue.Queue`입니다.&#x20;
 
-python
+**실무에서는 항상 이것을 사용하세요.** 위의 구현들은 원리를 이해하기 위한 것입니다.
 
 ```python
 import queue
@@ -785,8 +794,6 @@ t2.join()
 | 즉시 반환 (예외)   | `add(e)` → IllegalStateException            | `put_nowait(data)` → queue.Full           |
 | 큐 비었을 때 (예외) | `remove()` → NoSuchElementException         | `get_nowait()` → queue.Empty              |
 
-python
-
 ```python
 import queue
 
@@ -813,8 +820,6 @@ except queue.Empty:
 
 **다른 큐 종류:**
 
-python
-
 ```python
 import queue
 
@@ -825,7 +830,7 @@ queue.PriorityQueue(maxsize=10)  # 우선순위 큐
 
 ***
 
-## Part 4. 결(結) — 실무 도구와 파이썬의 미래
+## Part 4. 실무 도구와 파이썬의 미래
 
 ***
 
@@ -835,9 +840,7 @@ queue.PriorityQueue(maxsize=10)  # 우선순위 큐
 
 #### 5.1 concurrent.futures — 스레드풀과 프로세스풀
 
-스레드를 직접 생성/관리하는 대신, \*\*풀(Pool)\*\*을 사용하는 것이 실무의 표준입니다.
-
-python
+스레드를 직접 생성/관리하는 대신, **풀(Pool)**&#xC744; 사용하는 것이 실무의 표준입니다.
 
 ```python
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -859,8 +862,6 @@ with ThreadPoolExecutor(max_workers=3) as executor:
         result = future.result()
         print(f"{url} → {result}")
 ```
-
-python
 
 ```python
 from concurrent.futures import ProcessPoolExecutor
@@ -887,9 +888,9 @@ with ProcessPoolExecutor(max_workers=4) as executor:
 
 #### 5.2 multiprocessing — 프로세스로 GIL 우회
 
-CPU 바운드 작업의 병렬 처리를 위해 프로세스를 사용합니다. 프로세스마다 독립된 GIL을 가지므로 진짜 병렬 실행이 가능합니다.
+CPU 바운드 작업의 병렬 처리를 위해 프로세스를 사용합니다.&#x20;
 
-python
+프로세스마다 독립된 GIL을 가지므로 진짜 병렬 실행이 가능합니다.
 
 ```python
 from multiprocessing import Pool
@@ -907,8 +908,6 @@ with Pool(4) as pool:
 #### 5.3 asyncio — 코루틴으로 대량 동시 처리
 
 파이썬에는 멀티스레드 외에 `asyncio`라는 강력한 선택지가 있습니다. 2장에서 다룬 M:N 모델로, 단일 스레드에서 수만 개의 동시 I/O 작업을 처리할 수 있습니다.
-
-python
 
 ```python
 import asyncio
@@ -945,16 +944,12 @@ asyncio.run(main())
 
 Java 21의 가상 스레드와 Python asyncio는 같은 문제(대량 I/O 동시 처리)를 풀지만, 접근이 다릅니다.
 
-python
-
 ```python
 # Python — async/await이 명시적으로 필요
 async def get_user(user_id):
     user = await db.fetch_one("SELECT * FROM users WHERE id = $1", user_id)
     return user
 ```
-
-java
 
 ```java
 // Java 가상 스레드 — 동기 코드 그대로, JVM이 자동 처리
