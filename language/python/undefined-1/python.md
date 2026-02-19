@@ -41,10 +41,11 @@
 
 **핵심 용어 정리**
 
-<table><thead><tr><th width="215.26953125">용어</th><th>설명</th></tr></thead><tbody><tr><td><strong>가상 주소 공간</strong></td><td>각 프로세스가 "나만 메모리 전체를 쓰고 있다"고 착각하게 만드는 구조. <br>(프로세스 A, B가 같은 주소를 써도 실제 RAM에서는 다른 위치를 가리킴)</td></tr><tr><td><strong>페이지 테이블</strong></td><td>가상 주소 → 물리 주소 변환표. 프로세스마다 자신만의 것을 가짐</td></tr><tr><td><strong>MMU</strong></td><td>CPU 안의 하드웨어 장치. 가상 주소를 물리 주소로 실제 변환하는 역할</td></tr><tr><td><strong>TLB</strong></td><td>MMU 안의 캐시. 최근 변환 결과를 저장해두어 빠르게 재사용</td></tr><tr><td><strong>PCB</strong><br><strong>(Process Control Block)</strong> </td><td>프로세스의 모든 상태 정보를 저장하는 자료구조 <br>(레지스터, 프로그램 카운터, 페이지 테이블 포인터 등)</td></tr><tr><td><strong>TCB</strong><br><strong>(Thread Control Block)</strong> </td><td>스레드의 상태 정보를 저장하는 자료구조. PCB보다 훨씬 가벼움 <br>(레지스터, 스택 포인터 등 스레드 고유 정보만)</td></tr></tbody></table>
+<table><thead><tr><th width="215.26953125">용어</th><th>설명</th></tr></thead><tbody><tr><td><strong>가상 주소 공간</strong><br><strong>(Virtual Address Space)</strong> </td><td>각 프로세스가 "나만 메모리 전체를 쓰고 있다"고 착각하게 만드는 구조. <br>(프로세스 A, B가 같은 주소를 써도 실제 RAM에서는 다른 위치를 가리킴)</td></tr><tr><td><strong>페이지 테이블</strong><br><strong>(Page Table)</strong></td><td>가상 주소 → 물리 주소 변환표. 프로세스마다 자신만의 것을 가짐</td></tr><tr><td><strong>MMU</strong><br><strong>(Memory Management Unit)</strong></td><td>CPU 안의 하드웨어 장치. 가상 주소를 물리 주소로 실제 변환하는 역할</td></tr><tr><td><strong>TLB</strong><br><strong>(Translation Lookaside Buffer)</strong></td><td>MMU 안의 캐시. 최근 변환 결과를 저장해두어 빠르게 재사용</td></tr><tr><td><strong>PCB</strong><br><strong>(Process Control Block)</strong> </td><td>프로세스의 모든 상태 정보를 저장하는 자료구조<br>(레지스터, 프로그램 카운터, 페이지 테이블 포인터 등)</td></tr><tr><td><strong>TCB</strong><br><strong>(Thread Control Block)</strong> </td><td>스레드의 상태 정보를 저장하는 자료구조. PCB보다 훨씬 가벼움 <br>(레지스터, 스택 포인터 등 스레드 고유 정보만)</td></tr></tbody></table>
 
 ```
-CPU가 가상 주소 0x1000에 접근하려 할 때:
+CPU가 가상 주소 0x1000에 접근하려 할 때: 
+  → MMU 사용 
 
 1단계: TLB 확인 (매우 빠름, 약 1 클럭)
   → 캐싱되어 있으면 바로 물리 주소 반환 (TLB Hit)
@@ -61,7 +62,7 @@ CPU가 가상 주소 0x1000에 접근하려 할 때:
 1. 프로세스 A의 모든 상태를 PCB에 저장
 2. 프로세스 B의 상태를 PCB에서 불러와 CPU 레지스터에 로드
 3. **MMU의 페이지 테이블 포인터가 B의 것으로 변경**
-4. **TLB 캐시 전부 무효화 (TLB Flush)** — 핵심 오버헤드!
+4. _**TLB 캐시 전부 무효화 (TLB Flush)** — 핵심 오버헤드!_
 
 ```
 프로세스 A 실행 중:
@@ -72,7 +73,7 @@ CPU가 가상 주소 0x1000에 접근하려 할 때:
   → 모든 주소 변환을 느린 메인 메모리의 페이지 테이블에서 다시 해야 함
 ```
 
-**파이썬에서의 의미:** Gunicorn 같은 WSGI 서버가 워커를 프로세스 단위로 띄우는 구조에서는, 워커 간 전환 시 이 비용이 발생합니다. 워커 수를 CPU 코어 수에 맞추는 이유 중 하나가 이 오버헤드를 최소화하기 위함입니다.
+**파이썬에서의 의미:** Gunicorn 같은 WSGI 서버가 워커를 프로세스 단위로 띄우는 구조에서는, 워커 간 전환 시 이 비용이 발생합니다. **CPU 바운드 작업의 경우 워커 수를 CPU 코어 수에 맞추는 이유 중 하나가 이 오버헤드를 최소화하기 위함입니다.**
 
 **스레드 컨텍스트 스위칭 — 가볍다**
 
@@ -670,7 +671,7 @@ class SleepBoundedQueue:
             return self.queue.popleft()
 ```
 
-**치명적 문제:** 자바에서 겪은 것과 동일합니다. 생산자가 **락을 가진 채로** sleep하면, 소비자가 락을 얻을 수 없어서 큐에서 데이터를 꺼갈 수 없습니다. 소비자가 꺼가야 빈 공간이 생기는데, 락을 얻지 못해 꺼갈 수 없으니 **무한 대기**에 빠집니다.
+**치명적 문제:** 자바에서 겪은 것과 동일합니다. 생산자가 **락을 가진 채로** sleep하면, 소비자가 락을 얻을 수 없어서 큐에서 데이터를 꺼갈 수 없습니다. 소비자가 꺼내가야 빈 공간이 생기는데, 락을 얻지 못해 꺼갈 수 없으니 **무한 대기**에 빠집니다.
 
 #### 4.4 3단계: Condition — wait/notify 패턴
 
@@ -831,8 +832,6 @@ queue.PriorityQueue(maxsize=10)  # 우선순위 큐
 ***
 
 ## Part 4. 실무 도구와 파이썬의 미래
-
-***
 
 ### 5장. 실무에서 쓰는 고수준 동시성 도구
 
