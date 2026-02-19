@@ -271,6 +271,7 @@
     * [Python 개발자를 위한 CPython 완전 가이드](language/python/undefined-1/python-cpython.md)
     * [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](language/python/undefined-1/python-gil.md)
     * [Python 개발자를 위한 멀티스레드와 동시성 완전 가이드](language/python/undefined-1/python.md)
+    * [Python 비동기 프로그래밍 - 왜 필요하고 어떻게 동작하는가](language/python/undefined-1/python-1.md)
     * [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](language/python/undefined-1/python-cgi-wsgi-asgi.md)
 
 ## framework
