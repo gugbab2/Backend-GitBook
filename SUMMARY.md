@@ -367,7 +367,7 @@
       * [섹션7. ORM 이해하기](framework/django/undefined/django-1/7.-orm.md)
       * [섹션8. Service Layer 분리](framework/django/undefined/django-1/8.-service-layer.md)
   * [그 외](framework/django/undefined-1/README.md)
-    * [왜 웹 프레임워크(Python 진형)는 비동기에 집착하게 되었을까?](framework/django/undefined-1/python.md)
+    * [왜 웹 프레임워크(Python 진영)는 비동기에 집착하게 되었을까?](framework/django/undefined-1/undefined.md)
 
 ## DEVOPS
 
