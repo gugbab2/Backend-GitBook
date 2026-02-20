@@ -267,12 +267,13 @@
       * [1부 데이터 구조체](language/python/undefined/fluent-python/1/README.md)
         * [1장 파이썬 데이터 모델](language/python/undefined/fluent-python/1/1.md)
         * [2장 시퀀스의 배열](language/python/undefined/fluent-python/1/2.md)
-  * [그 외](language/python/undefined-1/README.md)
+  * [웹개발 위한 기반 지식](language/python/undefined-1/README.md)
     * [Python 개발자를 위한 CPython 가이드](language/python/undefined-1/python-cpython.md)
     * [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](language/python/undefined-1/python-gil.md)
     * [Python 개발자를 위한 멀티스레드와 동시성 완전 가이드](language/python/undefined-1/python.md)
     * [Python 비동기 프로그래밍 - 왜 필요하고 어떻게 동작하는가](language/python/undefined-1/python-1.md)
     * [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](language/python/undefined-1/python-cgi-wsgi-asgi.md)
+    * [WSGI, ASGI 핸들러 구현체 비교](language/python/undefined-1/wsgi-asgi.md)
 
 ## framework
 
@@ -368,6 +369,7 @@
       * [섹션8. Service Layer 분리](framework/django/undefined/django-1/8.-service-layer.md)
   * [그 외](framework/django/undefined-1/README.md)
     * [왜 웹 프레임워크(Python 진영)는 비동기에 집착하게 되었을까?](framework/django/undefined-1/undefined.md)
+* [FastAPI](framework/fastapi.md)
 
 ## DEVOPS
 
