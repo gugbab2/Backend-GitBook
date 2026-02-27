@@ -402,7 +402,7 @@
   * [OpenAI](ai/api/openai/README.md)
     * [Responses API](ai/api/openai/responses-api/README.md)
       * [OpenAI API 진화의 전체 흐름](ai/api/openai/responses-api/openai-api.md)
-      * [시나리오1 : 챗봇으로 과거 법무검토 이력 조회](ai/api/openai/responses-api/1.md)
+      * [시나리오 : 챗봇으로 과거 법무검토 이력 조회](ai/api/openai/responses-api/undefined.md)
 
 ## CS
 
