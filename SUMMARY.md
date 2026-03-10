@@ -275,7 +275,7 @@
     * [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](language/python/undefined-1/python-cgi-wsgi-asgi.md)
     * [WSGI, ASGI 핸들러 구현체 비교](language/python/undefined-1/wsgi-asgi.md)
   * [그 외](language/python/undefined-2/README.md)
-    * [Python 버전 & 패키지 관리 완벽 가이드](language/python/undefined-2/python-and.md)
+    * [Python 버전 & 패키지 관리 완벽 가이드 - uv 사용](language/python/undefined-2/python-and-uv.md)
 
 ## framework
 
