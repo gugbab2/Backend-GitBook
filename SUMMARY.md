@@ -375,6 +375,10 @@
   * [그 외](framework/django/undefined-1/README.md)
     * [왜 웹 프레임워크(Python 진영)는 비동기에 집착하게 되었을까?](framework/django/undefined-1/python.md)
 * [FastAPI](framework/fastapi.md)
+* [LangChain](framework/langchain/README.md)
+  * [LangChain 실무 지식](framework/langchain/langchain.md)
+* [LangGraph](framework/langgraph/README.md)
+  * [LangGraph 실무 지식](framework/langgraph/langgraph.md)
 
 ## DEVOPS
 
