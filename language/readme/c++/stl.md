@@ -34,7 +34,7 @@
 <figure><img src="../../../.gitbook/assets/image (92).png" alt=""><figcaption></figcaption></figure>
 
 3. 요소에 접근할 때도, 해쉬 함수를 해쉬값을 확인하고 해당 버킷에 저장된 요소를 가져온다. \
-   &#xNAN;**-> (O(1))**
+   **-> (O(1))**
 
 <figure><img src="../../../.gitbook/assets/image (93).png" alt=""><figcaption></figcaption></figure>
 

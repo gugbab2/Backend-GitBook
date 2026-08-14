@@ -40,5 +40,5 @@
 * 위에서 클래스 수준의 정보가 저장되는 메모리 영역을 메서드 영역이라 불렀는데, 버전에 따라 저장되는 영역이 달라졌다.
   * **자바 7 : PermGen(Java Heap)**
   * **자바 8 : Metaspace(Native Memory)**\
-    &#xNAN;**-> Native Memory : 운영체제 수준에서 관리하는 메모리**\
-    &#xNAN;**-> PermGen 은 고정 크기 문제가 있는데, Metaspace 는 동적 메모리 할당으로 이 문제를 해결했다.**
+    **-> Native Memory : 운영체제 수준에서 관리하는 메모리**\
+    **-> PermGen 은 고정 크기 문제가 있는데, Metaspace 는 동적 메모리 할당으로 이 문제를 해결했다.**

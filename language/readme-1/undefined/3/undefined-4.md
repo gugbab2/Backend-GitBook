@@ -409,7 +409,7 @@ Function<Person, String> fun2 = Person::introduce // 메서드 참조 (타입::�
 "`(Reference to an instance method of an arbitrary object of a particular type)`"
 
 이런 메서드 참조를 **특정 타입의 임의 객체의 인스턴스 참조**라 한다.\
-&#xNAN;**(실제로 메서드 참조 기능 중 가장 많이 사용된다)**
+**(실제로 메서드 참조 기능 중 가장 많이 사용된다)**
 
 여기서 줄여서 **임의 객체의 인스턴스 참조**라 하겠다.&#x20;
 

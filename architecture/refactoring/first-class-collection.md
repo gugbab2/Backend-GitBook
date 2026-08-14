@@ -80,7 +80,7 @@ Wrapping 함으로써 다음과 같은 장점을 가지게 된다.&#x20;
 <figure><img src="../../.gitbook/assets/image (187).png" alt=""><figcaption></figcaption></figure>
 
 이제 로또 번호가 필요한 모든 로직은 이 일급 컬렉션만 있으면 된다. \
-&#xNAN;**(로또 번호 생성 시 검증이 자동으로 이루어진다)**&#x20;
+**(로또 번호 생성 시 검증이 자동으로 이루어진다)**&#x20;
 
 <figure><img src="../../.gitbook/assets/image (188).png" alt=""><figcaption></figcaption></figure>
 

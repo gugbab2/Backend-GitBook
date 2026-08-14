@@ -21,5 +21,5 @@
 
 * Encapsulation : 단위화, 보안성 강화\
   -> 러시아 전통인형 마트료시카를 생각하자\
-  &#xNAN;**-> 네트워크에서L2 의 payload 는 L3 패킷, L3의 payload 는 L4 의 세그먼트 .. 와 같이 Encapsulation!**
+  **-> 네트워크에서L2 의 payload 는 L3 패킷, L3의 payload 는 L4 의 세그먼트 .. 와 같이 Encapsulation!**
 * Decapsulation : Encapsulation 의 반대 개념

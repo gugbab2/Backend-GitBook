@@ -3,7 +3,7 @@
 ## Collection Pattern
 
 -> 통상적으로 **RESTFUL 이라는 기준이 된다.**\
-&#xNAN;**-> Collection : 서버가 관리하는 리소스 디렉토리**
+**-> Collection : 서버가 관리하는 리소스 디렉토리**
 
 대부분의 경우, 여러 리소스를 하나의 그룹으로 묶을 수 있다. 예를 들어 게시물의 경우, 100개의 게시물을 하나의 게시물 그룹으로 묶어서 표현하는 게 훨씬 유용하다.
 
@@ -20,7 +20,7 @@ Collection Pattern을 쓰는 경우:
 * `/posts/{id}` 또는 `/posts/:id` 등으로 일반적인 형태로 쓸 수 있다. 여기서 {id}를 {post\_id}나 {postId} 등으로 표기할 수도 있다. 여기서는 그냥 Post ID라고 부를 예정.
 
 **리소스의 ID 는 URI 전체가 되는 것이다.**\
-&#xNAN;**->** Post ID`{id}`**가 리소스의 ID 가 될 수는 없다..!**
+**->** Post ID`{id}`**가 리소스의 ID 가 될 수는 없다..!**
 
 * Resource ID = URI = URL
 * Post ID = Resource ID를 구성하는 요소 중 하나. posts 그룹 내 식별자(ID).

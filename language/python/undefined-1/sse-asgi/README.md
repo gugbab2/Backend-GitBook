@@ -282,7 +282,7 @@ httpx AsyncClient·async LLM SDK가 이 방식이다. "기다림에 스레드가
 
 ## 연관 노트
 
-* [Python 비동기 프로그래밍 - 왜 필요하고 어떻게 동작하는가](python-1.md)
-* [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](python-cgi-wsgi-asgi.md)
-* [WSGI, ASGI 핸들러 구현체 비교](wsgi-asgi.md)
-* [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](python-gil.md)
+* [Python 비동기 프로그래밍 - 왜 필요하고 어떻게 동작하는가](../python-1.md)
+* [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](../python-cgi-wsgi-asgi.md)
+* [WSGI, ASGI 핸들러 구현체 비교](../wsgi-asgi.md)
+* [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](../python-gil.md)

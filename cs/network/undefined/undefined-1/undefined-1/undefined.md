@@ -36,5 +36,5 @@
 <figure><img src="../../../../../.gitbook/assets/스크린샷 2024-01-13 16.10.04.png" alt=""><figcaption></figcaption></figure>
 
 * 공유기에서 부여하는 사설 IP 는 다음의 대역에서 부여된다. \
-  &#xNAN;**-> 192.168.x.x / 172.16.x.x / 10.x.x.x**\
+  **-> 192.168.x.x / 172.16.x.x / 10.x.x.x**\
   **-> 사설 IP 는 Internet 에서 사용되지 않는다. (이건 규칙이다!)**

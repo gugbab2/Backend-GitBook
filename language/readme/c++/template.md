@@ -43,7 +43,7 @@
 >     -> 해당 클래스를 사용하는 cpp 파일마다 4바이트를 사용해야한다..
 >   * static const int MAX\_VALUE = 3; \
 >     -> 불필요한 4바이트를 사용해야 한다. ( const int 보다는 낫다)\
->     &#xNAN;_**-> 하지만 요즘에는 컴파일러가 좋아져서 static const variable 들은 거의 무조건 inline 을 하는 편이다.**_&#x20;
+>     _**-> 하지만 요즘에는 컴파일러가 좋아져서 static const variable 들은 거의 무조건 inline 을 하는 편이다.**_&#x20;
 >   * **enum { MAX = 3};**\
 >     **-> enum 은 그냥 상수의 이름을 붙이는 방법이다!**\
 >     **-> 불필요한 4바이트를 사용하지 않아도 된다! (좋은 방법)**
@@ -66,7 +66,7 @@
   * 컴파일러가 "Main.cpp" 을 컴파일 할 때, " MyArray.cpp" 를 못찾는다. \
     -> "MyArray.h" 를 통해서 오직 MyArray 클래스 선언만 볼 수 있다.&#x20;
   * 따라서, 컴파일러가 MyArray\<int> 를 만들어 줄 수 없다. \
-    &#xNAN;**-> 인라인 함수에서도 동일한 문제를 발견할 수 있다..** \
+    **-> 인라인 함수에서도 동일한 문제를 발견할 수 있다..** \
     **(구현체를 모두 헤더파일로 옮겼었다)**
 
 <figure><img src="../../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>

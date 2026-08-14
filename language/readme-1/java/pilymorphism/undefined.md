@@ -88,7 +88,7 @@ public class InheritanceCasting {
 ```
 
 * 하지만 아래 코드와 같이 **자식객체에서 사용하려는 객체의 실제 모습이 자식객체라면 문제없이 사용할 수 있다.**\
-  &#xNAN;**-> 실제 인스턴스가 어떠한 값을 가지고 있는지가 중요하다.**
+  **-> 실제 인스턴스가 어떠한 값을 가지고 있는지가 중요하다.**
 
 ```java
 public class InheritanceCasting2 {

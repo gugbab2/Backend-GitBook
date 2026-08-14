@@ -140,7 +140,7 @@ void Foo(const char* name)
 ## 동적캐스팅(dynamic\_cast)
 
 * 런타임에 캐스팅이 가능한지 판단을 하고 캐스팅이 가능할 때는 캐스팅, 아니라면 null 을 반환한다.\
-  &#xNAN;**-> 때문에, dynamic\_cast 가 static\_cast 보다 더 안전하다.**
+  **-> 때문에, dynamic\_cast 가 static\_cast 보다 더 안전하다.**
 
 ```cpp
 // static_cast
@@ -167,7 +167,7 @@ if(myDog != null)
 ```
 
 * **하지만, dynamic\_cast 를 사용하기 위해서는 컴파일 중에 RTTI(실시간 타입정보, Real Time Type Infomation) 설정을 켜야한다!**\
-  &#xNAN;**-> 이 기능을 키지 않는다면 static\_cast 와 동일하게 작동한다.**
+  **-> 이 기능을 키지 않는다면 static\_cast 와 동일하게 작동한다.**
 * 대부분의 프로젝트에서는 RTTI 가 꺼져있다.\
   -> 왜? C++ 을 쓰는 업계는 성능이 중요하다고 했는데, RTTI 를 버틸수 있을 만큼의 성능을 가지고 있지 않는다.\
   -> 정말 좋은 개념이지만 실제로는 거의 쓰이지 않는다..
