@@ -81,7 +81,7 @@ Django fallback과의 차이는 단 하나 — **스레드에 시키는 일의 �
 두 축을 동시에 만족하는 칸 = ASGI + async iterator, 단 하나
 ```
 
-* 체인의 동시 처리 한도는 **min(각 홉의 한도)** — 한쪽만 ASGI면 병목이 이동할 뿐 천장은 그대로다. 그래서 게이트웨이·AI 서버가 **각자 독립적으로** 같은 결론(ASGI)에 수렴한다.
+* 체인의 동시 처리 한도는 **min(각 홉의 한도)** — 한쪽만 ASGI면 병목이 이동할 뿐 천장은 그대로다. 그래서 게이l트웨이·AI 서버가 **각자 독립적으로** 같은 결론(ASGI)에 수렴한다.
 * 반면 라이브 여부는 **AND(소스부터 모든 홉)** — 각 홉이 자기 프로세스 안에서 매칭만 맞추면 되므로, 서버끼리 서빙 방식이 섞여도 기능은 성립한다.
 * "ASGI로 간다"는 결정 하나에 매칭 규칙이 "iterator도 async로"를 자동으로 붙여준다. 둘은 두 번의 선택이 아니라 한 세트다.
 
@@ -282,7 +282,7 @@ httpx AsyncClient·async LLM SDK가 이 방식이다. "기다림에 스레드가
 
 ## 연관 노트
 
-* [Python 비동기 프로그래밍 - 왜 필요하고 어떻게 동작하는가](../python-1.md)
-* [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](../python-cgi-wsgi-asgi.md)
-* [WSGI, ASGI 핸들러 구현체 비교](../wsgi-asgi.md)
-* [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](../python-gil.md)
+* [Python 비동기 프로그래밍 - 왜 필요하고 어떻게 동작하는가](python-1.md)
+* [웹 서버는 어떻게 Python 코드를 실행하게 되었는가 — CGI, WSGI, ASGI의 발전과 실전 배포](python-cgi-wsgi-asgi.md)
+* [WSGI, ASGI 핸들러 구현체 비교](wsgi-asgi.md)
+* [Python은 왜 한 번에 하나만 실행할까? - GIL 이해하기](python-gil.md)
