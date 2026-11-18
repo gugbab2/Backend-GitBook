@@ -652,3 +652,4 @@
 * [이력서 리마인드](undefined-1/README.md)
   * [2.x](undefined-1/2.x/README.md)
     * [2.4](undefined-1/2.x/2.4.md)
+    * [2.4 라이나생명](undefined-1/2.x/2.4-1.md)
