@@ -649,6 +649,6 @@
 
 ***
 
-* [기술면접 질문](undefined-1/README.md)
-  * [2025](undefined-1/2025/README.md)
-    * [일급 컬렉션이란? (08.28)](undefined-1/2025/08.28.md)
+* [이력서 리마인드](undefined-1/README.md)
+  * [2.x](undefined-1/2.x/README.md)
+    * [2.4](undefined-1/2.x/2.4.md)
